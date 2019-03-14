@@ -11,9 +11,15 @@
 
 public class GraphicalInterface {
 
-public GraphicalInterface()
+int BAT;
+int HOLE; 
+int WUMPUS;
+
+public GraphicalInterface(int bat, int hole, int wumpus)
 {
- 
+ WUMPUS = wumpus;
+ HOLE = hole;
+ BAT = bat;
 }
 
 public String toString()
@@ -44,9 +50,31 @@ public void displayItems(Player player)
 { 
 }
 
-// Display on screen what "danger" is near (Wumpus, bat, hole)
-public void inDanger(int danger)
+/**
+*Display on screen what "danger" is near (Wumpus, bat, hole)
+* Takes and array of hazards displaying what hazards are nearby
+* Prints out to user what hazards are nearby
+*/
+public void inDanger(int [] hazards)
 {
+ String batString = "THERE ARE BATS NEARBY";
+ String wumpusString = "I SMELL A WUMPUS";
+ String holeString = "I FEEL A DRAFT";
+ 
+ for(int hazard : hazards)
+ {
+  if(hazard == null)
+  // do nothing
+  
+  else if(hazard == BAT)
+   System.out.println(batString);
+   
+  else if(hazard == HOLE)
+   System.out.println(holeString);
+   
+  else if(hazard == WUMPUS)
+   System.out.println(wumpusString);
+ }
 }
 
 //Returns direction that arrow is shot
@@ -55,8 +83,8 @@ public int shootArrow (Cave cave)
  return -1;
 }
 
-// returns if player has enough money to buy the item they want
-public boolean buyItem(String item) 
+// returns if player has enough money to buy the item they want, I will edit this with the implementation
+public boolean buyItem(int item, int playerBalance) 
 {
  return false;
 }
