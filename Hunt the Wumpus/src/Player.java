@@ -2,7 +2,7 @@
  * @author Saihaj Gulati
  * Class: APCSA - 3
  * Object: Player
- 	*  keeps track of the playerâ€™s inventory (Arrows and Gold coins)
+ 	*  keeps track of the player’s inventory (Arrows and Gold coins)
  	*  keeps track of the number of turns the player has taken
  	*  Computes ending score of the player 
  * 
@@ -10,6 +10,7 @@
  * Version:   Date:     Description:
  * 1.0        3/4/19    Constructor and toString added
  * 2.0        3/8/19    Stubs added (fields and skeleton methods)
+ * 3.0        3/14/19   Implemented Constructor and few methods
 */
 public class Player 
 {
@@ -18,11 +19,14 @@ public class Player
 	private int coins;
 	
 	/**
-	 * This constructs player object
+	 * This constructs the player object and sets default values of the fields
 	 * @return Player object
 	 */
 	public Player()
-	{	
+	{
+		turns = 0;
+		arrows = 3;
+		coins = 0;
 	}
 	
 	/**
@@ -40,7 +44,9 @@ public class Player
 	 */
 	public int movePlayer()
 	{
-		return 0;
+		turns++;
+		coins++;
+		return coins;
 	}
 	
 	/**
@@ -50,7 +56,8 @@ public class Player
 	 */
 	public int changeArrows(int amt)
 	{
-		return 0;		
+		arrows += amt;	
+		return arrows;
 	}
 	
 	/**
@@ -60,7 +67,8 @@ public class Player
 	 */
 	public int changeCoins(int amt)
 	{
-		return 0;
+		coins += amt;
+		return coins;
 	}
 	
 	/**
@@ -70,7 +78,38 @@ public class Player
 	 */
 	public int getScore(boolean gotWumpus)
 	{
-		return 0;
+		int score = 100 - turns + coins + 5*arrows;
+		if (gotWumpus)
+		{
+			return score + 50;
+		}
+		return score;
 	}
 	
+	/**
+	 * accessor for arrows
+	 * @return number of arrows
+	 */
+	public int getArrows()
+	{
+		return arrows;
+	}
+	
+	/**
+	 * accessor for coins
+	 * @return number of coins
+	 */
+	public int getCoins()
+	{
+		return coins;
+	}
+	
+	/**
+	 * accessor for turns
+	 * @return number of turns
+	 */
+	public int getTurns()
+	{
+		return turns;
+	}
 }
