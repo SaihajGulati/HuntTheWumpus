@@ -68,10 +68,13 @@ public class HighScore
      * 
      * Pre-Condition: The leaderboard isn't in its default state when the Player chooses to reset the game. 
      */
-    public void resetScores()
+     public void resetScores()
     {
         //Again, must learn how to update a file from my code
-        highScores.clear();
+        for(int i = 0; i < highScores.size(); i++)
+        {
+            highScores.set(i, 0);
+        }
     }
     
     /**
