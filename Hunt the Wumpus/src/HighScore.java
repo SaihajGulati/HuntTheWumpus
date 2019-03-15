@@ -1,4 +1,23 @@
-/** Name: Brian Yang
+ public void updateScoreBoard(int totalScore)
+    {
+        //Reminder: Ask how to update a File with new HighSccores
+        if(highScores.size() <= 10)
+        {
+            for (int i = 0; i < highScores.size(); i++)
+            { 
+                if(totalScore >= highScores.get(i) && totalScore <= highScores.get(i-1))
+                {
+                    highScores.add(i, totalScore);
+                    i++;
+                }
+            }
+        }
+        if(highScores.size() > 10)
+        {
+            highScores.remove(highScores.size()-1);
+        }
+        //GraphicalInterface.displayHighscore(highScores);
+    }/** Name: Brian Yang
  * Class: APCSA Period 3
  * Teacher: Mrs. Kankelborg
  * The HighScore object manages the high scores by saving new scores on a leaderboard if they qualify for it,
