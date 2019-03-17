@@ -1,23 +1,4 @@
- public void updateScoreBoard(int totalScore)
-    {
-        //Reminder: Ask how to update a File with new HighSccores
-        if(highScores.size() <= 10)
-        {
-            for (int i = 0; i < highScores.size(); i++)
-            { 
-                if(totalScore >= highScores.get(i) && totalScore <= highScores.get(i-1))
-                {
-                    highScores.add(i, totalScore);
-                    i++;
-                }
-            }
-        }
-        if(highScores.size() > 10)
-        {
-            highScores.remove(highScores.size()-1);
-        }
-        //GraphicalInterface.displayHighscore(highScores);
-    }/** Name: Brian Yang
+/** Name: Brian Yang
  * Class: APCSA Period 3
  * Teacher: Mrs. Kankelborg
  * The HighScore object manages the high scores by saving new scores on a leaderboard if they qualify for it,
@@ -28,13 +9,12 @@
  * Added the class header, constructor, and toString method.
  * 3/7/19: Version 1.1
  * Added a stubbed class for the HighScore.
- * 3/14/19: Version 1.2
- * Added two method functions to HighScore (resetScores and updateScoreBoard)
 */
 import java.util.*;
 import java.io.*;
 public class HighScore 
 {
+        private String fileName;
         private File scoreBoard; //The File that will be used to load the high scores
         private ArrayList<Integer> highScores; /**
                                                 * An ArrayList that will represent the high scores after they have
@@ -48,9 +28,9 @@ public class HighScore
     */
     public HighScore(String fileName) throws FileNotFoundException
     {
+        this.fileName = fileName;
         scoreBoard = new File(fileName); 
-        @SuppressWarnings("resource")
-		Scanner input = new Scanner(scoreBoard);
+        Scanner input = new Scanner(scoreBoard);
         highScores = new ArrayList<Integer>();
         while(input.hasNext()) 
         {
@@ -68,7 +48,7 @@ public class HighScore
      * 
      * Pre-Condition: The leaderboard isn't in its default state when the Player chooses to reset the game. 
      */
-     public void resetScores()
+    public void resetScores()
     {
         //Again, must learn how to update a file from my code
         for(int i = 0; i < highScores.size(); i++)
@@ -103,11 +83,12 @@ public class HighScore
      * Other methods that updateScoreBoard may call: viewScores (the high scores will be displayed after the
      * Player finishes the game). 
      */
-    public void updateScoreBoard(int totalScore)
+    public void updateScoreBoard(int totalScore) throws FileNotFoundException
     {
-        //Reminder: Ask how to update a File with new HighSccores
+        PrintStream output = new PrintStream(new File(fileName));
+        //PrintStream output = new PrintStream(new File("testOutput.txt"));
         if(highScores.size() <= 10)
-        {
+        {            
             for (int i = 0; i < highScores.size(); i++)
             { 
                 if(totalScore >= highScores.get(i) && totalScore <= highScores.get(i-1))
@@ -117,9 +98,13 @@ public class HighScore
                 }
             }
         }
-        else
+        if(highScores.size() > 10)
         {
             highScores.remove(highScores.size()-1);
+        }
+        for(int score: highScores)
+        {
+            output.println(score);
         }
         //GraphicalInterface.displayHighscore(highScores);
     }
