@@ -67,7 +67,7 @@ public void Outcome(boolean score)
 }
 
 // Displays high score
-public void displayHighscore(ArrayList<Integer> highScores)
+public void displayHighscore(int highScore)
 {
 }
 
