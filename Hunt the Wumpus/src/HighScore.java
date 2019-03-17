@@ -9,6 +9,8 @@
  * Added the class header, constructor, and toString method.
  * 3/7/19: Version 1.1
  * Added a stubbed class for the HighScore.
+ * 3/15/19: Version 1.2
+ * Implemented the constructors, resetScore, and highScore
 */
 import java.util.*;
 import java.io.*;
@@ -48,13 +50,14 @@ public class HighScore
      * 
      * Pre-Condition: The leaderboard isn't in its default state when the Player chooses to reset the game. 
      */
-    public void resetScores()
+    public void resetScores() throws FileNotFoundException
     {
         //Again, must learn how to update a file from my code
         for(int i = 0; i < highScores.size(); i++)
         {
             highScores.set(i, 0);
         }
+        updateFile();
     }
     
     /**
@@ -68,7 +71,7 @@ public class HighScore
      */
     public void  viewScores() 
     {
-        
+        //GraphicalInterface.displayHighscore(highScores);
     }
     
     /**
@@ -85,7 +88,6 @@ public class HighScore
      */
     public void updateScoreBoard(int totalScore) throws FileNotFoundException
     {
-        PrintStream output = new PrintStream(new File(fileName));
         //PrintStream output = new PrintStream(new File("testOutput.txt"));
         if(highScores.size() <= 10)
         {            
@@ -102,11 +104,24 @@ public class HighScore
         {
             highScores.remove(highScores.size()-1);
         }
+        updateFile();
+        viewScores();
+    }
+    
+    /**
+     * Updates the File after the scores are reset or updated.
+     * 
+     * @Param: Void (no need to accept parameters from other classes)
+     * 
+     * @Return: Void (no need to return stuff)
+     */
+    public void updateFile() throws FileNotFoundException
+    {
+        PrintStream output = new PrintStream(new File(fileName));
         for(int score: highScores)
         {
             output.println(score);
         }
-        //GraphicalInterface.displayHighscore(highScores);
     }
     
     //Prints a description of the HighScore object rather than its address in computer's memory.
