@@ -83,7 +83,7 @@ public int shootArrow (Cave cave)
  return -1;
 }
 
-// returns if player has enough money to buy the item they want, I will edit this with the implementation
+// returns if player has enough money to buy the item they want
 public boolean buyItem(int item, int playerBalance) 
 {
  return false;
@@ -97,6 +97,7 @@ public void Outcome(boolean score)
 // Displays high score
 public void displayHighscore(int highScore)
 {
+   System.out.println("Player Highscore: "+highScore);
 }
 
 
