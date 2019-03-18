@@ -8,7 +8,7 @@
  *     3/12/2019      |  Added method headers
  *
  */
-
+import java.util.*;
 public class GraphicalInterface {
 
 int BAT;
@@ -95,7 +95,7 @@ public void Outcome(boolean score)
 }
 
 // Displays high score
-public void displayHighscore(int score)
+public void displayHighscore(int highScore)
 {
 }
 

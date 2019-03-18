@@ -6,7 +6,7 @@
  * 
  * @Date Last Updated: 3/8/19
  * @Version : JavaSE-1.8
- * @Comments : Completed Main method w/ creation of objects
+ * @Comments : Created stub methods
  */
 import java.util.*;
 /**
@@ -26,16 +26,20 @@ public class GameControl
 	{
 		Cave cave = new Cave();
 		GameLocations locations = new GameLocations();
-		GraphicalInterface GI = new GraphicalInterface();
+		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
 		HighScore score = new HighScore();
 		Player player = new Player();
 		Trivia trivia = new Trivia();
+		/*
 		System.out.println(cave);
 		System.out.println(locations);
 		System.out.println(GI);
 		System.out.println(score);
 		System.out.println(player);
 		System.out.println(trivia);
+		*/
+		locations.warning();
+		
 	}
 	/**
 	 *
@@ -151,14 +155,13 @@ public class GameControl
 	}
 	/**
 	 * 
-	 * @param caveType the type of cave given by GameLocations
+	 * @param int array of dangers with 0, 1, 2 being the bat, cave, and wumpus
 	 * @return the type of the cave given as an integer for easier handling
 	 */
-	public static int Hazard(int caveType) //'int caveType' is a place holder for the cave class
+	public static int[] Hazard(int[] dangers)
 	{
-		//code here to turn the cave type into a number
-		//return one of the static variable as an ENUM for the types of hazards and give it to trivia
-		return 0;
+		//returns array of dangers in cave
+		return dangers;
 	}
 	/**
 	 * 
@@ -170,4 +173,3 @@ public class GameControl
 		return false;
 	}
 }
-
