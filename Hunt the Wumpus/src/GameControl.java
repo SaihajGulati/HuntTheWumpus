@@ -27,7 +27,7 @@ public class GameControl
 	public static void main(String[] args) throws FileNotFoundException
 	{
 		Cave cave = new Cave();
-		GameLocations locations = new GameLocations();
+		GameLocations locations = new GameLocations(cave);
 		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
 		HighScore score = new HighScore();
 		Player player = new Player();
@@ -46,10 +46,12 @@ public class GameControl
 		player.changeCoins(4);
 		GI.inDanger(null);
 		GI.buyItem(0,0);
-		cave.tunnels(0, 0);
-		cave.adjacentRooms(0, 0);
+		cave.tunnels(0);
+		cave.adjacentRooms(0);
 		trivia.askQuestions(0);
 		trivia.getAnswers();
+		score.resetScores();
+		score.viewScores();
 		
 	}
 	/**
