@@ -1,186 +1,115 @@
-/*
- * 
- * @author : Joshua Venable
- * @Class : AP Computer Science A
- * @Object : Game Control : Controls the interaction between every other object
- * 
- * @Date Last Updated: 3/8/19
- * @Version : JavaSE-1.8
- * @Comments : Created stub methods
- */
-import java.util.*;
 /**
- * MAJOR NOTES:
+ * @author Saihaj Gulati
+ * Class: APCSA - 3
+ * Object: Player
+ 	*  keeps track of the player’s inventory (Arrows and Gold coins)
+ 	*  keeps track of the number of turns the player has taken
+ 	*  Computes ending score of the player 
  * 
- * 	Figure out how to get the adjacent room index?
- * 	Add Wumpus control methods but what do we need for that? 
- *
- */
-public class GameControl 
+ * Revision History:
+ * Version:   Date:     Description:
+ * 1.0        3/4/19    Constructor and toString added
+ * 2.0        3/8/19    Stubs added (fields and skeleton methods)
+ * 3.0        3/14/19   Implemented Constructor and few methods
+*/
+public class Player 
 {
-	public static final int BATS = 0;
-	public static final int HOLE = 1;
-	public static final int WUMPUS = 2;
-	public static final int SCORE = 0;
-	public static void main(String[] args)
-	{
-		Cave cave = new Cave();
-		GameLocations locations = new GameLocations();
-		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
-		HighScore score = new HighScore();
-		Player player = new Player();
-		Trivia trivia = new Trivia();
-		/*
-		System.out.println(cave);
-		System.out.println(locations);
-		System.out.println(GI);
-		System.out.println(score);
-		System.out.println(player);
-		System.out.println(trivia);
-		*/
-		locations.warning();
-		locations.moveWumpus();
-		player.movePlayer();
-		player.changeCoins(4);
-		GI.inDanger(null);
-		GI.buyItem(3);
-		cave.tunnels();
-		cave.adjacentRooms();
-		trivia.askQuestions();
-		trivia.giveTrivia();
-		score.updateScoreboard();
-		score.resetScores();
-		
-	}
+	private int turns;
+	private int arrows;
+	private int coins;
+	
 	/**
-	 *
-	 * @return whether or not you can move there
+	 * This constructs the player object and sets default values of the fields
+	 * @return Player object
 	 */
-	public static boolean movePossible() 
-	{	
-		//locations.<method to return room number>
-		//if there is a door leading there and he is adjacent to it then return true
-		return false;
+	public Player()
+	{
+		turns = 0;
+		arrows = 3;
+		coins = 0;
 	}
 	
 	/**
-	 * 
-	 * @return the map fully created if player decides to play the game
+	 * This allows for printing out the object nicely
+	 * @return Player as a string
 	 */
-	public static ArrayList<Integer> createMap()
+	public String toString()
 	{
-		//if player clicks 'Play Game'
-		//NOTE : Integer is a placeholder and will be replaced with a cave type
-		//cave method replaces 'new ArrayList<Integer>();' to grab the generated cave
-		ArrayList<Integer> map = new ArrayList<Integer>();
-		return map;
+		return "Player";
 	}
 	
 	/**
-	 * 
-	 * @return the location of the player as an integer index in the arrayList
+	 * This method adds 1 to the number of turns and coins.
+	 * @return number of coins
 	 */
-	public static int playerLocation() 
+	public int movePlayer()
 	{
-		//get this from a GameLocation method and return the index for the player and the GI 
-		return 0;
+		turns++;
+		coins++;
+		return coins;
 	}
 	
 	/**
-	 * 
-	 * @param 'words' is given by trivia and given to the player when the GI needs it
-	 * @return the random questions that are given by trivia
+	 * This number changes the number of arrows by the parameter.
+	 * @param amount to change number of arrows by
+	 * @return number of arrows
 	 */
-	public static String[] getQuestions(String[] words)
+	public int changeArrows(int amt)
 	{
-		// simple passing method so trivia doesn't have to extend
-		return words;
-	}
-
-	/**
-	 * 
-	 * @param The Direction is given from GI as a char which will be changed in that class
-	 * @return the player index from 'playerLocation' to give to the GameLocation
-	 * 			in order to see what adjacent rooms there are
-	 */
-	public static int movingPlayer(int roomNumber)
-	{
-		//use the roomNumber which is the room that the player wants to move
-		// if 'movePossible' then give the 'playerLocation' index
-		//code for inputting 'playerLocation'
-		return 0;
+		arrows += amt;	
+		return arrows;
 	}
 	
 	/**
-	 * 
-	 * @param answers are given from GI and passed in order to check with trivia
-	 * @return the answers as an array and given to trivia
+	 * This method changes the number of coins by the parameter.
+	 * @param amount to change number of coins by
+	 * @return number of coins
 	 */
-	public static String[] giveAnswer(String[] answers)
+	public int changeCoins(int amt)
 	{
-		//do not add anything else for now this should be a simple pass
-		return answers;
+		coins += amt;
+		return coins;
 	}
 	
 	/**
-	 * 
-	 * @param items given from player in order to show GI and gameScore
-	 * @return the item list to give to GI and gameScore
+	 * This method calculates the end score.
+	 * @param boolean representing whether the Wumpus was killed
+	 * @return score
 	 */
-	public static int[] itemList(int[] items)
+	public int getScore(boolean gotWumpus)
 	{
-		//another simple array carry over
-		return items;
+		int score = 100 - turns + coins + 5*arrows;
+		if (gotWumpus)
+		{
+			return score + 50;
+		}
+		return score;
 	}
 	
 	/**
-	 * 
-	 * @return the index of the cave they want to shoot for GameLocations
+	 * accessor for arrows
+	 * @return number of arrows
 	 */
-	public static int shootArrow()
+	public int getArrows()
 	{
-		//Do not include 'shot' boolean as a parameter, do it inside main code
-		//code for getting the index (using same rules as the movingPlayer)
-		return 0;
+		return arrows;
 	}
 	
 	/**
-	 * 
-	 * @return boolean of whether or not Wumpus was shot
+	 * accessor for coins
+	 * @return number of coins
 	 */
-	public static boolean shotWumpus()
+	public int getCoins()
 	{
-		//return true if the room shot has the Wumpus
-		//I need the return value from GameLocations after giving it 'shootArrow' method
-		return false;
+		return coins;
 	}
 	
 	/**
-	 * 
-	 * @return the total high score for the GI
+	 * accessor for turns
+	 * @return number of turns
 	 */
-	public static int getScore()
+	public int getTurns()
 	{
-		//input the player method that calculates the high score
-		return 0;
-	}
-	/**
-	 * 
-	 * @param int array of dangers with 0, 1, 2 being the bat, cave, and wumpus
-	 * @return the type of the cave given as an integer for easier handling
-	 */
-	public static int[] Hazard(int[] dangers)
-	{
-		//returns array of dangers in cave
-		return dangers;
-	}
-	/**
-	 * 
-	 * @return whether or not the Wumpus is within 2 rooms of the player (for ease of use to the trivia class)
-	 */
-	public static boolean WumpusIsnear() 
-	{
-		//code here that asks game location to compare the the distance between the player and wumpus class
-		return false;
+		return turns;
 	}
 }
