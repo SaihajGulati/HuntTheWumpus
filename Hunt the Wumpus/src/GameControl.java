@@ -52,23 +52,40 @@ public class GameControl
 		trivia.getAnswers();
 		score.resetScores();
 		score.viewScores();
+		startGame(true, GI, player, cave, locations);
+		endGame(true, GI, player, score, locations);
 		
 	}
 	/**
-	 * Simple method that increments Round after every rotation
+	 * Starts up the Game
+	 * @param start gets a call from GI to see if player wants to start
+	 * @param GI is the Graphical interface
+	 * @param player is the player class
+	 * @param cave is the cave class
 	 */
-	public static void addRound()
+	public static void startGame(boolean start, GraphicalInterface GI, Player player, Cave cave, GameLocations locations)
 	{
-		ROUND ++;
+		System.out.println("Time to start the game!");
+		if(start)
+		{
+			GI.displayItems(player);
+			GI.inDanger(cave.adjacentRooms(locations.getPlayerLocation()));
+		}
 	}
 	/**
 	 * 
-	 * @param amount of coins/whatever else that would increment score
-	 * Simple method that adds score to keep it incremented
+	 * @param end if the game ends
+	 * @param GI the GraphicalInterface class
+	 * @param player the player class
+	 * @param score the HighScore Class
+	 * @param locations The GameLocations class
 	 */
-	public static void addScore(int amount) 
-	{
-		SCORE += amount;
+	public static void endGame(boolean end, GraphicalInterface GI, Player player, HighScore score, GameLocations locations) {
+		System.out.println("Time to end the game!");
+		if(end)
+		{
+			GI.displayHighscore(score.updateScoreBoard(player.getScore(locations.shootArrow(locations.getWumpusLocation()))));
+		}
 	}
 	/**
 	 *
