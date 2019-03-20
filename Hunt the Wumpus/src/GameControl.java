@@ -4,7 +4,7 @@
  * @Class : AP Computer Science A
  * @Object : Game Control : Controls the interaction between every other object
  * 
- * @Date Last Updated: 3/19/19
+ * @Date Last Updated: 3/8/19
  * @Version : JavaSE-1.8
  * @Comments : Created stub methods
  */
@@ -22,7 +22,8 @@ public class GameControl
 	public static final int BATS = 0;
 	public static final int HOLE = 1;
 	public static final int WUMPUS = 2;
-	public static final int SCORE = 0;
+	public static int SCORE = 0;
+	public static int ROUND = 0;
 	public static void main(String[] args) throws FileNotFoundException
 	{
 		Cave cave = new Cave();
@@ -50,6 +51,22 @@ public class GameControl
 		trivia.askQuestions(0);
 		trivia.getAnswers();
 		
+	}
+	/**
+	 * Simple method that increments Round after every rotation
+	 */
+	public static void addRound()
+	{
+		ROUND ++;
+	}
+	/**
+	 * 
+	 * @param amount of coins/whatever else that would increment score
+	 * Simple method that adds score to keep it incremented
+	 */
+	public static void addScore(int amount) 
+	{
+		SCORE += amount;
 	}
 	/**
 	 *
