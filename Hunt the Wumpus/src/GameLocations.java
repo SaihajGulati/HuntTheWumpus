@@ -152,16 +152,16 @@ public class GameLocations {
        
        public int getWumpusLocation()
        {
-              return 0;
+              return wumpusLocation;
        }
        
        public int[] getBatLocations()
        {
-              return null;
+              return batLocations;
        }
        
        public int[] getPitLocations()
        {
-              return null;
+              return pitLocations;
        }
 }
