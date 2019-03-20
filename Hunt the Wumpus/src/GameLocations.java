@@ -103,7 +103,7 @@ public class GameLocations {
        public int[] warning()
        {
     	   int[] warnings= {0,0,0};
-    	   int[] sides=cave.adjacentSides();
+    	   int[] sides = cave.adjacentRooms(getPlayerLocation());
     	   for(int i=0; i<sides.length;i++)
     	   {
     		   if(batLocations[0]==sides[i]||batLocations[1]==sides[i])
@@ -147,7 +147,7 @@ public class GameLocations {
         */
        public int getPlayerLocation()
        {
-              return 0;
+              return playerLocation;
        }
        
        public int getWumpusLocation()
