@@ -4,10 +4,11 @@
  * @Class : AP Computer Science A
  * @Object : Game Control : Controls the interaction between every other object
  * 
- * @Date Last Updated: 3/8/19
+ * @Date Last Updated: 3/19/19
  * @Version : JavaSE-1.8
  * @Comments : Created stub methods
  */
+import java.io.FileNotFoundException;
 import java.util.*;
 /**
  * MAJOR NOTES:
@@ -22,14 +23,14 @@ public class GameControl
 	public static final int HOLE = 1;
 	public static final int WUMPUS = 2;
 	public static final int SCORE = 0;
-	public static void main(String[] args)
+	public static void main(String[] args) throws FileNotFoundException
 	{
 		Cave cave = new Cave();
 		GameLocations locations = new GameLocations();
 		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
 		HighScore score = new HighScore();
 		Player player = new Player();
-		Trivia trivia = new Trivia();
+		Trivia trivia = new Trivia("asdf");
 		/*
 		System.out.println(cave);
 		System.out.println(locations);
@@ -39,6 +40,15 @@ public class GameControl
 		System.out.println(trivia);
 		*/
 		locations.warning();
+		locations.moveWumpus();
+		player.movePlayer();
+		player.changeCoins(4);
+		GI.inDanger(null);
+		GI.buyItem(0,0);
+		cave.tunnels(0, 0);
+		cave.adjacentRooms(0, 0);
+		trivia.askQuestions(0);
+		trivia.getAnswers();
 		
 	}
 	/**
