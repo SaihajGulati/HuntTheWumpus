@@ -63,10 +63,7 @@ public void inDanger(int [] hazards)
  
  for(int hazard : hazards)
  {
-  if(hazard == null)
-  // do nothing
-  
-  else if(hazard == BAT)
+  if(hazard == BAT)
    System.out.println(batString);
    
   else if(hazard == HOLE)
