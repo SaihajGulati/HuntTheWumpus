@@ -112,7 +112,9 @@ public class Trivia
             while (correctAnswers < 3 && totalQuestions <= 5)
             {
                 int questionNum = (int)(Math.random() * triviaQuestions.size());
-                String correctAnswer = triviaAnswers.get(questionNum).substring(14);
+                if (questionNum < triviaAnswers.size())
+                {
+                	String correctAnswer = triviaAnswers.get(questionNum).substring(14);
                 System.out.print(triviaQuestions.get(questionNum) + " ");
                 String answer = playerResponse.nextLine();
                 if(answer.equalsIgnoreCase(correctAnswer))
@@ -122,6 +124,7 @@ public class Trivia
                 totalQuestions++;
                 triviaQuestions.remove(questionNum);
                 triviaAnswers.remove(questionNum);
+                }
             }
             if(correctAnswers >= 3)
             {
