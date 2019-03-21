@@ -5,7 +5,8 @@
  *First Created 3/4/2019
  *
  * Date of revision  |  Revision made
- *     3/12/2019      |  Added method headers
+ *     3/12/2019     |  Added method headers
+ *     3/21/2019     |  Highscore method
  *
  */
 import java.util.*;
@@ -92,10 +93,12 @@ public void Outcome(boolean score)
 }
 
 // Displays high score
-public void displayHighscore(int highScore)
+public void displayHighscore(ArrayList<String> highscores)
 {
-   System.out.println("Player Highscore: "+highScore);
+   for(inti = 0; i < highscores.siz();i++)
+   {
+     System.out.println("High score is +"highscores.get(i));
+   }
 }
-
 
 }
