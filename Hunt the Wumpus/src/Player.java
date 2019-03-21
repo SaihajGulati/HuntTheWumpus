@@ -21,13 +21,17 @@ public class Player
 	/**
 	 * This constructs the player object and sets default values of the fields
 	 * @return Player object
-	 * test comment what
 	 */
 	public Player()
 	{
 		turns = 0;
 		arrows = 3;
 		coins = 0;
+	}
+	
+	public void poop()
+	{
+		return;
 	}
 	
 	/**
