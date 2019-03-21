@@ -4,10 +4,12 @@
  * @Class : AP Computer Science A
  * @Object : Game Control : Controls the interaction between every other object
  * 
- * @Date Last Updated: 3/8/19
- * @Version : JavaSE-1.8
- * @Comments : Created stub methods
- */
+ * Revision History:
+ * Version:   Date:     Description:
+ * 1.0        3/4/19    Constructor and toString added
+ * 2.0        3/8/19    Stubs added (fields and skeleton methods)
+ * 3.0        3/19/19   Added calls to methods for testing and implemented a few methods
+*/
 import java.io.FileNotFoundException;
 import java.util.*;
 /**
@@ -26,25 +28,26 @@ public class GameControl
 	public static int ROUND = 0;
 	public static void main(String[] args) throws FileNotFoundException
 	{
-		Cave cave = new Cave();
+		String[][] caveArray = new String[30][30];
+		Cave cave = new Cave(caveArray);
 		GameLocations locations = new GameLocations(cave);
 		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
-		HighScore score = new HighScore();
+		HighScore score = new HighScore("hello.txt");
 		Player player = new Player();
-		Trivia trivia = new Trivia("asdf");
-		/*
+		Trivia trivia = new Trivia("asdf.txt");
+		
 		System.out.println(cave);
 		System.out.println(locations);
 		System.out.println(GI);
 		System.out.println(score);
 		System.out.println(player);
 		System.out.println(trivia);
-		*/
+		int[] hazardLocs = new int[4];
 		locations.warning();
 		locations.moveWumpus();
 		player.movePlayer();
 		player.changeCoins(4);
-		GI.inDanger(null);
+		GI.inDanger(hazardLocs);
 		GI.buyItem(0,0);
 		cave.tunnels(0);
 		cave.adjacentRooms(0);
@@ -79,12 +82,15 @@ public class GameControl
 	 * @param player the player class
 	 * @param score the HighScore Class
 	 * @param locations The GameLocations class
+	 * @throws FileNotFoundException 
 	 */
-	public static void endGame(boolean end, GraphicalInterface GI, Player player, HighScore score, GameLocations locations) {
+	public static void endGame(boolean end, GraphicalInterface GI, Player player, HighScore score, GameLocations locations) throws FileNotFoundException {
 		System.out.println("Time to end the game!");
 		if(end)
 		{
-			GI.displayHighscore(score.updateScoreBoard(player.getScore(locations.shootArrow(locations.getWumpusLocation()))));
+			int endScore = player.getScore(locations.shootArrow(locations.getWumpusLocation()));
+			score.updateScoreBoard(endScore);
+			GI.displayHighscore(endScore);
 		}
 	}
 	/**
