@@ -117,4 +117,9 @@ public class Player
 	{
 		return turns;
 	}
+	
+	public int sahillSucks()
+	{
+		System.out.println("ayush is a retard");
+	}
 }
