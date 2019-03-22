@@ -2,7 +2,7 @@
  * @author Saihaj Gulati
  * Class: APCSA - 3
  * Object: Player
- 	*  keeps track of the player’s inventory (Arrows and Gold coins)
+ 	*  keeps track of the player's inventory (Arrows and Gold coins)
  	*  keeps track of the number of turns the player has taken
  	*  Computes ending score of the player 
  * 
@@ -27,11 +27,6 @@ public class Player
 		turns = 0;
 		arrows = 3;
 		coins = 0;
-	}
-	
-	public void poop()
-	{
-		return;
 	}
 	
 	/**
