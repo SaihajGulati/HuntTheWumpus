@@ -11,14 +11,19 @@
  * Added a stubbed class for the HighScore.
  * 3/15/19: Version 1.2
  * Implemented the constructors, resetScore, and highScore
+ * 3/21/19: Version 1.3
+ * Modified updateScoreBoard and made the method static
+ * 3/22/19: Version 1.4
+ * Added test case in updateScoreBoard if the Player gets a higher
+ * score than any of the pre-existing scores on the scoreboard.
 */
 import java.util.*;
 import java.io.*;
 public class HighScore 
 {
-        private String fileName;
-        private File scoreBoard; //The File that will be used to load the high scores
-        private ArrayList<Integer> highScores; /**
+        private static String fileName;
+        private static File scoreBoard; //The File that will be used to load the high scores
+        private static ArrayList<Integer> highScores; /**
                                                 * An ArrayList that will represent the high scores after they have
                                                 * been loaded into the game; used either when displaying the high scores
                                                 * or updating them after a game (when the Player's score qualifies).
@@ -28,9 +33,9 @@ public class HighScore
      * The constructor for the HighScore object that will handle the File processing and fill the
      * HighScores ArrayList with its respective scores.
     */
-    public HighScore(String fileName) throws FileNotFoundException
+    public HighScore(String filename) throws FileNotFoundException
     {
-        this.fileName = fileName;
+        this.fileName = filename;
         scoreBoard = new File(fileName); 
         Scanner input = new Scanner(scoreBoard);
         highScores = new ArrayList<Integer>();
@@ -50,7 +55,7 @@ public class HighScore
      * 
      * Pre-Condition: The leaderboard isn't in its default state when the Player chooses to reset the game. 
      */
-    public void resetScores() throws FileNotFoundException
+    public static void resetScores() throws FileNotFoundException
     {
         //Again, must learn how to update a file from my code
         for(int i = 0; i < highScores.size(); i++)
@@ -60,19 +65,19 @@ public class HighScore
         updateFile();
     }
     
-    /**
-     * The purpose of this method is to take the ArrayList of highScores (the loading from a file will be handled
-     * in the constructor) and send them to the GraphicalInterface object so they can be rendered
-     * properly when the leaderboard is supposed to be displayed.
-     * 
-     * @Param: Void (This method doesn't need to take any parameters as it already has the high scores in its fields)
-     * 
-     * @Return: Void (No need to pass the high scores to gameControl when the scoreboard is being printed). 
-     */
-    public void  viewScores() 
-    {
-        //GraphicalInterface.displayHighscore(highScores);
-    }
+    // /**
+     // * The purpose of this method is to take the ArrayList of highScores (the loading from a file will be handled
+     // * in the constructor) and send them to the GraphicalInterface object so they can be rendered
+     // * properly when the leaderboard is supposed to be displayed.
+     // * 
+     // * @Param: Void (This method doesn't need to take any parameters as it already has the high scores in its fields)
+     // * 
+     // * @Return: Void (No need to pass the high scores to gameControl when the scoreboard is being printed). 
+     // */
+    // public static void  viewScores() 
+    // {
+        // //GraphicalInterface.displayHighscore(highScores);
+    // }
     
     /**
      * The purpose of this method is to take the Player's score after he/she finishes a game (either by dying
@@ -82,16 +87,17 @@ public class HighScore
      * @Param: int totalScore (the final score of the Player, calculated in the Player object) 
      * 
      * @Return: Void
-     * 
-     * Other methods that updateScoreBoard may call: viewScores (the high scores will be displayed after the
-     * Player finishes the game). 
      */
-    public void updateScoreBoard(int totalScore) throws FileNotFoundException
+    public static ArrayList<Integer> updateScoreBoard(int totalScore) throws FileNotFoundException
     {
         //PrintStream output = new PrintStream(new File("testOutput.txt"));
-        if(highScores.size() <= 10)
-        {            
-            for (int i = 0; i < highScores.size(); i++)
+        if(totalScore >= highScores.get(0))
+        {
+            highScores.add(0, totalScore);
+        }
+        else
+        {
+            for (int i = 1; i < highScores.size(); i++)
             { 
                 if(totalScore >= highScores.get(i) && totalScore <= highScores.get(i-1))
                 {
@@ -100,12 +106,12 @@ public class HighScore
                 }
             }
         }
-        if(highScores.size() > 10)
+        while (highScores.size() > 10)
         {
             highScores.remove(highScores.size()-1);
         }
         updateFile();
-        viewScores();
+        return highScores;
     }
     
     /**
@@ -115,7 +121,7 @@ public class HighScore
      * 
      * @Return: Void (no need to return stuff)
      */
-    public void updateFile() throws FileNotFoundException
+    public static void updateFile() throws FileNotFoundException
     {
         PrintStream output = new PrintStream(new File(fileName));
         for(int score: highScores)
@@ -125,13 +131,13 @@ public class HighScore
     }
     
     //Prints a description of the HighScore object rather than its address in computer's memory.
-    public String toString()
-    {
-        return "HighScore";
-    }
+    // public String toString()
+    // {
+        // return "HighScore";
+    // }
     
     //Test method
-    public ArrayList<Integer> getHighScores()
+    public static ArrayList<Integer> getHighScores()
     {
         return highScores;
     }

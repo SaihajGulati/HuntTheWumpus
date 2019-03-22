@@ -11,6 +11,10 @@
  * Added a stubbed class for the HighScore.
  * 3/19/19: Version 1.2
  * Implemented the methods askQuestions and getTrivia, along with the constructor for Trivia.
+ * 3/21/19: Version 1.3
+ * Made the method static
+ * 3/22/19: Version 1.4
+ * Added the declaration/instantiation of the secrets ArrayList
 */
 import java.util.*;
 import java.io.*;
@@ -18,17 +22,17 @@ public class Trivia
 {
     Scanner input;
     private File trivia;
-    private ArrayList<String> triviaQuestions; //The trivia questions that will be asked during the game 
-    private ArrayList<String> triviaAnswers; /**
+    private static ArrayList<String> triviaQuestions; //The trivia questions that will be asked during the game 
+    private static ArrayList<String> triviaAnswers; /**
                                               * The answers to the trivia questions; will be updated alongside
                                               * the triviaQuestions ArrayList.
                                               */
-    private ArrayList<String> triviaInformation; /**
+    private static ArrayList<String> triviaInformation; /**
                                          * The trivia information that will be given out for every Player turn;
                                          * unlike the triviaAnswers ArrayList this array won't remove values for
                                          * every question asked.
                                          */
-    private ArrayList<String> secrets; //The secrets that will be given to the Player when he/she buys them.
+    private static ArrayList<String> secrets; //The secrets that will be given to the Player when he/she buys them.
     
     /**
      * The constructor for the Trivia object that will handle the File processing and fill the
@@ -52,9 +56,13 @@ public class Trivia
                 {
                     triviaAnswers.add(triviaLine);
                 }
-                else if(triviaLine.substring(0, 4).equals("Key:"))
+                else if(triviaLine.substring(0, 5).equals("Key: "))
                 {
                     triviaInformation.add(triviaLine.substring(5));
+                }
+                else if(triviaLine.substring(0, 6).equals("Hint: "))
+                {
+                    secrets.add(triviaLine.substring(6));
                 }
                 else
                 {
@@ -81,7 +89,7 @@ public class Trivia
      * 
      * Postcondition: Any question asked in the method will never be asked again.
     */
-    public boolean askQuestions(int scenario)
+    public static boolean askQuestions(int scenario)
     {
         int correctAnswers = 0;
         int totalQuestions = 1;
@@ -112,9 +120,7 @@ public class Trivia
             while (correctAnswers < 3 && totalQuestions <= 5)
             {
                 int questionNum = (int)(Math.random() * triviaQuestions.size());
-                if (questionNum < triviaAnswers.size())
-                {
-                	String correctAnswer = triviaAnswers.get(questionNum).substring(14);
+                String correctAnswer = triviaAnswers.get(questionNum).substring(14);
                 System.out.print(triviaQuestions.get(questionNum) + " ");
                 String answer = playerResponse.nextLine();
                 if(answer.equalsIgnoreCase(correctAnswer))
@@ -124,7 +130,6 @@ public class Trivia
                 totalQuestions++;
                 triviaQuestions.remove(questionNum);
                 triviaAnswers.remove(questionNum);
-                }
             }
             if(correctAnswers >= 3)
             {
@@ -155,7 +160,7 @@ public class Trivia
      * Please note that this method may have to be called from gameControl after askQuestions returns its
      * boolean, as a method can only return one value at a time.
     */
-    public String returnHint(int currentRoom, int wumpusRoom, int batRoom, int pitRoom, boolean wumpusNear)
+    public static String returnHint(int currentRoom, int wumpusRoom, int batRoom, int pitRoom, boolean wumpusNear)
     {
         return "a";
     }
@@ -168,7 +173,7 @@ public class Trivia
      * 
      * @Return: String (the piece of trivia that the Player will eventually get)
     */
-    public String giveTrivia()
+    public static String giveTrivia()
     {
         int infoNum = (int)(Math.random() * triviaInformation.size());
         String trivia = triviaInformation.get(infoNum);
@@ -176,26 +181,32 @@ public class Trivia
     }
     
     //Prints a description of the Trivia object rather than its address in computer's memory.
-    public String toString()
-    {
-        return "Trivia";
-    }
+    // public static String toString()
+    // {
+        // return "Trivia";
+    // }
     
     //test accessor method for triviaQuestions ArrayList
-    public ArrayList<String> getQuestions()
+    public static ArrayList<String> getQuestions()
     {
         return triviaQuestions;
     }
     
     //test accessor method for triviaAnswers ArrayList 
-    public ArrayList<String> getAnswers()
+    public static ArrayList<String> getAnswers()
     {
         return triviaAnswers;
     }
     
     //test accessor method for triviaInformation ArrayList
-    public ArrayList<String> getInformation()
+    public static ArrayList<String> getInformation()
     {
         return triviaInformation;
+    }
+    
+    //test accessor method for secrets ArrayList
+    public static ArrayList<String> accessHints()
+    {
+        return secrets;
     }
 }
