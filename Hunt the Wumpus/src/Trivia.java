@@ -15,6 +15,8 @@
  * Made the method static
  * 3/22/19: Version 1.4
  * Added the declaration/instantiation of the secrets ArrayList
+ * 3/25/19: Version 1.5
+ * Added the body of the returnHint method, and a new method called wumpusNearPlayer.
 */
 import java.util.*;
 import java.io.*;
@@ -160,9 +162,49 @@ public class Trivia
      * Please note that this method may have to be called from gameControl after askQuestions returns its
      * boolean, as a method can only return one value at a time.
     */
-    public static String returnHint(int currentRoom, int wumpusRoom, int batRoom, int pitRoom, boolean wumpusNear)
+    public String returnHint(int currentRoom, int wumpusRoom, int batRoom, int pitRoom, boolean wumpusNear)
     {
-        return "a";
+    	int numReturn = (int)(Math.random() * 6);
+    	if(numReturn == 5)
+    	{
+    		return giveTrivia();
+    	}
+    	if(numReturn == 4)
+    	{
+    		return wumpusNearPlayer(wumpusNear, numReturn);
+    	}
+    	if(numReturn == 3)
+    	{
+    		return secrets.get(numReturn) + " " + pitRoom;
+    	}
+    	if(numReturn == 2)
+    	{
+    		return secrets.get(numReturn) + " " + batRoom;
+    	}
+    	if(numReturn == 1)
+    	{
+    		return secrets.get(numReturn) + " " + wumpusRoom;
+    	}
+    	return secrets.get(numReturn) + " " + currentRoom;
+    }
+    
+    /**
+     * The purpose of this method is to determine whether the Wumpus is near the Player (based on the
+     * boolean passed from returnHint), then return the correct String depending on the location of the
+     * Wumpus.
+     * 
+     * @Param: boolean wumpusNear (whether the Wumpus is near the Player), int num (the random number
+     * generated to pick a hint from the secrets ArrayList).
+     * 
+     * @Return: String (the String telling whether the Wumpus is near the Player or not).
+    */
+    public String wumpusNearPlayer(boolean wumpusNear, int num)
+    {
+    	if(wumpusNear)
+    	{
+    		return secrets.get(num);
+    	}
+    	return secrets.get(num+1);
     }
     
     /**
