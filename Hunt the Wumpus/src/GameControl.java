@@ -9,6 +9,7 @@
  * 1.0        3/4/19    Constructor and toString added
  * 2.0        3/8/19    Stubs added (fields and skeleton methods)
  * 3.0        3/19/19   Added calls to methods for testing and implemented a few methods
+ * 4.0        3/25/19  Added starting point in main however needs to be fixed with GI
 */
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -26,6 +27,10 @@ public class GameControl
 	public static final int WUMPUS = 2;
 	public static int SCORE = 0;
 	public static int ROUND = 0;
+	//following e-nums are for the start of the game and anywhere else so its easier to identify changes
+	public static int START = 0;
+	public static int HIGHSCORE = 1;
+	public static int QUIT = 2;
 	public static void main(String[] args) throws FileNotFoundException
 	{
 		String[][] caveArray = new String[30][30];
@@ -55,10 +60,21 @@ public class GameControl
 		trivia.getAnswers();
 		score.resetScores();
 		score.viewScores();
-		startGame(true, GI, player, cave, locations);
-		endGame(true, GI, player, score, locations);
-		
-	}
+		int Player_Choice = GI.mainMenu(); //change return type to int from 0-2
+		if(Player_Choice == START){
+			startGame(GI, player, cave, locations);
+		}
+		else if(Player_Choice == HIGHSCORE){
+			GI.displayHighscore(score.getHighScores())); //change param to ArrayList
+		}
+		else if(Player_Choice == QUIT){
+			System.out.println("Thank you for playing!");
+		}
+		else {
+			System.out.println("ERROR");
+		}
+		}
+			
 	/**
 	 * Starts up the Game
 	 * @param start gets a call from GI to see if player wants to start
@@ -66,14 +82,10 @@ public class GameControl
 	 * @param player is the player class
 	 * @param cave is the cave class
 	 */
-	public static void startGame(boolean start, GraphicalInterface GI, Player player, Cave cave, GameLocations locations)
+	public static void startGame(GraphicalInterface GI, Player player, Cave cave, GameLocations locations)
 	{
-		System.out.println("Time to start the game!");
-		if(start)
-		{
 			GI.displayItems(player);
 			GI.inDanger(cave.adjacentRooms(locations.getPlayerLocation()));
-		}
 	}
 	/**
 	 * 
@@ -84,14 +96,12 @@ public class GameControl
 	 * @param locations The GameLocations class
 	 * @throws FileNotFoundException 
 	 */
-	public static void endGame(boolean end, GraphicalInterface GI, Player player, HighScore score, GameLocations locations) throws FileNotFoundException {
-		System.out.println("Time to end the game!");
-		if(end)
-		{
+	public static void endGame(GraphicalInterface GI, Player player, HighScore score, GameLocations locations) throws FileNotFoundException {
+
 			int endScore = player.getScore(locations.shootArrow(locations.getWumpusLocation()));
 			score.updateScoreBoard(endScore);
 			GI.displayHighscore(endScore);
-		}
+
 	}
 	/**
 	 *
