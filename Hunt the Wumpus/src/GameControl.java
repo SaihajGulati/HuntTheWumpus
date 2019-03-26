@@ -64,7 +64,7 @@ public class GameControl
 			startGame(GI, player, cave, locations);
 		}
 		else if(Player_Choice == HIGHSCORE){
-			GI.displayHighscore(HighScore.getHighScores())); //change param to ArrayList
+			GI.displayHighscore(HighScore.getHighScores()); //change param to ArrayList
 		}
 		else if(Player_Choice == QUIT){
 			System.out.println("Thank you for playing!");
@@ -98,8 +98,8 @@ public class GameControl
 	public static void endGame(GraphicalInterface GI, Player player, HighScore score, GameLocations locations) throws FileNotFoundException {
 
 			int endScore = player.getScore(locations.shootArrow(locations.getWumpusLocation()));
-			score.updateScoreBoard(endScore);
-			GI.displayHighscore(endScore);
+			HighScore.updateScoreBoard(endScore);
+			GI.displayHighscore(HighScore.getHighScores());
 
 	}
 	/**
