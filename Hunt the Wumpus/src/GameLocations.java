@@ -122,6 +122,7 @@ public class GameLocations {
         */
        public boolean shootArrow(int room)
        {
+    	   moveWumpus();
               return false;
        }
        
