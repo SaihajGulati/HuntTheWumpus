@@ -16,6 +16,9 @@
  * 3/22/19: Version 1.4
  * Added test case in updateScoreBoard if the Player gets a higher
  * score than any of the pre-existing scores on the scoreboard.
+ * 3/25/19: Version 1.5
+ * Removed the stubbed class viewScores, as my getHighScores method
+ * already does the same intended function as viewScores.
 */
 import java.util.*;
 import java.io.*;
@@ -64,21 +67,7 @@ public class HighScore
         }
         updateFile();
     }
-    
-    // /**
-     // * The purpose of this method is to take the ArrayList of highScores (the loading from a file will be handled
-     // * in the constructor) and send them to the GraphicalInterface object so they can be rendered
-     // * properly when the leaderboard is supposed to be displayed.
-     // * 
-     // * @Param: Void (This method doesn't need to take any parameters as it already has the high scores in its fields)
-     // * 
-     // * @Return: Void (No need to pass the high scores to gameControl when the scoreboard is being printed). 
-     // */
-    // public static void  viewScores() 
-    // {
-        // //GraphicalInterface.displayHighscore(highScores);
-    // }
-    
+        
     /**
      * The purpose of this method is to take the Player's score after he/she finishes a game (either by dying
      * or shooting the Wumpus with an arrow), and update the scoreboard if the total score is able to qualify
@@ -130,13 +119,15 @@ public class HighScore
         }
     }
     
-    //Prints a description of the HighScore object rather than its address in computer's memory.
-    // public String toString()
-    // {
-        // return "HighScore";
-    // }
-    
-    //Test method
+   /**
+     * The purpose of this method is to take the ArrayList of highScores (the loading from a file will be handled
+     * in the constructor) and return them to the GraphicalInterface object (which will be calling this method) so they can be rendered
+     * properly when the leaderboard is supposed to be displayed.
+     * 
+     * @Param: Void (This method doesn't need to take any parameters as it already has the high scores in its fields)
+     * 
+     * @Return: ArrayList<Integer> (the GraphicalInterface needs to be able to access the high scores from the highScores ArrayList in order to display them).
+     */
     public static ArrayList<Integer> getHighScores()
     {
         return highScores;
