@@ -40,7 +40,6 @@ public class GameControl
 		HighScore score = new HighScore("hello.txt");
 		Player player = new Player();
 		Trivia trivia = new Trivia("asdf.txt");
-		
 		System.out.println(cave);
 		System.out.println(locations);
 		System.out.println(GI);
@@ -56,16 +55,16 @@ public class GameControl
 		GI.buyItem(0,0);
 		cave.tunnels(0);
 		cave.adjacentRooms(0);
-		trivia.askQuestions(0);
-		trivia.getAnswers();
-		score.resetScores();
-		score.viewScores();
+		Trivia.askQuestions(0);
+		Trivia.getAnswers();
+		HighScore.resetScores();
+		HighScore.getHighScores();
 		int Player_Choice = GI.mainMenu(); //change return type to int from 0-2
 		if(Player_Choice == START){
 			startGame(GI, player, cave, locations);
 		}
 		else if(Player_Choice == HIGHSCORE){
-			GI.displayHighscore(score.getHighScores())); //change param to ArrayList
+			GI.displayHighscore(HighScore.getHighScores())); //change param to ArrayList
 		}
 		else if(Player_Choice == QUIT){
 			System.out.println("Thank you for playing!");
