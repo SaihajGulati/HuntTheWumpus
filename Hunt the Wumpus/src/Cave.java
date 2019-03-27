@@ -11,8 +11,10 @@ Revision History Table:
 Date:        Version:    Comments:
 3/2/2019     1            Assignment 1: empty constructor and toString method  
 3/13/2019    2            Assignment 2: stubbed methods
-3/19/2019    3            Assignment 3: Implementation of rooms, cave map, along with row and column
-                                        setup.
+3/19/2019    3            Assignment 3: Implementation of rooms, cave map, along with row and column setup.
+3/27/2019    4            Assignment 4: Implementation of room to return adjacent rooms, and a method
+                                        to return whether the room is an edge room or inner room
+                                        within the cave.
  */                                      
 
 import java.io.*;
@@ -80,14 +82,53 @@ public class Cave
 		return null;
 	}
 	
+	
+	//Assingment 4 methods
 	/*this method will sort out the adjacent rooms next to the room the player is in (in progress)
 	 */
-	public int[] adjacentRooms(int roomNum)
+	public static int[] adjacentRooms(int roomNum)
 	{
-		int rooms[] = new int[30];
-		return rooms;
+		int[] adjRooms = new int[2];
+		if(roomColumn == 0)
+		{
+			rooms[0] = row * caveType[0].length + column + 1;
+		}
+		else
+		{
+			adjRooms[0] = roomNum - 1;
+		}
 		
+		if(roomColumn == caveType[0].length - 1)
+		{
+			adjRooms[1] = row * caveType[0].length + column + 1;
+		}
+		else
+		{
+			adjRooms[1] = roomNum + 1;
+		}
+		return adjRooms;
 	}
+	
+	public int roomLayout()
+	{
+		int[] edgeRooms = new int{1, 2, 3, 4, 5, 6, 12, 18, 24, 30, 29, 28, 27,
+			26, 25, 19, 13, 7};
+		int[] innerRooms = new int{8, 9, 10, 11, 17, 23, 22, 21, 20, 14, 8, 15, 21, 10, 16, 22};
+		for(int i = 0; i < edgeRooms.length; i++)
+		{
+			if(edgeRooms[i] == roomNum)
+			{
+				return roomNum;
+				wrapAround(int roomNum);
+			}
+			else
+			{
+				return 0;
+				adjacentRooms();
+			}
+		}
+	}
+
 	
 	/*this method sorts out the configuration of the rooms in each row, according to the current
 	 * room number the player is in using the 2D array.
@@ -109,6 +150,11 @@ public class Cave
 	public int roomColumn(int roomNum)
 	{
 		return roomNum - 1 -(roomRow(roomNum) * caveType[0].length);
+	}
+	
+	public int wrapAround()
+	{
+		return 0;
 	}
 	/*This method will keep track of when the player changes rooms and the new room number
 	according to the layout of the cave, using the room number and then the number of 
