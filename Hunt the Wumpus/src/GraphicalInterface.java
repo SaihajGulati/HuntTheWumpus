@@ -6,11 +6,24 @@
  *
  * Date of revision  |  Revision made
  *     3/12/2019     |  Added method headers
- *     3/21/2019     |  Highscore method
+ *     3/25/2019     |  Made test window for GP
+ *     3/26/2019     |  Made test homescreen with buttons
  *
  */
 import java.util.*;
-public class GraphicalInterface {
+import javafx.application.Application;
+import javafx.scene.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
+import javafx.scene.text.Text;
+import javafx.scene.text.Font; 
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.event.*;
+import javafx.scene.input.MouseEvent;
+ 
+public class GraphicalInterface extends Application {
 
 int BAT;
 int HOLE; 
@@ -26,12 +39,6 @@ public GraphicalInterface(int bat, int hole, int wumpus)
 public String toString()
 {
  return "Graphical Interface";
-}
-
-// Display main menu, return if player wants to start game
-public boolean mainMenu()
-{
- return true;
 }
 
 // return room number player wants to move in
@@ -93,12 +100,119 @@ public void Outcome(boolean score)
 }
 
 // Displays high score
-public void displayHighscore(ArrayList<String> highscores)
+public void displayHighscore(int highScore)
 {
-   for(inti = 0; i < highscores.siz();i++)
-   {
-     System.out.println("High score is +"highscores.get(i));
-   }
+   System.out.println("Player Highscore: "+highScore);
 }
+
+public void displayMainMenue(String [] args)
+{
+	launch(args);
+}
+
+//Start() is part of javafx, here I make everything that will be displayed
+@Override
+public void start(Stage stage) {
+    Group root = new Group();
+    int wide = 1000;
+    int tall = 700;
+    
+    
+    Scene scene = new Scene(root, wide, tall, Color.BLACK);
+    
+    root.setOnMouseClicked(new EventHandler<MouseEvent>() {
+ 	    @Override
+ 	    public void handle(MouseEvent event) {
+ 	    	int pressed = getMainMenuePressed(event.getSceneY());
+ 	    	System.out.println(buttonTester(pressed));
+ 	    }
+ 	});
+    
+    Text playtext = new Text();
+    Text exittext = new Text();
+    Text scoretext = new Text();
+    Text titletext = new Text();
+    
+    
+    Rectangle playButton = new Rectangle();
+    Rectangle exitButton = new Rectangle();       
+    Rectangle scoreButton = new Rectangle();
+
+    makeGreyRectangle(root, playButton,500,100,(wide/2)-250,(tall/2)-100);
+    makeGreyRectangle(root, exitButton,500,100,(wide/2)-250,(tall/2)+50);
+    makeGreyRectangle(root, scoreButton,500,100,(wide/2)-250,(tall/2)+200);
+    makeText(root, titletext, "HUNT THE WUMPUS", "verdana", 60, (wide/2)-320,150);
+    makeText(root, playtext, "PLAY GAME", "verdana", 60, (wide/2)-190,320);
+    makeText(root, exittext, "EXIT", "verdana", 60, (wide/2)-80,470);
+    makeText(root, scoretext, "HIGH SCORES", "verdana", 60, (wide/2)-235,620);  
+    
+    
+    stage.setTitle("Not_a_virus.exe");
+    stage.setScene(scene);
+    stage.show();
+}
+
+//For me to see if the button is actually getting pressed, prints which button was pressed
+private static String buttonTester(int button)
+{
+	   if(button == 1)
+	   {
+		   return "PLAY BUTTON";
+	   }
+	   
+	   else if(button == 2)
+	   {
+		   return "EXIT BUTTON";
+	   }
+	   
+	   else if(button == 3)
+	   {
+		   return "HIGH SCORE BUTTON";
+	   }
+	   
+	   return "NONE";
+}
+
+//Return 1-4 which button was pressed, 1 -> Play Game, 2 -> Exit, 3 -> High Scores, 4 -> None
+public static int getMainMenuePressed(double Y)
+{
+	   if(Y >= 250 && Y <= 350)
+	   	{
+		   return 1;
+	   	}
+	   
+	   else if(Y >= 400 && Y <= 500)
+		{
+		   return 2;   
+		}
+	   
+	   else if(Y >= 550 && Y <= 650)
+		{
+		   return 3;   
+		}
+	   
+	   return 4;
+}
+
+//Methods makes Grey rectangles for homescreen buttons
+private static void makeGreyRectangle(Group root, Rectangle rectangle, int width, int height, int x, int y)
+{
+    Rectangle a = new Rectangle(x,y,width, height);
+    rectangle = a;
+    rectangle.setFill(Color.GREY);
+    
+    root.getChildren().add(rectangle);  
+}
+
+//Method that makes text for homescreen buttons
+private static void makeText(Group root, Text text, String message, String font, int size, int x, int y)
+{
+    text.setFill(Color.WHITE);
+    text.setText(message); 
+    text.setFont(Font.font(font, FontWeight.BOLD, FontPosture.REGULAR, size));
+    text.setX(x); 
+    text.setY(y);
+    root.getChildren().add(text);
+} 
 
 }
