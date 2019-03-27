@@ -47,7 +47,7 @@ public class GameControl
 		System.out.println(player);
 		System.out.println(trivia);
 		int[] hazardLocs = new int[4];
-		locations.warning();
+		/*locations.warning();
 		locations.moveWumpus();
 		player.movePlayer();
 		player.changeCoins(4);
@@ -59,7 +59,8 @@ public class GameControl
 		Trivia.getAnswers();
 		HighScore.resetScores();
 		HighScore.getHighScores();
-		int Player_Choice = GI.mainMenu(); //change return type to int from 0-2
+		*/
+		int Player_Choice = GI.mainMenu(args); //change return type to int from 0-2
 		if(Player_Choice == START){
 			startGame(GI, player, cave, locations);
 		}
