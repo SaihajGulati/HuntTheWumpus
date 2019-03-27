@@ -22,9 +22,10 @@ import java.util.*;
  */
 public class GameControl 
 {
-	public static final int BATS = 0;
-	public static final int HOLE = 1;
-	public static final int WUMPUS = 2;
+	///kljoijkljkljkl
+	public static int BATS = 0;
+	public static int HOLE = 1;
+	public static int WUMPUS = 2;
 	public static int SCORE = 0;
 	public static int ROUND = 0;
 	//following e-nums are for the start of the game and anywhere else so its easier to identify changes
