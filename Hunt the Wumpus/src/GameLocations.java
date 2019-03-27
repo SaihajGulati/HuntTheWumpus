@@ -11,7 +11,6 @@
 * 3/26/19:   triggerBat, triggerPit, and shootArrow implemented
 */
 public class GameLocations {
-	//test
        private int[] batLocations;
        private int[] pitLocations;
        private int originalPlayerLocation;
