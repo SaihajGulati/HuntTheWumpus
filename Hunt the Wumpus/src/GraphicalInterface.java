@@ -28,6 +28,7 @@ public class GraphicalInterface extends Application {
 int BAT;
 int HOLE; 
 int WUMPUS;
+int pressed;
 
 public GraphicalInterface(int bat, int hole, int wumpus)
 {
@@ -48,13 +49,13 @@ public int playerMoves(Cave cave)
 }
 
 // return which answer player thought correct (I want to change this, will talk in class)
-public  int triviaResponse(Trivia trivia)
+public  int triviaResponse()
 {
  return -1;
 }
 
 // Displayer player Items
-public void displayItems(Player player)
+public void displayItems()
 { 
 }
 
@@ -105,7 +106,7 @@ public void displayHighscore(int highScore)
    System.out.println("Player Highscore: "+highScore);
 }
 
-public void displayMainMenue(String [] args)
+public void displayMainMenu(String [] args)
 {
 	launch(args);
 }
@@ -123,8 +124,8 @@ public void start(Stage stage) {
     root.setOnMouseClicked(new EventHandler<MouseEvent>() {
  	    @Override
  	    public void handle(MouseEvent event) {
- 	    	int pressed = getMainMenuePressed(event.getSceneY());
- 	    	System.out.println(buttonTester(pressed));
+ 	    	pressed = (int)event.getSceneY();;
+ 	    	//System.out.println(buttonTester(getMainMenuPressed()));
  	    }
  	});
     
@@ -173,25 +174,27 @@ private static String buttonTester(int button)
 	   return "NONE";
 }
 
-//Return 1-4 which button was pressed, 1 -> Play Game, 2 -> Exit, 3 -> High Scores, 4 -> None
-public static int getMainMenuePressed(double Y)
+//Return 0-3 which button was pressed, 0 -> Play Game, 1 -> Exit, 2 -> High Scores, 3 -> None
+public int getMainMenuPressed()
 {
+	   int Y  = pressed;
 	   if(Y >= 250 && Y <= 350)
 	   	{
-		   return 1;
+		   return 0;
 	   	}
 	   
 	   else if(Y >= 400 && Y <= 500)
 		{
-		   return 2;   
+		   return 1;   
 		}
 	   
 	   else if(Y >= 550 && Y <= 650)
 		{
-		   return 3;   
+		   return 2;   
 		}
 	   
-	   return 4;
+	   return 3;
+	   
 }
 
 //Methods makes Grey rectangles for homescreen buttons
