@@ -175,7 +175,7 @@ private static String buttonTester(int button)
 	   return "NONE";
 }
 
-//Return 1-4 which button was pressed, 1 -> Play Game, 2 -> Exit, 3 -> High Scores, 4 -> None
+//Return 1-4 which button was pressed, 0 -> Play Game, 1 -> Exit, 2 -> High Scores, 3 -> None
 public int getMainMenuPressed()
 {
 	   int Y  = pressed;
