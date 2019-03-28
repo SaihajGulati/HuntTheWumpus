@@ -16,6 +16,7 @@
  */
 public class LazyWumpus {
 	
+	private String state;
 	/**
 	 * This constructs the Lazy Wumpus object and sets default values of the fields
 	 * @return Lazy Wumpus object
@@ -32,5 +33,7 @@ public class LazyWumpus {
 	{
 		return "Lazy Wumpus";
 	}
+	
+	
 
 }
