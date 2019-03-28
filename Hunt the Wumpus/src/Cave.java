@@ -86,12 +86,12 @@ public class Cave
 	//Assingment 4 methods
 	/*this method will sort out the adjacent rooms next to the room the player is in (in progress)
 	 */
-	public static int[] adjacentRooms(int roomNum)
+	public int[] adjacentRooms(int roomNum)
 	{
 		int[] adjRooms = new int[2];
 		if(roomColumn == 0)
 		{
-			rooms[0] = row * caveType[0].length + column + 1;
+			adjRooms[0] = row * caveType[0].length + column + 1;
 		}
 		else
 		{
@@ -149,7 +149,8 @@ public class Cave
 	 */
 	public int roomColumn(int roomNum)
 	{
-		return roomNum - 1 -(roomRow(roomNum) * caveType[0].length);
+		int column = roomNum - 1 -(roomRow(roomNum) * caveType[0].length);
+		return column;
 	}
 	
 	public int wrapAround()
