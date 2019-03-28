@@ -12,7 +12,7 @@
 
  * Revision History:
  * Version:   Date:     Description:
- * 1.0        3/4/19    Constructor and toString added
+ * 1.0        3/27/19    Constructor and toString added
  */
 public class LazyWumpus {
 	
