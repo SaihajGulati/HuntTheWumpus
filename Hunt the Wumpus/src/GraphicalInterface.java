@@ -186,15 +186,15 @@ public int getMainMenuPressed()
 	   
 	   else if(Y >= 400 && Y <= 500)
 		{
-		   return 2;   
+		   return 1;   
 		}
 	   
 	   else if(Y >= 550 && Y <= 650)
 		{
-		   return 3;   
+		   return 2;   
 		}
 	   
-	   return 4;
+	   return 3;
 	   
 }
 
