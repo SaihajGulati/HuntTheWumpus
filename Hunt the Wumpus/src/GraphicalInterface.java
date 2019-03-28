@@ -28,6 +28,7 @@ public class GraphicalInterface extends Application {
 int BAT;
 int HOLE; 
 int WUMPUS;
+int pressed;
 
 public GraphicalInterface(int bat, int hole, int wumpus)
 {
@@ -123,8 +124,9 @@ public void start(Stage stage) {
     root.setOnMouseClicked(new EventHandler<MouseEvent>() {
  	    @Override
  	    public void handle(MouseEvent event) {
- 	    	int pressed = getMainMenuePressed(event.getSceneY());
- 	    	System.out.println(buttonTester(pressed));
+ 	    	pressed = (int)event.getSceneY();
+ 	    	getMainMenuePressed(pressed);
+ 	    	System.out.println(buttonTester(getMainMenuePressed(pressed)));
  	    }
  	});
     
@@ -174,11 +176,12 @@ private static String buttonTester(int button)
 }
 
 //Return 1-4 which button was pressed, 1 -> Play Game, 2 -> Exit, 3 -> High Scores, 4 -> None
-public static int getMainMenuePressed(double Y)
+public int getMainMenuPressed()
 {
+	   int Y  = pressed;
 	   if(Y >= 250 && Y <= 350)
 	   	{
-		   return 1;
+		   return 0;
 	   	}
 	   
 	   else if(Y >= 400 && Y <= 500)
@@ -192,6 +195,7 @@ public static int getMainMenuePressed(double Y)
 		}
 	   
 	   return 4;
+	   
 }
 
 //Methods makes Grey rectangles for homescreen buttons
