@@ -105,7 +105,7 @@ public void displayHighscore(int highScore)
    System.out.println("Player Highscore: "+highScore);
 }
 
-public void displayMainMenue(String [] args)
+public void displayMainMenu(String [] args)
 {
 	launch(args);
 }
