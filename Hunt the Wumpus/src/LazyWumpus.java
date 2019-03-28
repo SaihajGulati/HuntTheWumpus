@@ -3,7 +3,7 @@
  * Class: APCSA - 3
  * Object: Lazy Wumpus
  	* Has different functionality for this certain type of wumpus 
- 	* Keeps track of the current state the Wumpus is in (that is, asleep, awake, moving)
+ 	* Keeps track of the current state the Wumpus is in (asleep, awake, moving)
  	* If the player shoots an arrow and misses while the Wumpus is sleeping
  		the Wumpus wakes up and runs up to two rooms away from current position.
 	* If the Wumpus is defeated in trivia, it will run up to three rooms away.
