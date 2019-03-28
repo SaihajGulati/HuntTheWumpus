@@ -49,13 +49,13 @@ public int playerMoves(Cave cave)
 }
 
 // return which answer player thought correct (I want to change this, will talk in class)
-public  int triviaResponse(Trivia trivia)
+public  int triviaResponse()
 {
  return -1;
 }
 
 // Displayer player Items
-public void displayItems(Player player)
+public void displayItems()
 { 
 }
 
@@ -124,9 +124,8 @@ public void start(Stage stage) {
     root.setOnMouseClicked(new EventHandler<MouseEvent>() {
  	    @Override
  	    public void handle(MouseEvent event) {
- 	    	pressed = (int)event.getSceneY();
- 	    	getMainMenuePressed(pressed);
- 	    	System.out.println(buttonTester(getMainMenuePressed(pressed)));
+ 	    	pressed = (int)event.getSceneY();;
+ 	    	//System.out.println(buttonTester(getMainMenuPressed()));
  	    }
  	});
     
@@ -175,7 +174,7 @@ private static String buttonTester(int button)
 	   return "NONE";
 }
 
-//Return 1-4 which button was pressed, 0 -> Play Game, 1 -> Exit, 2 -> High Scores, 3 -> None
+//Return 0-3 which button was pressed, 0 -> Play Game, 1 -> Exit, 2 -> High Scores, 3 -> None
 public int getMainMenuPressed()
 {
 	   int Y  = pressed;
