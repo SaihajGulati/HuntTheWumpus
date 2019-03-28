@@ -109,3 +109,6 @@ public class Cave
 			adjRooms[1] = roomNum + 1;
 		}
 		return adjRooms;
+	}
+}
+
