@@ -1,0 +1,26 @@
+What is the highest grossing movie worldwide?
+Key: Highest grossing movie worldwide: Avatar
+The answer is Avatar
+
+Which film has the highest opening weekend domestically?
+Key: Highest domestic opening weekend: Avengers: Infinity War
+The answer is Avengers Infinity War
+
+How many films had crossed $2 billion worldwide?
+Key: 4 films have crossed $2 billion worldwide
+The answer is 4
+
+What is the highest grossing animation worldwide?
+Key: Highest grossing animation worldwide: Frozen
+The answer is Frozen
+
+How many of the 10 highest grossing movies are by Disney?
+Key: Disney has 5 films in the 10 highest-grossing movies of all time.
+The answer is 5
+
+Hint: Your current room is Room #
+Hint: The Wumpus is currently in Room #
+Hint: There is a bat in Room #
+Hint: There is a pit in Room #
+Hint: The Wumpus is in a room near you.
+Hint: The Wumpus is not in a room near you.
