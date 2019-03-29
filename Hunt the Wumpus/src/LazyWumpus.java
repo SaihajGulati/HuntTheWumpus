@@ -67,7 +67,7 @@ public class LazyWumpus {
 	/**
 	 * This method moves the wumpus
 	 * @param reason
-	 * Based on the reason it moves the wumpus 
+	 * Based on the reason, it moves the wumpus different amounts of rooms
 	 */
 	public void move(String reason)
 	{
