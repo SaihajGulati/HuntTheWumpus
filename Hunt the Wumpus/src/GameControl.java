@@ -85,7 +85,7 @@ public class GameControl
 	 */
 	public static void startGame(GraphicalInterface GI, Player player, Cave cave, GameLocations locations)
 	{
-			GI.displayItems(player);
+			GI.displayItems();
 			GI.inDanger(cave.adjacentRooms(locations.getPlayerLocation()));
 	}
 	/**
