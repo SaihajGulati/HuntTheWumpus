@@ -15,8 +15,80 @@ Key: Highest grossing animation worldwide: Frozen
 The answer is Frozen
 
 How many of the 10 highest grossing movies are by Disney?
-Key: Disney has 5 films in the 10 highest-grossing movies of all time.
-The answer is 5
+Key: Disney has 6 films in the 10 highest-grossing movies of all time.
+The answer is 6
+
+How many Universal films are among the 10 highest-grossing worldwide?
+Key: Universal has 2 films in the Top 10 at the all-time global box office?
+The answer is 2
+
+What is the highest-grossing film that still lost money at the box office?
+Key: The highest-grossing "box office bomb" in terms of money earned was Justice League.
+The answer is Justice League
+
+Which film lost the most money at the box office?
+Key: Biggest money-loser of all time: John Carter
+The answer is John Carter
+
+What is the highest-grossing film that was released in the 20th century?
+Key: Highest-grossing film released before 2000: Titanic
+The answer is Titanic
+
+Which film had the highest production budget?
+Key: The most expensive film ever made: Pirates of the Caribbean: On Stranger Tides
+The answer is Pirates of the Caribbean On Stranger Tides
+
+Which studio currently owns the highest-grossing movie ever?
+Key: The current studio that owns Avatar: Disney
+The answer is Disney
+
+What is the highest-grossing film worldwide that didn't come out in the summer or holiday movie-going seasons?
+Key: highest-grossing film worldwide that wasn't released in the summer or holiday seasons: Furious 7
+The answer is Furious 7
+
+What is the highest-grossing G-rated movie of all time?
+Key: Highest-grossing G-rated film: Toy Story 3
+The answer is Toy Story 3
+
+What was the only Pixar film to bomb at the box office?
+Key: Only Pixar movie that flopped: The Good Dinosaur
+The answer is The Good Dinosaur
+
+What was the only Star Wars film to bomb at the box office?
+Key: Only Star Wars movie that flopped: Solo
+The answer is Solo
+
+How many Illumination films have bombed at the box office?
+Key: Illumination is still yet to score a box office bomb.
+The answer is 0
+
+How many Marvel comics films have bombed at the box office since 2000?
+Key: A total of 8 Marvel comics films have bombed at the box office in the 21st century?
+The answer is 8
+
+How many Lucasfilm movies have bombed at the box office?
+Key: Counting both Star Wars and non-Star Wars installments, 9 Lucasfilm movies have flopped in total.
+The answer is 9
+
+What was the most profitable film of all time, in terms of its return of investment ratio?
+Key: Movie with highest return of investment ratio: Paranormal Activity
+The answer is Paranormal Activity
+
+Which film had the highest second weekend drop at the domestic box office?
+Key: Highest domestic second-weekend drop: Collide
+The answer is Collide
+
+What film had the biggest third-weekend theater loss at the box office?
+Key: The biggest single-week drop in theater counts goes to The Darkest Minds.
+The answer is The Darkest Minds
+
+What is the highest-grossing film that never topped the box office?
+Key: Highest-grossing movie that never hit #1: Sing
+The answer is Sing
+
+Which film had the highest single-weekend gross that didn't rank at #1 for the weekend?
+Key: Inside Out had the highest single-weekend gross that still came in second place during its respective weekend.
+The answer is Inside Out
 
 Hint: Your current room is Room #
 Hint: The Wumpus is currently in Room #

@@ -12,16 +12,21 @@
 
  * Revision History:
  * Version:   Date:     Description:
- * 1.0        3/27/19    Constructor and toString added
+ * 1.0        3/24/19   Constructor and toString added
+ * 2.0        3/28/19   Added fields, stubs, and implemented Constructor and accessors   
  */
 public class LazyWumpus {
 	
+	private String state;
+	private int location;
 	/**
 	 * This constructs the Lazy Wumpus object and sets default values of the fields
 	 * @return Lazy Wumpus object
 	 */
 	public LazyWumpus()
 	{
+		state = "asleep";
+		location = (int)(Math.random()*30+1);
 	}
 	
 	/**
@@ -32,5 +37,40 @@ public class LazyWumpus {
 	{
 		return "Lazy Wumpus";
 	}
-
+	
+	/**
+	 * This method is an accessor for state
+	 * @return state of the Wumpus
+	 */
+	public String getState()
+	{
+		return state;
+	}
+	
+	/**
+	 * This method is a setter for state
+	 */
+	public void setState(String newState)
+	{
+		state = newState;
+	}
+	
+	/**
+	 * This method is an accessor for location
+	 * @return location of this object
+	 */
+	public int getLocation()
+	{
+		return location;
+	}
+	
+	/**
+	 * This method moves the wumpus
+	 * @param reason
+	 * Based on the reason, it moves the wumpus different amounts of rooms
+	 */
+	public void move(String reason)
+	{
+	}	
+	
 }
