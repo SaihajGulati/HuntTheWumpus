@@ -38,9 +38,9 @@ public class GameControl
 		Cave cave = new Cave(caveArray);
 		GameLocations locations = new GameLocations(cave);
 		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
-		HighScore score = new HighScore("HighScores.txt");
+		HighScore score = new HighScore("input/HighScores.txt");
 		Player player = new Player();
-		Trivia trivia = new Trivia("cave1.txt");
+		Trivia trivia = new Trivia("input/cave1.txt");
 		System.out.println(cave);
 		System.out.println(locations);
 		System.out.println(GI);
@@ -61,18 +61,23 @@ public class GameControl
 		HighScore.resetScores();
 		HighScore.getHighScores();
 		*/
-		int Player_Choice = GI.mainMenu(args); //change return type to int from 0-2
-		if(Player_Choice == START){
-			startGame(GI, player, cave, locations);
-		}
-		else if(Player_Choice == HIGHSCORE){
-			GI.displayHighscore(HighScore.getHighScores()); //change param to ArrayList
-		}
-		else if(Player_Choice == QUIT){
-			System.out.println("Thank you for playing!");
-		}
-		else {
-			System.out.println("ERROR");
+		int Player_Choice = 3;
+		while(Player_Choice == 3) {
+		
+			GI.displayMainMenu(args);
+			Player_Choice = GI.getMainMenuPressed();
+			if(Player_Choice == START){
+				startGame(GI, player, cave, locations);
+			}
+			else if(Player_Choice == HIGHSCORE){
+				//GI.displayHighscore(HighScore.getHighScores()); //change param to ArrayList
+			}
+			else if(Player_Choice == QUIT){
+				System.out.println("Thank you for playing!");
+			}
+			else {
+				System.out.println("ERROR");
+			}
 		}
 		}
 			
@@ -101,7 +106,7 @@ public class GameControl
 
 			int endScore = player.getScore(locations.shootArrow(locations.getWumpusLocation()));
 			HighScore.updateScoreBoard(endScore);
-			GI.displayHighscore(HighScore.getHighScores());
+			//GI.displayHighscore(HighScore.getHighScores());
 
 	}
 	/**
