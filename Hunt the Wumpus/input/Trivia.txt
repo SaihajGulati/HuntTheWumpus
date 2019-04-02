@@ -14,7 +14,7 @@ What is the highest grossing animation worldwide?
 Key: Highest grossing animation worldwide: Frozen
 The answer is Frozen
 
-How many of the 10 highest grossing movies are by Disney?
+How many of the 10 highest grossing movies are by Disney, after acquiring Fox?
 Key: Disney has 6 films in the 10 highest-grossing movies of all time.
 The answer is 6
 
