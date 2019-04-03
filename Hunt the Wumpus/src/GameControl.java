@@ -22,7 +22,6 @@ import java.util.*;
  */
 public class GameControl 
 {
-	///kljoijkljkljkl
 	public static int BATS = 0;
 	public static int HOLE = 1;
 	public static int WUMPUS = 2;
@@ -38,9 +37,9 @@ public class GameControl
 		Cave cave = new Cave(caveArray);
 		GameLocations locations = new GameLocations(cave);
 		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
-		HighScore score = new HighScore("input/HighScores.txt");
+		HighScore score = new HighScore("HighScores.txt");
 		Player player = new Player();
-		Trivia trivia = new Trivia("input/cave1.txt");
+		Trivia trivia = new Trivia("cave1.txt");
 		System.out.println(cave);
 		System.out.println(locations);
 		System.out.println(GI);
@@ -90,8 +89,11 @@ public class GameControl
 	 */
 	public static void startGame(GraphicalInterface GI, Player player, Cave cave, GameLocations locations)
 	{
+		while(player.isAlive()) {
 			GI.displayItems();
 			GI.inDanger(cave.adjacentRooms(locations.getPlayerLocation()));
+		}
+
 	}
 	/**
 	 * 
