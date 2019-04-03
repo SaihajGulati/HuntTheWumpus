@@ -14,7 +14,7 @@ What is the highest grossing animation worldwide?
 Key: Highest grossing animation worldwide: Frozen
 The answer is Frozen
 
-How many of the 10 highest grossing movies are by Disney?
+How many of the 10 highest grossing movies are by Disney, after acquiring Fox?
 Key: Disney has 6 films in the 10 highest-grossing movies of all time.
 The answer is 6
 
@@ -23,7 +23,7 @@ Key: Universal has 2 films in the Top 10 at the all-time global box office?
 The answer is 2
 
 What is the highest-grossing film that still lost money at the box office?
-Key: The highest-grossing "box office bomb" in terms of money earned was Justice League.
+Key: The highest-grossing "box office bomb" in terms of money earned is Justice League.
 The answer is Justice League
 
 Which film lost the most money at the box office?
@@ -42,13 +42,29 @@ Which studio currently owns the highest-grossing movie ever?
 Key: The current studio that owns Avatar: Disney
 The answer is Disney
 
+What is the highest-grossing film worldwide by Universal?
+Key: Highest-grossing Universal movie: Jurassic World
+The answer is Jurassic World
+
+What is the highest-grossing Warner Bros film worldwide?
+Key: Highest-grossing Warner Bros blockbuster: Harry Potter & the Deathly Hallows Part 2
+The answer is Harry Potter & the Deathly Hallows Part 2
+
 What is the highest-grossing film worldwide that didn't come out in the summer or holiday movie-going seasons?
 Key: highest-grossing film worldwide that wasn't released in the summer or holiday seasons: Furious 7
 The answer is Furious 7
 
+What is the highest-grossing film in North America that didn't come out in the summer or holiday movie-going seasons?
+Key: highest-grossing film domestically that wasn't released in the summer or holiday seasons: Black Panther
+The answer is Black Panther
+
 What is the highest-grossing G-rated movie of all time?
 Key: Highest-grossing G-rated film: Toy Story 3
 The answer is Toy Story 3
+
+What is the highest-grossing R-rated movie worldwide?
+Key: Highest-grossing R-rated film: Deadpool
+The answer is Deadpool
 
 What was the only Pixar film to bomb at the box office?
 Key: Only Pixar movie that flopped: The Good Dinosaur
