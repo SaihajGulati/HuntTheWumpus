@@ -19,6 +19,8 @@
  * 3/25/19: Version 1.5
  * Removed the stubbed class viewScores, as my getHighScores method
  * already does the same intended function as viewScores.
+ * 4/03/19: Version 1.6
+ * Added comments to the while and for/for-each loops explaining their purposes.
 */
 import java.util.*;
 import java.io.*;
@@ -42,6 +44,7 @@ public class HighScore
         scoreBoard = new File(fileName); 
         Scanner input = new Scanner(scoreBoard);
         highScores = new ArrayList<Integer>();
+        //Adds high scores to the highScores ArrayList upon being scanned from the file
         while(input.hasNext()) 
         {
             highScores.add(input.nextInt());
@@ -60,7 +63,7 @@ public class HighScore
      */
     public static void resetScores() throws FileNotFoundException
     {
-        //Again, must learn how to update a file from my code
+        //Resets all high scores in highScores to 0, before updating their file through updateFile.
         for(int i = 0; i < highScores.size(); i++)
         {
             highScores.set(i, 0);
@@ -95,6 +98,10 @@ public class HighScore
                 }
             }
         }
+        /**
+         * As long as highScores has more than 10 elements, the last element (1 less than the ArrayList's
+         * length) will be removed from the list.
+         */
         while (highScores.size() > 10)
         {
             highScores.remove(highScores.size()-1);
@@ -113,6 +120,11 @@ public class HighScore
     public static void updateFile() throws FileNotFoundException
     {
         PrintStream output = new PrintStream(new File(fileName));
+        /**
+         * For each score in the highScores ArrayList, the loop will output the score to a new file
+         * with the same fileName as the old file, that replaces the old file in its location on the
+         * computer
+         */
         for(int score: highScores)
         {
             output.println(score);

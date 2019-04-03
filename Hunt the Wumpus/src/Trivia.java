@@ -18,7 +18,9 @@
  * 3/25/19: Version 1.5
  * Added the body of the returnHint method, and a new method called wumpusNearPlayer.
  * 4/03/19: Version 1.6
- * Made some minor changes to the scenario numbers for the askQuestions method (started from 0 rather than 1).
+ * Made some minor changes to the scenario numbers for the askQuestions method 
+ * (started from 0 rather than 1). Also added descriptions for the while loops
+ * in the class methods.
 */
 import java.util.*;
 import java.io.*;
@@ -51,6 +53,11 @@ public class Trivia
         triviaAnswers = new ArrayList<String>();
         triviaInformation = new ArrayList<String>();
         secrets = new ArrayList<String>();
+        /**
+         * Scans the Trivia file and determines which array to put its trivia in,
+         * by analyzing certain key words and terms in each of the Strings that
+         * represent them.
+         */
         while(input.hasNext()) 
         {
             String triviaLine = input.nextLine();
@@ -101,6 +108,9 @@ public class Trivia
         if(scenario == 3)
         //Encountering the Wumpus
         {
+        	/**Allows the method to keep asking questions for the Wumpus encounter, until either
+        	 * 3 questions are answered correctly or a total of 5 questions have been asked.
+        	 */
             while (correctAnswers < 3 && totalQuestions <= 5)
             {
                 int questionNum = (int)(Math.random() * triviaQuestions.size());
@@ -123,6 +133,10 @@ public class Trivia
         else
         //Scenarios 0, 1, and 2: Buying arrows or hints, and falling into a bottomless pit
         {
+        	/**Allows the method to keep asking questions for all other scenarios besides the 
+        	 * Wumpus encounter, until either 2 questions have answered correctly or a total of 
+        	 * 3 questions have been asked.
+        	 */
             while(correctAnswers < 2 && totalQuestions <= 3)
             {
                 int questionNum = (int)(Math.random() * triviaQuestions.size());
