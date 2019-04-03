@@ -17,6 +17,8 @@
  * Added the declaration/instantiation of the secrets ArrayList
  * 3/25/19: Version 1.5
  * Added the body of the returnHint method, and a new method called wumpusNearPlayer.
+ * 4/03/19: Version 1.6
+ * Made some minor changes to the scenario numbers for the askQuestions method (started from 0 rather than 1).
 */
 import java.util.*;
 import java.io.*;
@@ -95,29 +97,9 @@ public class Trivia
     {
         int correctAnswers = 0;
         int totalQuestions = 1;
-        Scanner playerResponse = new Scanner(System.in);
-        if(scenario == 1 || scenario == 2 || scenario == 3)
-        {
-            while(correctAnswers < 2 && totalQuestions <= 3)
-            {
-                int questionNum = (int)(Math.random() * triviaQuestions.size());
-                String correctAnswer = triviaAnswers.get(questionNum).substring(14);
-                System.out.print(triviaQuestions.get(questionNum) + " ");
-                String answer = playerResponse.nextLine();
-                if(answer.equalsIgnoreCase(correctAnswer))
-                {
-                    correctAnswers++;
-                }
-                totalQuestions++;
-                triviaQuestions.remove(questionNum);
-                triviaAnswers.remove(questionNum); 
-            }
-            if(correctAnswers >= 2)
-            {
-                return true;
-            }
-        }
-        else
+        Scanner playerResponse = new Scanner(System.in);       
+        if(scenario == 3)
+        //Encountering the Wumpus
         {
             while (correctAnswers < 3 && totalQuestions <= 5)
             {
@@ -137,6 +119,28 @@ public class Trivia
             {
                 return true;
             }
+        }
+        else
+        //Scenarios 0, 1, and 2: Buying arrows or hints, and falling into a bottomless pit
+        {
+            while(correctAnswers < 2 && totalQuestions <= 3)
+            {
+                int questionNum = (int)(Math.random() * triviaQuestions.size());
+                String correctAnswer = triviaAnswers.get(questionNum).substring(14);
+                System.out.print(triviaQuestions.get(questionNum) + " ");
+                String answer = playerResponse.nextLine();
+                if(answer.equalsIgnoreCase(correctAnswer))
+                {
+                    correctAnswers++;
+                }
+                totalQuestions++;
+                triviaQuestions.remove(questionNum);
+                triviaAnswers.remove(questionNum); 
+            }
+            if(correctAnswers >= 2)
+            {
+                return true;
+            }           
         }
         return false;
     }
