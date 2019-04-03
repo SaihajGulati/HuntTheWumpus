@@ -89,9 +89,14 @@ public class GameControl
 	 */
 	public static void startGame(GraphicalInterface GI, Player player, Cave cave, GameLocations locations)
 	{
-		while(player.isAlive()) {
+		cave.openCaveFile();
+		cave.readCaveFile();
+		while(player.getArrows() > 0) {
 			GI.displayItems();
 			GI.inDanger(cave.adjacentRooms(locations.getPlayerLocation()));
+			if(locations.getPlayerLocation() == locations.getWumpusLocation() || locations.getPlayerLocation()){}
+				
+			}
 		}
 
 	}
