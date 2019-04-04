@@ -5,10 +5,11 @@
 * It also controls arrow shooting, controls the movement of the wumpus, and gives warnings
 * 
 * Revision History:
-* 3/01/2019:  empty constructor and toString method added
+* 3/01/2019: empty constructor and toString method added
 * 3/12/2019: Studded Methods and Fields added
 * 3/19/2019: warning, movePlayer, and constructor implemented
 * 3/26/2019: triggerBat, triggerPit, and shootArrow implemented
+* 4/03/2019: moveWumpus implemented, so class is finished
 */
 public class GameLocations {
        private static int[] batLocations;
@@ -74,7 +75,11 @@ public class GameLocations {
         */
        public static void moveWumpus()
        {
-              
+    	  for(int i=0;i<(int)(Math.random()*3+2);i++)
+    	  {
+    		  int moveLocation=cave.tunnels(wumpusLocation)[(int)(Math.random()*3)];
+    		  wumpusLocation=moveLocation;
+    	  }
        }
        
        /*
@@ -164,12 +169,12 @@ public class GameLocations {
        
        /*
         * Changes the location of the player when if the player encounters a botomless pit or triggers endgame
-        * @param answeredQuestions 
+        * @param answeredQuestions is a boolean indicating if the Player properly answered the questions
         */
        public static void triggerPit(boolean answeredQuestions)
        {
     	   if(answeredQuestions)
-              playerLocation=originalPlayerLocation;
+    		   playerLocation=originalPlayerLocation;
        }
        
        /*
