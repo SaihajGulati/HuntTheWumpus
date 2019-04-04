@@ -8,7 +8,8 @@
  *     3/12/2019     |  Added method headers
  *     3/25/2019     |  Made test window for GP
  *     3/26/2019     |  Made test homescreen with buttons
- *
+ *     3/28/2019     |  Did access stuff for goup in javafx, also modded menu methods to return which button was pressed.
+ *     4/3/2019      |  Can switch to display scores, still crashes after screen change and functionality isn't complete
  */
 import java.util.*;
 import javafx.application.Application;
@@ -29,6 +30,8 @@ int BAT;
 int HOLE; 
 int WUMPUS;
 int pressed;
+Group root = new Group();
+Group root2 = new Group();
 
 public GraphicalInterface(int bat, int hole, int wumpus)
 {
@@ -106,28 +109,57 @@ public void displayHighscore(int highScore)
    System.out.println("Player Highscore: "+highScore);
 }
 
-public void displayMainMenu(String [] args)
+public void Display(String [] args)
 {
+
 	launch(args);
+
 }
 
 //Start() is part of javafx, here I make everything that will be displayed
-@Override
-public void start(Stage stage) {
-    Group root = new Group();
+public void start(Stage stage) 
+{
+
+		menu(stage); 
+
+}
+
+
+private void score (Stage stage)
+{
+	String [] scores = {"Cool Kidz: "+(int)((Math.random()+1)*1000), "AAA: "+(int)((Math.random()+1)*1000), "Your mom: "+(int)((Math.random()+1)*1000), "Reeeee: "+(int)((Math.random()+1)*1000)};
     int wide = 1000;
     int tall = 700;
+	   Scene scene = new Scene(root2, wide, tall, Color.BLACK);
+	   
+	   Text titletext = new Text();
+	   makeText(root2, titletext, "HIGH SCORES", "verdana", 60, (wide/2)-200,150);
+	   
+	   for(int i = 0; i < scores.length; i++)
+	   {
+		   makeText(root2, new Text() , scores[i], "verdana", 40, (wide/2)-400,200+(i*50));
+	   }
+    stage.setTitle("Not_a_virus.exe");
+    stage.setScene(scene);       
+    stage.show();
+}
+
+
+private void menu(Stage stage)
+{
+    int wide = 1000;
+    int tall = 700;
+    root.setOnMouseClicked(new EventHandler<MouseEvent>() {
+ 	    @Override
+ 	    public void handle(MouseEvent event) {
+ 	    	getMainMenuePressed(event.getSceneY(), stage);
+ 	    	//System.out.println(buttonTester(pressed)+" "+pressed);
+ 	    }
+ 	});
     
     
     Scene scene = new Scene(root, wide, tall, Color.BLACK);
     
-    root.setOnMouseClicked(new EventHandler<MouseEvent>() {
- 	    @Override
- 	    public void handle(MouseEvent event) {
- 	    	pressed = (int)event.getSceneY();;
- 	    	//System.out.println(buttonTester(getMainMenuPressed()));
- 	    }
- 	});
     
     Text playtext = new Text();
     Text exittext = new Text();
@@ -147,13 +179,13 @@ public void start(Stage stage) {
     makeText(root, exittext, "EXIT", "verdana", 60, (wide/2)-80,470);
     makeText(root, scoretext, "HIGH SCORES", "verdana", 60, (wide/2)-235,620);  
     
-    
+    System.out.println(pressed);
+
     stage.setTitle("Not_a_virus.exe");
-    stage.setScene(scene);
-    stage.show();
+    stage.setScene(scene);       
+    stage.show(); 
 }
 
-//For me to see if the button is actually getting pressed, prints which button was pressed
 private static String buttonTester(int button)
 {
 	   if(button == 1)
@@ -174,30 +206,26 @@ private static String buttonTester(int button)
 	   return "NONE";
 }
 
-//Return 0-3 which button was pressed, 0 -> Play Game, 1 -> Exit, 2 -> High Scores, 3 -> None
-public int getMainMenuPressed()
+private void getMainMenuePressed(double Y, Stage stage)
 {
-	   int Y  = pressed;
 	   if(Y >= 250 && Y <= 350)
 	   	{
-		   return 0;
+		   menu(stage);
 	   	}
 	   
 	   else if(Y >= 400 && Y <= 500)
 		{
-		   return 1;   
+		   menu(stage);  
 		}
 	   
 	   else if(Y >= 550 && Y <= 650)
 		{
-		   return 2;   
+		   score(stage);  
 		}
 	   
-	   return 3;
-	   
+	   menu(stage);
 }
 
-//Methods makes Grey rectangles for homescreen buttons
 private static void makeGreyRectangle(Group root, Rectangle rectangle, int width, int height, int x, int y)
 {
     Rectangle a = new Rectangle(x,y,width, height);
@@ -207,7 +235,6 @@ private static void makeGreyRectangle(Group root, Rectangle rectangle, int width
     root.getChildren().add(rectangle);  
 }
 
-//Method that makes text for homescreen buttons
 private static void makeText(Group root, Text text, String message, String font, int size, int x, int y)
 {
     text.setFill(Color.WHITE);
@@ -216,6 +243,5 @@ private static void makeText(Group root, Text text, String message, String font,
     text.setX(x); 
     text.setY(y);
     root.getChildren().add(text);
-} 
-
+}
 }

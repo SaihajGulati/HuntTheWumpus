@@ -10,7 +10,9 @@
  * 2.0        3/8/19    Stubs added (fields and skeleton methods)
  * 3.0        3/19/19   Added calls to methods for testing and implemented a few methods
  * 4.0        3/25/19  Added starting point in main however needs to be fixed with GI
+ * 5.0		  4/3/19  Fixed GI problems and added loop for main menu
 */
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 /**
@@ -37,34 +39,20 @@ public class GameControl
 		Cave cave = new Cave(caveArray);
 		GameLocations locations = new GameLocations(cave);
 		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
-		HighScore score = new HighScore("HighScores.txt");
+		HighScore score = new HighScore("input/HighScores.txt");
 		Player player = new Player();
-		Trivia trivia = new Trivia("cave1.txt");
+		Trivia trivia = new Trivia("input/Trivia.txt");
 		System.out.println(cave);
 		System.out.println(locations);
 		System.out.println(GI);
 		System.out.println(score);
 		System.out.println(player);
 		System.out.println(trivia);
-		int[] hazardLocs = new int[4];
-		/*locations.warning();
-		locations.moveWumpus();
-		player.movePlayer();
-		player.changeCoins(4);
-		GI.inDanger(hazardLocs);
-		GI.buyItem(0,0);
-		cave.tunnels(0);
-		cave.adjacentRooms(0);
-		Trivia.askQuestions(0);
-		Trivia.getAnswers();
-		HighScore.resetScores();
-		HighScore.getHighScores();
-		*/
 		int Player_Choice = 3;
 		while(Player_Choice == 3) {
 		
-			GI.displayMainMenu(args);
-			Player_Choice = GI.getMainMenuPressed();
+			GI.Display(args);
+			Player_Choice = 0;
 			if(Player_Choice == START){
 				startGame(GI, player, cave, locations);
 			}
@@ -73,6 +61,7 @@ public class GameControl
 			}
 			else if(Player_Choice == QUIT){
 				System.out.println("Thank you for playing!");
+				break;
 			}
 			else {
 				System.out.println("ERROR");
@@ -89,39 +78,47 @@ public class GameControl
 	 */
 	public static void startGame(GraphicalInterface GI, Player player, Cave cave, GameLocations locations) throws FileNotFoundException
 	{
-		boolean inPit = false, inBats = false, inWumpus = false;
+		boolean inPit = false, inBats = false, inWumpus = false, isAlive = true;
+		int i = 0;
 		cave.openCaveFile();
 		cave.readCaveFile();
-		
-		while(player.getArrows() > 0) {
-			for(int i : locations.getBatLocations()) {
-				if(locations.getPlayerLocation() == locations.getBatLocations()[i]) {
+		//loop that runs the whole game while the player is alive;
+		while(player.getArrows() > 0 && isAlive) {
+			while(!inBats && i < GameLocations.getBatLocations().length) {
+				if(GameLocations.getPlayerLocation() == GameLocations.getBatLocations()[i]) {
 					inBats = true;
-					break;
+					i = 0;
 				}
 			}
-			for(int i : locations.getPitLocations()) {
-				if(locations.getPlayerLocation() == locations.getPitLocations()[i]) {
+			while(!inPit && i < GameLocations.getPitLocations().length){
+				if(GameLocations.getPlayerLocation() == GameLocations.getPitLocations()[i]) {
 					inPit = true;
-					break;
+					i = 0;
 				}
 			}
-			if(locations.getPlayerLocation() == locations.getWumpusLocation()) {
+			if(GameLocations.getPlayerLocation() == GameLocations.getWumpusLocation()) {
 				inWumpus = true;
+				i = 0;
 			}
 			
 			GI.displayItems();
-			GI.inDanger(cave.adjacentRooms(locations.getPlayerLocation()));
 			
 			if(inWumpus) {
-				Trivia.askQuestions(WUMPUS);
+				if(!Trivia.askQuestions(WUMPUS)) {
+					isAlive = false;
+					break;
+				}
 			}
 			if(inBats) {
 				Trivia.askQuestions(BATS);
 			}
 			if(inPit) {
-				Trivia.askQuestions(HOLE);
+				if(!Trivia.askQuestions(HOLE)) {
+					isAlive = false;
+					break;
+				}
 			}
+			GI.inDanger(cave.adjacentRooms(GameLocations.getPlayerLocation()));
 		}
 		
 		}
@@ -136,7 +133,7 @@ public class GameControl
 	 */
 	public static void endGame(GraphicalInterface GI, Player player, HighScore score, GameLocations locations) throws FileNotFoundException {
 
-			int endScore = player.getScore(locations.shootArrow(locations.getWumpusLocation()));
+			int endScore = player.getScore(GameLocations.shootArrow(GameLocations.getWumpusLocation()));
 			HighScore.updateScoreBoard(endScore);
 			//GI.displayHighscore(HighScore.getHighScores());
 
