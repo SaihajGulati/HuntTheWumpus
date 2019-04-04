@@ -84,19 +84,19 @@ public class GameControl
 		cave.readCaveFile();
 		//loop that runs the whole game while the player is alive;
 		while(player.getArrows() > 0 && isAlive) {
-			while(!inBats && i < locations.getBatLocations().length) {
-				if(locations.getPlayerLocation() == locations.getBatLocations()[i]) {
+			while(!inBats && i < GameLocations.getBatLocations().length) {
+				if(GameLocations.getPlayerLocation() == GameLocations.getBatLocations()[i]) {
 					inBats = true;
 					i = 0;
 				}
 			}
-			while(!inPit && i < locations.getPitLocations().length){
-				if(locations.getPlayerLocation() == locations.getPitLocations()[i]) {
+			while(!inPit && i < GameLocations.getPitLocations().length){
+				if(GameLocations.getPlayerLocation() == GameLocations.getPitLocations()[i]) {
 					inPit = true;
 					i = 0;
 				}
 			}
-			if(locations.getPlayerLocation() == locations.getWumpusLocation()) {
+			if(GameLocations.getPlayerLocation() == GameLocations.getWumpusLocation()) {
 				inWumpus = true;
 				i = 0;
 			}
@@ -105,6 +105,7 @@ public class GameControl
 			
 			if(inWumpus) {
 				if(!Trivia.askQuestions(WUMPUS)) {
+					isAlive = false;
 					break;
 				}
 			}
@@ -113,10 +114,11 @@ public class GameControl
 			}
 			if(inPit) {
 				if(!Trivia.askQuestions(HOLE)) {
+					isAlive = false;
 					break;
 				}
 			}
-			GI.inDanger(cave.adjacentRooms(locations.getPlayerLocation()));
+			GI.inDanger(cave.adjacentRooms(GameLocations.getPlayerLocation()));
 		}
 		
 		}
@@ -131,7 +133,7 @@ public class GameControl
 	 */
 	public static void endGame(GraphicalInterface GI, Player player, HighScore score, GameLocations locations) throws FileNotFoundException {
 
-			int endScore = player.getScore(locations.shootArrow(locations.getWumpusLocation()));
+			int endScore = player.getScore(GameLocations.shootArrow(GameLocations.getWumpusLocation()));
 			HighScore.updateScoreBoard(endScore);
 			//GI.displayHighscore(HighScore.getHighScores());
 
