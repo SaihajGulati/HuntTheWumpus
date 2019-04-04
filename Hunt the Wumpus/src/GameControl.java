@@ -39,9 +39,9 @@ public class GameControl
 		Cave cave = new Cave(caveArray);
 		GameLocations locations = new GameLocations(cave);
 		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
-		HighScore score = new HighScore("");
+		HighScore score = new HighScore("input/HighScores.txt");
 		Player player = new Player();
-		Trivia trivia = new Trivia("cave1.txt");
+		Trivia trivia = new Trivia("input/Trivia.txt");
 		System.out.println(cave);
 		System.out.println(locations);
 		System.out.println(GI);
