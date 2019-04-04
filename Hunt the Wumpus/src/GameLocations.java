@@ -5,18 +5,19 @@
 * It also controls arrow shooting, controls the movement of the wumpus, and gives warnings
 * 
 * Revision History:
-* 3/1/2019:  empty constructor and toString method added
+* 3/01/2019: empty constructor and toString method added
 * 3/12/2019: Studded Methods and Fields added
 * 3/19/2019: warning, movePlayer, and constructor implemented
-* 3/26/19:   triggerBat, triggerPit, and shootArrow implemented
+* 3/26/2019: triggerBat, triggerPit, and shootArrow implemented
+* 4/03/2019: moveWumpus implemented, so class is finished
 */
 public class GameLocations {
-       private int[] batLocations;
-       private int[] pitLocations;
-       private int originalPlayerLocation;
-       private int playerLocation;
-       private int wumpusLocation;
-       private Cave cave;
+       private static int[] batLocations;
+       private static int[] pitLocations;
+       private static int originalPlayerLocation;
+       private static int playerLocation;
+       private static int wumpusLocation;
+       private static Cave cave;
        
        /* 
         * This constructor sets random values for all of the locations
@@ -72,9 +73,13 @@ public class GameLocations {
        /*
         * Moves Wumpus if player wins argument or every random amount of time
         */
-       public void moveWumpus()
+       public static void moveWumpus()
        {
-              
+    	  for(int i=0;i<(int)(Math.random()*3+2);i++)
+    	  {
+    		  int moveLocation=cave.tunnels(wumpusLocation)[(int)(Math.random()*3)];
+    		  wumpusLocation=moveLocation;
+    	  }
        }
        
        /*
@@ -82,7 +87,7 @@ public class GameLocations {
         * @param room is the desired location to move to
         * @return a boolean value indicating if it was possible to move to room
         */
-       public boolean movePlayer(int room)
+       public static boolean movePlayer(int room)
        {
     	   int[] playerTunnels = cave.tunnels(playerLocation);
     	   for(int i=0; i<playerTunnels.length;i++)
@@ -101,7 +106,7 @@ public class GameLocations {
         * @return an array with the number of each hazard/wumpus in adjacent rooms
         * index 0: # of Bats, index 1: # of Pits, index 2: # of Wumpus
         */
-       public int[] warning()
+       public static int[] warning()
        {
     	   int[] warnings= {0,0,0};
     	   int[] sides = cave.adjacentRooms(getPlayerLocation());
@@ -121,7 +126,7 @@ public class GameLocations {
         * @param room is the desired location to shoot the arrow
         * @return true if the Wumpus if shot, false if not
         */
-       public boolean shootArrow(int room)
+       public static boolean shootArrow(int room)
        {
     	   boolean properRoom=false;
     	   int[] x=cave.tunnels(playerLocation);
@@ -140,7 +145,7 @@ public class GameLocations {
         * Changes the location of the bat if the player walks in its room
         * @return the position the player moved to
         */
-       public int triggerBat()
+       public static int triggerBat()
        {
     	   int i;
     	   if(playerLocation==batLocations[0])
@@ -164,32 +169,33 @@ public class GameLocations {
        
        /*
         * Changes the location of the player when if the player encounters a botomless pit or triggers endgame
+        * @param answeredQuestions is a boolean indicating if the Player properly answered the questions
         */
-       public void triggerPit(boolean answeredQuestions)
+       public static void triggerPit(boolean answeredQuestions)
        {
     	   if(answeredQuestions)
-              playerLocation=originalPlayerLocation;
+    		   playerLocation=originalPlayerLocation;
        }
        
        /*
         * All "get" methods are accessors
         */
-       public int getPlayerLocation()
+       public static int getPlayerLocation()
        {
               return playerLocation;
        }
        
-       public int getWumpusLocation()
+       public static int getWumpusLocation()
        {
               return wumpusLocation;
        }
        
-       public int[] getBatLocations()
+       public static int[] getBatLocations()
        {
               return batLocations;
        }
        
-       public int[] getPitLocations()
+       public static int[] getPitLocations()
        {
               return pitLocations;
        }
