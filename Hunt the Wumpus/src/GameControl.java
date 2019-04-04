@@ -42,12 +42,6 @@ public class GameControl
 		HighScore score = new HighScore("input/HighScores.txt");
 		Player player = new Player();
 		Trivia trivia = new Trivia("input/Trivia.txt");
-		System.out.println(cave);
-		System.out.println(locations);
-		System.out.println(GI);
-		System.out.println(score);
-		System.out.println(player);
-		System.out.println(trivia);
 		int Player_Choice = 3;
 		while(Player_Choice == 3) {
 		
@@ -105,7 +99,6 @@ public class GameControl
 			
 			if(inWumpus) {
 				if(!Trivia.askQuestions(WUMPUS)) {
-					isAlive = false;
 					break;
 				}
 			}
@@ -114,7 +107,6 @@ public class GameControl
 			}
 			if(inPit) {
 				if(!Trivia.askQuestions(HOLE)) {
-					isAlive = false;
 					break;
 				}
 			}
