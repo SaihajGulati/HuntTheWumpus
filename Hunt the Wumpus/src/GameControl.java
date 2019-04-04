@@ -15,6 +15,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
+import javafx.application.Application;
+import javafx.stage.Stage;
 /**
  * MAJOR NOTES:
  * 
@@ -22,7 +24,7 @@ import java.util.*;
  * 	Add Wumpus control methods but what do we need for that? 
  *
  */
-public class GameControl 
+public class GameControl extends Application
 {
 	public static int BATS = 0;
 	public static int HOLE = 1;
@@ -45,7 +47,7 @@ public class GameControl
 		int Player_Choice = 3;
 		while(Player_Choice == 3) {
 		
-			GI.Display(args);
+			launch(args);
 			Player_Choice = 0;
 			if(Player_Choice == START){
 				startGame(GI, player, cave, locations);
@@ -62,6 +64,11 @@ public class GameControl
 			}
 		}
 		}
+	public void start(Stage stage)
+	{
+		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
+		GI.start(stage);
+	}
 			
 	/**
 	 * Starts up the Game
