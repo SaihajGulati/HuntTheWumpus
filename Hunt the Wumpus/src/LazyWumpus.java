@@ -14,6 +14,7 @@
  * Version:   Date:     Description:
  * 1.0        3/24/19   Constructor and toString added
  * 2.0        3/28/19   Added fields, stubs, and implemented Constructor and accessors   
+ * 3.0        4/13/19   Implemented some more methods, namely move
  */
 public class LazyWumpus {
 	
@@ -71,6 +72,16 @@ public class LazyWumpus {
 	 */
 	public void move(String reason)
 	{
-	}	
+		if (reason.toLowerCase().equals("arrow"))
+		{
+			location += (int)(Math.random()*2+1);
+		}
+		else
+		{
+			location += (int)(Math.random()*3+1);
+		}
+	}
+	
+	
 	
 }
