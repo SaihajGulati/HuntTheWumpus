@@ -8,7 +8,7 @@
  * turns if defeated in trivia.
  * 
  * 4/15/19: Version 1.0
- * Created the ActiveWumpus object.
+ * Created the ActiveWumpus object and its toString method.
  */
 public class ActiveWumpus 
 {
@@ -18,5 +18,10 @@ public class ActiveWumpus
 	public ActiveWumpus()
 	{
 		
+	}
+	
+	public String toString()
+	{
+		return "Active Wumpus";
 	}
 }
