@@ -21,12 +21,14 @@
  * already does the same intended function as viewScores.
  * 4/03/19: Version 1.6
  * Added comments to the while and for/for-each loops explaining their purposes.
+ * 4/15/19: Version 1.7
+ * Added a comment for the String fileName
 */
 import java.util.*;
 import java.io.*;
 public class HighScore 
 {
-        private static String fileName;
+        private static String fileName; //The name of the File used to load the scores
         private static File scoreBoard; //The File that will be used to load the high scores
         private static ArrayList<Integer> highScores; /**
                                                 * An ArrayList that will represent the high scores after they have
