@@ -21,13 +21,15 @@
  * Made some minor changes to the scenario numbers for the askQuestions method 
  * (started from 0 rather than 1). Also added descriptions for the while loops
  * in the class methods.
+ * 4/15/19: Version 1.7
+ * Added a comment for the private File trivia
 */
 import java.util.*;
 import java.io.*;
 public class Trivia 
 {
     Scanner input;
-    private File trivia;
+    private File trivia; //The File that contains the trivia
     private static ArrayList<String> triviaQuestions; //The trivia questions that will be asked during the game 
     private static ArrayList<String> triviaAnswers; /**
                                               * The answers to the trivia questions; will be updated alongside
