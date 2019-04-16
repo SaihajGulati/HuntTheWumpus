@@ -75,6 +75,7 @@ public class LazyWumpus {
 		if (reason.toLowerCase().equals("arrow"))
 		{
 			location += (int)(Math.random()*2+1);
+			//For now because need cave to be made and for gamelocations to add method to allow for easy moving
 		}
 		else
 		{
