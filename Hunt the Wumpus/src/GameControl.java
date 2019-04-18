@@ -46,9 +46,7 @@ public class GameControl extends Application
 		Trivia trivia = new Trivia("input/Trivia.txt");
 		int Player_Choice = 3;
 		while(Player_Choice == 3) {
-		
 			launch(args);
-			Player_Choice = 0;
 			if(Player_Choice == START){
 				startGame(GI, player, cave, locations);
 			}
