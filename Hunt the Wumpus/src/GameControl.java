@@ -83,7 +83,17 @@ public class GameControl extends Application
 		cave.readCaveFile();
 		//loop that runs the whole game while the player is alive;
 		while(player.getArrows() > 0 && isAlive) {
-			while(!inBats && i < GameLocations.getBatLocations().length) {
+			for (int i: GameLocations.getBatLocations())
+			{
+				if(GameLocations.getPlayerLocation() == i) {
+					Trivia.askQuestions(BATS);			
+			}
+			for (int i: GameLocations.getPitLocations())
+			{
+				if(GameLocations.getPlayerLocation() == i) {
+					Trivia.askQuestions(BATS);			
+			}
+			/*while(!inBats && i < GameLocations.getBatLocations().length) {
 				if(GameLocations.getPlayerLocation() == GameLocations.getBatLocations()[i]) {
 					inBats = true;
 					i = 0;
@@ -108,7 +118,7 @@ public class GameControl extends Application
 				}
 			}
 			if(inBats) {
-				Trivia.askQuestions(BATS);
+				
 			}
 			if(inPit) {
 				if(!Trivia.askQuestions(HOLE)) {
