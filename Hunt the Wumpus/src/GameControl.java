@@ -78,7 +78,6 @@ public class GameControl extends Application
 	public static void startGame(GraphicalInterface GI, Player player, Cave cave, GameLocations locations) throws FileNotFoundException
 	{
 		boolean inPit = false, inBats = false, inWumpus = false, isAlive = true;
-		int i = 0;
 		cave.openCaveFile();
 		cave.readCaveFile();
 		//loop that runs the whole game while the player is alive;
@@ -86,13 +85,21 @@ public class GameControl extends Application
 			for (int i: GameLocations.getBatLocations())
 			{
 				if(GameLocations.getPlayerLocation() == i) {
-					Trivia.askQuestions(BATS);			
+					Trivia.askQuestions(BATS);
+				}
 			}
 			for (int i: GameLocations.getPitLocations())
 			{
-				if(GameLocations.getPlayerLocation() == i) {
+				if(GameLocations.getPlayerLocation() == i) 
+				{
 					Trivia.askQuestions(BATS);			
+				}
 			}
+			if (GameLocations.getPlayerLocation() == GameLocations.getWumpusLocation())
+			{
+				//placeholder
+			}
+		}
 			/*while(!inBats && i < GameLocations.getBatLocations().length) {
 				if(GameLocations.getPlayerLocation() == GameLocations.getBatLocations()[i]) {
 					inBats = true;
@@ -126,7 +133,7 @@ public class GameControl extends Application
 				}
 			}
 			GI.inDanger(cave.adjacentRooms(GameLocations.getPlayerLocation()));
-		}
+		}*/
 		
 		}
 	/**
