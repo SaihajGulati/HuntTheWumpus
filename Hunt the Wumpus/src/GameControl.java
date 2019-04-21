@@ -135,7 +135,7 @@ public class GameControl extends Application
 			GI.inDanger(cave.adjacentRooms(GameLocations.getPlayerLocation()));
 		}*/
 		
-		}
+	}
 	/**
 	 * 
 	 * @param end if the game ends
