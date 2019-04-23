@@ -66,6 +66,7 @@ public class GameControl extends Application
 	{
 		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
 		GI.start(stage);
+		GI.mainmenu(HighScore.getHighScores())
 	}
 			
 	/**
