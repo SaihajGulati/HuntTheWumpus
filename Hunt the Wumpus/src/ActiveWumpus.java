@@ -14,8 +14,54 @@ public class ActiveWumpus
 {
 	private String status; //The status of the Wumpus (asleep or awake)
 	private int turns; //The number of turns
+	private int wakeTurn; //The turn when the Wumpus would wake up
 	
+	/*
+	 * The constructor of the ActiveWumpus object, which sets "asleep" as the default value for the status
+	 * field (turns will use the default constructor which sets it to 0).
+	 */
 	public ActiveWumpus()
+	{
+		status = "asleep";
+	}
+	
+	public void setWakeUpTurn()
+	{
+		wakeTurn = (int)(Math.random() * 6 + (turns + 5));
+	}
+	
+	public void incrementTurns(LazyWumpus lazy, String condition)
+	{
+		double teleportChance = Math.random();
+		turns++;
+		if(teleportChance < 0.05)
+		{
+			teleport();
+		}
+		if(turns == wakeTurn)
+		{
+			status = "awake";
+			awakeWumpus(lazy, condition);
+		}
+		setWakeUpTurn();
+	}
+	
+	/*Maybe have LazyWumpus edit its move method to include movements for every 5 turns, and for when the
+	 * Wumpus is defeated in Trivia.
+	 * 
+	 */
+	public void awakeWumpus(LazyWumpus lW, String state)
+	{
+		for(int i = 0; i < (int)(Math.random() * 3 +1); i++)
+		{
+			lW.move(state);
+		}
+	}
+
+	/*possibly have LazyWumpus create a teleport method for this to work, since ActiveWumpus can't
+	 * access its location variable.
+	 */
+	public void teleport()
 	{
 		
 	}
