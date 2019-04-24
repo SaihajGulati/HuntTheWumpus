@@ -10,28 +10,17 @@
  *     3/26/2019     |  Made test homescreen with buttons
  *     3/28/2019     |  Did access stuff for goup in javafx, also modded menu methods to return which button was pressed.
  *     4/3/2019      |  Can switch to display scores, still crashes after screen change and functionality isn't complete
+ *     4/21/2019     |  Replaced all the main menue code with StdDraw stuff ive been working on in a different file
  */
 import java.util.*;
-import javafx.application.Application;
-import javafx.scene.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
-import javafx.scene.text.Text;
-import javafx.scene.text.Font; 
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
-import javafx.event.*;
-import javafx.scene.input.MouseEvent;
+import java.awt.Font;
+import java.util.ArrayList;
  
-public class GraphicalInterface extends Application {
+public class GraphicalInterface{
 
 int BAT;
 int HOLE; 
 int WUMPUS;
-int pressed;
-Group root = new Group();
-Group root2 = new Group();
 
 public GraphicalInterface(int bat, int hole, int wumpus)
 {
@@ -109,139 +98,195 @@ public void displayHighscore(int highScore)
    System.out.println("Player Highscore: "+highScore);
 }
 
-public void Display(String [] args)
+// Opens up the canvas for the game to be displayed on and enables double buffering
+public static void start()
 {
+	StdDraw.enableDoubleBuffering();
+	StdDraw.setCanvasSize(1000, 700);
+}
 
-	launch(args);
+private static void displayHighScores(ArrayList<String> scores)
+{
+	boolean displayscores = true;
+	while(displayscores)
+			{
+		displayscores = !highScores(scores);
+		System.out.println("score");
+			}
+	mainmenu(scores);
+	
+}
+
+private static void displayCredits(ArrayList<String> scores)
+{
+	boolean displaycredits = true;
+	while(displaycredits)
+			{
+		displaycredits = !credits(scores);
+		System.out.println("credits");
+			}
+	mainmenu(scores);
+	
+}
+
+public static boolean mainmenu(ArrayList<String> scores)
+{	
+int select = 0;
+while(select == 0)
+{
+	StdDraw.clear();
+	select = menubuttons();
+ }
+
+if(select == 2)
+{
+	displayHighScores(scores);
+}
+
+if(select == 3)
+{
+	displayCredits(scores);
+}
+
+if(select == 1)
+{
+	return true;
+}
+
+	
+    return false;
+}
+
+
+
+private static int menubuttons()
+{	double x = 0.2;
+    double y = 0.5;
+    double containerx= 0.15;
+    double containery= 0.5;
+    double shift = 0.2;
+    int toreturn = 0;
+
+		StdDraw.clear();
+		StdDraw.setPenColor(0,0,0);
+		StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+		//StdDraw.picture(0.5, 0.5, "C:\\Users\\s-dapopa\\Desktop\\cave.jpg",1, 1);
+		
+	    StdDraw.setPenColor(32,32,32);
+		StdDraw.filledRectangle(x , y, containerx, containery);
+		title(containerx+0.05,0.9, "Hunt the Wumpus" );
+		
+
+	if(button(x,0.745-shift, containerx,0.055,"PLAY"))
+		
+		    toreturn = 1;	
+	
+	if(button(x,0.635-shift, containerx,0.055,"HIGH SCORES"))
+		    toreturn = 2;	
+
+	
+	if(button(x,0.525-shift, containerx,0.055,"CREDITS"))
+		    toreturn = 3;	
+
+	
+	if(button(x,0.415-shift, containerx,0.055,"EXIT"))
+		    toreturn = 4;	
+
+			
+	StdDraw.show();
+	return toreturn;
 
 }
 
-//Start() is part of javafx, here I make everything that will be displayed
-public void start(Stage stage) 
+private static boolean button(double x, double y, double high, double wide, String message)
 {
+	boolean hovering = inBox(x,y,high,wide);
+	StdDraw.setPenColor( 32,32,32);
+	if(hovering)
+		StdDraw.setPenColor(0,0,128);
+	
+	StdDraw.filledRectangle(x, y, high , wide);
+	StdDraw.setPenColor( 255,255,255);
+	StdDraw.setFont( );
+	StdDraw.text(x, y, message);
+	return hovering && Clicked();
+}
 
-		menu(stage); 
-
+private static void title(double x, double y, String message)
+{
+	StdDraw.setPenColor( 255,255,255);
+	StdDraw.setFont( );
+	StdDraw.text(x, y, message);
 }
 
 
-private void score (Stage stage)
-{
-	String [] scores = {"Cool Kidz: "+(int)((Math.random()+1)*1000), "AAA: "+(int)((Math.random()+1)*1000), "Your mom: "+(int)((Math.random()+1)*1000), "Reeeee: "+(int)((Math.random()+1)*1000)};
-    int wide = 1000;
-    int tall = 700;
-	   Scene scene = new Scene(root2, wide, tall, Color.BLACK);
-	   
-	   Text titletext = new Text();
-	   makeText(root2, titletext, "HIGH SCORES", "verdana", 60, (wide/2)-200,150);
-	   
-	   for(int i = 0; i < scores.length; i++)
-	   {
-		   makeText(root2, new Text() , scores[i], "verdana", 40, (wide/2)-400,200+(i*50));
-	   }
-    stage.setTitle("Not_a_virus.exe");
-    stage.setScene(scene);       
-    stage.show();
+private static boolean inBox(double xcenter, double ycenter, double height, double width) {
+        double x = StdDraw.mouseX();
+        double y = StdDraw.mouseY();
+        //System.out.println(x+" "+y);
+        if(x < xcenter-width*2.7 || x> xcenter+width*2.7)
+        {
+        	return false;
+        }
+        
+        if(y < ycenter-height/2.7 || y> ycenter+height/2.7)
+        {
+        	return false;
+        }
+        //System.out.println("YEE");
+        return true;     
+        
+    }
+
+private static boolean Clicked() 
+{	
+  return StdDraw.isMousePressed();
 }
 
+private static boolean highScores(ArrayList<String> scores)
+{	boolean toMain;
+	StdDraw.clear();
+	StdDraw.setPenColor( 0,0,0);
+	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	
+	StdDraw.setPenColor( 32,32,32);
+	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	
+	title(0.5, 0.9, "High Scores");
+	
+	for(int i = 0; i< Math.min(10, scores.size()); i++)
+	{
+		StdDraw.setPenColor( 255,255,255);
+		StdDraw.setFont( );
+		StdDraw.text(0.5, 0.75-(0.05*i), scores.get(i));		
+	}
 
-private void menu(Stage stage)
-{
-    int wide = 1000;
-    int tall = 700;
-    root.setOnMouseClicked(new EventHandler<MouseEvent>() {
- 	    @Override
- 	    public void handle(MouseEvent event) {
- 	    	getMainMenuePressed(event.getSceneY(), stage);
- 	    	//System.out.println(buttonTester(pressed)+" "+pressed);
- 	    }
- 	});
-    
-    
-    Scene scene = new Scene(root, wide, tall, Color.BLACK);
-    
-    
-    Text playtext = new Text();
-    Text exittext = new Text();
-    Text scoretext = new Text();
-    Text titletext = new Text();
-    
-    
-    Rectangle playButton = new Rectangle();
-    Rectangle exitButton = new Rectangle();       
-    Rectangle scoreButton = new Rectangle();
-
-    makeGreyRectangle(root, playButton,500,100,(wide/2)-250,(tall/2)-100);
-    makeGreyRectangle(root, exitButton,500,100,(wide/2)-250,(tall/2)+50);
-    makeGreyRectangle(root, scoreButton,500,100,(wide/2)-250,(tall/2)+200);
-    makeText(root, titletext, "HUNT THE WUMPUS", "verdana", 60, (wide/2)-320,150);
-    makeText(root, playtext, "PLAY GAME", "verdana", 60, (wide/2)-190,320);
-    makeText(root, exittext, "EXIT", "verdana", 60, (wide/2)-80,470);
-    makeText(root, scoretext, "HIGH SCORES", "verdana", 60, (wide/2)-235,620);  
-    
-    System.out.println(pressed);
-
-    stage.setTitle("Not_a_virus.exe");
-    stage.setScene(scene);       
-    stage.show(); 
+	toMain = button(0.5, 0.1 , 0.15 , 0.055, "Main Menu");
+	StdDraw.show();
+	return toMain;
 }
 
-private static String buttonTester(int button)
-{
-	   if(button == 1)
-	   {
-		   return "PLAY BUTTON";
-	   }
-	   
-	   else if(button == 2)
-	   {
-		   return "EXIT BUTTON";
-	   }
-	   
-	   else if(button == 3)
-	   {
-		   return "HIGH SCORE BUTTON";
-	   }
-	   
-	   return "NONE";
-}
+private static boolean credits(ArrayList<String> scores)
+{	boolean toMain;
+	String [] names = {"ME","ME","ME","ME" };
+	StdDraw.clear();
+	StdDraw.setPenColor( 0,0,0);
+	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	
+	StdDraw.setPenColor( 32,32,32);
+	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	
+	title(0.5, 0.9, "Credits");
+	
+	for(int i = 0; i< names.length; i++)
+	{
+		StdDraw.setPenColor( 255,255,255);
+		StdDraw.setFont();
+		StdDraw.text(0.5, 0.75-(0.1*i), names[i]);		
+	}
 
-private void getMainMenuePressed(double Y, Stage stage)
-{
-	   if(Y >= 250 && Y <= 350)
-	   	{
-		   menu(stage);
-	   	}
-	   
-	   else if(Y >= 400 && Y <= 500)
-		{
-		   menu(stage);  
-		}
-	   
-	   else if(Y >= 550 && Y <= 650)
-		{
-		   score(stage);  
-		}
-	   
-	   menu(stage);
-}
-
-private static void makeGreyRectangle(Group root, Rectangle rectangle, int width, int height, int x, int y)
-{
-    Rectangle a = new Rectangle(x,y,width, height);
-    rectangle = a;
-    rectangle.setFill(Color.GREY);
-    
-    root.getChildren().add(rectangle);  
-}
-
-private static void makeText(Group root, Text text, String message, String font, int size, int x, int y)
-{
-    text.setFill(Color.WHITE);
-    text.setText(message); 
-    text.setFont(Font.font(font, FontWeight.BOLD, FontPosture.REGULAR, size));
-    text.setX(x); 
-    text.setY(y);
-    root.getChildren().add(text);
+	toMain = button(0.5, 0.1 , 0.15 , 0.055, "Main Menu");
+	StdDraw.show();
+	return toMain;
 }
 }

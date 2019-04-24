@@ -62,10 +62,11 @@ public class GameControl extends Application
 			}
 		}
 		}
-	public void start(Stage stage)
+	public static void start()
 	{
 		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
-		GI.start(stage);
+		GI.start();
+		GI.mainmenu(HighScore.getHighScores())
 	}
 			
 	/**
@@ -78,47 +79,36 @@ public class GameControl extends Application
 	public static void startGame(GraphicalInterface GI, Player player, Cave cave, GameLocations locations) throws FileNotFoundException
 	{
 		boolean inPit = false, inBats = false, inWumpus = false, isAlive = true;
-		int i = 0;
 		cave.openCaveFile();
 		cave.readCaveFile();
 		//loop that runs the whole game while the player is alive;
 		while(player.getArrows() > 0 && isAlive) {
-			while(!inBats && i < GameLocations.getBatLocations().length) {
-				if(GameLocations.getPlayerLocation() == GameLocations.getBatLocations()[i]) {
-					inBats = true;
-					i = 0;
+			for (int i: GameLocations.getBatLocations())
+			{
+				if(GameLocations.getPlayerLocation() == i) {
+					if(!Trivia.askQuestions(BATS)) {
+						break;
+					}
 				}
 			}
-			while(!inPit && i < GameLocations.getPitLocations().length){
-				if(GameLocations.getPlayerLocation() == GameLocations.getPitLocations()[i]) {
-					inPit = true;
-					i = 0;
+			for (int i: GameLocations.getPitLocations())
+			{
+				if(GameLocations.getPlayerLocation() == i) 
+				{
+					if(!Trivia.askQuestions(BATS)) {
+						break;
+					}		
 				}
 			}
-			if(GameLocations.getPlayerLocation() == GameLocations.getWumpusLocation()) {
-				inWumpus = true;
-				i = 0;
-			}
-			
-			GI.displayItems();
-			
-			if(inWumpus) {
+			if (GameLocations.getPlayerLocation() == GameLocations.getWumpusLocation())
+			{
 				if(!Trivia.askQuestions(WUMPUS)) {
 					break;
 				}
 			}
-			if(inBats) {
-				Trivia.askQuestions(BATS);
-			}
-			if(inPit) {
-				if(!Trivia.askQuestions(HOLE)) {
-					break;
-				}
-			}
-			GI.inDanger(cave.adjacentRooms(GameLocations.getPlayerLocation()));
 		}
 		
-		}
+	}
 	/**
 	 * 
 	 * @param end if the game ends
