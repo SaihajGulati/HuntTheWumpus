@@ -62,10 +62,10 @@ public class GameControl extends Application
 			}
 		}
 		}
-	public void start(Stage stage)
+	public static void start()
 	{
 		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
-		GI.start(stage);
+		GI.start();
 		GI.mainmenu(HighScore.getHighScores())
 	}
 			
