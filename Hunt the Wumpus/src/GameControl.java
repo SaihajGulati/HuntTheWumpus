@@ -86,55 +86,27 @@ public class GameControl extends Application
 			for (int i: GameLocations.getBatLocations())
 			{
 				if(GameLocations.getPlayerLocation() == i) {
-					Trivia.askQuestions(BATS);
+					if(!Trivia.askQuestions(BATS)) {
+						break;
+					}
 				}
 			}
 			for (int i: GameLocations.getPitLocations())
 			{
 				if(GameLocations.getPlayerLocation() == i) 
 				{
-					Trivia.askQuestions(BATS);			
+					if(!Trivia.askQuestions(BATS)) {
+						break;
+					}		
 				}
 			}
 			if (GameLocations.getPlayerLocation() == GameLocations.getWumpusLocation())
 			{
-				//placeholder
-			}
-		}
-			/*while(!inBats && i < GameLocations.getBatLocations().length) {
-				if(GameLocations.getPlayerLocation() == GameLocations.getBatLocations()[i]) {
-					inBats = true;
-					i = 0;
-				}
-			}
-			while(!inPit && i < GameLocations.getPitLocations().length){
-				if(GameLocations.getPlayerLocation() == GameLocations.getPitLocations()[i]) {
-					inPit = true;
-					i = 0;
-				}
-			}
-			if(GameLocations.getPlayerLocation() == GameLocations.getWumpusLocation()) {
-				inWumpus = true;
-				i = 0;
-			}
-			
-			GI.displayItems();
-			
-			if(inWumpus) {
 				if(!Trivia.askQuestions(WUMPUS)) {
 					break;
 				}
 			}
-			if(inBats) {
-				
-			}
-			if(inPit) {
-				if(!Trivia.askQuestions(HOLE)) {
-					break;
-				}
-			}
-			GI.inDanger(cave.adjacentRooms(GameLocations.getPlayerLocation()));
-		}*/
+		}
 		
 	}
 	/**
