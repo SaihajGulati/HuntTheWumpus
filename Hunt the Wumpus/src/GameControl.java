@@ -35,6 +35,7 @@ public class GameControl
 	public static int START = 0;
 	public static int HIGHSCORE = 1;
 	public static int QUIT = 2;
+	
 	public static void main(String[] args) throws FileNotFoundException
 	{
 		String[][] caveArray = new String[30][30];
@@ -44,23 +45,9 @@ public class GameControl
 		HighScore score = new HighScore("input/HighScores.txt");
 		Player player = new Player();
 		Trivia trivia = new Trivia("input/Trivia.txt");
-		int Player_Choice = 3;
-		while(Player_Choice == 3) {
-			if(Player_Choice == START){
-				startGame(GI, player, cave, locations);
-			}
-			else if(Player_Choice == HIGHSCORE){
-				//GI.displayHighscore(HighScore.getHighScores()); //change param to ArrayList
-			}
-			else if(Player_Choice == QUIT){
-				System.out.println("Thank you for playing!");
-				break;
-			}
-			else {
-				System.out.println("ERROR");
-			}
-		}
-		}
+		//starts the game
+		start();
+	}
 	public static void start()
 	{
 		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
