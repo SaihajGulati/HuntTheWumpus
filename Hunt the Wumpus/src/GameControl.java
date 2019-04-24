@@ -24,7 +24,7 @@ import javafx.stage.Stage;
  * 	Add Wumpus control methods but what do we need for that? 
  *
  */
-public class GameControl extends Application
+public class GameControl
 {
 	public static int BATS = 0;
 	public static int HOLE = 1;
@@ -46,7 +46,6 @@ public class GameControl extends Application
 		Trivia trivia = new Trivia("input/Trivia.txt");
 		int Player_Choice = 3;
 		while(Player_Choice == 3) {
-			launch(args);
 			if(Player_Choice == START){
 				startGame(GI, player, cave, locations);
 			}
