@@ -1,16 +1,16 @@
 //Raj Sunku
 //GameLocations object
 /*
-* This object keeps track of where all the hazards, the player, and the wumpus are.
-* It also controls arrow shooting, controls the movement of the wumpus, and gives warnings
-* 
-* Revision History:
-* 3/01/2019: empty constructor and toString method added
-* 3/12/2019: Studded Methods and Fields added
-* 3/19/2019: warning, movePlayer, and constructor implemented
-* 3/26/2019: triggerBat, triggerPit, and shootArrow implemented
-* 4/03/2019: moveWumpus implemented, so class is finished
-*/
+ * This object keeps track of where all the hazards, the player, and the wumpus are.
+ * It also controls arrow shooting, controls the movement of the wumpus, and gives warnings
+ * 
+ * Revision History:
+ * 3/01/2019: empty constructor and toString method added
+ * 3/12/2019: Studded Methods and Fields added
+ * 3/19/2019: warning, movePlayer, and constructor implemented
+ * 3/26/2019: triggerBat, triggerPit, and shootArrow implemented
+ * 4/03/2019: moveWumpus implemented, so class is finished
+ */
 public class GameLocations {
        private static int[] batLocations;
        private static int[] pitLocations;
@@ -18,7 +18,6 @@ public class GameLocations {
        private static int playerLocation;
        private static int wumpusLocation;
        private static Cave cave;
-       
        /* 
         * This constructor sets random values for all of the locations
         * @param c is the cave that helps find adjacent rooms for the player  
@@ -73,16 +72,16 @@ public class GameLocations {
        /*
         * Moves Wumpus if player wins argument or every random amount of time
         */
-       public static void moveWumpus()
-       {
-    	  for(int i=0;i<(int)(Math.random()*3+2);i++)
-    	  {
-    		  int moveLocation=cave.tunnels(wumpusLocation)[(int)(Math.random()*3)];
-    		  wumpusLocation=moveLocation;
-    	  }
-       }
+//       public static void moveWumpus()
+//       {
+//    	  for(int i=0;i<(int)(Math.random()*3+2);i++)
+//    	  {
+//    		  int moveLocation=cave.tunnels(wumpusLocation)[(int)(Math.random()*cave.tunnels(wumpusLocation).length)];
+//    		  wumpusLocation=moveLocation;
+//    	  }
+//       }
        
-       /*
+       /* 
         * Moves Player to room if possible
         * @param room is the desired location to move to
         * @return a boolean value indicating if it was possible to move to room
@@ -136,7 +135,7 @@ public class GameLocations {
     			   properRoom=true;
     	   }
     	   if(room==wumpusLocation&&properRoom)
-    		   return true;
+    		  return true;
     	   moveWumpus();
               return false;
        }
@@ -154,7 +153,7 @@ public class GameLocations {
     		   i=1;
     	   while(batLocations[i]==pitLocations[0]||batLocations[i]==pitLocations[1]||
     			   batLocations[i]==batLocations[(i+1)%2]||batLocations[i]==originalPlayerLocation||
-    					   batLocations[i]==playerLocation||batLocations[i]==wumpusLocation)
+    			   batLocations[i]==playerLocation||batLocations[i]==wumpusLocation)
            {
     		   batLocations[i]=(int)(Math.random()*30+1);
            }
