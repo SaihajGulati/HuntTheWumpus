@@ -35,21 +35,41 @@ public class HighScore
                                                 * been loaded into the game; used either when displaying the high scores
                                                 * or updating them after a game (when the Player's score qualifies).
                                                 */
+        private static ArrayList<String> names; /**
+         * An ArrayList that will represent the high scores after they have
+         * been loaded into the game; used either when displaying the high scores
+         * or updating them after a game (when the Player's score qualifies).
+         */
     
+        /*
+         * How to cast a String to an int:
+         * int bob = Integer.valueOf("30");
+         */
+        /*
+         * How to split a String (returns a String array)
+         * "Saihaj:42".split(":");
+         */
+        
     /**
      * The constructor for the HighScore object that will handle the File processing and fill the
      * HighScores ArrayList with its respective scores.
     */
     public HighScore(String filename) throws FileNotFoundException
     {
+    	String[] temp;
         this.fileName = filename;
         scoreBoard = new File(fileName); 
         Scanner input = new Scanner(scoreBoard);
+        String userName = "";
         highScores = new ArrayList<Integer>();
+        names = new ArrayList<String>();
+        String inputLine = "";
         //Adds high scores to the highScores ArrayList upon being scanned from the file
         while(input.hasNext()) 
         {
-            highScores.add(input.nextInt());
+        	inputLine = input.nextLine();
+        	temp = inputLine.split(":");
+            //highScores.add(input.nextInt());
         }
     }
     
@@ -82,12 +102,13 @@ public class HighScore
      * 
      * @Return: Void
      */
-    public static ArrayList<Integer> updateScoreBoard(int totalScore) throws FileNotFoundException
+    public static ArrayList<Integer> updateScoreBoard(int totalScore, String name) throws FileNotFoundException
     {
         //PrintStream output = new PrintStream(new File("testOutput.txt"));
         if(totalScore >= highScores.get(0))
         {
             highScores.add(0, totalScore);
+            names.add(0, name);
         }
         else
         {
@@ -96,6 +117,7 @@ public class HighScore
                 if(totalScore >= highScores.get(i) && totalScore <= highScores.get(i-1))
                 {
                     highScores.add(i, totalScore);
+                    names.add(i, name);
                     i++;
                 }
             }
