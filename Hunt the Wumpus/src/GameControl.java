@@ -45,14 +45,15 @@ public class GameControl
 		HighScore score = new HighScore("input/HighScores.txt");
 		Player player = new Player();
 		Trivia trivia = new Trivia("input/Trivia.txt");
+		ArrayList <String> scores = new ArrayList<String>();
 		//starts the game
-		start();
+		start(scores);
 	}
-	public static void start()
+	public static void start(ArrayList <String> scores)
 	{
 		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
 		GI.start();
-		GI.mainmenu(null);
+		GI.mainmenu(scores);
 	}
 			
 	/**
