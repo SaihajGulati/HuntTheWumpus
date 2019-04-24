@@ -23,6 +23,9 @@
  * in the class methods.
  * 4/15/19: Version 1.7
  * Added a comment for the private File trivia
+ * 4/24/19: Version 1.8
+ * Changed the scenario integers for askQuestions another time (buying hints/arrows is 0; 
+ * falling into a pit is 1; encountering the Wumpus is 2)
 */
 import java.util.*;
 import java.io.*;
@@ -107,7 +110,7 @@ public class Trivia
         int correctAnswers = 0;
         int totalQuestions = 1;
         Scanner playerResponse = new Scanner(System.in);       
-        if(scenario == 3)
+        if(scenario == 2)
         //Encountering the Wumpus
         {
         	/**Allows the method to keep asking questions for the Wumpus encounter, until either
@@ -133,7 +136,7 @@ public class Trivia
             }
         }
         else
-        //Scenarios 0, 1, and 2: Buying arrows or hints, and falling into a bottomless pit
+        //Scenarios 0, 1: Buying arrows or hints, and falling into a bottomless pit
         {
         	/**Allows the method to keep asking questions for all other scenarios besides the 
         	 * Wumpus encounter, until either 2 questions have answered correctly or a total of 
