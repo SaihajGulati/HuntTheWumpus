@@ -93,12 +93,6 @@ public void Outcome(boolean score)
 {
 }
 
-// Displays high score
-public void displayHighscore(int highScore)
-{
-   System.out.println("Player Highscore: "+highScore);
-}
-
 // Opens up the canvas for the game to be displayed on and enables double buffering
 public static void start()
 {
@@ -151,7 +145,7 @@ public static int caveSelection(ArrayList<String> scores)
 
 }
 
-private static void displayHighScores(ArrayList<String> scores)
+public static void displayHighScores(ArrayList<String> scores)
 {
 	boolean displayscores = true;
 	while(displayscores)
