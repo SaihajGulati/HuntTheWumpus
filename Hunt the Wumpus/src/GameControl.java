@@ -116,7 +116,8 @@ public class GameControl
 			{
 				scores.set(i, HighScore.getNames().get(i) + " : " + HighScore.getHighScores().get(i));
 			}
-			GI.displayHighScores(scores);		
+			GI.displayHighScores(scores);
+			//fized it
 	}
 	/**
 	 *
