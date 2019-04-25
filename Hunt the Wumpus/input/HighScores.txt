@@ -7,4 +7,8 @@ f:86
 g:86
 h:83
 i:82
+<<<<<<< HEAD
 j:76
+=======
+j:76
+>>>>>>> branch 'master' of https://s-bryang@bitbucket.org/htw19_p3_artesiancode/htw19_p3_artesiancode.git

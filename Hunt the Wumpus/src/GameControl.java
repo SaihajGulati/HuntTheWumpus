@@ -24,7 +24,7 @@ import javafx.stage.Stage;
  * 	Add Wumpus control methods but what do we need for that? 
  *
  */
-public class GameControl extends Application
+public class GameControl
 {
 	public static int BATS = 0;
 	public static int HOLE = 1;
@@ -35,6 +35,7 @@ public class GameControl extends Application
 	public static int START = 0;
 	public static int HIGHSCORE = 1;
 	public static int QUIT = 2;
+	
 	public static void main(String[] args) throws FileNotFoundException
 	{
 		String[][] caveArray = new String[30][30];
@@ -44,29 +45,15 @@ public class GameControl extends Application
 		HighScore score = new HighScore("input/HighScores.txt");
 		Player player = new Player();
 		Trivia trivia = new Trivia("input/Trivia.txt");
-		int Player_Choice = 3;
-		while(Player_Choice == 3) {
-			launch(args);
-			if(Player_Choice == START){
-				startGame(GI, player, cave, locations);
-			}
-			else if(Player_Choice == HIGHSCORE){
-				//GI.displayHighscore(HighScore.getHighScores()); //change param to ArrayList
-			}
-			else if(Player_Choice == QUIT){
-				System.out.println("Thank you for playing!");
-				break;
-			}
-			else {
-				System.out.println("ERROR");
-			}
-		}
-		}
-	public void start(Stage stage)
+		ArrayList <String> scores = new ArrayList<String>();
+		//starts the game
+		start(scores);
+	}
+	public static void start(ArrayList <String> scores)
 	{
 		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
-		GI.start(stage);
-		GI.mainmenu(HighScore.getHighScores())
+		GI.start();
+		GI.mainmenu(scores);
 	}
 			
 	/**
@@ -86,55 +73,27 @@ public class GameControl extends Application
 			for (int i: GameLocations.getBatLocations())
 			{
 				if(GameLocations.getPlayerLocation() == i) {
-					Trivia.askQuestions(BATS);
+					if(!Trivia.askQuestions(BATS)) {
+						break;
+					}
 				}
 			}
 			for (int i: GameLocations.getPitLocations())
 			{
 				if(GameLocations.getPlayerLocation() == i) 
 				{
-					Trivia.askQuestions(BATS);			
+					if(!Trivia.askQuestions(BATS)) {
+						break;
+					}		
 				}
 			}
 			if (GameLocations.getPlayerLocation() == GameLocations.getWumpusLocation())
 			{
-				//placeholder
-			}
-		}
-			/*while(!inBats && i < GameLocations.getBatLocations().length) {
-				if(GameLocations.getPlayerLocation() == GameLocations.getBatLocations()[i]) {
-					inBats = true;
-					i = 0;
-				}
-			}
-			while(!inPit && i < GameLocations.getPitLocations().length){
-				if(GameLocations.getPlayerLocation() == GameLocations.getPitLocations()[i]) {
-					inPit = true;
-					i = 0;
-				}
-			}
-			if(GameLocations.getPlayerLocation() == GameLocations.getWumpusLocation()) {
-				inWumpus = true;
-				i = 0;
-			}
-			
-			GI.displayItems();
-			
-			if(inWumpus) {
 				if(!Trivia.askQuestions(WUMPUS)) {
 					break;
 				}
 			}
-			if(inBats) {
-				
-			}
-			if(inPit) {
-				if(!Trivia.askQuestions(HOLE)) {
-					break;
-				}
-			}
-			GI.inDanger(cave.adjacentRooms(GameLocations.getPlayerLocation()));
-		}*/
+		}
 		
 	}
 	/**

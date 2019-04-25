@@ -31,7 +31,7 @@ import java.util.*;
 import java.io.*;
 public class Trivia 
 {
-    Scanner input;
+    private Scanner input;
     private File trivia; //The File that contains the trivia
     private static ArrayList<String> triviaQuestions; //The trivia questions that will be asked during the game 
     private static ArrayList<String> triviaAnswers; /**
