@@ -54,7 +54,8 @@ public class GameControl
 	{
 		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
 		GI.start();
-		if(GI.mainmenu(scores) == 0) {
+		int getCave = GI.mainmenu(scores);
+		if(getCave == 0) {
 			endGame(scores, player, GI);
 		}
 	}
