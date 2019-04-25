@@ -107,8 +107,7 @@ public static void start()
 }
 
 public static int caveSelection(ArrayList<String> scores)
-{
-	{	double x = 0.2;
+{	double x = 0.2;
     double y = 0.5;
     double containerx= 0.15;
     double containery= 0.5;
@@ -148,6 +147,7 @@ public static int caveSelection(ArrayList<String> scores)
 			
 	StdDraw.show();
     }
+
 
 }
 
