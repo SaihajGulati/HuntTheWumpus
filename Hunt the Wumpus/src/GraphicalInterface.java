@@ -11,6 +11,7 @@
  *     3/28/2019     |  Did access stuff for goup in javafx, also modded menu methods to return which button was pressed.
  *     4/3/2019      |  Can switch to display scores, still crashes after screen change and functionality isn't complete
  *     4/21/2019     |  Replaced all the main menue code with StdDraw stuff ive been working on in a different file
+ *     4/24/2019     | Made navigation a bit easier, no dead ends, added cave selection and return of main menue changed, will duiscus in class
  */
 import java.util.*;
 import java.awt.Font;
@@ -105,6 +106,51 @@ public static void start()
 	StdDraw.setCanvasSize(1000, 700);
 }
 
+public static int caveSelection(ArrayList<String> scores)
+{
+	{	double x = 0.2;
+    double y = 0.5;
+    double containerx= 0.15;
+    double containery= 0.5;
+    double shift = 0.2;
+     while(true)
+    {
+		StdDraw.clear();
+		StdDraw.setPenColor(0,0,0);
+		StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+		//StdDraw.picture(0.5, 0.5, "C:\\Users\\s-dapopa\\Desktop\\cave.jpg",1, 1);
+		
+	    StdDraw.setPenColor(32,32,32);
+		StdDraw.filledRectangle(x , y, containerx, containery);
+		title(containerx+0.05,0.9, "Hunt the Wumpus" );
+		
+
+	if(button(x,0.85-shift, containerx,0.055,"Cave 1"))
+		
+		    return 1;	
+	
+	if(button(x,0.74-shift, containerx,0.055,"Cave 2"))
+		    return 2;	
+	
+	if(button(x,0.63-shift, containerx,0.055,"Cave 3"))
+		    return 3;	
+
+	
+	if(button(x,0.63-shift, containerx,0.055,"Cave 4"))
+		    return 4;
+
+	if(button(x,0.52-shift, containerx,0.055,"Cave 5"))
+	        return 5;
+	
+	if(button(x,0.41-shift, containerx,0.055,"Main Menu"))
+		mainmenu(scores);
+
+			
+	StdDraw.show();
+    }
+
+}
+
 private static void displayHighScores(ArrayList<String> scores)
 {
 	boolean displayscores = true;
@@ -129,32 +175,33 @@ private static void displayCredits(ArrayList<String> scores)
 	
 }
 
-public static boolean mainmenu(ArrayList<String> scores)
+public static int mainmenu(ArrayList<String> scores)
 {	
-int select = 0;
-while(select == 0)
-{
-	StdDraw.clear();
-	select = menubuttons();
- }
-
-if(select == 2)
-{
-	displayHighScores(scores);
-}
-
-if(select == 3)
-{
-	displayCredits(scores);
-}
-
-if(select == 1)
-{
-	return true;
-}
-
+	int select = 0;
+	while(select == 0)
+	{
+		StdDraw.clear();
+		select = menubuttons();
+	 }
 	
-    return false;
+	if(select == 2)
+	{
+		displayHighScores(scores);
+	}
+	
+	if(select == 3)
+	{
+		displayCredits(scores);
+	}
+	
+	if(select == 4)
+	{
+		return 0;
+	}
+	
+	   StdDraw.clear();
+	   return caveSelection(scores);
+		
 }
 
 
@@ -207,15 +254,17 @@ private static boolean button(double x, double y, double high, double wide, Stri
 	
 	StdDraw.filledRectangle(x, y, high , wide);
 	StdDraw.setPenColor( 255,255,255);
-	StdDraw.setFont( );
+	Font buttonfont = new Font("Copperplate Gothic Bold",0, 20);
+	StdDraw.setFont(buttonfont);
 	StdDraw.text(x, y, message);
 	return hovering && Clicked();
 }
 
 private static void title(double x, double y, String message)
 {
+	Font titlefont = new Font("Copperplate Gothic Bold",0, 27);
 	StdDraw.setPenColor( 255,255,255);
-	StdDraw.setFont( );
+	StdDraw.setFont(titlefont);
 	StdDraw.text(x, y, message);
 }
 
@@ -240,7 +289,15 @@ private static boolean inBox(double xcenter, double ycenter, double height, doub
 
 private static boolean Clicked() 
 {	
-  return StdDraw.isMousePressed();
+	if(StdDraw.isMousePressed())
+	{
+		while(StdDraw.isMousePressed())
+		{
+			//do nothing
+		}
+		return true;
+	}
+  return false;
 }
 
 private static boolean highScores(ArrayList<String> scores)
@@ -255,9 +312,9 @@ private static boolean highScores(ArrayList<String> scores)
 	title(0.5, 0.9, "High Scores");
 	
 	for(int i = 0; i< Math.min(10, scores.size()); i++)
-	{
+	{	Font scoresfont = new Font("Copperplate Gothic Bold",0, 30);
 		StdDraw.setPenColor( 255,255,255);
-		StdDraw.setFont( );
+		StdDraw.setFont( scoresfont);
 		StdDraw.text(0.5, 0.75-(0.05*i), scores.get(i));		
 	}
 
@@ -277,11 +334,12 @@ private static boolean credits(ArrayList<String> scores)
 	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
 	
 	title(0.5, 0.9, "Credits");
+	Font creditsfont = new Font("Copperplate Gothic Bold",0, 30);
 	
 	for(int i = 0; i< names.length; i++)
 	{
 		StdDraw.setPenColor( 255,255,255);
-		StdDraw.setFont();
+		StdDraw.setFont(creditsfont);
 		StdDraw.text(0.5, 0.75-(0.1*i), names[i]);		
 	}
 
