@@ -23,33 +23,68 @@
  * Added comments to the while and for/for-each loops explaining their purposes.
  * 4/15/19: Version 1.7
  * Added a comment for the String fileName
+ * 4/24/19: Version 1.8
+ * Added a names array (String type) and the code to update it alongside highScores,
+ * including the retrieval of the names and their output to/from a file
 */
 import java.util.*;
 import java.io.*;
 public class HighScore 
 {
-        private static String fileName; //The name of the File used to load the scores
-        private static File scoreBoard; //The File that will be used to load the high scores
-        private static ArrayList<Integer> highScores; /**
-                                                * An ArrayList that will represent the high scores after they have
-                                                * been loaded into the game; used either when displaying the high scores
-                                                * or updating them after a game (when the Player's score qualifies).
-                                                */
-    
+    private Scanner input;
+    private static File scoreBoard; //The File that will be used to load the high scores
+    private static ArrayList<Integer> highScores; /**
+                                            * An ArrayList that will represent the high scores after they have
+                                            * been loaded into the game; used either when displaying the high scores
+                                            * or updating them after a game (when the Player's score qualifies).
+                                            */
+    private static ArrayList<String> names; /**
+     * An ArrayList that will represent the high scores after they have
+     * been loaded into the game; used either when displaying the high scores
+     * or updating them after a game (when the Player's score qualifies).
+     */
+
+    /*
+     * How to cast a String to an int:
+     * int bob = Integer.valueOf("30");
+     */
+    /*
+     * How to split a String (returns a String array)
+     * "Saihaj:42".split(":");
+     */
+        
     /**
      * The constructor for the HighScore object that will handle the File processing and fill the
      * HighScores ArrayList with its respective scores.
     */
     public HighScore(String filename) throws FileNotFoundException
     {
-        this.fileName = filename;
-        scoreBoard = new File(fileName); 
-        Scanner input = new Scanner(scoreBoard);
+        scoreBoard = new File(filename);    
+        //Scanner input = new Scanner(scoreBoard,"utf-8");
+        input = new Scanner(scoreBoard);
+        String userName = "";
         highScores = new ArrayList<Integer>();
+        names = new ArrayList<String>();
         //Adds high scores to the highScores ArrayList upon being scanned from the file
         while(input.hasNext()) 
         {
-            highScores.add(input.nextInt());
+            String inputLine = input.nextLine();
+            System.out.println(inputLine);
+            if(!(inputLine.equals("")))
+            {
+                if(inputLine.substring(0, 5).equals("Name "))
+                {
+                    names.add(inputLine.substring(5));
+                }
+                else if(inputLine.substring(0, 6).equals("Score "))
+                {
+                    highScores.add(Integer.valueOf(inputLine.substring(6)));
+                }
+                else
+                {
+                    System.out.println(inputLine);
+                }
+            }
         }
     }
     
@@ -69,6 +104,7 @@ public class HighScore
         for(int i = 0; i < highScores.size(); i++)
         {
             highScores.set(i, 0);
+            //Add code that resets names to its default values;
         }
         updateFile();
     }
@@ -82,12 +118,13 @@ public class HighScore
      * 
      * @Return: Void
      */
-    public static ArrayList<Integer> updateScoreBoard(int totalScore) throws FileNotFoundException
+    public static ArrayList<Integer> updateScoreBoard(int totalScore, String name) throws FileNotFoundException
     {
         //PrintStream output = new PrintStream(new File("testOutput.txt"));
-        if(totalScore >= highScores.get(0))
+        if(highScores.size() == 0 || totalScore >= highScores.get(0))
         {
             highScores.add(0, totalScore);
+            names.add(0, name);
         }
         else
         {
@@ -96,6 +133,7 @@ public class HighScore
                 if(totalScore >= highScores.get(i) && totalScore <= highScores.get(i-1))
                 {
                     highScores.add(i, totalScore);
+                    names.add(i, name);
                     i++;
                 }
             }
@@ -107,6 +145,7 @@ public class HighScore
         while (highScores.size() > 10)
         {
             highScores.remove(highScores.size()-1);
+            names.remove(names.size()-1);
         }
         updateFile();
         return highScores;
@@ -121,7 +160,7 @@ public class HighScore
      */
     public static void updateFile() throws FileNotFoundException
     {
-        PrintStream output = new PrintStream(new File(fileName));
+        PrintStream output = new PrintStream(new File("HighScores.txt"));
         /**
          * For each score in the highScores ArrayList, the loop will output the score to a new file
          * with the same fileName as the old file, that replaces the old file in its location on the
@@ -129,8 +168,12 @@ public class HighScore
          */
         for(int score: highScores)
         {
-            output.println(score);
+            output.println("Score " + score);
         }
+        for(String name: names)
+        {
+        	output.println("Name " + name);
+        }        
     }
     
    /**
@@ -145,5 +188,19 @@ public class HighScore
     public static ArrayList<Integer> getHighScores()
     {
         return highScores;
+    }
+    
+    /**
+     * The purpose of this method is to take the ArrayList of names (the loading from a file will be handled
+     * in the constructor) and return them to the GraphicalInterface object (which will be calling this method) so they can be rendered
+     * properly when the leaderboard is supposed to be displayed.
+     * 
+     * @Param: Void (This method doesn't need to take any parameters as it already has the names in its fields)
+     * 
+     * @Return: ArrayList<String> (the GraphicalInterface needs to be able to access the names from the names ArrayList in order to display them).
+     */
+    public static ArrayList<String> getNames()
+    {
+        return names;
     }
 }
