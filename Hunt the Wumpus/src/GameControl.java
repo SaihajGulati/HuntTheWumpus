@@ -45,15 +45,18 @@ public class GameControl
 		HighScore score = new HighScore("input/HighScores.txt");
 		Player player = new Player();
 		Trivia trivia = new Trivia("input/Trivia.txt");
+		//HighSCore ArrayList
 		ArrayList <String> scores = new ArrayList<String>();
 		//starts the game
-		start(scores);
+		start(scores, player);
 	}
-	public static void start(ArrayList <String> scores)
+	public static void start(ArrayList <String> scores, Player player) throws FileNotFoundException
 	{
 		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
 		GI.start();
-		GI.mainmenu(scores);
+		if(GI.mainmenu(scores) == 0) {
+			endGame(scores, player, GI);
+		}
 	}
 			
 	/**
@@ -105,11 +108,11 @@ public class GameControl
 	 * @param locations The GameLocations class
 	 * @throws FileNotFoundException 
 	 */
-	public static void endGame(GraphicalInterface GI, Player player, HighScore score, GameLocations locations) throws FileNotFoundException {
+	public static void endGame(ArrayList <String> scores, Player player, GraphicalInterface GI) throws FileNotFoundException {
 
 			int endScore = player.getScore(GameLocations.shootArrow(GameLocations.getWumpusLocation()));
 			HighScore.updateScoreBoard(endScore, "Name");
-			//GI.displayHighscore(HighScore.getHighScores());
+			GI.displayHighScores(scores);
 
 	}
 	/**
