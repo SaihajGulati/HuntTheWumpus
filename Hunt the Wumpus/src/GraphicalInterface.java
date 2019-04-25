@@ -100,6 +100,29 @@ public static void start()
 	StdDraw.setCanvasSize(1000, 700);
 }
 
+public static String getName()
+{
+	System.out.println("Yee");
+	String name = "";
+	boolean button = true;
+	while(button)
+	{
+	StdDraw.clear();
+	StdDraw.setPenColor( 0,0,0);
+	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	StdDraw.setPenColor( 32,32,32);
+	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	title(0.5, 0.9, "Enter Your Name");
+	title(0.5, 0.5, name);
+	name += getKeyPressed();
+	button = !button(0.5, 0.1 , 0.15 , 0.055, "Play");
+	StdDraw.show();
+	StdDraw.pause(50);
+	}
+	
+	return name;
+}
+
 public static int caveSelection(ArrayList<String> scores)
 {	double x = 0.2;
     double y = 0.5;
