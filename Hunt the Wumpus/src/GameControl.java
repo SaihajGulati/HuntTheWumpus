@@ -112,8 +112,15 @@ public class GameControl
 
 			int endScore = player.getScore(GameLocations.shootArrow(GameLocations.getWumpusLocation()));
 			HighScore.updateScoreBoard(endScore, "Name");
-			GI.displayHighScores(scores);
-
+			ArrayList <String> names = HighScore.getNames();
+			ArrayList <Integer> numbers = HighScore.getHighScores();
+			String[] highScores = new String[names.size()];
+			for (int i = 0; i < highScores.length; i++)
+			{
+				highScores[i] = names.get(i) + " : " + numbers.get(i);
+			}
+			;
+			GI.displayHighScores(scores);		
 	}
 	/**
 	 *
