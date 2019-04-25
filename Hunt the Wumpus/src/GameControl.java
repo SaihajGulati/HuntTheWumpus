@@ -60,7 +60,7 @@ public class GameControl
 	}
 			
 	/**
-	 * Starts up the Game
+	 * Starts up the Game and helps out with the running
 	 * @param start gets a call from GI to see if player wants to start
 	 * @param GI is the Graphical interface
 	 * @param player is the player class
