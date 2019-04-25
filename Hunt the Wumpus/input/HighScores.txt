@@ -1,10 +1,21 @@
-a:106
-b:106
-c:98
-d:91
-e:86
-f:86
-g:86
-h:83
-i:82
-j:76
+Score 106
+Score 106
+Score 98
+Score 91
+Score 86
+Score 86
+Score 86
+Score 83
+Score 82
+Score 76
+
+Name a
+Name b
+Name c
+Name d
+Name e
+Name f
+Name g
+Name h
+Name i
+Name j
