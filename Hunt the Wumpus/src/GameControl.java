@@ -108,7 +108,7 @@ public class GameControl
 	public static void endGame(GraphicalInterface GI, Player player, HighScore score, GameLocations locations) throws FileNotFoundException {
 
 			int endScore = player.getScore(GameLocations.shootArrow(GameLocations.getWumpusLocation()));
-			HighScore.updateScoreBoard(endScore);
+			HighScore.updateScoreBoard(endScore, "Name");
 			//GI.displayHighscore(HighScore.getHighScores());
 
 	}
