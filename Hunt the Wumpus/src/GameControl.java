@@ -55,6 +55,8 @@ public class GameControl
 		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
 		GI.start();
 		int getCave = GI.mainmenu(scores);
+		String name = GI.getName();
+		HighScore.updateScoreBoard(0, name);
 		if(getCave == 0) {
 			endGame(scores, player, GI);
 		}
