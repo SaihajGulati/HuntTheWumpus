@@ -12,6 +12,7 @@
  *     4/3/2019      |  Can switch to display scores, still crashes after screen change and functionality isn't complete
  *     4/21/2019     |  Replaced all the main menue code with StdDraw stuff ive been working on in a different file
  *     4/24/2019     | Made navigation a bit easier, no dead ends, added cave selection and return of main menue changed, will duiscus in class
+ *     4/25/2019     | Made screen for selecting the name and worked on cleaning up errors with key typed, now any key can be typed and deleted
  */
 import java.util.*;
 import java.awt.Font;
@@ -100,11 +101,41 @@ public static void start()
 	StdDraw.setCanvasSize(1000, 700);
 }
 
+private static String getKeyTyped()
+{
+	char typed;
+	if(StdDraw.hasNextKeyTyped())
+	{
+		typed = StdDraw.nextKeyTyped();
+		if((int)typed == 8)
+		{
+			return "-1";
+		}
+		
+		return typed+"";
+	}
+	
+	return "";
+}
+
+private static String delete(String s)
+{
+	if(s.length()>0)
+	{
+		return s.substring(0,s.length()-1);
+	}
+	
+	return "";
+}
+
 public static String getName()
 {
 	System.out.println("Yee");
 	String name = "";
 	boolean button = true;
+	String typed = "";
+	int charLimit = 25;
+	
 	while(button)
 	{
 	StdDraw.clear();
@@ -114,10 +145,23 @@ public static String getName()
 	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
 	title(0.5, 0.9, "Enter Your Name");
 	title(0.5, 0.5, name);
-	name += getKeyPressed();
+	
+	typed = getKeyTyped();
+	if(typed.equals("-1"))
+	{
+		name = delete(name);
+	}
+	else
+	{
+		name+=typed;
+	}
+	
+	if(name.length()>charLimit)//name length limit
+	{
+		name = delete(name);
+	}
 	button = !button(0.5, 0.1 , 0.15 , 0.055, "Play");
 	StdDraw.show();
-	StdDraw.pause(50);
 	}
 	
 	return name;
@@ -342,7 +386,7 @@ private static boolean highScores(ArrayList<String> scores)
 
 private static boolean credits(ArrayList<String> scores)
 {	boolean toMain;
-	String [] names = {"ME","ME","ME","ME" };
+	String [] names = {"Daniel Popa","Saihaj Gulati","Joshua Venable","Brian Yang", "Raj Sunku", "Hans Koduri" };
 	StdDraw.clear();
 	StdDraw.setPenColor( 0,0,0);
 	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
