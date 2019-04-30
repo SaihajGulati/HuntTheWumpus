@@ -39,11 +39,15 @@ public class HighScore
                                             * or updating them after a game (when the Player's score qualifies).
                                             */
     private static ArrayList<String> names; /**
-     * An ArrayList that will represent the high scores after they have
-     * been loaded into the game; used either when displaying the high scores
+     * An ArrayList that will represent the names after they have
+     * been loaded into the game; used either when displaying the names
      * or updating them after a game (when the Player's score qualifies).
      */
-
+    private static ArrayList<Integer> caves; /**
+     * An ArrayList that will represent the caves after they have
+     * been loaded into the game; used either when displaying the cave that each Player played in
+     * or updating them after a game (when the Player's score qualifies).
+     */
     /*
      * How to cast a String to an int:
      * int bob = Integer.valueOf("30");
