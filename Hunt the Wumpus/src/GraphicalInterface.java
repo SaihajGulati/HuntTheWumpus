@@ -294,7 +294,7 @@ private static int menubuttons()
 
 	
 	if(button(x,0.415-shift, containerx,0.055,"EXIT"))
-		    toreturn = 4;	
+		java.lang.System.exit(0);	
 
 			
 	StdDraw.show();
