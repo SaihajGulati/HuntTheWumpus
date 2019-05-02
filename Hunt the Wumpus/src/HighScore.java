@@ -46,7 +46,7 @@ public class HighScore
      * been loaded into the game; used either when displaying the names
      * or updating them after a game (when the Player's score qualifies).
      */
-    private static ArrayList<String> caves; /**
+    private static ArrayList<Integer> caves; /**
      * An ArrayList that will represent the caves after they have
      * been loaded into the game; used either when displaying the cave that each Player played in
      * or updating them after a game (when the Player's score qualifies).
@@ -93,7 +93,7 @@ public class HighScore
                 }
                 else if(inputLine.substring(0, 5).equals("Cave "))
                 {
-                	caves.add(inputLine.substring(5));
+                	caves.add(Integer.valueOf(inputLine.substring(5)));
                 }
                 else
                 {
@@ -149,7 +149,7 @@ public class HighScore
      * Post-Condition: The ArrayLists will always be updated simultaneously so no IndexOutOfBounds exceptions
      * would show up under normal circumstances.
      */
-    public static ArrayList<Integer> updateScoreBoard(int totalScore, String name, String caveName) throws FileNotFoundException
+    public static ArrayList<Integer> updateScoreBoard(int totalScore, String name, int caveName) throws FileNotFoundException
     {
         //PrintStream output = new PrintStream(new File("testOutput.txt"));
         if(highScores.size() == 0 || totalScore >= highScores.get(0))
@@ -210,52 +210,31 @@ public class HighScore
         {
         	output.println("Name " + name);
         }        
-        for(String caveName: caves)
+        for(int caveNum: caves)
         {
-        	output.println("Cave " + caveName);
+        	output.println("Cave " + caveNum);
         }
     }
     
    /**
-     * The purpose of this method is to take the ArrayList of highScores (the loading from a file will be handled
-     * in the constructor) and return them to the GraphicalInterface object (which will be calling this method) so they can be rendered
+     * The purpose of this method is to take the ArrayLists of highScores, names, and caves (the loading 
+     * from a file will be handled in the constructor) and return them to the GraphicalInterface object 
+     * (which will be calling this method) so they can be rendered
      * properly when the leaderboard is supposed to be displayed.
      * 
-     * @Param: Void (This method doesn't need to take any parameters as it already has the high scores in its fields)
+     * @Param: Void (This method doesn't need to take any parameters as it already has the high score data 
+     * in its fields)
      * 
-     * @Return: ArrayList<Integer> (the GraphicalInterface needs to be able to access the high scores from the highScores ArrayList in order to display them).
+     * @Return: ArrayList<Integer> (the GraphicalInterface needs to be able to access the high score data 
+     * from the highScores ArrayList in order to display them).
      */
-    public static ArrayList<Integer> getHighScores()
+    public static ArrayList<String> getHighScores()
     {
-        return highScores;
-    }
-    
-    /**
-     * The purpose of this method is to take the ArrayList of names (the loading from a file will be handled
-     * in the constructor) and return them to the GraphicalInterface object (which will be calling this method) so they can be rendered
-     * properly when the leaderboard is supposed to be displayed.
-     * 
-     * @Param: Void (This method doesn't need to take any parameters as it already has the names in its fields)
-     * 
-     * @Return: ArrayList<String> (the GraphicalInterface needs to be able to access the names from the names ArrayList in order to display them).
-     */
-    public static ArrayList<String> getNames()
-    {
-        return names;
-    }
-    
-    /**
-     * The purpose of this method is to take the ArrayList of caves (the loading from a file will be handled
-     * in the constructor) and return them to the GraphicalInterface object (which will be calling this method) so they can be rendered
-     * properly when the leaderboard is supposed to be displayed.
-     * 
-     * @Param: Void (This method doesn't need to take any parameters as it already has the names in its fields)
-     * 
-     * @Return: ArrayList<String> (the GraphicalInterface needs to be able to access the cave names from the 
-     * caves ArrayList in order to display them).
-     */
-    public static ArrayList<String> getCaveNames()
-    {
-        return caves;
+        ArrayList<String> returnString = new ArrayList<String>();
+        for(int i = 0; i < highScores.size(); i++)
+        {
+        	returnString.add(highScores.get(i) + ":" + names.get(i) + ":" + caves.get(i));
+        }
+        return returnString;
     }
 }
