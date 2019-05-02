@@ -50,7 +50,7 @@ public class GameControl
 		//added a score to test out what happens;
 		scores.add("Bob: 13");
 		//starts the game
-		start(scores, player);
+		start(HighScore.getHighScores(), player);
 	}
 	public static void start(ArrayList <String> scores, Player player) throws FileNotFoundException
 	{
@@ -117,11 +117,13 @@ public class GameControl
 
 			int endScore = player.getScore(GameLocations.shootArrow(GameLocations.getWumpusLocation()));
 			HighScore.updateScoreBoard(endScore, name, getCave);
+			/*
 			for (int i = 0; i < scores.size(); i++)
 			{
-				scores.set(i, HighScore.getNames().get(i) + " : " + HighScore.getHighScores().get(i));
+				HighScore.getHighScores()
 			}
-			GI.displayHighScores(scores);
+			*/
+			GI.displayHighScores(HighScore.getHighScores());
 			//fized it
 	}
 	/**

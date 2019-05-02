@@ -225,6 +225,9 @@ public class HighScore
      * @Param: Void (This method doesn't need to take any parameters as it already has the high score data 
      * in its fields)
      * 
+     * pushing not working
+     * 
+     * 
      * @Return: ArrayList<Integer> (the GraphicalInterface needs to be able to access the high score data 
      * from the highScores ArrayList in order to display them).
      */
