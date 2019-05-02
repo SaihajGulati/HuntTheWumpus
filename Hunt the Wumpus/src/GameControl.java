@@ -47,6 +47,8 @@ public class GameControl
 		Trivia trivia = new Trivia("input/Trivia.txt");
 		//HighSCore ArrayList
 		ArrayList <String> scores = new ArrayList<String>();
+		//added a score to test out what happens;
+		scores.add("Bob: 13");
 		//starts the game
 		start(scores, player);
 	}
