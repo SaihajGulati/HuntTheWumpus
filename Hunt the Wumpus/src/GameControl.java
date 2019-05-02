@@ -58,7 +58,7 @@ public class GameControl
 		GI.start();
 		int getCave = GI.mainmenu(scores);
 		String name = GI.getName();
-		HighScore.updateScoreBoard(0, name);
+		HighScore.updateScoreBoard(0, name, getCave);
 		if(getCave == 0) {
 			endGame(scores, player, GI);
 		}
