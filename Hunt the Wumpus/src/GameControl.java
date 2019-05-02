@@ -45,10 +45,6 @@ public class GameControl
 		HighScore score = new HighScore("input/HighScores.txt");
 		Player player = new Player();
 		Trivia trivia = new Trivia("input/Trivia.txt");
-		//HighSCore ArrayList
-		ArrayList <String> scores = new ArrayList<String>();
-		//added a score to test out what happens;
-		scores.add("Bob: 13");
 		//starts the game
 		start(HighScore.getHighScores(), player);
 	}
