@@ -12,7 +12,6 @@
  *     4/3/2019      |  Can switch to display scores, still crashes after screen change and functionality isn't complete
  *     4/21/2019     |  Replaced all the main menue code with StdDraw stuff ive been working on in a different file
  *     4/24/2019     | Made navigation a bit easier, no dead ends, added cave selection and return of main menue changed, will duiscus in class
- *     4/25/2019     | Made screen for selecting the name and worked on cleaning up errors with key typed, now any key can be typed and deleted
  */
 import java.util.*;
 import java.awt.Font;
@@ -107,6 +106,7 @@ private static String getKeyTyped()
 	if(StdDraw.hasNextKeyTyped())
 	{
 		typed = StdDraw.nextKeyTyped();
+		System.out.print((int)(typed));
 		if((int)typed == 8)
 		{
 			return "-1";
@@ -195,11 +195,7 @@ public static int caveSelection(ArrayList<String> scores)
 	if(button(x,0.63-shift, containerx,0.055,"Cave 3"))
 		    return 3;	
 
-	
-	if(button(x,0.63-shift, containerx,0.055,"Cave 4"))
-		    return 4;
-
-	if(button(x,0.52-shift, containerx,0.055,"Cave 5"))
+	if(button(x,0.52-shift, containerx,0.055,"Cave 4"))
 	        return 5;
 	
 	if(button(x,0.41-shift, containerx,0.055,"Main Menu"))
@@ -408,4 +404,6 @@ private static boolean credits(ArrayList<String> scores)
 	StdDraw.show();
 	return toMain;
 }
+
+
 }
