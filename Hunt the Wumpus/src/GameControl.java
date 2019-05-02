@@ -60,7 +60,7 @@ public class GameControl
 		String name = GI.getName();
 		HighScore.updateScoreBoard(0, name, getCave);
 		if(getCave == 0) {
-			endGame(scores, player, GI);
+			endGame(scores, player, GI, name, getCave);
 		}
 	}
 			
@@ -113,10 +113,10 @@ public class GameControl
 	 * @param locations The GameLocations class
 	 * @throws FileNotFoundException 
 	 */
-	public static void endGame(ArrayList <String> scores, Player player, GraphicalInterface GI) throws FileNotFoundException {
+	public static void endGame(ArrayList <String> scores, Player player, GraphicalInterface GI, String name, int getCave) throws FileNotFoundException {
 
 			int endScore = player.getScore(GameLocations.shootArrow(GameLocations.getWumpusLocation()));
-			HighScore.updateScoreBoard(endScore, "Name");
+			HighScore.updateScoreBoard(endScore, name, getCave);
 			for (int i = 0; i < scores.size(); i++)
 			{
 				scores.set(i, HighScore.getNames().get(i) + " : " + HighScore.getHighScores().get(i));
