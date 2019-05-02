@@ -26,6 +26,9 @@
  * 4/24/19: Version 1.8
  * Added a names array (String type) and the code to update it alongside highScores,
  * including the retrieval of the names and their output to/from a file
+ * 4/30/19: Version 1.9
+ * Added a caves array (String type) and the code to update it alongside highScores 
+ * and names, including their retrieval and their output to/from a file.
 */
 import java.util.*;
 import java.io.*;
@@ -43,7 +46,7 @@ public class HighScore
      * been loaded into the game; used either when displaying the names
      * or updating them after a game (when the Player's score qualifies).
      */
-    private static ArrayList<Integer> caves; /**
+    private static ArrayList<String> caves; /**
      * An ArrayList that will represent the caves after they have
      * been loaded into the game; used either when displaying the cave that each Player played in
      * or updating them after a game (when the Player's score qualifies).
@@ -59,7 +62,10 @@ public class HighScore
         
     /**
      * The constructor for the HighScore object that will handle the File processing and fill the
-     * HighScores ArrayList with its respective scores.
+     * highScores ArrayList with its respective scores, the names ArrayList with its respective
+     * names, and the caves ArrayList with its respective cave names.
+     * 
+     * @Param: String filename (The name of the file that will be processed and used by the HighScore object)
     */
     public HighScore(String filename) throws FileNotFoundException
     {
@@ -69,7 +75,8 @@ public class HighScore
         String userName = "";
         highScores = new ArrayList<Integer>();
         names = new ArrayList<String>();
-        //Adds high scores to the highScores ArrayList upon being scanned from the file
+        //Adds high scores to the highScores ArrayList upon being scanned from the file, along with player names
+        //to the names ArrayList and cave names to the caves ArrayList. 
         while(input.hasNext()) 
         {
             String inputLine = input.nextLine();
@@ -83,6 +90,10 @@ public class HighScore
                 else if(inputLine.substring(0, 6).equals("Score "))
                 {
                     highScores.add(Integer.valueOf(inputLine.substring(6)));
+                }
+                else if(inputLine.substring(0, 5).equals("Cave "))
+                {
+                	caves.add(inputLine.substring(5));
                 }
                 else
                 {
@@ -110,25 +121,42 @@ public class HighScore
             highScores.set(i, 0);
             //Add code that resets names to its default values;
         }
+        for(int i = 0; i < names.size(); i++)
+        {
+            
+            //Add code that resets names to its default values;
+        }
+        for(int i = 0; i < caves.size(); i++)
+        {
+            
+            //Add code that resets caves to its default values;
+        }
         updateFile();
     }
         
     /**
-     * The purpose of this method is to take the Player's score after he/she finishes a game (either by dying
-     * or shooting the Wumpus with an arrow), and update the scoreboard if the total score is able to qualify
-     * for it.
+     * The purpose of this method is to take the Player's score, name, and cave played in after he/she finishes #
+     * a game (either by dying or shooting the Wumpus with an arrow), and update the scoreboard if the total 
+     * score is able to qualify for it.
      * 
-     * @Param: int totalScore (the final score of the Player, calculated in the Player object) 
+     * @Param: int totalScore (the final score of the Player, calculated in the Player object), String name (the
+     * name of the Player), String caveName (The name of the cave that the Player played in) 
      * 
      * @Return: Void
+     * 
+     * Pre-Condition: The Player will always give a totalScore, name, and caveName when this method is called.
+     * 
+     * Post-Condition: The ArrayLists will always be updated simultaneously so no IndexOutOfBounds exceptions
+     * would show up under normal circumstances.
      */
-    public static ArrayList<Integer> updateScoreBoard(int totalScore, String name) throws FileNotFoundException
+    public static ArrayList<Integer> updateScoreBoard(int totalScore, String name, String caveName) throws FileNotFoundException
     {
         //PrintStream output = new PrintStream(new File("testOutput.txt"));
         if(highScores.size() == 0 || totalScore >= highScores.get(0))
         {
             highScores.add(0, totalScore);
             names.add(0, name);
+            caves.add(0, caveName);
         }
         else
         {
@@ -138,18 +166,21 @@ public class HighScore
                 {
                     highScores.add(i, totalScore);
                     names.add(i, name);
+                    caves.add(i, caveName);
                     i++;
                 }
             }
         }
         /**
-         * As long as highScores has more than 10 elements, the last element (1 less than the ArrayList's
-         * length) will be removed from the list.
+         * As long as highScores, names, and caves have more than 10 elements, the last element 
+         * (1 less than the ArrayLists'
+         * lengths) will be removed from the list.
          */
         while (highScores.size() > 10)
         {
             highScores.remove(highScores.size()-1);
             names.remove(names.size()-1);
+            caves.remove(caves.size()-1);
         }
         updateFile();
         return highScores;
@@ -166,7 +197,8 @@ public class HighScore
     {
         PrintStream output = new PrintStream(new File("HighScores.txt"));
         /**
-         * For each score in the highScores ArrayList, the loop will output the score to a new file
+         * For each score in the highScores ArrayList, the loop will output the score with its
+         * corresponding player name and cave name to a new file
          * with the same fileName as the old file, that replaces the old file in its location on the
          * computer
          */
@@ -178,6 +210,10 @@ public class HighScore
         {
         	output.println("Name " + name);
         }        
+        for(String caveName: caves)
+        {
+        	output.println("Cave " + caveName);
+        }
     }
     
    /**
@@ -206,5 +242,20 @@ public class HighScore
     public static ArrayList<String> getNames()
     {
         return names;
+    }
+    
+    /**
+     * The purpose of this method is to take the ArrayList of caves (the loading from a file will be handled
+     * in the constructor) and return them to the GraphicalInterface object (which will be calling this method) so they can be rendered
+     * properly when the leaderboard is supposed to be displayed.
+     * 
+     * @Param: Void (This method doesn't need to take any parameters as it already has the names in its fields)
+     * 
+     * @Return: ArrayList<String> (the GraphicalInterface needs to be able to access the cave names from the 
+     * caves ArrayList in order to display them).
+     */
+    public static ArrayList<String> getCaveNames()
+    {
+        return caves;
     }
 }
