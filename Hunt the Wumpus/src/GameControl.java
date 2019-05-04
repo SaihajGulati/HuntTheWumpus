@@ -15,8 +15,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
-import javafx.application.Application;
-import javafx.stage.Stage;
 /**
  * MAJOR NOTES:
  * 
