@@ -15,6 +15,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
+import javafx.application.Application;
+import javafx.stage.Stage;
 /**
  * MAJOR NOTES:
  * 
@@ -65,9 +67,7 @@ public class GameControl
 		int getCave = GI.mainmenu(scores);
 		String name = GI.getName();
 		HighScore.updateScoreBoard(0, name, getCave);
-		if(getCave == 0) {
-			endGame(scores, player, GI, name, getCave);
-		}
+		
 	}
 			
 	/**
@@ -141,65 +141,6 @@ public class GameControl
 		//locations.<method to return room number>
 		//if there is a door leading there and he is adjacent to it then return true
 		return false;
-	}
-	
-	/**
-	 * 
-	 * @return the map fully created if player decides to play the game
-	 */
-	public static ArrayList<Integer> createMap()
-	{
-		//if player clicks 'Play Game'
-		//NOTE : Integer is a placeholder and will be replaced with a cave type
-		//cave method replaces 'new ArrayList<Integer>();' to grab the generated cave
-		ArrayList<Integer> map = new ArrayList<Integer>();
-		return map;
-	}
-	
-	/**
-	 * 
-	 * @return the location of the player as an integer index in the arrayList
-	 */
-	public static int playerLocation() 
-	{
-		//get this from a GameLocation method and return the index for the player and the GI 
-		return 0;
-	}
-	
-	/**
-	 * 
-	 * @param 'words' is given by trivia and given to the player when the GI needs it
-	 * @return the random questions that are given by trivia
-	 */
-	public static String[] getQuestions(String[] words)
-	{
-		// simple passing method so trivia doesn't have to extend
-		return words;
-	}
-
-	/**
-	 * 
-	 * @param The Direction is given from GI as a char which will be changed in that class
-	 * @return the player index from 'playerLocation' to give to the GameLocation
-	 * 			in order to see what adjacent rooms there are
-	 */
-	public static int movingPlayer(int roomNumber)
-	{
-		//use the roomNumber which is the room that the player wants to move
-		// if 'movePossible' then give the 'playerLocation' index
-		//code for inputting 'playerLocation'
-		return 0;
-	}
-	
-	/**
-	 * 
-	 * @param answers are given from GI and passed in order to check with trivia
-	 * @return the answers as an array and given to trivia
-	 */
-	public static String[] giveAnswer(String[] answers)
-	{
-		//do not add anything else for now this should be a simple pass
-		return answers;
 	}
 	
 	/**
