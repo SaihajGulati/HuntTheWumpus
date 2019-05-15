@@ -62,7 +62,7 @@ public class GameControl
 	{
 		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
 		GI.start();
-		int getCave = GI.mainmenu(scores);
+		GI.mainmenu(scores);
 		int CaveSelection = GI.caveSelection();
 		String name = GI.getName();
 		HighScore.updateScoreBoard(0, name, getCave);
