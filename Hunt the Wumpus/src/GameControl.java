@@ -76,6 +76,7 @@ public class GameControl
 	 * @param GI is the Graphical interface
 	 * @param player is the player class
 	 * @param cave is the cave class
+	 * @return whether or not player is alive
 	 */
 	public static boolean startGame(GraphicalInterface GI, Player player, Cave cave, GameLocations locations) throws FileNotFoundException
 	{
