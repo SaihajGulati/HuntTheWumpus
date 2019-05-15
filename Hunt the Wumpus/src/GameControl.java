@@ -65,7 +65,7 @@ public class GameControl
 		GI.mainmenu(scores);
 		int CaveSelection = GI.caveSelection();
 		String name = GI.getName();
-		HighScore.updateScoreBoard(0, name, getCave);
+		HighScore.updateScoreBoard(0, name, CaveSelection);
 		
 	}
 			
