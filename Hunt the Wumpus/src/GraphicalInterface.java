@@ -167,7 +167,7 @@ public static String getName()
 	return name;
 }
 
-public static int caveSelection(ArrayList<String> scores)
+public static int caveSelection()
 {	double x = 0.2;
     double y = 0.5;
     double containerx= 0.15;
@@ -199,7 +199,7 @@ public static int caveSelection(ArrayList<String> scores)
 	        return 5;
 	
 	if(button(x,0.41-shift, containerx,0.055,"Main Menu"))
-		mainmenu(scores);
+		return 6;
 
 			
 	StdDraw.show();
@@ -257,7 +257,7 @@ public static int mainmenu(ArrayList<String> scores)
 	}
 	
 	   StdDraw.clear();
-	   return caveSelection(scores);
+	   return 1;
 		
 }
 
