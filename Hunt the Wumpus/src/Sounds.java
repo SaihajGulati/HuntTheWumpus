@@ -25,7 +25,7 @@ public class Sounds
 	{
 		if (theme==1)
 		{
-			currentSounds[0] = Applet.newAudioClip(new URL("movePlayer1.wav"));
+			currentSounds[0] = Applet.newAudioClip(new URL("https://s-rsunku@bitbucket.org/htw19_p3_artesiancode/htw19_p3_artesiancode.git/config/movePlayer1.wav"));
 			currentSounds[1] = Applet.newAudioClip(new URL("shootArrow1.wav"));
 			currentSounds[2] = Applet.newAudioClip(new URL("moveWumpus1.wav"));
 			currentSounds[3] = Applet.newAudioClip(new URL("trivia1.wav"));
