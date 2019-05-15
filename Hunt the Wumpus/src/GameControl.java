@@ -77,7 +77,7 @@ public class GameControl
 	 * @param player is the player class
 	 * @param cave is the cave class
 	 */
-	public static void startGame(GraphicalInterface GI, Player player, Cave cave, GameLocations locations) throws FileNotFoundException
+	public static boolean startGame(GraphicalInterface GI, Player player, Cave cave, GameLocations locations) throws FileNotFoundException
 	{
 		boolean inPit = false, inBats = false, inWumpus = false, isAlive = true;
 		cave.openCaveFile();
@@ -88,7 +88,7 @@ public class GameControl
 			{
 				if(GameLocations.getPlayerLocation() == i) {
 					if(!Trivia.askQuestions(BATS)) {
-						break;
+						GameLocations.triggerBat();
 					}
 				}
 			}
@@ -96,18 +96,21 @@ public class GameControl
 			{
 				if(GameLocations.getPlayerLocation() == i) 
 				{
-					if(!Trivia.askQuestions(BATS)) {
-						break;
+					if(!Trivia.askQuestions(HOLE)){
+						isAlive = false;
+						return isAlive;
 					}		
 				}
 			}
 			if (GameLocations.getPlayerLocation() == GameLocations.getWumpusLocation())
 			{
 				if(!Trivia.askQuestions(WUMPUS)) {
-					break;
+					isAlive = false;
+					return isAlive;
 				}
 			}
 		}
+		return isAlive;
 		
 	}
 	/**
