@@ -22,6 +22,7 @@ import javafx.stage.Stage;
  * 
  * 	Figure out how to get the adjacent room index?
  * 	Add Wumpus control methods but what do we need for that? 
+ * I hat eclipse
  *
  */
 public class GameControl
