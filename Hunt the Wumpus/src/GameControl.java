@@ -12,11 +12,8 @@
  * 4.0        3/25/19  Added starting point in main however needs to be fixed with GI
  * 5.0		  4/3/19  Fixed GI problems and added loop for main menu
 */
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.*;
-import javafx.application.Application;
-import javafx.stage.Stage;
 /**
  * MAJOR NOTES:
  * 
