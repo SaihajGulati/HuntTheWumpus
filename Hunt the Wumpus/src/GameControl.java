@@ -114,6 +114,8 @@ public class GameControl
 			GI.inDanger(BATS);
 			GI.inDanger(HOLE);
 			GI.inDanger(WUMPUS);
+			//display Inventory
+			GI.displayItems();
 		}
 		return isAlive;
 		
