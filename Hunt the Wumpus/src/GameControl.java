@@ -111,9 +111,9 @@ public class GameControl
 				}
 			}
 			//check if player is near one of the hazards
-			GI.inDanger(BATS);
-			GI.inDanger(HOLE);
-			GI.inDanger(WUMPUS);
+			//GI.inDanger(BATS);
+			//GI.inDanger(HOLE);
+			//GI.inDanger(WUMPUS);
 			//display Inventory
 			GI.displayItems();
 		}
