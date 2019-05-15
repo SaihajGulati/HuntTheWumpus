@@ -84,6 +84,7 @@ public class GameControl
 		cave.readCaveFile();
 		//loop that runs the whole game while the player is alive;
 		while(player.getArrows() > 0 && isAlive) {
+			//checks if player is in same spot as hazard
 			for (int i: GameLocations.getBatLocations())
 			{
 				if(GameLocations.getPlayerLocation() == i) {
@@ -109,6 +110,10 @@ public class GameControl
 					return isAlive;
 				}
 			}
+			//check if player is near one of the hazards
+			GI.inDanger(BATS);
+			GI.inDanger(HOLE);
+			GI.inDanger(WUMPUS);
 		}
 		return isAlive;
 		
@@ -133,7 +138,7 @@ public class GameControl
 			}
 			*/
 			GI.displayHighScores(HighScore.getHighScores());
-			//fized it
+			//fixed it
 	}
 	/**
 	 *
