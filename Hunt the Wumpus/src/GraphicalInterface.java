@@ -12,6 +12,7 @@
  *     4/3/2019      |  Can switch to display scores, still crashes after screen change and functionality isn't complete
  *     4/21/2019     |  Replaced all the main menue code with StdDraw stuff ive been working on in a different file
  *     4/24/2019     | Made navigation a bit easier, no dead ends, added cave selection and return of main menue changed, will duiscus in class
+ *     5/26/2019     | Havent been good at documenting edits, main menu is almost completely clean, startng game graphics soon
  */
 import java.util.*;
 import java.awt.Font;
@@ -243,12 +244,13 @@ public static int mainmenu(ArrayList<String> scores)
 	
 	if(select == 2)
 	{
-		displayHighScores(scores);
+		return displayHighScores(scores);
+		
 	}
 	
 	if(select == 3)
 	{
-		displayCredits(scores);
+		return  displayCredits(scores);
 	}
 	
 	if(select == 4)
