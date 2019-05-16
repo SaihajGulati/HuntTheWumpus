@@ -30,6 +30,7 @@ public GraphicalInterface(int bat, int hole, int wumpus)
  HOLE = hole;
  BAT = bat;
 }
+//test
 
 public String toString()
 {
