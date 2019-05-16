@@ -29,12 +29,14 @@
  * 4/30/19: Version 1.9
  * Added a caves array (String type) and the code to update it alongside highScores 
  * and names, including their retrieval and their output to/from a file.
+ * 5/15/19: Version 2.0
+ * Changed the constructor to a static method called loadFiles.
 */
 import java.util.*;
 import java.io.*;
 public class HighScore 
 {
-    private Scanner input;
+    private static Scanner input;
     private static File scoreBoard; //The File that will be used to load the high scores
     private static ArrayList<Integer> highScores; /**
                                             * An ArrayList that will represent the high scores after they have
@@ -61,15 +63,15 @@ public class HighScore
      */
         
     /**
-     * The constructor for the HighScore object that will handle the File processing and fill the
+     * The method for the HighScore class that will handle the File processing and fill the
      * highScores ArrayList with its respective scores, the names ArrayList with its respective
      * names, and the caves ArrayList with its respective cave names.
      * 
      * @Param: String filename (The name of the file that will be processed and used by the HighScore object)
     */
-    public HighScore(String filename) throws FileNotFoundException
+    public static void loadFiles() throws FileNotFoundException
     {
-        scoreBoard = new File(filename);    
+        scoreBoard = new File("HighScores.txt");    
         //Scanner input = new Scanner(scoreBoard,"utf-8");
         input = new Scanner(scoreBoard);
         String userName = "";
