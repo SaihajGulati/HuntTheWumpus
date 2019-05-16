@@ -19,7 +19,7 @@ import java.util.*;
  * 
  * 	Figure out how to get the adjacent room index?
  * 	Add Wumpus control methods but what do we need for that? 
- * I hat eclipse
+ * I hate eclipse
  *
  */
 public class GameControl
@@ -31,7 +31,7 @@ public class GameControl
 	public static int ROUND = 0;
 	//following e-nums are for the start of the game and anywhere else so its easier to identify changes
 	public static int START = 0;
-	public static int HIGHSCORE = 1;
+	public static int HIGHSCORE = 1;  
 	public static int QUIT = 2;
 	
 	public static void main(String[] args) throws FileNotFoundException
