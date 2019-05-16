@@ -30,7 +30,6 @@ public GraphicalInterface(int bat, int hole, int wumpus)
  HOLE = hole;
  BAT = bat;
 }
-//test
 
 public String toString()
 {
@@ -132,11 +131,10 @@ private static String delete(String s)
 
 public static String getName()
 {
-	System.out.println("Yee");
 	String name = "";
 	boolean button = true;
 	String typed = "";
-	int charLimit = 25;
+	int charLimit = 20;
 	
 	while(button)
 	{
@@ -263,8 +261,6 @@ public static int mainmenu(ArrayList<String> scores)
 	   return caveSelection(scores);		
 }
 
-
-
 private static int menubuttons()
 {	double x = 0.2;
     double y = 0.5;
@@ -326,7 +322,6 @@ private static void title(double x, double y, String message)
 	StdDraw.setFont(titlefont);
 	StdDraw.text(x, y, message);
 }
-
 
 private static boolean inBox(double xcenter, double ycenter, double height, double width) {
         double x = StdDraw.mouseX();
