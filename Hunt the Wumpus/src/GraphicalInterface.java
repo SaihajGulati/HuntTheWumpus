@@ -167,7 +167,7 @@ public static String getName()
 	return name;
 }
 
-public static int caveSelection()
+public static int caveSelection(ArrayList<String> scores)
 {	double x = 0.2;
     double y = 0.5;
     double containerx= 0.15;
@@ -199,7 +199,7 @@ public static int caveSelection()
 	        return 5;
 	
 	if(button(x,0.41-shift, containerx,0.055,"Main Menu"))
-		return 6;
+		return mainmenu(scores);
 
 			
 	StdDraw.show();
@@ -208,7 +208,7 @@ public static int caveSelection()
 
 }
 
-public static void displayHighScores(ArrayList<String> scores)
+public static int displayHighScores(ArrayList<String> scores)
 {
 	boolean displayscores = true;
 	while(displayscores)
@@ -216,11 +216,11 @@ public static void displayHighScores(ArrayList<String> scores)
 		displayscores = !highScores(scores);
 		System.out.println("score");
 			}
-	mainmenu(scores);
+	return mainmenu(scores);
 	
 }
 
-private static void displayCredits(ArrayList<String> scores)
+private static int displayCredits(ArrayList<String> scores)
 {
 	boolean displaycredits = true;
 	while(displaycredits)
@@ -228,7 +228,7 @@ private static void displayCredits(ArrayList<String> scores)
 		displaycredits = !credits(scores);
 		System.out.println("credits");
 			}
-	mainmenu(scores);
+	return mainmenu(scores);
 	
 }
 
@@ -257,8 +257,7 @@ public static int mainmenu(ArrayList<String> scores)
 	}
 	
 	   StdDraw.clear();
-	   return 1;
-		
+	   return caveSelection(scores);		
 }
 
 
