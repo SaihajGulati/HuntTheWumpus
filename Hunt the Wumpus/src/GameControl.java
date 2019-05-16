@@ -46,7 +46,8 @@ public class GameControl
 		//starts the game
 		//start(HighScore.getHighScores(), player);
 		ArrayList <String> scores = new ArrayList<String>();
-		scores.add(" 1. Cave 1; Bob; 44");
+		
+		/*scores.add(" 1. Cave 1; Bob; 44");
 		scores.add(" 2. Cave 1; Josh; 34");
 		scores.add(" 3. Cave 1; Brian; 64");
 		scores.add(" 4. Cave 1; Okay; 74");
@@ -56,15 +57,18 @@ public class GameControl
 		scores.add(" 8. Cave 1; Bye; 14");
 		scores.add(" 9. Cave 1; Hello; 84");
 		scores.add("10. Cave 1; Joe; 94");
-		start(scores, player);
+		*/
+		
+		start(scores, player, cave, locations);
 	}
-	public static void start(ArrayList <String> scores, Player player) throws FileNotFoundException
+	public static void start(ArrayList <String> scores, Player player, Cave cave, GameLocations locations) throws FileNotFoundException
 	{
 		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
 		GI.start();
 		int CaveSelection = GI.mainmenu(scores);
 		String name = GI.getName();
 		HighScore.updateScoreBoard(0, name, CaveSelection);
+		startGame(GI, player, cave, locations, CaveSelection);
 		
 	}
 			
@@ -76,7 +80,7 @@ public class GameControl
 	 * @param cave is the cave class
 	 * @return whether or not player is alive
 	 */
-	public static boolean startGame(GraphicalInterface GI, Player player, Cave cave, GameLocations locations) throws FileNotFoundException
+	public static boolean startGame(GraphicalInterface GI, Player player, Cave cave, GameLocations loctaions, int CaveSelection) throws FileNotFoundException
 	{
 		boolean inPit = false, inBats = false, inWumpus = false, isAlive = true;
 		cave.openCaveFile();
