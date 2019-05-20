@@ -26,13 +26,18 @@
  * 4/24/19: Version 1.8
  * Changed the scenario integers for askQuestions another time (buying hints/arrows is 0; 
  * falling into a pit is 1; encountering the Wumpus is 2)
+<<<<<<< HEAD
+=======
+ * 5/15/19: Version 1.9
+ * Changed the constructor to a method called loadFiles.
+>>>>>>> branch 'master' of https://s-bryang@bitbucket.org/htw19_p3_artesiancode/htw19_p3_artesiancode.git
 */
 import java.util.*;
 import java.io.*;
 public class Trivia 
 {
-    private Scanner input; //The Scanner used for the Trivia object
-    private File trivia; //The File that contains the trivia
+    private static Scanner input; //The Scanner used for the Trivia object
+    private static File trivia; //The File that contains the trivia
     private static ArrayList<String> triviaQuestions; //The trivia questions that will be asked during the game 
     private static ArrayList<String> triviaAnswers; /**
                                               * The answers to the trivia questions; will be updated alongside
@@ -46,13 +51,13 @@ public class Trivia
     private static ArrayList<String> secrets; //The secrets that will be given to the Player when he/she buys them.
     
     /**
-     * The constructor for the Trivia object that will handle the File processing and fill the
+     * The method for the Trivia class that will handle the File processing and fill the
      * Trivia-related ArrayLists and arrays with their appropriate values, in addition to instantiating the
      * Scanner for user input.
     */
-    public Trivia(String filename) throws FileNotFoundException
+    public static void loadFiles() throws FileNotFoundException
     {
-        trivia = new File(filename);
+        trivia = new File("Trivia.txt");
         input = new Scanner(trivia);
         triviaQuestions = new ArrayList<String>();
         triviaAnswers = new ArrayList<String>();
