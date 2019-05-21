@@ -320,8 +320,7 @@ private static boolean Clicked()
 }
 
 private static boolean highScores(ArrayList<String> scores)
-{	
-	System.out.println(scores);
+{
 	boolean toMain;
 	StdDraw.clear();
 	StdDraw.setPenColor( 0,0,0);
