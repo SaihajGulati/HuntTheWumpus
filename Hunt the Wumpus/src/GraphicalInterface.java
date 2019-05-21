@@ -11,6 +11,8 @@
  *     3/28/2019     |  Did access stuff for goup in javafx, also modded menu methods to return which button was pressed.
  *     4/3/2019      |  Can switch to display scores, still crashes after screen change and functionality isn't complete
  *     4/21/2019     |  Replaced all the main menue code with StdDraw stuff ive been working on in a different file
+ *     4/24/2019     | Made navigation a bit easier, no dead ends, added cave selection and return of main menue changed, will duiscus in class
+ *     5/26/2019     | Havent been good at documenting edits, main menu is almost completely clean, startng game graphics soon
  */
 import java.util.*;
 import java.awt.Font;
@@ -18,85 +20,6 @@ import java.util.ArrayList;
  
 public class GraphicalInterface{
 
-int BAT;
-int HOLE; 
-int WUMPUS;
-
-public GraphicalInterface(int bat, int hole, int wumpus)
-{
- WUMPUS = wumpus;
- HOLE = hole;
- BAT = bat;
-}
-
-public String toString()
-{
- return "Graphical Interface";
-}
-
-// return room number player wants to move in
-public int playerMoves(Cave cave)
-{
- return -1;
-}
-
-// return which answer player thought correct (I want to change this, will talk in class)
-public  int triviaResponse()
-{
- return -1;
-}
-
-// Displayer player Items
-public void displayItems()
-{ 
-}
-
-/**
-*Display on screen what "danger" is near (Wumpus, bat, hole)
-* Takes and array of hazards displaying what hazards are nearby
-* Prints out to user what hazards are nearby
-*/
-public void inDanger(int [] hazards)
-{
- String batString = "THERE ARE BATS NEARBY";
- String wumpusString = "I SMELL A WUMPUS";
- String holeString = "I FEEL A DRAFT";
- 
- for(int hazard : hazards)
- {
-  if(hazard == BAT)
-   System.out.println(batString);
-   
-  else if(hazard == HOLE)
-   System.out.println(holeString);
-   
-  else if(hazard == WUMPUS)
-   System.out.println(wumpusString);
- }
-}
-
-//Returns direction that arrow is shot
-public int shootArrow (Cave cave)
-{
- return -1;
-}
-
-// returns if player has enough money to buy the item they want
-public boolean buyItem(int item, int playerBalance) 
-{
- return false;
-}
-
-// Displays the outcome of the game
-public void Outcome(boolean score)
-{
-}
-
-// Displays high score
-public void displayHighscore(int highScore)
-{
-   System.out.println("Player Highscore: "+highScore);
-}
 
 // Opens up the canvas for the game to be displayed on and enables double buffering
 public static void start()
@@ -105,68 +28,80 @@ public static void start()
 	StdDraw.setCanvasSize(1000, 700);
 }
 
-private static void displayHighScores(ArrayList<String> scores)
+private static String getKeyTyped()
 {
-	boolean displayscores = true;
-	while(displayscores)
-			{
-		displayscores = !highScores(scores);
-		System.out.println("score");
-			}
-	mainmenu(scores);
+	char typed;
+	if(StdDraw.hasNextKeyTyped())
+	{
+		typed = StdDraw.nextKeyTyped();
+		System.out.print((int)(typed));
+		if((int)typed == 8)
+		{
+			return "-1";
+		}
+		
+		return typed+"";
+	}
 	
+	return "";
 }
 
-private static void displayCredits(ArrayList<String> scores)
+private static String delete(String s)
 {
-	boolean displaycredits = true;
-	while(displaycredits)
-			{
-		displaycredits = !credits(scores);
-		System.out.println("credits");
-			}
-	mainmenu(scores);
+	if(s.length()>0)
+	{
+		return s.substring(0,s.length()-1);
+	}
 	
+	return "";
 }
 
-public static boolean mainmenu(ArrayList<String> scores)
-{	
-int select = 0;
-while(select == 0)
+public static String getName()
 {
+	String name = "";
+	boolean button = true;
+	String typed = "";
+	int charLimit = 20;
+	
+	while(button)
+	{
 	StdDraw.clear();
-	select = menubuttons();
- }
-
-if(select == 2)
-{
-	displayHighScores(scores);
-}
-
-if(select == 3)
-{
-	displayCredits(scores);
-}
-
-if(select == 1)
-{
-	return true;
-}
-
+	StdDraw.setPenColor( 0,0,0);
+	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	StdDraw.setPenColor( 32,32,32);
+	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	title(0.5, 0.9, "Enter Your Name");
+	title(0.5, 0.5, name);
 	
-    return false;
+	typed = getKeyTyped();
+	if(typed.equals("-1"))
+	{
+		name = delete(name);
+	}
+	else
+	{
+		name+=typed;
+	}
+	
+	if(name.length()>charLimit)//name length limit
+	{
+		name = delete(name);
+	}
+	button = !button(0.5, 0.1 , 0.15 , 0.055, "Play");
+	StdDraw.show();
+	}
+	
+	return name;
 }
 
-
-
-private static int menubuttons()
+public static int caveSelection(ArrayList<String> scores)
 {	double x = 0.2;
     double y = 0.5;
     double containerx= 0.15;
     double containery= 0.5;
     double shift = 0.2;
-    int toreturn = 0;
-
+     while(true)
+    {
 		StdDraw.clear();
 		StdDraw.setPenColor(0,0,0);
 		StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
@@ -177,20 +112,115 @@ private static int menubuttons()
 		title(containerx+0.05,0.9, "Hunt the Wumpus" );
 		
 
-	if(button(x,0.745-shift, containerx,0.055,"PLAY"))
+	if(button(x,0.85-shift, containerx,0.055,"Cave 1"))
+		
+		    return 1;	
+	
+	if(button(x,0.74-shift, containerx,0.055,"Cave 2"))
+		    return 2;	
+	
+	if(button(x,0.63-shift, containerx,0.055,"Cave 3"))
+		    return 3;	
+
+	if(button(x,0.52-shift, containerx,0.055,"Cave 4"))
+	        return 5;
+	
+	if(button(x,0.41-shift, containerx,0.055,"Main Menu"))
+		return mainmenu(scores);
+
+			
+	StdDraw.show();
+    }
+
+
+}
+
+public static int displayHighScores(ArrayList<String> scores)
+{
+	boolean displayscores = true;
+	while(displayscores)
+			{
+		displayscores = !highScores(scores);
+		System.out.println("score");
+			}
+	return mainmenu(scores);
+	
+}
+
+private static int displayCredits(ArrayList<String> scores)
+{
+	boolean displaycredits = true;
+	while(displaycredits)
+			{
+		displaycredits = !credits(scores);
+		System.out.println("credits");
+			}
+	return mainmenu(scores);
+	
+}
+
+public static int mainmenu(ArrayList<String> scores)
+{	
+	int select = 0;
+	StdDraw.enableDoubleBuffering();
+	while(select == 0)
+	{
+		StdDraw.clear();
+		select = menubuttons();
+	 }
+	
+	if(select == 2)
+	{
+		return displayHighScores(scores);
+		
+	}
+	
+	if(select == 3)
+	{
+		return  displayCredits(scores);
+	}
+	
+	if(select == 4)
+	{
+		return 0;
+	}
+	
+	   StdDraw.clear();
+	   return caveSelection(scores);		
+}
+
+private static int menubuttons()
+{	double x = 0.5;
+    double y = 0.5;
+    double containerx= 0.15;
+    double containery= 0.5;
+    int toreturn = 0;
+    
+        //StdDraw.disableDoubleBuffering();
+		StdDraw.clear();
+		StdDraw.setPenColor(0,0,0);
+		StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+		//StdDraw.picture(0.5, 0.5, "C:\\Users\\s-dapopa\\Desktop\\cave.jpg",1, 1);
+		
+	    StdDraw.setPenColor(32,32,32);
+		StdDraw.filledRectangle(x , y, containerx, containery);
+		title(x,0.8, "Something" );
+		
+
+	if(menubutton(x,0.605, containerx,0.055,"PLAY"))
 		
 		    toreturn = 1;	
 	
-	if(button(x,0.635-shift, containerx,0.055,"HIGH SCORES"))
+	if(menubutton(x,0.495, containerx,0.055,"HIGH SCORES"))
 		    toreturn = 2;	
 
 	
-	if(button(x,0.525-shift, containerx,0.055,"CREDITS"))
+	if(menubutton(x,0.385, containerx,0.055,"CREDITS"))
 		    toreturn = 3;	
 
 	
-	if(button(x,0.415-shift, containerx,0.055,"EXIT"))
-		    toreturn = 4;	
+	if(menubutton(x,0.275, containerx,0.055,"EXIT"))
+		java.lang.System.exit(0);	
 
 			
 	StdDraw.show();
@@ -203,22 +233,44 @@ private static boolean button(double x, double y, double high, double wide, Stri
 	boolean hovering = inBox(x,y,high,wide);
 	StdDraw.setPenColor( 32,32,32);
 	if(hovering)
-		StdDraw.setPenColor(0,0,128);
+		StdDraw.setPenColor(150,0,0);
 	
 	StdDraw.filledRectangle(x, y, high , wide);
 	StdDraw.setPenColor( 255,255,255);
-	StdDraw.setFont( );
+	Font buttonfont = new Font("Copperplate Gothic Bold",0, 20);
+	StdDraw.setFont(buttonfont);
 	StdDraw.text(x, y, message);
-	return hovering && Clicked();
+	return hovering && ClickedRelease();
+}
+
+private static boolean menubutton(double x, double y, double high, double wide, String message)
+{
+	double thick = 0.015;
+	boolean hovering = inBox(x,y,high,wide);
+	StdDraw.setPenColor( 32,32,32);
+	StdDraw.filledRectangle(x, y, high , wide);
+	System.out.println("wait");
+	if(hovering)
+	{
+		StdDraw.setPenColor(150,0,0);
+	    StdDraw.filledRectangle(x, y, high+thick, wide);
+	}
+	
+	StdDraw.setPenColor( 255,255,255);
+	Font buttonfont = new Font("Copperplate Gothic Bold",0, 20);
+	StdDraw.setFont(buttonfont);
+	StdDraw.text(x, y, message);
+	
+	return hovering && ClickedRelease();
 }
 
 private static void title(double x, double y, String message)
 {
+	Font titlefont = new Font("Copperplate Gothic Bold",0, 27);
 	StdDraw.setPenColor( 255,255,255);
-	StdDraw.setFont( );
+	StdDraw.setFont(titlefont);
 	StdDraw.text(x, y, message);
 }
-
 
 private static boolean inBox(double xcenter, double ycenter, double height, double width) {
         double x = StdDraw.mouseX();
@@ -238,9 +290,22 @@ private static boolean inBox(double xcenter, double ycenter, double height, doub
         
     }
 
+private static boolean ClickedRelease() 
+{	
+	if(StdDraw.isMousePressed())
+	{
+		while(StdDraw.isMousePressed())
+		{
+			//do nothing
+		}
+		return true;
+	}
+  return false;
+}
+
 private static boolean Clicked() 
 {	
-  return StdDraw.isMousePressed();
+	return StdDraw.isMousePressed();
 }
 
 private static boolean highScores(ArrayList<String> scores)
@@ -255,9 +320,9 @@ private static boolean highScores(ArrayList<String> scores)
 	title(0.5, 0.9, "High Scores");
 	
 	for(int i = 0; i< Math.min(10, scores.size()); i++)
-	{
+	{	Font scoresfont = new Font("Copperplate Gothic Bold",0, 30);
 		StdDraw.setPenColor( 255,255,255);
-		StdDraw.setFont( );
+		StdDraw.setFont( scoresfont);
 		StdDraw.text(0.5, 0.75-(0.05*i), scores.get(i));		
 	}
 
@@ -266,9 +331,10 @@ private static boolean highScores(ArrayList<String> scores)
 	return toMain;
 }
 
+
 private static boolean credits(ArrayList<String> scores)
 {	boolean toMain;
-	String [] names = {"ME","ME","ME","ME" };
+	String [] names = {"Daniel Popa","Saihaj Gulati","Joshua Venable","Brian Yang", "Raj Sunku", "Hans Koduri" };
 	StdDraw.clear();
 	StdDraw.setPenColor( 0,0,0);
 	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
@@ -277,11 +343,12 @@ private static boolean credits(ArrayList<String> scores)
 	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
 	
 	title(0.5, 0.9, "Credits");
+	Font creditsfont = new Font("Copperplate Gothic Bold",0, 30);
 	
 	for(int i = 0; i< names.length; i++)
 	{
 		StdDraw.setPenColor( 255,255,255);
-		StdDraw.setFont();
+		StdDraw.setFont(creditsfont);
 		StdDraw.text(0.5, 0.75-(0.1*i), names[i]);		
 	}
 
@@ -289,4 +356,6 @@ private static boolean credits(ArrayList<String> scores)
 	StdDraw.show();
 	return toMain;
 }
+
+
 }
