@@ -216,7 +216,7 @@ private static int menubuttons()
 		
 	    StdDraw.setPenColor(32,32,32);
 		StdDraw.filledRectangle(x , y, containerx, containery);
-		title(x,0.8, "Something" );
+		title(x,0.8, "Hunt The Wumpus" );
 		
 
 	if(menubutton(x,0.605, containerx,0.055,"PLAY"))
