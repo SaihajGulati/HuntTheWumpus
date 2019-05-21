@@ -56,13 +56,9 @@ public class GameControl
 		 scores.add(" 8. Cave 1; Bye; 14");
 		 scores.add(" 9. Cave 1; Hello; 84");
 		 scores.add("10. Cave 1; Joe; 94");
-		start(scores);
-	}
-	public static void start(ArrayList <String> scores)
-	{
-		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
 		GI.start();
-		GI.mainmenu(scores);
+		int caveSelect = GI.mainmenu(scores);
+		String name = GI.getName();
 	}
 			
 	/**
