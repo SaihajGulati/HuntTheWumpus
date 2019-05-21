@@ -19,6 +19,8 @@ Name g
 Name h
 Name i
 Name j
+<<<<<<< HEAD
+Name j
 
 Cave 1
 Cave 3
@@ -30,3 +32,16 @@ Cave 4
 Cave 5 
 Cave 2
 Cave 3
+=======
+
+Cave 1
+Cave 3
+Cave 2
+Cave 5
+Cave 4
+Cave 1
+Cave 4
+Cave 5 
+Cave 2
+Cave 3
+>>>>>>> branch 'master' of https://s-bryang@bitbucket.org/htw19_p3_artesiancode/htw19_p3_artesiancode.git

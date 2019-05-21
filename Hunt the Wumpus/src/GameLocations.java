@@ -170,9 +170,10 @@ public class GameLocations {
         * Changes the location of the player when if the player encounters a botomless pit or triggers endgame
         * @param answeredQuestions is a boolean indicating if the Player properly answered the questions
         */
-       public static void triggerPit()
+       public static void triggerPit(boolean answeredQuestions)
        {
-    	   playerLocation=originalPlayerLocation;
+    	   if(answeredQuestions)
+    		   playerLocation=originalPlayerLocation;
        }
        
        /*

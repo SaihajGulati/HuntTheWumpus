@@ -12,14 +12,16 @@
  * 4.0        3/25/19  Added starting point in main however needs to be fixed with GI
  * 5.0		  4/3/19  Fixed GI problems and added loop for main menu
 */
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
+import javafx.application.Application;
+import javafx.stage.Stage;
 /**
  * MAJOR NOTES:
  * 
  * 	Figure out how to get the adjacent room index?
  * 	Add Wumpus control methods but what do we need for that? 
- * I hate eclipse
  *
  */
 public class GameControl
@@ -31,7 +33,7 @@ public class GameControl
 	public static int ROUND = 0;
 	//following e-nums are for the start of the game and anywhere else so its easier to identify changes
 	public static int START = 0;
-	public static int HIGHSCORE = 1;  
+	public static int HIGHSCORE = 1;
 	public static int QUIT = 2;
 	
 	public static void main(String[] args) throws FileNotFoundException
@@ -40,59 +42,39 @@ public class GameControl
 		Cave cave = new Cave(caveArray);
 		GameLocations locations = new GameLocations(cave);
 		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
-		//HighScore score = new HighScore("input/HighScores.txt");
+		HighScore score = new HighScore("input/HighScores.txt");
 		Player player = new Player();
 		Trivia trivia = new Trivia("input/Trivia.txt");
-		//starts the game
-		//start(HighScore.getHighScores(), player);
 		ArrayList <String> scores = new ArrayList<String>();
-		
-		/*scores.add(" 1. Cave 1; Bob; 44");
-		scores.add(" 2. Cave 1; Josh; 34");
-		scores.add(" 3. Cave 1; Brian; 64");
-		scores.add(" 4. Cave 1; Okay; 74");
-		scores.add(" 5. Cave 1; Hello; 84");
-		scores.add(" 6. Cave 1; Why; 94");
-		scores.add(" 7. Cave 1; No; 24");
-		scores.add(" 8. Cave 1; Bye; 14");
-		scores.add(" 9. Cave 1; Hello; 84");
-		scores.add("10. Cave 1; Joe; 94");
-		*/
-		
-		start(scores, player, cave, locations);
+		//starts the game
+		start(scores);
 	}
-	public static void start(ArrayList <String> scores, Player player, Cave cave, GameLocations locations) throws FileNotFoundException
+	public static void start(ArrayList <String> scores)
 	{
 		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
 		GI.start();
-		int CaveSelection = GI.mainmenu(scores);
-		String name = GI.getName();
-		HighScore.updateScoreBoard(0, name, CaveSelection);
-		startGame(GI, player, cave, locations, CaveSelection);
-		
+		GI.mainmenu(scores);
 	}
 			
 	/**
-	 * Starts up the Game and helps out with the running
+	 * Starts up the Game
 	 * @param start gets a call from GI to see if player wants to start
 	 * @param GI is the Graphical interface
 	 * @param player is the player class
 	 * @param cave is the cave class
-	 * @return whether or not player is alive
 	 */
-	public static boolean startGame(GraphicalInterface GI, Player player, Cave cave, GameLocations loctaions, int CaveSelection) throws FileNotFoundException
+	public static void startGame(GraphicalInterface GI, Player player, Cave cave, GameLocations locations) throws FileNotFoundException
 	{
 		boolean inPit = false, inBats = false, inWumpus = false, isAlive = true;
 		cave.openCaveFile();
 		cave.readCaveFile();
 		//loop that runs the whole game while the player is alive;
 		while(player.getArrows() > 0 && isAlive) {
-			//checks if player is in same spot as hazard
 			for (int i: GameLocations.getBatLocations())
 			{
 				if(GameLocations.getPlayerLocation() == i) {
 					if(!Trivia.askQuestions(BATS)) {
-						GameLocations.triggerBat();
+						break;
 					}
 				}
 			}
@@ -100,27 +82,18 @@ public class GameControl
 			{
 				if(GameLocations.getPlayerLocation() == i) 
 				{
-					if(!Trivia.askQuestions(HOLE)){
-						isAlive = false;
-						return isAlive;
+					if(!Trivia.askQuestions(BATS)) {
+						break;
 					}		
 				}
 			}
 			if (GameLocations.getPlayerLocation() == GameLocations.getWumpusLocation())
 			{
 				if(!Trivia.askQuestions(WUMPUS)) {
-					isAlive = false;
-					return isAlive;
+					break;
 				}
 			}
-			//check if player is near one of the hazards
-			//GI.inDanger(BATS);
-			//GI.inDanger(HOLE);
-			//GI.inDanger(WUMPUS);
-			//display Inventory
-			GI.displayItems();
 		}
-		return isAlive;
 		
 	}
 	/**
@@ -132,18 +105,12 @@ public class GameControl
 	 * @param locations The GameLocations class
 	 * @throws FileNotFoundException 
 	 */
-	public static void endGame(ArrayList <String> scores, Player player, GraphicalInterface GI, String name, int getCave) throws FileNotFoundException {
+	public static void endGame(GraphicalInterface GI, Player player, HighScore score, GameLocations locations) throws FileNotFoundException {
 
 			int endScore = player.getScore(GameLocations.shootArrow(GameLocations.getWumpusLocation()));
-			HighScore.updateScoreBoard(endScore, name, getCave);
-			/*
-			for (int i = 0; i < scores.size(); i++)
-			{
-				HighScore.getHighScores()
-			}
-			*/
-			GI.displayHighScores(HighScore.getHighScores());
-			//fixed it
+			HighScore.updateScoreBoard(endScore);
+			//GI.displayHighscore(HighScore.getHighScores());
+
 	}
 	/**
 	 *
@@ -154,6 +121,65 @@ public class GameControl
 		//locations.<method to return room number>
 		//if there is a door leading there and he is adjacent to it then return true
 		return false;
+	}
+	
+	/**
+	 * 
+	 * @return the map fully created if player decides to play the game
+	 */
+	public static ArrayList<Integer> createMap()
+	{
+		//if player clicks 'Play Game'
+		//NOTE : Integer is a placeholder and will be replaced with a cave type
+		//cave method replaces 'new ArrayList<Integer>();' to grab the generated cave
+		ArrayList<Integer> map = new ArrayList<Integer>();
+		return map;
+	}
+	
+	/**
+	 * 
+	 * @return the location of the player as an integer index in the arrayList
+	 */
+	public static int playerLocation() 
+	{
+		//get this from a GameLocation method and return the index for the player and the GI 
+		return 0;
+	}
+	
+	/**
+	 * 
+	 * @param 'words' is given by trivia and given to the player when the GI needs it
+	 * @return the random questions that are given by trivia
+	 */
+	public static String[] getQuestions(String[] words)
+	{
+		// simple passing method so trivia doesn't have to extend
+		return words;
+	}
+
+	/**
+	 * 
+	 * @param The Direction is given from GI as a char which will be changed in that class
+	 * @return the player index from 'playerLocation' to give to the GameLocation
+	 * 			in order to see what adjacent rooms there are
+	 */
+	public static int movingPlayer(int roomNumber)
+	{
+		//use the roomNumber which is the room that the player wants to move
+		// if 'movePossible' then give the 'playerLocation' index
+		//code for inputting 'playerLocation'
+		return 0;
+	}
+	
+	/**
+	 * 
+	 * @param answers are given from GI and passed in order to check with trivia
+	 * @return the answers as an array and given to trivia
+	 */
+	public static String[] giveAnswer(String[] answers)
+	{
+		//do not add anything else for now this should be a simple pass
+		return answers;
 	}
 	
 	/**

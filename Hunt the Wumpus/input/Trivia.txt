@@ -3,8 +3,8 @@ Key: Highest grossing movie worldwide: Avatar
 The answer is Avatar
 
 Which film has the highest opening weekend domestically?
-Key: Highest domestic opening weekend: Avengers: Infinity War
-The answer is Avengers Infinity War
+Key: Highest domestic opening weekend: Avengers: Endgame
+The answer is Avengers Endgame
 
 How many films had crossed $2 billion worldwide?
 Key: 4 films have crossed $2 billion worldwide
