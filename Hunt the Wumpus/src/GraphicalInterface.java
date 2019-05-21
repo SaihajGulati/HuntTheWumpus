@@ -19,7 +19,18 @@ import java.awt.Font;
 import java.util.ArrayList;
  
 public class GraphicalInterface{
+	
+	private int BAT;
+	private int WUMPUS;
+	private int HOLE;
 
+	public GraphicalInterface(int b, int w, int h)
+	{
+		BAT = b;
+		WUMPUS = w;
+		HOLE = h;
+		
+	}
 
 // Opens up the canvas for the game to be displayed on and enables double buffering
 public static void start()
@@ -153,7 +164,7 @@ private static int displayCredits(ArrayList<String> scores)
 	while(displaycredits)
 			{
 		displaycredits = !credits(scores);
-		System.out.println("credits");
+		//System.out.println("credits");
 			}
 	return mainmenu(scores);
 	
@@ -161,6 +172,7 @@ private static int displayCredits(ArrayList<String> scores)
 
 public static int mainmenu(ArrayList<String> scores)
 {	
+	System.out.println(scores);
 	int select = 0;
 	StdDraw.enableDoubleBuffering();
 	while(select == 0)
@@ -249,7 +261,6 @@ private static boolean menubutton(double x, double y, double high, double wide, 
 	boolean hovering = inBox(x,y,high,wide);
 	StdDraw.setPenColor( 32,32,32);
 	StdDraw.filledRectangle(x, y, high , wide);
-	System.out.println("wait");
 	if(hovering)
 	{
 		StdDraw.setPenColor(150,0,0);
@@ -309,7 +320,9 @@ private static boolean Clicked()
 }
 
 private static boolean highScores(ArrayList<String> scores)
-{	boolean toMain;
+{	
+	System.out.println(scores);
+	boolean toMain;
 	StdDraw.clear();
 	StdDraw.setPenColor( 0,0,0);
 	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
