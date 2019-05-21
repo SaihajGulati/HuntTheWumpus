@@ -5,6 +5,8 @@
  * and displaying the high scores when necessary (either when the Player wants to see the scores, or when the
  * game has ended, either by dying or defeating the Wumpus).
  * 
+ * Test comment
+ * 
  * 3/4/19: Version 1.0
  * Added the class header, constructor, and toString method.
  * 3/7/19: Version 1.1
