@@ -32,7 +32,7 @@ public class GraphicalInterface{
 		
 	}
 
-// Opens up the canvas for the game to be displayed on and enables double buffering
+// Opens uhop the canvas for the game to be displayed on and enables double buffering
 public static void start()
 {
 	StdDraw.enableDoubleBuffering();
