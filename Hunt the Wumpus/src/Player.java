@@ -21,6 +21,7 @@ public class Player
 	/**
 	 * This constructs the player object and sets default values of the fields
 	 * @return Player object
+	 * test
 	 */
 	public Player()
 	{
