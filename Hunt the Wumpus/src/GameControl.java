@@ -42,7 +42,7 @@ public class GameControl
 		Cave cave = new Cave(caveArray);
 		GameLocations locations = new GameLocations(cave);
 		//hello
-		//GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
+		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
 		Player player = new Player();
 		ArrayList <String> scores = new ArrayList<String>();
 		//starts the game
