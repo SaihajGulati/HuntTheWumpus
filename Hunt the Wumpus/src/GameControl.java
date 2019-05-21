@@ -42,11 +42,19 @@ public class GameControl
 		Cave cave = new Cave(caveArray);
 		GameLocations locations = new GameLocations(cave);
 		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
-		HighScore score = new HighScore("input/HighScores.txt");
 		Player player = new Player();
-		Trivia trivia = new Trivia("input/Trivia.txt");
 		ArrayList <String> scores = new ArrayList<String>();
 		//starts the game
+		scores.add(" 1. Cave 1; Bob; 44");
+		 scores.add(" 2. Cave 1; Josh; 34");
+		 scores.add(" 3. Cave 1; Brian; 64");
+		 scores.add(" 4. Cave 1; Okay; 74");
+		 scores.add(" 5. Cave 1; Hello; 84");
+		 scores.add(" 6. Cave 1; Why; 94");
+		 scores.add(" 7. Cave 1; No; 24");
+		 scores.add(" 8. Cave 1; Bye; 14");
+		 scores.add(" 9. Cave 1; Hello; 84");
+		 scores.add("10. Cave 1; Joe; 94");
 		start(scores);
 	}
 	public static void start(ArrayList <String> scores)
@@ -105,10 +113,10 @@ public class GameControl
 	 * @param locations The GameLocations class
 	 * @throws FileNotFoundException 
 	 */
-	public static void endGame(GraphicalInterface GI, Player player, HighScore score, GameLocations locations) throws FileNotFoundException {
+	public static void endGame(GraphicalInterface GI, Player player, HighScore score, GameLocations locations, String Name, int CaveName) throws FileNotFoundException {
 
 			int endScore = player.getScore(GameLocations.shootArrow(GameLocations.getWumpusLocation()));
-			HighScore.updateScoreBoard(endScore);
+			HighScore.updateScoreBoard(endScore, Name, CaveName);
 			//GI.displayHighscore(HighScore.getHighScores());
 
 	}
