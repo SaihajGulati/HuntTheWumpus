@@ -134,9 +134,12 @@ public static int caveSelection(ArrayList<String> scores)
 		    return 3;	
 
 	if(button(x,0.52-shift, containerx,0.055,"Cave 4"))
-	        return 5;
+	        return 4;
 	
-	if(button(x,0.41-shift, containerx,0.055,"Main Menu"))
+	if(button(x,0.41-shift, containerx,0.055,"Cave 5"))
+        return 5;
+	
+	if(button(x,0.30-shift, containerx,0.055,"Main Menu"))
 		return mainmenu(scores);
 
 			
