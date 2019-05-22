@@ -17,98 +17,42 @@ Date:        Version:    Comments:
                                         within the cave.
  */                                      
 
-import java.io.*;
-import java.util.*;
+import java.io.FileNotFoundException;
 public class Cave
 {
-	private int roomNum;
-	private int row;
-	private int column;
-	private boolean hasHazard;
-	private boolean useArrow;
-	private Scanner x;
-	private String[][] caveType;
-	
-	/* This is the constructor method which initializes the fields for the current room
-	 *  and the array for caveType, as well as booleans if the room has a hazard or if the
-	 *  player uses an arrow.
-	 * 
-	 */
-	public Cave(String[][] type)
+	public Rooms[] readFile(int cave) throws FileNotFoundException
 	{
-		caveType = type;
-		roomNum = (int)(Math.random()*30+1);
-		hasHazard = false;
-		useArrow = false;
-		column = 0;
-		row = 0;
-	}
-	
-	/*
-	 * returns "Cave" when this object is printed
-	 */
-	public String toString()
-	{
-		return "Cave";
-	}
-	
-	
-	
-	/* This method opens and reads a file which gives each room along with its adjacent rooms
-	 * and wall rooms, or rooms that cannot be entered from the current room. Currently in progress.
-	 * 
-	 */
-	public void openCaveFile() throws FileNotFoundException
-	{
-		x= new Scanner(new File("Cave1.txt"));
-	}
-	
-	public void readCaveFile() throws FileNotFoundException
-	{
-		while(x.hasNext())
-		{
-			int room = x.nextInt();
-			int tunnel = x.nextInt();
-			int adjRoom = x.nextInt();
-		}
-	}
-	
-	public void closeCaveFile()
-	{
-		x.close();
-	}
-	
-	/*this method will return an array with the locations of tunnels in the room that the player is currently in.
-	 * (In progress)
-	 */
-	public int[] tunnels(int roomNum)
-	{
-		return null;
-	}
-	
-	/*this method will sort out the adjacent rooms next to the room the player is in (in progress)
-	 */
-	public int[] adjacentRooms(int roomNum)
-	{
-		int[] adjRooms = new int[2];
-		if(column == 0)
-		{
-			adjRooms[0] = row * caveType[0].length + column + 1;
-		}
-		else
-		{
-			adjRooms[0] = roomNum - 1;
-		}
+		File file = new File(".//input//cave1.txt");
+		Rooms[] roomLayout = new Rooms[30];
+		Scanner layout = new Scanner(file);
+		int tunnelsWalls = 0;
+		int currentRoom = layout.nextInt();
+		ArrayList<Integer> tunnels = new ArrayList<Integer>(0);
+		ArrayList<Integer> walls = new ArrayList<Integer>(0);
 		
-		if(column == caveType[0].length - 1)
+		while(layout.hasNextInt())
 		{
-			adjRooms[1] = row * caveType[0].length + column + 1;
+			tunnelsWalls = layout.nextInt();
+			while(tunnelsWalls > 0)
+			{
+				tunnels.add(tunnelsWalls);
+				tunnelsWalls = layout.nextInt();
+			}
+			tunnelsWalls = layout.nextInt();
+			while(tunnelsWalls != 31)
+			{
+				walls.add(tunnelsWalls);
+				tunnelsWalls = layout.nextInt();
+			}
+			
+			roomLayout[currentRoom - 1] = new Rooms(currentRoom, tunnels, walls);
+			walls.clear();
+			tunnels.clear();
+			if(layout.hasNextInt())
+			{
+				currentRoom = layout.nextInt();
+			}
 		}
-		else
-		{
-			adjRooms[1] = roomNum + 1;
-		}
-		return adjRooms;
+		return roomLayout;
 	}
 }
-
