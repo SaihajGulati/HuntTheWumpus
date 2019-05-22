@@ -38,9 +38,7 @@ public class GameControl
 	
 	public static void main(String[] args) throws FileNotFoundException
 	{
-		String[][] caveArray = new String[30][30];
-		Cave cave = new Cave(caveArray);
-		GameLocations locations = new GameLocations(cave);
+		GameLocations locations = new GameLocations();
 		//hello testing
 		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
 		Player player = new Player();
@@ -71,8 +69,6 @@ public class GameControl
 	public static void startGame(GraphicalInterface GI, Player player, Cave cave, GameLocations locations) throws FileNotFoundException
 	{
 		boolean inPit = false, inBats = false, inWumpus = false, isAlive = true;
-		cave.openCaveFile();
-		cave.readCaveFile();
 		//loop that runs the whole game while the player is alive;
 		while(player.getArrows() > 0 && isAlive) {
 			for (int i: GameLocations.getBatLocations())
