@@ -56,8 +56,12 @@ public class GameControl
 		 scores.add(" 9. Cave 1; Hello; 84");
 		 scores.add("10. Cave 1; Joe; 94");
 		GI.start();
-		int caveSelect = GI.mainmenu(scores);
-		String name = GI.getName();
+		String name = "";
+		while(name.equals("")) {
+			int caveSelect = GI.mainmenu(scores);
+			name = GI.getName();
+		}
+		GI.gameGraphics();
 	}
 			
 	/**
