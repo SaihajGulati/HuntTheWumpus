@@ -41,7 +41,9 @@ public static void start()
 
 public static void gameGraphics()
 {
+	StdDraw.clear();
 	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	StdDraw.show();
 	
 }
 
@@ -119,6 +121,7 @@ public static String getName()
 	StdDraw.show();
 	}
 	
+	StdDraw.clear();
 	return name;
 }
 
