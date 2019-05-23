@@ -32,11 +32,22 @@ public class GraphicalInterface{
 		
 	}
 
-// Opens uhop the canvas for the game to be displayed on and enables double buffering
+// Opens up the canvas for the game to be displayed on and enables double buffering
 public static void start()
 {
 	StdDraw.enableDoubleBuffering();
 	StdDraw.setCanvasSize(1000, 700);
+}
+
+public static void gameGraphics()
+{
+	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	
+}
+
+private static void screenAlert()
+{
+	
 }
 
 private static String getKeyTyped()
@@ -98,7 +109,13 @@ public static String getName()
 	{
 		name = delete(name);
 	}
-	button = !button(0.5, 0.1 , 0.15 , 0.055, "Play");
+	button = !button(0.5, 0.3 , 0.15 , 0.055, "Play");
+	
+	if(button(0.5, 0.1 , 0.15 , 0.055, "Main Menu"))
+	{
+		name = "";
+		button = false;
+	}
 	StdDraw.show();
 	}
 	
@@ -345,7 +362,6 @@ private static boolean highScores(ArrayList<String> scores)
 	StdDraw.show();
 	return toMain;
 }
-
 
 private static boolean credits(ArrayList<String> scores)
 {	boolean toMain;
