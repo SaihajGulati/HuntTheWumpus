@@ -109,7 +109,7 @@ public static String getName()
 	{
 		name = delete(name);
 	}
-	button = !button(0.5, 0.225 , 0.15 , 0.055, "Play");
+	button = !button(0.5, 0.25 , 0.15 , 0.055, "Play");
 	
 	if(button(0.5, 0.1 , 0.15 , 0.055, "Main Menu"))
 	{
