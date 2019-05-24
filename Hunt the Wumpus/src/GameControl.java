@@ -63,6 +63,7 @@ public class GameControl
 		Cave cave = new Cave(caveSelect);
 		GameLocations locations = new GameLocations(cave);
 		GI.gameGraphics();
+		startGame(GI, player, cave, locations);
 	}
 			
 	/**
