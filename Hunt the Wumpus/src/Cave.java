@@ -17,42 +17,60 @@ Date:        Version:    Comments:
                                         within the cave.
  */                                      
 
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.util.*;
 public class Cave
 {
-	public Rooms[] readFile(int cave) throws FileNotFoundException
+	int[][] caveMap;
+	public Cave(int cave) throws FileNotFoundException
 	{
-		File file = new File(".//input//cave1.txt");
-		Rooms[] roomLayout = new Rooms[30];
+		File file = new File("input/cave" + cave + ".txt");
 		Scanner layout = new Scanner(file);
-		int tunnelsWalls = 0;
-		int currentRoom = layout.nextInt();
-		ArrayList<Integer> tunnels = new ArrayList<Integer>(0);
-		ArrayList<Integer> walls = new ArrayList<Integer>(0);
-		
-		while(layout.hasNextInt())
+		caveMap = new int[30][7];
+		String[][] temp= new String[30][7];
+		for (int i = 0; i < 30; i++)
 		{
-			tunnelsWalls = layout.nextInt();
-			while(tunnelsWalls > 0)
+			temp[i] = layout.nextLine().split(" ");
+			for(int j=0;j<7;j++)
 			{
-				tunnels.add(tunnelsWalls);
-				tunnelsWalls = layout.nextInt();
-			}
-			tunnelsWalls = layout.nextInt();
-			while(tunnelsWalls != 31)
-			{
-				walls.add(tunnelsWalls);
-				tunnelsWalls = layout.nextInt();
-			}
-			
-			roomLayout[currentRoom - 1] = new Rooms(currentRoom, tunnels, walls);
-			walls.clear();
-			tunnels.clear();
-			if(layout.hasNextInt())
-			{
-				currentRoom = layout.nextInt();
+				caveMap[i][j]=Integer.parseInt(temp[i][j]);
 			}
 		}
-		return roomLayout;
 	}
+	public int[][] getCaveMap()
+	{
+	    return caveMap;
+	}
+	public int[] tunnels(int location)
+	{
+		int[] temp = new int[Arrays.asList(caveMap[location-1]).indexOf(0)];
+		for (int i= 0; i < temp.length; i++)
+		{
+			temp[i] = caveMap[location-1][i];
+		}
+		return temp;
+	}
+	public int[] adjacentRooms(int location)
+	{
+		int temp = new int[6];
+		boolean x = false;
+		int count = 0;
+		for(int i=0;i<7;i++)
+		{
+			
+			if(caveMap[location-1][i]!=0)
+			{
+				if(x)
+				{
+					temp[i]=caveMap[location-1][i-1];
+				}
+				else
+					temp[i]=caveMap[location-1][i];
+			}
+			else
+				x=true;
+		}
+		return temp;
+	}
+	
 }
