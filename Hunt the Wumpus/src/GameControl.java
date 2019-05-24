@@ -78,7 +78,7 @@ public class GameControl
 		boolean inPit = false, inBats = false, inWumpus = false, isAlive = true;
 		//loop that runs the whole game while the player is alive;
 		while(player.getArrows() > 0 && isAlive) {
-			for (int i: GameLocations.getBatLocations())
+			/*for (int i: GameLocations.getBatLocations())
 			{
 				if(GameLocations.getPlayerLocation() == i) {
 					if(!Trivia.askQuestions(BATS)) {
@@ -100,8 +100,12 @@ public class GameControl
 				if(!Trivia.askQuestions(WUMPUS)) {
 					break;
 				}
-			}
+			} */
 		}
+		//Testing out which oom they are in
+		System.out.println(GameLocations.getPlayerLocation());
+		int roomNum = 2;
+		movingPlayer(roomNum);
 		
 	}
 	/**
