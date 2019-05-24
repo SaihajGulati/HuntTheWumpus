@@ -38,7 +38,7 @@ public class GameControl
 	
 	public static void main(String[] args) throws FileNotFoundException
 	{
-		Cave cave = new Cave();
+		Cave cave = new Cave(1);
 		GameLocations locations = new GameLocations(cave);
 		//hello testing
 		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
