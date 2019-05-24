@@ -38,8 +38,6 @@ public class GameControl
 	
 	public static void main(String[] args) throws FileNotFoundException
 	{
-		Cave cave = new Cave(1);
-		GameLocations locations = new GameLocations(cave);
 		//hello testing
 		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
 		Player player = new Player();
@@ -57,10 +55,13 @@ public class GameControl
 		 scores.add("10. Cave 1; Joe; 94");
 		GI.start();
 		String name = "";
+		int caveSelect = 0;
 		while(name.equals("")) {
-			int caveSelect = GI.mainmenu(scores);
+			caveSelect = GI.mainmenu(scores);
 			name = GI.getName();
 		}
+		Cave cave = new Cave(caveSelect);
+		GameLocations locations = new GameLocations(cave);
 		GI.gameGraphics();
 	}
 			
