@@ -15,6 +15,7 @@ Date:        Version:    Comments:
 3/27/2019    4            Assignment 4: Implementation of room to return adjacent rooms, and a method
                                         to return whether the room is an edge room or inner room
                                         within the cave.
+5/23/2019    5            Fully implemented methods to read and return cave information.
  */                                      
 
 import java.io.*;
@@ -53,8 +54,6 @@ public class Cave
 	public int[] adjacentRooms(int location)
 	{
 		int[] temp = new int[caveMap[location-1].length-1];
-		boolean x = false;
-		int count = 0;
 		for(int i = 0; i < Arrays.asList(caveMap[location-1]).indexOf(0); i++)
 		{
 			temp[i]=caveMap[location-1][i];
