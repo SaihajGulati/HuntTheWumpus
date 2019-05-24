@@ -42,8 +42,10 @@ public static void start()
 public static void gameGraphics()
 {
 	StdDraw.clear();
+	//brother
 	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
 	StdDraw.show();
+	System.out.println("Yeeeeeeeeet");
 	
 }
 
@@ -58,7 +60,7 @@ private static String getKeyTyped()
 	if(StdDraw.hasNextKeyTyped())
 	{
 		typed = StdDraw.nextKeyTyped();
-		System.out.print((int)(typed));
+		//System.out.print((int)(typed));
 		if((int)typed == 8)
 		{
 			return "-1";
@@ -175,7 +177,7 @@ public static int displayHighScores(ArrayList<String> scores)
 	while(displayscores)
 			{
 		displayscores = !highScores(scores);
-		System.out.println("score");
+		//System.out.println("score");
 			}
 	return mainmenu(scores);
 	
@@ -195,7 +197,7 @@ private static int displayCredits(ArrayList<String> scores)
 
 public static int mainmenu(ArrayList<String> scores)
 {	
-	System.out.println(scores);
+	//System.out.println(scores);
 	int select = 0;
 	StdDraw.enableDoubleBuffering();
 	while(select == 0)

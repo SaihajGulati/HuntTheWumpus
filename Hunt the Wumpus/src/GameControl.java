@@ -15,8 +15,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
-import javafx.application.Application;
-import javafx.stage.Stage;
 /**
  * MAJOR NOTES:
  * 
@@ -38,8 +36,6 @@ public class GameControl
 	
 	public static void main(String[] args) throws FileNotFoundException
 	{
-		Cave cave = new Cave(1);
-		GameLocations locations = new GameLocations(cave);
 		//hello testing
 		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
 		Player player = new Player();
@@ -57,11 +53,15 @@ public class GameControl
 		 scores.add("10. Cave 1; Joe; 94");
 		GI.start();
 		String name = "";
+		int caveSelect = 0;
 		while(name.equals("")) {
-			int caveSelect = GI.mainmenu(scores);
+			caveSelect = GI.mainmenu(scores);
 			name = GI.getName();
 		}
+		Cave cave = new Cave(caveSelect);
+		GameLocations locations = new GameLocations(cave);
 		GI.gameGraphics();
+		startGame(GI, player, cave, locations);
 	}
 			
 	/**
@@ -76,7 +76,7 @@ public class GameControl
 		boolean inPit = false, inBats = false, inWumpus = false, isAlive = true;
 		//loop that runs the whole game while the player is alive;
 		while(player.getArrows() > 0 && isAlive) {
-			for (int i: GameLocations.getBatLocations())
+			/*for (int i: GameLocations.getBatLocations())
 			{
 				if(GameLocations.getPlayerLocation() == i) {
 					if(!Trivia.askQuestions(BATS)) {
@@ -98,8 +98,12 @@ public class GameControl
 				if(!Trivia.askQuestions(WUMPUS)) {
 					break;
 				}
-			}
+			} */
 		}
+		//Testing out which oom they are in
+		System.out.println(GameLocations.getPlayerLocation());
+		int roomNum = 2;
+		movingPlayer(roomNum);
 		
 	}
 	/**
@@ -171,10 +175,9 @@ public class GameControl
 	 */
 	public static int movingPlayer(int roomNumber)
 	{
-		//use the roomNumber which is the room that the player wants to move
-		// if 'movePossible' then give the 'playerLocation' index
-		//code for inputting 'playerLocation'
-		return 0;
+		int roomNum = roomNumber;
+		System.out.println(roomNum);
+		return roomNum;
 	}
 	
 	/**
