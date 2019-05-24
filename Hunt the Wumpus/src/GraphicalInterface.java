@@ -44,6 +44,7 @@ public static void gameGraphics()
 	StdDraw.clear();
 	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
 	StdDraw.show();
+	System.out.println("Yeet");
 	
 }
 
