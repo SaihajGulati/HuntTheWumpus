@@ -15,8 +15,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
-import javafx.application.Application;
-import javafx.stage.Stage;
 /**
  * MAJOR NOTES:
  * 
@@ -177,10 +175,9 @@ public class GameControl
 	 */
 	public static int movingPlayer(int roomNumber)
 	{
-		//use the roomNumber which is the room that the player wants to move
-		// if 'movePossible' then give the 'playerLocation' index
-		//code for inputting 'playerLocation'
-		return 0;
+		int roomNum = roomNumber;
+		System.out.println(roomNum);
+		return roomNum;
 	}
 	
 	/**
