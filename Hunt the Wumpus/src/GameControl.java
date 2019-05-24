@@ -177,10 +177,9 @@ public class GameControl
 	 */
 	public static int movingPlayer(int roomNumber)
 	{
-		//use the roomNumber which is the room that the player wants to move
-		// if 'movePossible' then give the 'playerLocation' index
-		//code for inputting 'playerLocation'
-		return 0;
+		int roomNum = roomNumber;
+		System.out.println(roomNum);
+		return roomNum;
 	}
 	
 	/**
