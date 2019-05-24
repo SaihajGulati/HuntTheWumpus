@@ -42,6 +42,7 @@ public static void start()
 public static void gameGraphics()
 {
 	StdDraw.clear();
+	//brother
 	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
 	StdDraw.show();
 	System.out.println("Yeeeeeeeeet");
