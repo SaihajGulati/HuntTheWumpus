@@ -61,7 +61,7 @@ public class GameControl
 		Cave cave = new Cave(caveSelect);
 		GameLocations locations = new GameLocations(cave);
 		GI.gameGraphics();
-		startGame(GI, player, cave, locations);
+		startGame(GI, player, cave);
 	}
 			
 	/**
@@ -71,14 +71,16 @@ public class GameControl
 	 * @param player is the player class
 	 * @param cave is the cave class
 	 */
-	public static void startGame(GraphicalInterface GI, Player player, Cave cave, GameLocations locations) throws FileNotFoundException
+	public static void startGame(GraphicalInterface GI, Player player, Cave cave) throws FileNotFoundException
 	{
+		Scanner input = new Scanner(System.in);
+		System.out.println("Test");
 		boolean inPit = false, inBats = false, inWumpus = false, isAlive = true;
 		//loop that runs the whole game while the player is alive;
 		while(player.getArrows() > 0 && isAlive) {
 			/*for (int i: GameLocations.getBatLocations())
 			{
-				if(GameLocations.getPlayerLocation() == i) {
+				if(GameLocations.getPlayerLocation() == i) {//
 					if(!Trivia.askQuestions(BATS)) {
 						break;
 					}
@@ -99,11 +101,24 @@ public class GameControl
 					break;
 				}
 			} */
+			boolean start = false;
+			int room = GameLocations.getPlayerLocation();
+			System.out.println("Room: " + room);
+			int[] rooms = cave.tunnels(room);
+			int choice = input.nextInt();
+			for(int i : rooms) {
+				System.out.println(i);
+				if(choice == i) {
+					start = true;
+				}
+			}
+			if(start) {
+				GameLocations.movePlayer(choice);
+			}
+			
 		}
 		//Testing out which oom they are in
-		System.out.println(GameLocations.getPlayerLocation());
-		int roomNum = 2;
-		movingPlayer(roomNum);
+
 		
 	}
 	/**
@@ -167,18 +182,6 @@ public class GameControl
 		return words;
 	}
 
-	/**
-	 * 
-	 * @param The Direction is given from GI as a char which will be changed in that class
-	 * @return the player index from 'playerLocation' to give to the GameLocation
-	 * 			in order to see what adjacent rooms there are
-	 */
-	public static int movingPlayer(int roomNumber)
-	{
-		int roomNum = roomNumber;
-		System.out.println(roomNum);
-		return roomNum;
-	}
 	
 	/**
 	 * 
