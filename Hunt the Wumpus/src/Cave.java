@@ -52,24 +52,18 @@ public class Cave
 	}
 	public int[] adjacentRooms(int location)
 	{
-		int temp = new int[6];
+		int[] temp = new int[caveMap[location-1].length-1];
 		boolean x = false;
 		int count = 0;
-		for(int i=0;i<7;i++)
+		for(int i = 0; i < Arrays.asList(caveMap[location-1]).indexOf(0); i++)
 		{
-			
-			if(caveMap[location-1][i]!=0)
-			{
-				if(x)
-				{
-					temp[i]=caveMap[location-1][i-1];
-				}
-				else
-					temp[i]=caveMap[location-1][i];
-			}
-			else
-				x=true;
+			temp[i]=caveMap[location-1][i];
 		}
+		for(int i = Arrays.asList(caveMap[location-1]).indexOf(0) + 1; i < caveMap[location-1].length; i++)
+		{
+			temp[i-1]=caveMap[location-1][i];
+		}
+			
 		return temp;
 	}
 	
