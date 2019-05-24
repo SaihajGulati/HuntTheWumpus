@@ -80,7 +80,7 @@ public class GameControl
 		while(player.getArrows() > 0 && isAlive) {
 			/*for (int i: GameLocations.getBatLocations())
 			{
-				if(GameLocations.getPlayerLocation() == i) {
+				if(GameLocations.getPlayerLocation() == i) {//
 					if(!Trivia.askQuestions(BATS)) {
 						break;
 					}
