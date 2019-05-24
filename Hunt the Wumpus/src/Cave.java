@@ -44,12 +44,24 @@ public class Cave
 	}
 	public int[] tunnels(int location)
 	{
-		int[] temp = new int[Arrays.asList(caveMap[location-1]).indexOf(0)];
+		int[] temp = new int[findIndex(caveMap[location-1], 0)];
 		for (int i= 0; i < temp.length; i++)
 		{
 			temp[i] = caveMap[location-1][i];
 		}
 		return temp;
+	}
+	
+	public int findIndex(int[] array, int find)
+	{
+		for (int i = 0; i < array.length; i++)
+		{
+			if (array[i] == find)
+			{
+				return i;
+			}
+		}
+		return -1;
 	}
 	public int[] adjacentRooms(int location)
 	{
@@ -58,7 +70,7 @@ public class Cave
 		{
 			temp[i]=caveMap[location-1][i];
 		}
-		for(int i = Arrays.asList(caveMap[location-1]).indexOf(0) + 1; i < caveMap[location-1].length; i++)
+		for(int i = findIndex(caveMap[location-1], 0) + 1; i < caveMap[location-1].length; i++)
 		{
 			temp[i-1]=caveMap[location-1][i];
 		}
