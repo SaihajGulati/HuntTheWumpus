@@ -61,7 +61,7 @@ public class GameControl
 		Cave cave = new Cave(caveSelect);
 		GameLocations locations = new GameLocations(cave);
 		GI.gameGraphics();
-		startGame(GI, player, cave, locations);
+		startGame(GI, player, cave);
 	}
 			
 	/**
@@ -71,7 +71,7 @@ public class GameControl
 	 * @param player is the player class
 	 * @param cave is the cave class
 	 */
-	public static void startGame(GraphicalInterface GI, Player player, Cave cave, GameLocations locations) throws FileNotFoundException
+	public static void startGame(GraphicalInterface GI, Player player, Cave cave) throws FileNotFoundException
 	{
 		Scanner input = new Scanner(System.in);
 		System.out.println("Test");
