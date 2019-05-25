@@ -39,10 +39,20 @@ public class Cave
 			}
 		}
 	}
+	
+	/**
+	 * @return caveMap
+	 */
 	public int[][] getCaveMap()
 	{
 	    return caveMap;
 	}
+	
+	/**
+	 * 
+	 * @param location the player is
+	 * @return the tunnels/rooms the player can move to as an array
+	 */
 	public int[] tunnels(int location)
 	{
 		int[] temp = new int[findIndex(caveMap[location-1], 0)];
@@ -55,7 +65,6 @@ public class Cave
 	
 	
 	/**
-	 * this method finds the index of a value in the array
 	 * @param array which is the array to search in
 	 * @param find which is the value to find
 	 * @return index of first value in the array, -1 otherwise
@@ -72,6 +81,11 @@ public class Cave
 		}
 		return -1;
 	}
+	
+	/**
+	 * @param location the player is
+	 * @return the rooms adjacent to the room the player is in currently as an array
+	 */
 	public int[] adjacentRooms(int location)
 	{
 		int[] temp = new int[caveMap[location-1].length-1];
