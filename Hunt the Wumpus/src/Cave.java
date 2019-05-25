@@ -52,6 +52,14 @@ public class Cave
 		return temp;
 	}
 	
+	
+	/**
+	 * this method finds the index of a value in the array
+	 * @param array which is the array to search in
+	 * @param find which is the value to find
+	 * @return index of first value in the array, -1 otherwise
+	 */
+	
 	public int findIndex(int[] array, int find)
 	{
 		for (int i = 0; i < array.length; i++)
