@@ -16,6 +16,7 @@ Date:        Version:    Comments:
                                         to return whether the room is an edge room or inner room
                                         within the cave.
 5/23/2019    5            Fully implemented methods to read and return cave information.
+5/25/19      6 			  Added findIndex Method
  */                                      
 
 import java.io.*;
@@ -44,12 +45,32 @@ public class Cave
 	}
 	public int[] tunnels(int location)
 	{
-		int[] temp = new int[Arrays.asList(caveMap[location-1]).indexOf(0)];
+		int[] temp = new int[findIndex(caveMap[location-1], 0)];
 		for (int i= 0; i < temp.length; i++)
 		{
 			temp[i] = caveMap[location-1][i];
 		}
 		return temp;
+	}
+	
+	
+	/**
+	 * this method finds the index of a value in the array
+	 * @param array which is the array to search in
+	 * @param find which is the value to find
+	 * @return index of first value in the array, -1 otherwise
+	 */
+	
+	public int findIndex(int[] array, int find)
+	{
+		for (int i = 0; i < array.length; i++)
+		{
+			if (array[i] == find)
+			{
+				return i;
+			}
+		}
+		return -1;
 	}
 	public int[] adjacentRooms(int location)
 	{
@@ -58,7 +79,7 @@ public class Cave
 		{
 			temp[i]=caveMap[location-1][i];
 		}
-		for(int i = Arrays.asList(caveMap[location-1]).indexOf(0) + 1; i < caveMap[location-1].length; i++)
+		for(int i = findIndex(caveMap[location-1], 0) + 1; i < caveMap[location-1].length; i++)
 		{
 			temp[i-1]=caveMap[location-1][i];
 		}
