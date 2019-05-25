@@ -89,7 +89,7 @@ public class Cave
 	public int[] adjacentRooms(int location)
 	{
 		int[] temp = new int[caveMap[location-1].length-1];
-		for(int i = 0; i < Arrays.asList(caveMap[location-1]).indexOf(0); i++)
+		for(int i = 0; i < findIndex(caveMap[location-1], 0); i++)
 		{
 			temp[i]=caveMap[location-1][i];
 		}

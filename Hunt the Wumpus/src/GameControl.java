@@ -253,11 +253,11 @@ public class GameControl
 		{
 			System.out.println("Bats Nearby");
 		}
-		else if (hazards[1] > 0)
+		if (hazards[1] > 0)
 		{
 			System.out.println("I feel a draft nearby");
 		}
-		else if (hazards[2] > 0)
+		if (hazards[2] > 0)
 		{
 			System.out.println("I smell a Wumpus!");
 		}
