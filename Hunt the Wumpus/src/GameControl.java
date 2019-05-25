@@ -103,11 +103,19 @@ public class GameControl
 			} */
 			boolean start = false;
 			int room = GameLocations.getPlayerLocation();
-			System.out.println("Room: " + room);
+			System.out.println("You are in room " + room);
+			printHazards();
 			int[] rooms = cave.tunnels(room);
+			System.out.print("From here, you can move to rooms ");
+			for (int i = 0; i < rooms.length-1 ; i++)
+			{
+				System.out.print(rooms[i] + "," + " ");
+			}
+			System.out.print("or " + rooms[rooms.length-1] + ". ");
+			System.out.print("Which room would you like to go to? ");
 			int choice = input.nextInt();
+			System.out.println();
 			for(int i : rooms) {
-				System.out.println(i);
 				if(choice == i) {
 					start = true;
 				}
@@ -237,14 +245,23 @@ public class GameControl
 		return 0;
 	}
 	/**
-	 * 
-	 * @param int array of dangers with 0, 1, 2 being the bat, cave, and wumpus
-	 * @return the type of the cave given as an integer for easier handling
+	 * prints what hazards there are in adjacent rooms
 	 */
-	public static int[] Hazard(int[] dangers)
+	public static void printHazards()
 	{
-		//returns array of dangers in cave
-		return dangers;
+		int[] hazards = GameLocations.warning();
+		if (hazards[0] > 0)
+		{
+			System.out.println("Bats Nearby");
+		}
+		else if (hazards[1] > 0)
+		{
+			System.out.println("I feel a draft nearby");
+		}
+		else if (hazards[2] > 0)
+		{
+			System.out.println("I smell a Wumpus!");
+		}
 	}
 	/**
 	 * 
