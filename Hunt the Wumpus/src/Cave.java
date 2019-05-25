@@ -16,6 +16,7 @@ Date:        Version:    Comments:
                                         to return whether the room is an edge room or inner room
                                         within the cave.
 5/23/2019    5            Fully implemented methods to read and return cave information.
+5/25/19      6 			  Added findIndex Method
  */                                      
 
 import java.io.*;

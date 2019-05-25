@@ -28,11 +28,11 @@
  * 4/24/19: Version 1.8
  * Changed the scenario integers for askQuestions another time (buying hints/arrows is 0; 
  * falling into a pit is 1; encountering the Wumpus is 2)
-<<<<<<< HEAD
-=======
  * 5/15/19: Version 1.9
  * Changed the constructor to a method called loadFiles.
->>>>>>> branch 'master' of https://s-bryang@bitbucket.org/htw19_p3_artesiancode/htw19_p3_artesiancode.git
+ * 5/24/19: Version 2.0
+ * Changed the trivia answers to multiple-choice, including the modification of the class'
+ * associated text file.
 */
 import java.util.*;
 import java.io.*;
@@ -45,6 +45,10 @@ public class Trivia
                                               * The answers to the trivia questions; will be updated alongside
                                               * the triviaQuestions ArrayList.
                                               */
+    private static ArrayList<String> correctAnswers; /**
+                                              * The correct answers to the trivia questions
+                                              */
+    
     private static ArrayList<String> triviaInformation; /**
                                          * The trivia information that will be given out for every Player turn;
                                          * unlike the triviaAnswers ArrayList this array won't remove values for
@@ -63,6 +67,7 @@ public class Trivia
         input = new Scanner(trivia);
         triviaQuestions = new ArrayList<String>();
         triviaAnswers = new ArrayList<String>();
+        correctAnswers = new ArrayList<String>();
         triviaInformation = new ArrayList<String>();
         secrets = new ArrayList<String>();
         /**
@@ -71,13 +76,17 @@ public class Trivia
          * represent them.
          */
         while(input.hasNext()) 
-        {
+        {           
             String triviaLine = input.nextLine();
             if(!(triviaLine.equals("")))
             {
-                if(triviaLine.substring(0, 14).equals("The answer is "))
+                if(triviaLine.substring(0, 19).equals("Ans: The answer is "))
                 {
-                    triviaAnswers.add(triviaLine);
+                    correctAnswers.add(triviaLine.substring(5));
+                }
+                else if(triviaLine.substring(0, 5).equals("Ans: ")) 
+                {               
+                    triviaAnswers.add(triviaLine.substring(5));
                 }
                 else if(triviaLine.substring(0, 5).equals("Key: "))
                 {
@@ -96,10 +105,12 @@ public class Trivia
     }
     
     /**
-     * The purpose of this method is to ask the Player trivia questions and have him/her answer them; it will
-     * then compare the Player's response to the question's corresponding answer String in the triviaAnswers
+     * The purpose of this method is to ask the Player trivia questions and have him/her answer them by
+     * selecting one of four answer choices; it will
+     * then compare the Player's response to the question's corresponding one-letter answer String in the correctAnswers
      * ArrayList and return a boolean of whether the Player has answered the minimum number of questions correctly
-     * (depending on the scenario).
+     * (depending on the scenario). 
+     * Note: Answers are not case-sensitive.
      * 
      * @Param: scenario (The scenario that caused the Player to be asked the trivia, such as a Wumpus
      * encounter for example).
@@ -114,30 +125,42 @@ public class Trivia
     */
     public static boolean askQuestions(int scenario)
     {
-        int correctAnswers = 0;
+        int numCorrectAnswers = 0;
         int totalQuestions = 1;
         Scanner playerResponse = new Scanner(System.in);       
         if(scenario == 2)
         //Encountering the Wumpus
         {
-        	/**Allows the method to keep asking questions for the Wumpus encounter, until either
-        	 * 3 questions are answered correctly or a total of 5 questions have been asked.
-        	 */
-            while (correctAnswers < 3 && totalQuestions <= 5)
+            /**Allows the method to keep asking questions for the Wumpus encounter, until either
+             * 3 questions are answered correctly or a total of 5 questions have been asked.
+             */
+            while (numCorrectAnswers < 3 && totalQuestions <= 5)
             {
                 int questionNum = (int)(Math.random() * triviaQuestions.size());
-                String correctAnswer = triviaAnswers.get(questionNum).substring(14);
-                System.out.print(triviaQuestions.get(questionNum) + " ");
+                String correctAnswer = correctAnswers.get(questionNum).substring(14, 15);
+                String[] answers = triviaAnswers.get(questionNum).split(":");       
+                System.out.println(triviaQuestions.get(questionNum));
+                System.out.println("Please type either a, b, c, or d." + " ");
+                for(int i = 0; i < answers.length; i++)
+                {
+                    System.out.println(answers[i].substring(14));
+                }
                 String answer = playerResponse.nextLine();
                 if(answer.equalsIgnoreCase(correctAnswer))
                 {
-                    correctAnswers++;
+                    System.out.println("Correct!");
+                    numCorrectAnswers++;
+                }
+                else
+                {
+                    System.out.println("Incorrect.");
                 }
                 totalQuestions++;
                 triviaQuestions.remove(questionNum);
                 triviaAnswers.remove(questionNum);
+                correctAnswers.remove(questionNum);
             }
-            if(correctAnswers >= 3)
+            if(numCorrectAnswers >= 3)
             {
                 return true;
             }
@@ -145,25 +168,37 @@ public class Trivia
         else
         //Scenarios 0, 1: Buying arrows or hints, and falling into a bottomless pit
         {
-        	/**Allows the method to keep asking questions for all other scenarios besides the 
-        	 * Wumpus encounter, until either 2 questions have answered correctly or a total of 
-        	 * 3 questions have been asked.
-        	 */
-            while(correctAnswers < 2 && totalQuestions <= 3)
+            /**Allows the method to keep asking questions for all other scenarios besides the 
+             * Wumpus encounter, until either 2 questions have answered correctly or a total of 
+             * 3 questions have been asked.
+             */
+            while(numCorrectAnswers < 2 && totalQuestions <= 3)
             {
                 int questionNum = (int)(Math.random() * triviaQuestions.size());
-                String correctAnswer = triviaAnswers.get(questionNum).substring(14);
-                System.out.print(triviaQuestions.get(questionNum) + " ");
+                String correctAnswer = correctAnswers.get(questionNum).substring(14, 15);
+                String[] answers = triviaAnswers.get(questionNum).split(":");                
+                System.out.println(triviaQuestions.get(questionNum));
+                System.out.println("Please type either a, b, c, or d." + " ");
+                for(int i = 0; i < answers.length; i++)
+                {
+                   System.out.println(answers[i]);
+                }
                 String answer = playerResponse.nextLine();
                 if(answer.equalsIgnoreCase(correctAnswer))
                 {
-                    correctAnswers++;
+                   System.out.println("Correct!");
+                   numCorrectAnswers++;
+                }
+                else
+                {
+                    System.out.println("Incorrect.");
                 }
                 totalQuestions++;
                 triviaQuestions.remove(questionNum);
-                triviaAnswers.remove(questionNum); 
+                triviaAnswers.remove(questionNum);
+                correctAnswers.remove(questionNum);
             }
-            if(correctAnswers >= 2)
+            if(numCorrectAnswers >= 2)
             {
                 return true;
             }           
@@ -194,28 +229,28 @@ public class Trivia
     */
     public String returnHint(int currentRoom, int wumpusRoom, int batRoom, int pitRoom, boolean wumpusNear)
     {
-    	int numReturn = (int)(Math.random() * 6);
-    	if(numReturn == 5)
-    	{
-    		return giveTrivia();
-    	}
-    	if(numReturn == 4)
-    	{
-    		return wumpusNearPlayer(wumpusNear, numReturn);
-    	}
-    	if(numReturn == 3)
-    	{
-    		return secrets.get(numReturn) + " " + pitRoom;
-    	}
-    	if(numReturn == 2)
-    	{
-    		return secrets.get(numReturn) + " " + batRoom;
-    	}
-    	if(numReturn == 1)
-    	{
-    		return secrets.get(numReturn) + " " + wumpusRoom;
-    	}
-    	return secrets.get(numReturn) + " " + currentRoom;
+        int numReturn = (int)(Math.random() * 6);
+        if(numReturn == 5)
+        {
+            return giveTrivia();
+        }
+        if(numReturn == 4)
+        {
+            return wumpusNearPlayer(wumpusNear, numReturn);
+        }
+        if(numReturn == 3)
+        {
+            return secrets.get(numReturn) + " " + pitRoom;
+        }
+        if(numReturn == 2)
+        {
+            return secrets.get(numReturn) + " " + batRoom;
+        }
+        if(numReturn == 1)
+        {
+            return secrets.get(numReturn) + " " + wumpusRoom;
+        }
+        return secrets.get(numReturn) + " " + currentRoom;
     }
     
     /**
@@ -230,11 +265,11 @@ public class Trivia
     */
     public String wumpusNearPlayer(boolean wumpusNear, int num)
     {
-    	if(wumpusNear)
-    	{
-    		return secrets.get(num);
-    	}
-    	return secrets.get(num+1);
+        if(wumpusNear)
+        {
+            return secrets.get(num);
+        }
+        return secrets.get(num+1);
     }
     
     /**
