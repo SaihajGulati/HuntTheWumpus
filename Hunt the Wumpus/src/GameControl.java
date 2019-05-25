@@ -10,7 +10,9 @@
  * 2.0        3/8/19    Stubs added (fields and skeleton methods)
  * 3.0        3/19/19   Added calls to methods for testing and implemented a few methods
  * 4.0        3/25/19  Added starting point in main however needs to be fixed with GI
- * 5.0		  4/3/19  Fixed GI problems and added loop for main menu
+ * 5.0		  4/3/19   Fixed GI problems and added loop for main menu
+ * 6.0        5/15/19  Fixed alot of bugs with the main menu
+ * 7.0        5/25/19  Added code for printing to the console for checkpoints 2 and 3
 */
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -103,15 +105,12 @@ public class GameControl
 			} */
 			boolean start = false;
 			int room = GameLocations.getPlayerLocation();
+			printHazardLocs(); //for testing purposes
 			System.out.println("You are in room " + room);
-			printHazards();
+			printHazardWarnings();
 			int[] rooms = cave.tunnels(room);
-			System.out.print("From here, you can move to rooms ");
-			for (int i = 0; i < rooms.length-1 ; i++)
-			{
-				System.out.print(rooms[i] + "," + " ");
-			}
-			System.out.print("or " + rooms[rooms.length-1] + ". ");
+			System.out.print("From here, you can go to rooms ");
+			printArray(rooms, "or");
 			System.out.print("Which room would you like to go to? ");
 			int choice = input.nextInt();
 			System.out.println();
@@ -247,7 +246,7 @@ public class GameControl
 	/**
 	 * prints what hazards there are in adjacent rooms
 	 */
-	public static void printHazards()
+	public static void printHazardWarnings()
 	{
 		int[] hazards = GameLocations.warning();
 		if (hazards[0] > 0)
@@ -262,6 +261,38 @@ public class GameControl
 		{
 			System.out.println("I smell a Wumpus!");
 		}
+	}
+	
+	public static void printHazardLocs()
+	{
+		System.out.print("For testing:\nBats are located in rooms ");
+		printArray(GameLocations.getBatLocations(), "and");
+		System.out.print("Pits are located in rooms ");
+		printArray(GameLocations.getPitLocations(), "and");
+		System.out.println("Wumpus is located in room " + GameLocations.getWumpusLocation());
+		System.out.println();
+	}
+	
+	/**
+	 * prints out an array in normal english
+	 * @param array which is the array to print
+	 * @param the string representing the combining clause
+	 */
+	public static void printArray(int[] array, String andor)
+	{
+		if (array.length > 2)
+		{
+			for (int i = 0; i < array.length-1 ; i++)
+			{
+				System.out.print(array[i] + "," + " ");
+			}
+			System.out.print(andor + " " + array[array.length-1] + ". ");
+		}
+		else 
+		{
+			System.out.print(array[0] + " " + andor + " " + array[1] + ".");
+		}
+		System.out.println();
 	}
 	/**
 	 * 
