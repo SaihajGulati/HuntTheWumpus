@@ -39,9 +39,11 @@ public class GameControl
 	public static void main(String[] args) throws FileNotFoundException
 	{
 		//hello testing
+		
 		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
 		Player player = new Player();
 		ArrayList <String> scores = new ArrayList<String>();
+		Trivia.loadFiles();
 		//starts the game
 		scores.add(" 1. Cave 1; Bob; 44");
 		 scores.add(" 2. Cave 1; Josh; 34");
@@ -98,9 +100,10 @@ public class GameControl
 			}
 			if(start) {
 				GameLocations.movePlayer(choice);
+				room = GameLocations.getPlayerLocation();
 				for (int i: GameLocations.getBatLocations())
 				{
-					if(GameLocations.getPlayerLocation() == i) {//
+					if(room == i) {//
 						if(!Trivia.askQuestions(BATS)) {
 							break;
 						}
@@ -108,14 +111,14 @@ public class GameControl
 				}
 				for (int i: GameLocations.getPitLocations())
 				{
-					if(GameLocations.getPlayerLocation() == i) 
+					if(room == i) 
 					{
 						if(!Trivia.askQuestions(BATS)) {
 							break;
 						}		
 					}
 				}
-				if (GameLocations.getPlayerLocation() == GameLocations.getWumpusLocation())
+				if (room == GameLocations.getWumpusLocation())
 				{
 					if(!Trivia.askQuestions(WUMPUS)) {
 						break;
