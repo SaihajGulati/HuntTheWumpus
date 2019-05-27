@@ -80,29 +80,6 @@ public class GameControl
 		boolean inPit = false, inBats = false, inWumpus = false, isAlive = true;
 		//loop that runs the whole game while the player is alive;
 		while(player.getArrows() > 0 && isAlive) {
-			/*for (int i: GameLocations.getBatLocations())
-			{
-				if(GameLocations.getPlayerLocation() == i) {//
-					if(!Trivia.askQuestions(BATS)) {
-						break;
-					}
-				}
-			}
-			for (int i: GameLocations.getPitLocations())
-			{
-				if(GameLocations.getPlayerLocation() == i) 
-				{
-					if(!Trivia.askQuestions(BATS)) {
-						break;
-					}		
-				}
-			}
-			if (GameLocations.getPlayerLocation() == GameLocations.getWumpusLocation())
-			{
-				if(!Trivia.askQuestions(WUMPUS)) {
-					break;
-				}
-			} */
 			boolean start = false;
 			int room = GameLocations.getPlayerLocation();
 			printHazardLocs(); //for testing purposes
@@ -121,6 +98,29 @@ public class GameControl
 			}
 			if(start) {
 				GameLocations.movePlayer(choice);
+				for (int i: GameLocations.getBatLocations())
+				{
+					if(GameLocations.getPlayerLocation() == i) {//
+						if(!Trivia.askQuestions(BATS)) {
+							break;
+						}
+					}
+				}
+				for (int i: GameLocations.getPitLocations())
+				{
+					if(GameLocations.getPlayerLocation() == i) 
+					{
+						if(!Trivia.askQuestions(BATS)) {
+							break;
+						}		
+					}
+				}
+				if (GameLocations.getPlayerLocation() == GameLocations.getWumpusLocation())
+				{
+					if(!Trivia.askQuestions(WUMPUS)) {
+						break;
+					}
+				} 
 			}
 			
 		}
