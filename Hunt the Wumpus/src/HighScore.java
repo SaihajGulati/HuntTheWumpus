@@ -73,7 +73,7 @@ public class HighScore
     */
     public static void loadFiles() throws FileNotFoundException
     {
-        scoreBoard = new File("HighScores.txt");    
+        scoreBoard = new File("input/HighScores.txt");    
         //Scanner input = new Scanner(scoreBoard,"utf-8");
         input = new Scanner(scoreBoard);
         String userName = "";
