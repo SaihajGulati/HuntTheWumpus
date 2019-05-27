@@ -41,19 +41,110 @@ public static void start()
 
 public static void gameGraphics()
 {
-	StdDraw.clear();
-	//brother
-	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
-	StdDraw.show();
-	System.out.println("Yeeeeeeeeet");
+	int balls = 500;
+	double x = 0.5;
+    double y = 0.5;
+	//System.out.println("check0");
+	BallSprite [] player = new BallSprite[balls];
+	for(int i = 0; i<balls;i++)
+	{
+		player[i] = new BallSprite(x,y,0.01,i+1,balls);
+	}
 	
+
+	//System.out.println("check1");
+	while(true)
+	{
+		StdDraw.clear();
+		String to = getKeyTyped();
+		y= y+moveY(to,y);
+		x=x+moveX(to,x);
+	  //System.out.println("check2");
+      StdDraw.clear();
+      StdDraw.setPenColor(0,0,0);
+      StdDraw.filledRectangle(0.5, 0.5, 1, 1);
+  	for(int i = 0; i<balls;i++)
+  	{
+  		player[i].draw(x, y);
+  		//System.out.println("draw"+i);
+  	}
+  	StdDraw.setPenColor(250,250,250);
+  	StdDraw.filledCircle(x, y, 0.01);
+  	
+  	if(x > 1)
+  	{
+  		x = 0;
+  	}
+  	
+  	else if(x<0)
+  	{
+  		x = 1;
+  	}
+  	
+  	if(y > 1)
+  	{
+  		y = 0;
+  	}
+  	
+  	else if(y<0)
+  	{
+  		y = 1;
+  	}
+      StdDraw.show();
+      //StdDraw.pause(200);
+
+	}
 }
 
-private static void screenAlert()
+private static void room()
 {
 	
 }
 
+private static double moveX(String in, double x)
+{
+	 double mouse = StdDraw.mouseX();
+	double rate = 0.002;
+	
+	if(x<mouse+0.01 && x>mouse-0.01)	
+	{
+		return 0;
+	}
+	//yeet
+	if(x > mouse)
+	{
+		return -rate;
+	}
+	
+	else if(x < mouse+0.01)
+	{
+		return rate;
+	}
+	
+	return 0;
+}
+
+private static double moveY(String in, double y)
+{
+	double mouse = StdDraw.mouseY();
+	double rate = 0.002;
+	
+	if(y<mouse+0.01 && y>mouse-0.01)	
+	{
+		return 0;
+	}
+	if(y > mouse)
+	{
+		return -rate;
+	}
+	
+	else if(y < mouse)
+	{
+		return rate;
+	}
+	
+	return 0;
+}
 private static String getKeyTyped()
 {
 	char typed;
