@@ -225,7 +225,7 @@ public class Trivia
      * wumpusNear (whether the Wumpus is within 2 rooms of the Player).
      * 
      * @Return: String (the hint that the Player would eventually get from the purchase)
-     * 
+     * test
      * Other methods that returnHint may call: giveTrivia (if the array chosen happens to be triviaInformation where
      * the secret that the Player will receive is a piece of trivia, returnHint will call the giveTrivia method).
      * 

@@ -109,6 +109,7 @@ public class GameControl
 					if(choice == i) {
 						player.movePlayer();
 						System.out.println(Trivia.giveTrivia());
+						//commit
 						GameLocations.movePlayer(choice);//
 						room = GameLocations.getPlayerLocation();
 						for (int c: GameLocations.getBatLocations())
