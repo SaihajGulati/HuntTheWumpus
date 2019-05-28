@@ -47,7 +47,8 @@ public class Trivia
     private static Scanner input; //The Scanner used for the Trivia object
     private static File trivia; //The File that contains the trivia
     private static ArrayList<String> triviaQuestions; //The trivia questions that will be asked during the game 
-    private static ArrayList<String> triviaAnswers; /**
+    private static ArrayList<String> triviaAnswers;
+    										/**
                                               * The answers to the trivia questions; will be updated alongside
                                               * the triviaQuestions ArrayList.
                                               */
@@ -233,7 +234,8 @@ public class Trivia
      * Please note that this method may have to be called from gameControl after askQuestions returns its
      * boolean, as a method can only return one value at a time.
     */
-    public String returnHint(int currentRoom, int wumpusRoom, int batRoom, int pitRoom, boolean wumpusNear)
+    /* change this
+    public String returnHint()
     {
         int numReturn = (int)(Math.random() * 6);
         if(numReturn == 5)
@@ -258,6 +260,7 @@ public class Trivia
         }
         return secrets.get(numReturn) + " " + currentRoom;
     }
+    */
     
     /**
      * The purpose of this method is to determine whether the Wumpus is near the Player (based on the
