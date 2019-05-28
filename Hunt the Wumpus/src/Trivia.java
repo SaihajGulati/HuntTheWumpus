@@ -143,7 +143,7 @@ public class Trivia
                 System.out.println("Please type either a, b, c, or d." + " ");
                 for(int i = 0; i < answers.length; i++)
                 {
-                    System.out.println(answers[i].substring(14));
+                    System.out.println(answers[i]);
                 }
                 String answer = playerResponse.nextLine();
                 if(answer.equalsIgnoreCase(correctAnswer))
