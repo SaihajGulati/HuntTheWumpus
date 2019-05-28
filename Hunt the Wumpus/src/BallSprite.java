@@ -13,19 +13,31 @@ public class BallSprite{
 	private double MAXSIZE;
 	private double RATE;
 	private int COLOR;
+	double X;
+	double Y;
+	double BOUNDX;
+	double BOUNDY;
 	
-	public BallSprite(double x, double y, double size, double number, double ballnumber)
+	public BallSprite(double x, double y, double size, double shift, double boundX, double boundY)
 	{
 		BALLX = x;
 		BALLY = y;
 		RATE = 0.0001;
 		MAXSIZE = size;
-		SIZE = ballnumber*(MAXSIZE/number);
+		SIZE = shift;
 		COLOR = 250;
+		Y=0.5;
+		X= 0.5;
+		BOUNDX = boundX;
+		BOUNDY = boundY;
 	}
 	
-	public void draw(double x, double y)
+	public void draw()
 	{
+
+		Y=Y+moveY(Y);
+		X=X+moveX(X);
+		
 		
 		if(SIZE>MAXSIZE+0.1)
 		{
@@ -47,12 +59,69 @@ public class BallSprite{
 		
 		if(SIZE <= 0)
 		{
-			BALLX = x;
-			BALLY = y;
+			BALLX = X;
+			BALLY = Y;
 			SIZE = MAXSIZE;
 			COLOR = 250;
 		}
 		
+	}
+	
+	private double moveX( double x)
+	{
+		if(SIZE == MAXSIZE)
+		System.out.println(x);
+		 double mouse = StdDraw.mouseX();
+		double rate = 0.002;
+		
+		if(x <= 0.5-BOUNDX)
+		{
+			return rate;
+		}
+		
+		if(x<mouse+0.01 && x>mouse-0.01)	
+		{
+			return 0;
+		}
+		//yeet
+		if(x > mouse || x >= 0.5+BOUNDX)
+		{
+			return -rate;
+		}
+		
+		else if(x < mouse+0.01)
+		{
+			return rate;
+		}
+		
+		return 0;
+	}
+
+	private double moveY(double y)
+	{
+		double mouse = StdDraw.mouseY();
+		double rate = 0.002;
+		
+		if(y <= 0.5-BOUNDY)
+		{
+			return rate;
+		}
+		
+		if(y<mouse+0.01 && y>mouse-0.01)	
+		{
+			return 0;
+		}
+		if(y > mouse || y>= 0.5+BOUNDY)
+		{
+			return -rate;
+		}
+		
+		else if(y < mouse)
+		{
+			return rate;
+		}
+		
+		return 0;
 	}
 }
 	
