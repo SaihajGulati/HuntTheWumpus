@@ -113,7 +113,7 @@ public class GameControl
 				{
 					if(room == i) 
 					{
-						if(!Trivia.askQuestions(BATS)) {
+						if(!Trivia.askQuestions(HOLE)) {
 							break;
 						}		
 					}
