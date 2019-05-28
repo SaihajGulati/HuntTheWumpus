@@ -136,8 +136,11 @@ public class GameLocations {
     	   }
     	   if(room==wumpusLocation&&properRoom)
     		  return true;
-    	   moveWumpus();
+    	   else
+    	   {
+    		   moveWumpus();
               return false;
+    	   }
        }
        
        /*
