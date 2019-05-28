@@ -69,9 +69,9 @@ public class BallSprite{
 	
 	private double moveX( double x)
 	{
-		if(SIZE == MAXSIZE)
-		System.out.println(x);
-		 double mouse = StdDraw.mouseX();
+		if(SIZE == MAXSIZE);
+		//System.out.println(x);
+		double mouse = StdDraw.mouseX();
 		double rate = 0.002;
 		
 		if(x <= 0.5-BOUNDX)

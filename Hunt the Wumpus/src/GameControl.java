@@ -105,10 +105,11 @@ public class GameControl
 				System.out.print("From here, you can go to rooms " + arrayString(rooms, "or"));
 				System.out.print("Which room would you like to go to? ");
 				choice = input.nextInt();
-				player.movePlayer();
 				for(int i : rooms) {
 					if(choice == i) {
 						start = true;
+						player.movePlayer();
+						Trivia.accessHints();
 					}
 				}
 				if(start) {
