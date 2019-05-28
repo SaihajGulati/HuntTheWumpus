@@ -72,14 +72,14 @@ public class GameLocations {
        /*
         * Moves Wumpus if player wins argument or every random amount of time
         */
-//       public static void moveWumpus()
-//       {
-//    	  for(int i=0;i<(int)(Math.random()*3+2);i++)
-//    	  {
-//    		  int moveLocation=cave.tunnels(wumpusLocation)[(int)(Math.random()*cave.tunnels(wumpusLocation).length)];
-//    		  wumpusLocation=moveLocation;
-//    	  }
-//       }
+       public static void moveWumpus()
+       {
+    	  for(int i=0;i<(int)(Math.random()*3+2);i++)
+    	  {
+    		  int moveLocation=cave.tunnels(wumpusLocation)[(int)(Math.random()*cave.tunnels(wumpusLocation).length)];
+    		  wumpusLocation=moveLocation;
+    	  }
+       }
        
        /* 
         * Moves Player to room if possible
@@ -136,8 +136,11 @@ public class GameLocations {
     	   }
     	   if(room==wumpusLocation&&properRoom)
     		  return true;
-//    	   moveWumpus();
+    	   else
+    	   {
+    		   moveWumpus();
               return false;
+    	   }
        }
        
        /*
@@ -147,6 +150,7 @@ public class GameLocations {
        public static int triggerBat()
        {
     	   int i;
+    	   int x = playerLocation;
     	   if(playerLocation==batLocations[0])
     		   i=0;
     	   else
@@ -159,7 +163,7 @@ public class GameLocations {
            }
     	   while(playerLocation==pitLocations[0]||playerLocation==pitLocations[1]||
     			   playerLocation==batLocations[0]||playerLocation==batLocations[1]||
-    			   playerLocation==wumpusLocation)
+    			   playerLocation==wumpusLocation||playerLocation==x)
            {
          	  playerLocation=(int)(Math.random()*30+1);
            }

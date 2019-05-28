@@ -23,12 +23,18 @@ public class GraphicalInterface{
 	private int BAT;
 	private int WUMPUS;
 	private int HOLE;
+	private BallSprite [] player;
 
 	public GraphicalInterface(int b, int w, int h)
 	{
 		BAT = b;
 		WUMPUS = w;
 		HOLE = h;
+		player = new BallSprite[500];
+		for(int i = 0; i<500;i++)
+		{
+			player[i] = new BallSprite(0.5,0.5,0.01,(0.01/500)*i, 0.3, 0.3);
+		}
 		
 	}
 
@@ -39,112 +45,90 @@ public static void start()
 	StdDraw.setCanvasSize(1000, 700);
 }
 
-public static void gameGraphics()
+public void gameGraphics()
 {
-	int balls = 500;
-	double x = 0.5;
-    double y = 0.5;
-	//System.out.println("check0");
-	BallSprite [] player = new BallSprite[balls];
-	for(int i = 0; i<balls;i++)
-	{
-		player[i] = new BallSprite(x,y,0.01,i+1,balls);
-	}
-	
+	StdDraw.clear();
+	background();
+	room();
+	doors(true, true, true, false);
+	drawPlayer();
+	StdDraw.show();
+}
 
-	//System.out.println("check1");
-	while(true)
-	{
-		StdDraw.clear();
-		String to = getKeyTyped();
-		y= y+moveY(to,y);
-		x=x+moveX(to,x);
-	  //System.out.println("check2");
-      StdDraw.clear();
-      StdDraw.setPenColor(0,0,0);
-      StdDraw.filledRectangle(0.5, 0.5, 1, 1);
-  	for(int i = 0; i<balls;i++)
+private void drawPlayer()
+{
+  	for(int i = 0; i<500;i++)
   	{
-  		player[i].draw(x, y);
+  		player[i].draw();
   		//System.out.println("draw"+i);
   	}
-  	StdDraw.setPenColor(250,250,250);
-  	StdDraw.filledCircle(x, y, 0.01);
-  	
-  	if(x > 1)
-  	{
-  		x = 0;
-  	}
-  	
-  	else if(x<0)
-  	{
-  		x = 1;
-  	}
-  	
-  	if(y > 1)
-  	{
-  		y = 0;
-  	}
-  	
-  	else if(y<0)
-  	{
-  		y = 1;
-  	}
-      StdDraw.show();
-      //StdDraw.pause(200);
+}
 
-	}
+private void doors(boolean left, boolean right, boolean topdoor, boolean bottomdoor)
+{
+	leftdoor(left);
+	rightdoor(right);
+	topdoor(topdoor);
+	bottomdoor(bottomdoor);
+}
+
+private static void background()
+{
+	StdDraw.setPenColor(0,0,0);
+	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);
 }
 
 private static void room()
 {
-	
+	StdDraw.setPenColor( 32,32,32);
+	StdDraw.filledRectangle(0.5, 0.5, 0.3 , 0.3);
 }
 
-private static double moveX(String in, double x)
+private static void leftdoor(boolean active)
 {
-	 double mouse = StdDraw.mouseX();
-	double rate = 0.002;
-	
-	if(x<mouse+0.01 && x>mouse-0.01)	
+	StdDraw.setPenColor( 100,100,100);
+	if(active)
 	{
-		return 0;
-	}
-	//yeet
-	if(x > mouse)
-	{
-		return -rate;
+	StdDraw.setPenColor(150,0,0);
 	}
 	
-	else if(x < mouse+0.01)
-	{
-		return rate;
-	}
-	
-	return 0;
+	StdDraw.filledRectangle(0.2, 0.5, 0.007 , 0.2);
 }
 
-private static double moveY(String in, double y)
+private static void rightdoor(boolean active)
 {
-	double mouse = StdDraw.mouseY();
-	double rate = 0.002;
-	
-	if(y<mouse+0.01 && y>mouse-0.01)	
+	StdDraw.setPenColor(100,100,100);
+	if(active)
 	{
-		return 0;
-	}
-	if(y > mouse)
-	{
-		return -rate;
+	StdDraw.setPenColor(150,0,0);
 	}
 	
-	else if(y < mouse)
-	{
-		return rate;
-	}
-	
-	return 0;
+	StdDraw.filledRectangle(0.8, 0.5, 0.007 , 0.2);
 }
+
+private static void topdoor(boolean active)
+{
+	StdDraw.setPenColor(100,100,100);
+	if(active)
+	{
+	StdDraw.setPenColor(150,0,0);
+	}
+
+	StdDraw.filledRectangle(0.5, 0.8, 0.2 , 0.007);
+}
+
+private static void bottomdoor(boolean active)
+{
+	StdDraw.setPenColor(100,100,100);
+	if(active)
+	{
+	StdDraw.setPenColor(150,0,0);
+	}
+
+	StdDraw.filledRectangle(0.5, 0.2, 0.2 , 0.007);
+}
+
+
 private static String getKeyTyped()
 {
 	char typed;
