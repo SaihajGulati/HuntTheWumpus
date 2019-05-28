@@ -133,9 +133,9 @@ Key: Inside Out had the highest single-weekend gross that still came in second p
 Ans: The answer is d. Inside Out
 Ans: a. Frozen:b. World War Z:c. Incredibles 2:d. Inside Out 
 
-Hint: Your current room is Room #
-Hint: The Wumpus is currently in Room #
-Hint: There is a bat in Room #
-Hint: There is a pit in Room #
+Hint: Your current room is Room 
+Hint: The Wumpus is currently in Room 
+Hint: There are bats in Room 
+Hint: There are pits in Room 
 Hint: The Wumpus is in a room near you.
 Hint: The Wumpus is not in a room near you.

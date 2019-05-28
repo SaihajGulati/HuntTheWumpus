@@ -39,6 +39,9 @@
  * on its respective line in the code. Also added a "Q: " header to the beginning of the questions
  * so that the exceptions regarding the selection from triviaQuestions can be prevented (previously
  * that was a catch-all with just an else statement). 
+ * 5/28/19: Version 2.2
+ * Changed returnHint to now accept a GameLocations object and use its accessor methods when returning
+ * the secrets.
 */
 import java.util.*;
 import java.io.*;
@@ -242,25 +245,30 @@ public class Trivia
         {
             return wumpusNearPlayer(locator, numReturn);
         }
+        //Work on this
         if(numReturn == 3)
         {
-        	String returnString = "";
+        	int i = 0;
+        	String returnString = secrets.get(numReturn);
             int[] pitRooms = locator.getPitLocations();
-            for(int pitNum: pitRooms)
+            for(i = 0; i < pitRooms.length-1; i++)
             {
-            	returnString += secrets.get(numReturn) + pitNum;
+            	 returnString += " " + pitRooms[i] + ",";
             }
+            returnString += " " + pitRooms[i];
             return returnString;
         }
         //Work on this
         if(numReturn == 2)
         {
-        	String returnString = "";
+        	int i = 0;
+        	String returnString = secrets.get(numReturn);
             int[] batRooms = locator.getBatLocations();
-            for(int batNum: batRooms)
+            for(i = 0; i < batRooms.length-1; i++)
             {
-            	returnString += secrets.get(numReturn) + batNum;
+            	 returnString += " " + batRooms[i] + ",";
             }
+            returnString += " " + batRooms[i];
             return returnString;
         }
         if(numReturn == 1)
