@@ -86,7 +86,7 @@ public class GameControl
 		boolean start;
 		int[] rooms;
 		int choice;
-		while(player.getArrows() > 0 && player.getCoins() > 0) {
+		while(player.getArrows() > 0 && player.getCoins() > 0 || player.getTurns() == 0) {
 			GI.gameGraphics();
 			start = false;
 			room = GameLocations.getPlayerLocation();
@@ -105,6 +105,7 @@ public class GameControl
 				System.out.print("From here, you can go to rooms " + arrayString(rooms, "or"));
 				System.out.print("Which room would you like to go to? ");
 				choice = input.nextInt();
+				player.movePlayer();
 				for(int i : rooms) {
 					if(choice == i) {
 						start = true;
