@@ -38,8 +38,7 @@
  * when printing the different answer choices. (the removed error can be found commented out
  * on its respective line in the code. Also added a "Q: " header to the beginning of the questions
  * so that the exceptions regarding the selection from triviaQuestions can be prevented (previously
- * that was a catch-all with just an else statement).
- *  
+ * that was a catch-all with just an else statement). 
 */
 import java.util.*;
 import java.io.*;
@@ -48,7 +47,8 @@ public class Trivia
     private static Scanner input; //The Scanner used for the Trivia object
     private static File trivia; //The File that contains the trivia
     private static ArrayList<String> triviaQuestions; //The trivia questions that will be asked during the game 
-    private static ArrayList<String> triviaAnswers; /**
+    private static ArrayList<String> triviaAnswers;
+    										/**
                                               * The answers to the trivia questions; will be updated alongside
                                               * the triviaQuestions ArrayList.
                                               */
@@ -219,13 +219,10 @@ public class Trivia
      * from (triviaInformation or secrets) and then select a random String from one of those arrays to return
      * to the Player.
      * 
-     * @Params: int currentRoom (the number of the room that the Player is currently in), int wumpusRoom
-     * (the number of the room that the Wumpus is currently in), int batRoom (the number of one of the rooms
-     * that currently has a bat), int pitRoom (the number of one of the rooms with a bottomless pit), boolean
-     * wumpusNear (whether the Wumpus is within 2 rooms of the Player).
+     * @Params: GameLocations (the GameLocation object)
      * 
      * @Return: String (the hint that the Player would eventually get from the purchase)
-     * 
+     * test
      * Other methods that returnHint may call: giveTrivia (if the array chosen happens to be triviaInformation where
      * the secret that the Player will receive is a piece of trivia, returnHint will call the giveTrivia method).
      * 
@@ -234,7 +231,7 @@ public class Trivia
      * Please note that this method may have to be called from gameControl after askQuestions returns its
      * boolean, as a method can only return one value at a time.
     */
-    public String returnHint(int currentRoom, int wumpusRoom, int batRoom, int pitRoom, boolean wumpusNear)
+    public String returnHint(GameLocations locator)
     {
         int numReturn = (int)(Math.random() * 6);
         if(numReturn == 5)
@@ -243,21 +240,34 @@ public class Trivia
         }
         if(numReturn == 4)
         {
-            return wumpusNearPlayer(wumpusNear, numReturn);
+            return wumpusNearPlayer(locator, numReturn);
         }
         if(numReturn == 3)
         {
-            return secrets.get(numReturn) + " " + pitRoom;
+        	String returnString = "";
+            int[] pitRooms = locator.getPitLocations();
+            for(int pitNum: pitRooms)
+            {
+            	returnString += secrets.get(numReturn) + pitNum;
+            }
+            return returnString;
         }
+        //Work on this
         if(numReturn == 2)
         {
-            return secrets.get(numReturn) + " " + batRoom;
+        	String returnString = "";
+            int[] batRooms = locator.getBatLocations();
+            for(int batNum: batRooms)
+            {
+            	returnString += secrets.get(numReturn) + batNum;
+            }
+            return returnString;
         }
         if(numReturn == 1)
         {
-            return secrets.get(numReturn) + " " + wumpusRoom;
+            return secrets.get(numReturn) + " " + locator.getWumpusLocation();
         }
-        return secrets.get(numReturn) + " " + currentRoom;
+        return secrets.get(numReturn) + " " + locator.getPlayerLocation();
     }
     
     /**
@@ -265,14 +275,15 @@ public class Trivia
      * boolean passed from returnHint), then return the correct String depending on the location of the
      * Wumpus.
      * 
-     * @Param: boolean wumpusNear (whether the Wumpus is near the Player), int num (the random number
+     * @Param: GameLocation gameLocator (the GameLocations object, int num (the random number
      * generated to pick a hint from the secrets ArrayList).
      * 
      * @Return: String (the String telling whether the Wumpus is near the Player or not).
     */
-    public String wumpusNearPlayer(boolean wumpusNear, int num)
+    public String wumpusNearPlayer(GameLocations gameLocator, int num)
     {
-        if(wumpusNear)
+    	//Work on this
+        if(gameLocator.getWumpusLocation() == gameLocator.getPlayerLocation())
         {
             return secrets.get(num);
         }

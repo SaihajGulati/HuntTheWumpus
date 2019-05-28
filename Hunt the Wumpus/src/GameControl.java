@@ -80,14 +80,13 @@ public class GameControl
 		
 		Scanner input = new Scanner(System.in);
 		System.out.println("Test");
-		boolean inPit = false, inBats = false, inWumpus = false, isAlive = true;
 		//loop that runs the whole game while the player is alive;
 		String response;
 		int room;
 		boolean start;
 		int[] rooms;
 		int choice;
-		while(player.getArrows() > 0 && isAlive) {
+		while(player.getArrows() > 0 && player.getCoins() > 0 || player.getTurns() == 0) {
 			GI.gameGraphics();
 			start = false;
 			room = GameLocations.getPlayerLocation();
@@ -97,6 +96,10 @@ public class GameControl
 			System.out.print("Do you want to move, shoot an arrow, purchase more arrows, or purchase a secret? ");
 			response = input.nextLine().toLowerCase();
 			rooms = cave.tunnels(room);
+			if (response.equals(""))
+			{
+				response = input.nextLine();
+			}
 			if (response.indexOf("move") >= 0)
 			{
 				System.out.print("From here, you can go to rooms " + arrayString(rooms, "or"));
@@ -104,35 +107,39 @@ public class GameControl
 				choice = input.nextInt();
 				for(int i : rooms) {
 					if(choice == i) {
-						start = true;
-					}
-				}
-				if(start) {
-					GameLocations.movePlayer(choice);
-					room = GameLocations.getPlayerLocation();
-					for (int i: GameLocations.getBatLocations())
-					{
-						if(room == i) {//
-							room = GameLocations.triggerBat(); //hola
+						player.movePlayer();
+						System.out.println(Trivia.giveTrivia());
+						//commit
+						GameLocations.movePlayer(choice);//
+						room = GameLocations.getPlayerLocation();
+						for (int c: GameLocations.getBatLocations())
+						{
+							if(room == c) {//
+								player.changeCoins(-1);
+								room = GameLocations.triggerBat(); //hola
+								}
 							}
 						}
-					}
-					for (int i: GameLocations.getPitLocations())
-					{
-						if(room == i) 
+						for (int c: GameLocations.getPitLocations())
 						{
-							if(!Trivia.askQuestions(HOLE)) {
+							if(room == c) 
+							{
+								player.changeCoins(-1);
+								if(!Trivia.askQuestions(HOLE)) {
+									return;
+								}		
+							}
+						}
+						if (room == GameLocations.getWumpusLocation())
+						{
+							player.changeCoins(-1);
+							if(!Trivia.askQuestions(WUMPUS)) {
 								return;
-							}		
-						}
+							}
+						} 
 					}
-					if (room == GameLocations.getWumpusLocation())
-					{
-						if(!Trivia.askQuestions(WUMPUS)) {
-							return;
-						}
-					} 
-			}
+				}
+					
 			else if (response.indexOf("shoot") >= 0)
 			{
 				System.out.print("What room would you like to shoot into. You can shoot into " + arrayString(rooms, "or"));
@@ -149,21 +156,21 @@ public class GameControl
 				{
 					System.out.print("You have shot an arrow and ");
 					player.changeArrows(-1);
-					if (GameLocations.shootArrow(room))
+					if (GameLocations.shootArrow(roomShoot))
 					{
 						System.out.print("you hit the Wumpus! You won!");
 						return;
 					}
 					else 
 					{
-						System.out.println("you missed the Wumpus. Now you only have " + player.getArrows());
+						System.out.print("you missed the Wumpus. Now you only have " + player.getArrows());
 						if (player.getArrows() == 1)
 						{
 							System.out.print(" arrow left.");
 						}
 						else
 						{
-							System.out.print(" arrows left.");
+							System.out.println(" arrows left.");
 						}
 					}										
 				}
@@ -348,6 +355,7 @@ public class GameControl
 		}
 		return word;
 	}
+	
 	/**
 	 * 
 	 * @return whether or not the Wumpus is within 2 rooms of the player (for ease of use to the trivia class)
