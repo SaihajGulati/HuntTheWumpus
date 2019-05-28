@@ -33,6 +33,13 @@
  * 5/24/19: Version 2.0
  * Changed the trivia answers to multiple-choice, including the modification of the class'
  * associated text file.
+ * 5/27/19: Version 2.1
+ * Removed an error in the "Wumpus encounter" scenario, which was a ".substring(14)" statement
+ * when printing the different answer choices. (the removed error can be found commented out
+ * on its respective line in the code. Also added a "Q: " header to the beginning of the questions
+ * so that the exceptions regarding the selection from triviaQuestions can be prevented (previously
+ * that was a catch-all with just an else statement).
+ *  
 */
 import java.util.*;
 import java.io.*;
@@ -82,7 +89,7 @@ public class Trivia
             {
                 if(triviaLine.substring(0, 19).equals("Ans: The answer is "))
                 {
-                    correctAnswers.add(triviaLine.substring(5));
+                    correctAnswers.add(triviaLine.substring(19, 20));
                 }
                 else if(triviaLine.substring(0, 5).equals("Ans: ")) 
                 {               
@@ -96,9 +103,9 @@ public class Trivia
                 {
                     secrets.add(triviaLine.substring(6));
                 }
-                else
+                else if(triviaLine.substring(0, 3).equals("Q: "))
                 {
-                    triviaQuestions.add(triviaLine);
+                    triviaQuestions.add(triviaLine.substring(3));
                 }
             }
         }
@@ -137,13 +144,13 @@ public class Trivia
             while (numCorrectAnswers < 3 && totalQuestions <= 5)
             {
                 int questionNum = (int)(Math.random() * triviaQuestions.size());
-                String correctAnswer = correctAnswers.get(questionNum).substring(14, 15);
+                String correctAnswer = correctAnswers.get(questionNum);
                 String[] answers = triviaAnswers.get(questionNum).split(":");       
                 System.out.println(triviaQuestions.get(questionNum));
                 System.out.println("Please type either a, b, c, or d." + " ");
                 for(int i = 0; i < answers.length; i++)
                 {
-                    System.out.println(answers[i].substring(14));
+                    System.out.println(answers[i]); //System.out.println(answers[i].substring(14));
                 }
                 String answer = playerResponse.nextLine();
                 if(answer.equalsIgnoreCase(correctAnswer))
@@ -175,7 +182,7 @@ public class Trivia
             while(numCorrectAnswers < 2 && totalQuestions <= 3)
             {
                 int questionNum = (int)(Math.random() * triviaQuestions.size());
-                String correctAnswer = correctAnswers.get(questionNum).substring(14, 15);
+                String correctAnswer = correctAnswers.get(questionNum);
                 String[] answers = triviaAnswers.get(questionNum).split(":");                
                 System.out.println(triviaQuestions.get(questionNum));
                 System.out.println("Please type either a, b, c, or d." + " ");
@@ -315,5 +322,11 @@ public class Trivia
     public static ArrayList<String> accessHints()
     {
         return secrets;
+    }
+    
+    //test accessor method for correctAnswers ArrayList
+    public static ArrayList<String> getCorrectAnswers()
+    {
+        return correctAnswers;
     }
 }
