@@ -82,21 +82,26 @@ public class GameControl
 		System.out.println("Test");
 		boolean inPit = false, inBats = false, inWumpus = false, isAlive = true;
 		//loop that runs the whole game while the player is alive;
+		String response;
+		int room;
+		boolean start;
+		int[] rooms;
+		int choice;
 		while(player.getArrows() > 0 && isAlive) {
 			GI.gameGraphics();
-			boolean start = false;
-			int room = GameLocations.getPlayerLocation();
+			start = false;
+			room = GameLocations.getPlayerLocation();
 			printHazardLocs(); //for testing purposes
 			System.out.println("You are in room " + room);
 			printHazardWarnings();
 			System.out.print("Do you want to move, shoot an arrow, purchase more arrows, or purchase a secret? ");
-			String response = input.nextLine().toLowerCase();
-			int []rooms = cave.tunnels(room);
+			response = input.nextLine().toLowerCase();
+			rooms = cave.tunnels(room);
 			if (response.indexOf("move") >= 0)
 			{
 				System.out.print("From here, you can go to rooms " + arrayString(rooms, "or"));
 				System.out.print("Which room would you like to go to? ");
-				int choice = input.nextInt();
+				choice = input.nextInt();
 				for(int i : rooms) {
 					if(choice == i) {
 						start = true;
@@ -164,7 +169,7 @@ public class GameControl
 				}
 				
 			}
-			else
+			else if(response.equals(""))
 			{
 				System.out.println("Not a valid answer. Please try again.");
 			}
