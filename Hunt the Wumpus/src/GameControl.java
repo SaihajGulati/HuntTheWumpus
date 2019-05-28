@@ -111,7 +111,7 @@ public class GameControl
 					}
 				}
 				if(start) {
-					GameLocations.movePlayer(choice);
+					GameLocations.movePlayer(choice);//
 					room = GameLocations.getPlayerLocation();
 					for (int i: GameLocations.getBatLocations())
 					{
