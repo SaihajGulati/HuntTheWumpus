@@ -63,7 +63,7 @@ public class Trivia
     */
     public static void loadFiles() throws FileNotFoundException
     {
-        trivia = new File("input/Trivia.txt");
+        trivia = new File("Trivia.txt");
         input = new Scanner(trivia);
         triviaQuestions = new ArrayList<String>();
         triviaAnswers = new ArrayList<String>();
@@ -82,7 +82,7 @@ public class Trivia
             {
                 if(triviaLine.substring(0, 19).equals("Ans: The answer is "))
                 {
-                    correctAnswers.add(triviaLine.substring(5));
+                    correctAnswers.add(triviaLine.substring(19, 20));
                 }
                 else if(triviaLine.substring(0, 5).equals("Ans: ")) 
                 {               
@@ -137,7 +137,7 @@ public class Trivia
             while (numCorrectAnswers < 3 && totalQuestions <= 5)
             {
                 int questionNum = (int)(Math.random() * triviaQuestions.size());
-                String correctAnswer = correctAnswers.get(questionNum).substring(14, 15);
+                String correctAnswer = correctAnswers.get(questionNum);
                 String[] answers = triviaAnswers.get(questionNum).split(":");       
                 System.out.println(triviaQuestions.get(questionNum));
                 System.out.println("Please type either a, b, c, or d." + " ");
@@ -175,7 +175,7 @@ public class Trivia
             while(numCorrectAnswers < 2 && totalQuestions <= 3)
             {
                 int questionNum = (int)(Math.random() * triviaQuestions.size());
-                String correctAnswer = correctAnswers.get(questionNum).substring(14, 15);
+                String correctAnswer = correctAnswers.get(questionNum);
                 String[] answers = triviaAnswers.get(questionNum).split(":");                
                 System.out.println(triviaQuestions.get(questionNum));
                 System.out.println("Please type either a, b, c, or d." + " ");
@@ -315,5 +315,11 @@ public class Trivia
     public static ArrayList<String> accessHints()
     {
         return secrets;
+    }
+    
+    //test accessor method for correctAnswers ArrayList
+    public static ArrayList<String> getCorrectAnswers()
+    {
+        return correctAnswers;
     }
 }
