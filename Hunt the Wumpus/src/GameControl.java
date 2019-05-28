@@ -153,7 +153,7 @@ public class GameControl
 				{
 					System.out.print("You have shot an arrow and ");
 					player.changeArrows(-1);
-					if (GameLocations.shootArrow(room))
+					if (GameLocations.shootArrow(roomShoot))
 					{
 						System.out.print("you hit the Wumpus! You won!");
 						return;
