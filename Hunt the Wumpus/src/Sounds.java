@@ -24,6 +24,7 @@ public class Sounds
 	 */
 	public Sounds(int theme) throws MalformedURLException, FileNotFoundException
 	{
+		currentSounds = new AudioClip[8];
 		if (theme==1)
 		{
 			currentSounds[0] = Applet.newAudioClip(new File("input/movePlayer1.wav").toURI().toURL());
