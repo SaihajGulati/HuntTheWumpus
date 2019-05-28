@@ -77,6 +77,10 @@ public class GameControl
 	 */
 	public static void startGame(GraphicalInterface GI, Player player, Cave cave) throws FileNotFoundException
 	{
+		/*int x = 1;
+		while(x == 1) {
+			GI.gameGraphics();
+		}*/
 		Scanner input = new Scanner(System.in);
 		System.out.println("Test");
 		boolean inPit = false, inBats = false, inWumpus = false, isAlive = true;
