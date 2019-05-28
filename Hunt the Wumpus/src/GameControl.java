@@ -107,40 +107,39 @@ public class GameControl
 				choice = input.nextInt();
 				for(int i : rooms) {
 					if(choice == i) {
-						start = true;
 						player.movePlayer();
-						Trivia.accessHints();
-					}
-				}
-				if(start) {
-					GameLocations.movePlayer(choice);//
-					room = GameLocations.getPlayerLocation();
-					for (int i: GameLocations.getBatLocations())
-					{
-						if(room == i) {//
-							player.changeCoins(-1);
-							room = GameLocations.triggerBat(); //hola
+						System.out.println(Trivia.giveTrivia());
+						//commit
+						GameLocations.movePlayer(choice);//
+						room = GameLocations.getPlayerLocation();
+						for (int c: GameLocations.getBatLocations())
+						{
+							if(room == c) {//
+								player.changeCoins(-1);
+								room = GameLocations.triggerBat(); //hola
+								}
 							}
 						}
-					}
-					for (int i: GameLocations.getPitLocations())
-					{
-						if(room == i) 
+						for (int c: GameLocations.getPitLocations())
+						{
+							if(room == c) 
+							{
+								player.changeCoins(-1);
+								if(!Trivia.askQuestions(HOLE)) {
+									return;
+								}		
+							}
+						}
+						if (room == GameLocations.getWumpusLocation())
 						{
 							player.changeCoins(-1);
-							if(!Trivia.askQuestions(HOLE)) {
+							if(!Trivia.askQuestions(WUMPUS)) {
 								return;
-							}		
-						}
+							}
+						} 
 					}
-					if (room == GameLocations.getWumpusLocation())
-					{
-						player.changeCoins(-1);
-						if(!Trivia.askQuestions(WUMPUS)) {
-							return;
-						}
-					} 
-			}
+				}
+					
 			else if (response.indexOf("shoot") >= 0)
 			{
 				System.out.print("What room would you like to shoot into. You can shoot into " + arrayString(rooms, "or"));
@@ -356,6 +355,7 @@ public class GameControl
 		}
 		return word;
 	}
+	
 	/**
 	 * 
 	 * @return whether or not the Wumpus is within 2 rooms of the player (for ease of use to the trivia class)
