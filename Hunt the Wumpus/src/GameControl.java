@@ -97,6 +97,10 @@ public class GameControl
 			System.out.print("Do you want to move, shoot an arrow, purchase more arrows, or purchase a secret? ");
 			response = input.nextLine().toLowerCase();
 			rooms = cave.tunnels(room);
+			if (response.equals(""))
+			{
+				response = input.nextLine();
+			}
 			if (response.indexOf("move") >= 0)
 			{
 				System.out.print("From here, you can go to rooms " + arrayString(rooms, "or"));
@@ -156,14 +160,14 @@ public class GameControl
 					}
 					else 
 					{
-						System.out.println("you missed the Wumpus. Now you only have " + player.getArrows());
+						System.out.print("you missed the Wumpus. Now you only have " + player.getArrows());
 						if (player.getArrows() == 1)
 						{
 							System.out.print(" arrow left.");
 						}
 						else
 						{
-							System.out.print(" arrows left.");
+							System.out.println(" arrows left.");
 						}
 					}										
 				}
