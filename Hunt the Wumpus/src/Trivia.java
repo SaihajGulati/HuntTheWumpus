@@ -219,10 +219,7 @@ public class Trivia
      * from (triviaInformation or secrets) and then select a random String from one of those arrays to return
      * to the Player.
      * 
-     * @Params: int currentRoom (the number of the room that the Player is currently in), int wumpusRoom
-     * (the number of the room that the Wumpus is currently in), int batRoom (the number of one of the rooms
-     * that currently has a bat), int pitRoom (the number of one of the rooms with a bottomless pit), boolean
-     * wumpusNear (whether the Wumpus is within 2 rooms of the Player).
+     * @Params: GameLocations (the GameLocation object)
      * 
      * @Return: String (the hint that the Player would eventually get from the purchase)
      * test
@@ -234,8 +231,7 @@ public class Trivia
      * Please note that this method may have to be called from gameControl after askQuestions returns its
      * boolean, as a method can only return one value at a time.
     */
-    /* change this
-    public String returnHint()
+    public String returnHint(GameLocations locator)
     {
         int numReturn = (int)(Math.random() * 6);
         if(numReturn == 5)
@@ -244,37 +240,50 @@ public class Trivia
         }
         if(numReturn == 4)
         {
-            return wumpusNearPlayer(wumpusNear, numReturn);
+            return wumpusNearPlayer(locator, numReturn);
         }
         if(numReturn == 3)
         {
-            return secrets.get(numReturn) + " " + pitRoom;
+        	String returnString = "";
+            int[] pitRooms = locator.getPitLocations();
+            for(int pitNum: pitRooms)
+            {
+            	returnString += secrets.get(numReturn) + pitNum;
+            }
+            return returnString;
         }
+        //Work on this
         if(numReturn == 2)
         {
-            return secrets.get(numReturn) + " " + batRoom;
+        	String returnString = "";
+            int[] batRooms = locator.getBatLocations();
+            for(int batNum: batRooms)
+            {
+            	returnString += secrets.get(numReturn) + batNum;
+            }
+            return returnString;
         }
         if(numReturn == 1)
         {
-            return secrets.get(numReturn) + " " + wumpusRoom;
+            return secrets.get(numReturn) + " " + locator.getWumpusLocation();
         }
-        return secrets.get(numReturn) + " " + currentRoom;
+        return secrets.get(numReturn) + " " + locator.getPlayerLocation();
     }
-    */
     
     /**
      * The purpose of this method is to determine whether the Wumpus is near the Player (based on the
      * boolean passed from returnHint), then return the correct String depending on the location of the
      * Wumpus.
      * 
-     * @Param: boolean wumpusNear (whether the Wumpus is near the Player), int num (the random number
+     * @Param: GameLocation gameLocator (the GameLocations object, int num (the random number
      * generated to pick a hint from the secrets ArrayList).
      * 
      * @Return: String (the String telling whether the Wumpus is near the Player or not).
     */
-    public String wumpusNearPlayer(boolean wumpusNear, int num)
+    public String wumpusNearPlayer(GameLocations gameLocator, int num)
     {
-        if(wumpusNear)
+    	//Work on this
+        if(gameLocator.getWumpusLocation() == gameLocator.getPlayerLocation())
         {
             return secrets.get(num);
         }
