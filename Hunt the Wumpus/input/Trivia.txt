@@ -1,134 +1,134 @@
-What is the highest grossing movie worldwide?
+Q. What is the highest grossing movie worldwide?
 Key: Highest grossing movie worldwide: Avatar
 Ans: The answer is b. Avatar
 Ans: a. Avengers Endgame:b. Avatar:c. Titanic:d. Star Wars the Force Awakens
 
-Which film has the highest opening weekend domestically?
+Q. Which film has the highest opening weekend domestically?
 Key: Highest domestic opening weekend: Avengers Endgame
 Ans: The answer is a. Avengers Endgame
 Ans: a.Avengers Endgame:b. Star Wars the Force Awakens:c. Black Panther:d. Jurassic World
 
-How many films had crossed $2 billion worldwide?
+Q. How many films had crossed $2 billion worldwide?
 Key: 5 films have crossed $2 billion worldwide
 Ans: The answer is d. 5
 Ans: a. 4:b. 6:c. 3:d. 5
 
-What is the highest grossing animation worldwide?
+Q. What is the highest grossing animation worldwide?
 Key: Highest grossing animation worldwide: Frozen
 Ans: The answer is c. Frozen
 Ans: a. Minions:b. Incredibles 2:c. Frozen:d. Shrek 2
 
-How many of the 10 highest grossing movies are by Disney, after acquiring Fox?
+Q. How many of the 10 highest grossing movies are by Disney, after acquiring Fox?
 Key: Disney has 7 films in the 10 highest-grossing movies of all time.
 Ans: The answer is d. 7
 Ans: a. 8:b. 6:c. 5:d. 7
 
-How many Universal films are among the 10 highest-grossing worldwide?
+Q. How many Universal films are among the 10 highest-grossing worldwide?
 Key: Universal has 2 films in the Top 10 at the all-time global box office.
 Ans: The answer is b. 2
 Ans: a. 6:b. 2:c. 4:d. 5
 
-What is the highest-grossing film that still lost money at the box office?
+Q. What is the highest-grossing film that still lost money at the box office?
 Key: The highest-grossing "box office bomb" in terms of money earned is Justice League.
 Ans: The answer is b. Justice League
 Ans: a. Solo a Star Wars Story:b. Justice League:c. Transformers Age of Extinction:d. Dumbo
 
-Which film lost the most money at the box office?
+Q. Which film lost the most money at the box office?
 Key: Biggest money-loser of all time: John Carter
 Ans: The answer is c. John Carter
 Ans: a. Mars Needs Moms:b. King Arthur Legend of the Sword:c. John Carter:d. Mortal Engines
 
-What is the highest-grossing film that was released in the 20th century, in terms of unadjusted grosses?
+Q. What is the highest-grossing film that was released in the 20th century, in terms of unadjusted grosses?
 Key: Highest-grossing film released before 2000: Titanic
 Ans: The answer is a. Titanic
 Ans: a. Titanic:b. Gone with the Wind:c. Back to the Future:d. Star Wars Return of the Jedi
 
-Which film had the highest production budget?
+Q. Which film had the highest production budget?
 Key: The most expensive film ever made: Pirates of the Caribbean: On Stranger Tides
 Ans: The answer is d. Pirates of the Caribbean On Stranger Tides
 Ans: a. Avengers Age of Ultron:b. Pirates of the Caribbean at Worlds End:c. Avengers Endgame:d. Pirates of the Caribbean On Stranger Tides 
 
-As of 2019, which studio currently owns the highest-grossing movie ever?
+Q. As of 2019, which studio currently owns the highest-grossing movie ever?
 Key: The current studio that owns Avatar: Disney
 Ans: The answer is b. Disney
 Ans: a. Fox:b. Disney:c. Universal:d. Warner Bros 
 
-What is the highest-grossing film worldwide by Universal?
+Q. What is the highest-grossing film worldwide by Universal?
 Key: Highest-grossing Universal movie: Jurassic World
 Ans: The answer is c. Jurassic World
 Ans: a. Furious 7:b. Minions:c. Jurassic World:d. Harry Potter & the Deathly Hallows Part 2 
 
-What is the highest-grossing Warner Bros film worldwide?
+Q. What is the highest-grossing Warner Bros film worldwide?
 Key: Highest-grossing Warner Bros blockbuster: Harry Potter & the Deathly Hallows Part 2
 Ans: The answer is a. Harry Potter & the Deathly Hallows Part 2
 Ans: a. Harry Potter & the Deathly Hallows Part 2:b. Aquaman:c. Lord of the Rings the Return of the King:d. Batman vs. Superman Dawn of Justice 
 
-What is the highest-grossing film worldwide that didn't come out in the summer or holiday movie-going seasons?
+Q. What is the highest-grossing film worldwide that didn't come out in the summer or holiday movie-going seasons?
 Key: highest-grossing film worldwide that wasn't released in the summer or holiday seasons: Furious 7
 Ans: The answer is b. Furious 7
 Ans: a. Black Panther:b. Furious 7:c. Captain Marvel:d. Fate of the Furious
 
-What is the highest-grossing film in North America that didn't come out in the summer or holiday movie-going seasons?
+Q. What is the highest-grossing film in North America that didn't come out in the summer or holiday movie-going seasons?
 Key: highest-grossing film domestically that wasn't released in the summer or holiday seasons: Black Panther
 Ans: The answer is c. Black Panther
 Ans: a. Furious 7:b. Captain Marvel:c. Black Panther:d. Deadpool
 
-What is the highest-grossing G-rated movie of all time?
+Q. What is the highest-grossing G-rated movie of all time?
 Key: Highest-grossing G-rated film: Toy Story 3
 Ans: The answer is d. Toy Story 3
 Ans: a. Finding Nemo:b. The Lion King (1994):c. The Little Mermaid: d. Toy Story 3 
 
-What is the highest-grossing R-rated movie worldwide?
+Q. What is the highest-grossing R-rated movie worldwide?
 Key: Highest-grossing R-rated film: Deadpool
 Ans: The answer is d. Deadpool
 Ans: a. The Passion of the Christ:b. It:c. Logan:d. Deadpool
 
-What was the only Pixar film to bomb at the box office?
+Q. What was the only Pixar film to bomb at the box office?
 Key: Only Pixar movie that flopped: The Good Dinosaur
 Ans: The answer is c. The Good Dinosaur
 Ans: a. Cars 3:b. A Bug's Life:c. The Good Dinosaur:d. Coco
 
-What was the only Star Wars film to bomb at the box office?
+Q. What was the only Star Wars film to bomb at the box office?
 Key: Only Star Wars movie that flopped: Solo
 Ans: The answer is b. Solo a Star Wars Story
 Ans: a. The Last Jedi:b. Solo a Star Wars Story:c. A New Hope:d. Rogue One
 
-How many Illumination films have bombed at the box office?
+Q. How many Illumination films have bombed at the box office?
 Key: Illumination is still yet to score a box office bomb.
 Ans: The answer is c. 0
 Ans: a. 1:b. 6:c. 0:d. 2 
 
-How many Marvel comics films have bombed at the box office since 2000?
+Q. How many Marvel comics films have bombed at the box office since 2000?
 Key: A total of 8 Marvel comics films have bombed at the box office in the 21st century.
 Ans: The answer is a. 8
 Ans: a. 8:b. 7:c. 2:d. 1 
 
-How many Lucasfilm movies have bombed at the box office?
+Q. How many Lucasfilm movies have bombed at the box office?
 Key: Counting both Star Wars and non-Star Wars installments, 9 Lucasfilm movies have flopped in total.
 Ans: The answer is a. 9
 Ans: a. 9:b. 1:c. 2:d. 5
 
-What was the most profitable film of all time, in terms of its return of investment ratio?
+Q. What was the most profitable film of all time, in terms of its return of investment ratio?
 Key: Movie with highest return of investment ratio: Paranormal Activity
 Ans: The answer is c. Paranormal Activity
 Ans: a. Peter Pan:b. Annabelle:c. Paranormal Activity:d. Jaws  
 
-Which film had the highest second weekend drop at the domestic box office?
+Q. Which film had the highest second weekend drop at the domestic box office?
 Key: Highest domestic second-weekend drop: Collide
 Ans: The answer is b. Collide
 Ans: a. Hellboy (2019):b. Collide:c. Mortal Engines:d. Replicas 
 
-What film had the biggest single-week theater loss at the box office, not counting those that were pulled from theaters?
+Q. What film had the biggest single-week theater loss at the box office, not counting those that were pulled from theaters?
 Key: The biggest single-week drop in theater counts goes to The Darkest Minds.
 Ans: The answer is a. The Darkest Minds
 Ans: a. The Darkest Minds:b. Hellboy (2019):c. A Cure for Wellness:d. In the Heart of the Sea
 
-In North America, what was the highest-grossing film that never topped the box office?
+Q. In North America, what was the highest-grossing film that never topped the box office?
 Key: Highest-grossing movie domestically that never hit #1: Sing
 Ans: The answer is c. Sing
 Ans: a. The Greatest Showman:b. Pokemon Detective Pikachu:c. Sing:d. The Day After Tomorrow 
 
-Which film had the highest single-weekend gross that didn't rank at #1 for the weekend?
+Q. Which film had the highest single-weekend gross that didn't rank at #1 for the weekend?
 Key: Inside Out had the highest single-weekend gross that still came in second place during its respective weekend.
 Ans: The answer is d. Inside Out
 Ans: a. Frozen:b. World War Z:c. Incredibles 2:d. Inside Out 
