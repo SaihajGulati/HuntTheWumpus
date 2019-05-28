@@ -80,14 +80,13 @@ public class GameControl
 		
 		Scanner input = new Scanner(System.in);
 		System.out.println("Test");
-		boolean inPit = false, inBats = false, inWumpus = false, isAlive = true;
 		//loop that runs the whole game while the player is alive;
 		String response;
 		int room;
 		boolean start;
 		int[] rooms;
 		int choice;
-		while(player.getArrows() > 0 && isAlive) {
+		while(player.getArrows() > 0 && player.getCoins() > 0) {
 			GI.gameGraphics();
 			start = false;
 			room = GameLocations.getPlayerLocation();
@@ -117,6 +116,7 @@ public class GameControl
 					for (int i: GameLocations.getBatLocations())
 					{
 						if(room == i) {//
+							player.changeCoins(-1);
 							room = GameLocations.triggerBat(); //hola
 							}
 						}
@@ -125,6 +125,7 @@ public class GameControl
 					{
 						if(room == i) 
 						{
+							player.changeCoins(-1);
 							if(!Trivia.askQuestions(HOLE)) {
 								return;
 							}		
@@ -132,6 +133,7 @@ public class GameControl
 					}
 					if (room == GameLocations.getWumpusLocation())
 					{
+						player.changeCoins(-1);
 						if(!Trivia.askQuestions(WUMPUS)) {
 							return;
 						}
