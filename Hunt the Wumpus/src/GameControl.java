@@ -82,6 +82,7 @@ public class GameControl
 		boolean inPit = false, inBats = false, inWumpus = false, isAlive = true;
 		//loop that runs the whole game while the player is alive;
 		while(player.getArrows() > 0 && isAlive) {
+			GI.gameGraphics();
 			boolean start = false;
 			int room = GameLocations.getPlayerLocation();
 			printHazardLocs(); //for testing purposes
