@@ -147,6 +147,7 @@ public class GameLocations {
        public static int triggerBat()
        {
     	   int i;
+    	   int x = playerLocation;
     	   if(playerLocation==batLocations[0])
     		   i=0;
     	   else
@@ -159,7 +160,7 @@ public class GameLocations {
            }
     	   while(playerLocation==pitLocations[0]||playerLocation==pitLocations[1]||
     			   playerLocation==batLocations[0]||playerLocation==batLocations[1]||
-    			   playerLocation==wumpusLocation)
+    			   playerLocation==wumpusLocation||playerLocation==x)
            {
          	  playerLocation=(int)(Math.random()*30+1);
            }
