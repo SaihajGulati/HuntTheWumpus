@@ -114,14 +114,14 @@ public class GameControl
 					if(room == i) 
 					{
 						if(!Trivia.askQuestions(HOLE)) {
-							break;
+							return;
 						}		
 					}
 				}
 				if (room == GameLocations.getWumpusLocation())
 				{
 					if(!Trivia.askQuestions(WUMPUS)) {
-						break;
+						return;
 					}
 				} 
 			}
