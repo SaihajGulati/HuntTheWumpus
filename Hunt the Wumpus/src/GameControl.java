@@ -105,7 +105,7 @@ public class GameControl
 				{
 					if(room == i) {//
 						if(!Trivia.askQuestions(BATS)) {
-							GameLocations.triggerBat(); //hola
+							room = GameLocations.triggerBat(); //hola
 						}
 					}
 				}
