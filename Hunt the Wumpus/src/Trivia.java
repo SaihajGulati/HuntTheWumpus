@@ -36,7 +36,9 @@
  * 5/27/19: Version 2.1
  * Removed an error in the "Wumpus encounter" scenario, which was a ".substring(14)" statement
  * when printing the different answer choices. (the removed error can be found commented out
- * on its respective line in the code. 
+ * on its respective line in the code. Also added a "Q: " header to the beginning of the questions
+ * so that the exceptions regarding the selection from triviaQuestions can be prevented (previously
+ * that was a catch-all with just an else statement). 
 */
 import java.util.*;
 import java.io.*;
@@ -100,9 +102,9 @@ public class Trivia
                 {
                     secrets.add(triviaLine.substring(6));
                 }
-                else
+                else if(triviaLine.substring(0, 3).equals("Q: "))
                 {
-                    triviaQuestions.add(triviaLine);
+                    triviaQuestions.add(triviaLine.substring(3));
                 }
             }
         }
