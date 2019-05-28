@@ -77,10 +77,7 @@ public class GameControl
 	 */
 	public static void startGame(GraphicalInterface GI, Player player, Cave cave) throws FileNotFoundException
 	{
-		/*int x = 1;
-		while(x == 1) {
-			GI.gameGraphics();
-		}*/
+		
 		Scanner input = new Scanner(System.in);
 		System.out.println("Test");
 		boolean inPit = false, inBats = false, inWumpus = false, isAlive = true;
@@ -93,12 +90,11 @@ public class GameControl
 			System.out.println("You are in room " + room);
 			printHazardWarnings();
 			System.out.print("Do you want to move, shoot an arrow, purchase more arrows, or purchase a secret? ");
-			String response = input.next().toLowerCase();
-			if (response.equals("move"))
+			String response = input.nextLine().toLowerCase();
+			int []rooms = cave.tunnels(room);
+			if (response.indexOf("move") >= 0)
 			{
-				int[] rooms = cave.tunnels(room);
-				System.out.print("From here, you can go to rooms ");
-				printArray(rooms, "or");
+				System.out.print("From here, you can go to rooms " + arrayString(rooms, "or"));
 				System.out.print("Which room would you like to go to? ");
 				int choice = input.nextInt();
 				for(int i : rooms) {
@@ -134,17 +130,43 @@ public class GameControl
 			}
 			else if (response.indexOf("shoot") >= 0)
 			{
-				System.out.print("You have shot an arrow and ");
-				player.changeArrows(-1);
-				if (GameLocations.shootArrow(room))
+				System.out.print("What room would you like to shoot into. You can shoot into " + arrayString(rooms, "or"));
+				int roomShoot = input.nextInt();
+				while (findIndex(rooms, roomShoot) < 0)
 				{
-					System.out.print("you hit the Wumpus! You won!");
-					return;
+					System.out.println("Invalid room number typed. Please try again.");
+					System.out.print("What room would you like to shoot into. You can shoot into ");
+					arrayString(rooms, "or");
+					System.out.print(" ");
+					roomShoot = input.nextInt();
 				}
-				else 
+				if (findIndex(rooms, roomShoot) >= 0)	
 				{
-					System.out.println("you missed the Wumpus. Now you only have " + player.getArrows() + " arrows left.");
+					System.out.print("You have shot an arrow and ");
+					player.changeArrows(-1);
+					if (GameLocations.shootArrow(room))
+					{
+						System.out.print("you hit the Wumpus! You won!");
+						return;
+					}
+					else 
+					{
+						System.out.println("you missed the Wumpus. Now you only have " + player.getArrows());
+						if (player.getArrows() == 1)
+						{
+							System.out.print(" arrow left.");
+						}
+						else
+						{
+							System.out.print(" arrows left.");
+						}
+					}										
 				}
+				
+			}
+			else
+			{
+				System.out.println("Not a valid answer. Please try again.");
 			}
 			System.out.println();
 		}
@@ -291,10 +313,10 @@ public class GameControl
 	
 	public static void printHazardLocs()
 	{
-		System.out.print("For testing:\nBats are located in rooms ");
-		printArray(GameLocations.getBatLocations(), "and");
-		System.out.print("Pits are located in rooms ");
-		printArray(GameLocations.getPitLocations(), "and");
+		System.out.print("For testing:");
+		System.out.println();
+		System.out.println("Bats are located in rooms " + arrayString(GameLocations.getBatLocations(), "and"));
+		System.out.println("Pits are located in rooms " + arrayString(GameLocations.getPitLocations(), "and"));
 		System.out.println("Wumpus is located in room " + GameLocations.getWumpusLocation());
 		System.out.println();
 	}
@@ -304,21 +326,22 @@ public class GameControl
 	 * @param array which is the array to print
 	 * @param the string representing the combining clause
 	 */
-	public static void printArray(int[] array, String andor)
+	public static String arrayString(int[] array, String andor)
 	{
+		String word = "";
 		if (array.length > 2)
 		{
 			for (int i = 0; i < array.length-1 ; i++)
 			{
-				System.out.print(array[i] + "," + " ");
+				word += (array[i] + "," + " ");
 			}
-			System.out.print(andor + " " + array[array.length-1] + ". ");
+			word += (andor + " " + array[array.length-1] + ". ");
 		}
 		else 
 		{
-			System.out.print(array[0] + " " + andor + " " + array[1] + ".");
+			word += (array[0] + " " + andor + " " + array[1] + ".");
 		}
-		System.out.println();
+		return word;
 	}
 	/**
 	 * 
@@ -328,5 +351,23 @@ public class GameControl
 	{
 		//code here that asks game location to compare the the distance between the player and wumpus class
 		return false;
+	}
+	
+	/**
+	 * @param array which is the array to search in
+	 * @param find which is the value to find
+	 * @return index of first value in the array, -1 otherwise
+	 */
+	
+	public static int findIndex(int[] array, int find)
+	{
+		for (int i = 0; i < array.length; i++)
+		{
+			if (array[i] == find)
+			{
+				return i;
+			}
+		}
+		return -1;
 	}
 }
