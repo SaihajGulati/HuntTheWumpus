@@ -63,7 +63,7 @@ public class Trivia
     */
     public static void loadFiles() throws FileNotFoundException
     {
-        trivia = new File("Trivia.txt");
+        trivia = new File("input/Trivia.txt");
         input = new Scanner(trivia);
         triviaQuestions = new ArrayList<String>();
         triviaAnswers = new ArrayList<String>();
