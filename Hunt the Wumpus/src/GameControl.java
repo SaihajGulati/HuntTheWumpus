@@ -87,45 +87,64 @@ public class GameControl
 			printHazardLocs(); //for testing purposes
 			System.out.println("You are in room " + room);
 			printHazardWarnings();
-			int[] rooms = cave.tunnels(room);
-			System.out.print("From here, you can go to rooms ");
-			printArray(rooms, "or");
-			System.out.print("Which room would you like to go to? ");
-			int choice = input.nextInt();
-			System.out.println();
-			for(int i : rooms) {
-				if(choice == i) {
-					start = true;
+			System.out.print("Do you want to move, shoot an arrow, purchase more arrows, or purchase a secret? ");
+			String response = input.next().toLowerCase();
+			if (response.equals("move"))
+			{
+				int[] rooms = cave.tunnels(room);
+				System.out.print("From here, you can go to rooms ");
+				printArray(rooms, "or");
+				System.out.print("Which room would you like to go to? ");
+				int choice = input.nextInt();
+				for(int i : rooms) {
+					if(choice == i) {
+						start = true;
+					}
 				}
-			}
-			if(start) {
-				GameLocations.movePlayer(choice);
-				room = GameLocations.getPlayerLocation();
-				for (int i: GameLocations.getBatLocations())
-				{
-					if(room == i) {//
-						room = GameLocations.triggerBat(); //hola
+				if(start) {
+					GameLocations.movePlayer(choice);
+					room = GameLocations.getPlayerLocation();
+					for (int i: GameLocations.getBatLocations())
+					{
+						if(room == i) {//
+							room = GameLocations.triggerBat(); //hola
+							}
 						}
 					}
-				}
-				for (int i: GameLocations.getPitLocations())
-				{
-					if(room == i) 
+					for (int i: GameLocations.getPitLocations())
 					{
-						if(!Trivia.askQuestions(HOLE)) {
+						if(room == i) 
+						{
+							if(!Trivia.askQuestions(HOLE)) {
+								return;
+							}		
+						}
+					}
+					if (room == GameLocations.getWumpusLocation())
+					{
+						if(!Trivia.askQuestions(WUMPUS)) {
 							return;
-						}		
-					}
-				}
-				if (room == GameLocations.getWumpusLocation())
-				{
-					if(!Trivia.askQuestions(WUMPUS)) {
-						return;
-					}
-				} 
+						}
+					} 
 			}
-			
+			else if (response.indexOf("shoot") >= 0)
+			{
+				System.out.print("You have shot an arrow and ");
+				player.changeArrows(-1);
+				if (GameLocations.shootArrow(room))
+				{
+					System.out.print("you hit the Wumpus! You won!");
+					return;
+				}
+				else 
+				{
+					System.out.println("you missed the Wumpus. Now you only have " + player.getArrows() + " arrows left.");
+				}
+			}
+			System.out.println();
 		}
+			
+	}
 		//Testing out which oom they are in
 
 		
@@ -247,7 +266,7 @@ public class GameControl
 	/**
 	 * prints what hazards there are in adjacent rooms
 	 */
-	public static void printHazardWarnings()
+	public static boolean printHazardWarnings()
 	{
 		int[] hazards = GameLocations.warning();
 		if (hazards[0] > 0)
@@ -262,6 +281,7 @@ public class GameControl
 		{
 			System.out.println("I smell a Wumpus!");
 		}
+		return false;
 	}
 	
 	public static void printHazardLocs()
