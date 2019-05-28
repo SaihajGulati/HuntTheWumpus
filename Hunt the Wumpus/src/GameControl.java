@@ -104,8 +104,7 @@ public class GameControl
 				for (int i: GameLocations.getBatLocations())
 				{
 					if(room == i) {//
-						if(!Trivia.askQuestions(BATS)) {
-							room = GameLocations.triggerBat(); //hola
+						room = GameLocations.triggerBat(); //hola
 						}
 					}
 				}
@@ -130,7 +129,6 @@ public class GameControl
 		//Testing out which oom they are in
 
 		
-	}
 	/**
 	 * 
 	 * @param end if the game ends
