@@ -33,6 +33,10 @@
  * 5/24/19: Version 2.0
  * Changed the trivia answers to multiple-choice, including the modification of the class'
  * associated text file.
+ * 5/27/19: Version 2.1
+ * Removed an error in the "Wumpus encounter" scenario, which was a ".substring(14)" statement
+ * when printing the different answer choices. (the removed error can be found commented out
+ * on its respective line in the code. 
 */
 import java.util.*;
 import java.io.*;
@@ -143,7 +147,7 @@ public class Trivia
                 System.out.println("Please type either a, b, c, or d." + " ");
                 for(int i = 0; i < answers.length; i++)
                 {
-                    System.out.println(answers[i]);
+                    System.out.println(answers[i]); //System.out.println(answers[i].substring(14));
                 }
                 String answer = playerResponse.nextLine();
                 if(answer.equalsIgnoreCase(correctAnswer))
