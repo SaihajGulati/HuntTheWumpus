@@ -15,13 +15,9 @@ public class FlashingText{
 	private int [] COLOR;
 	private String MESSAGE;
 	
-	public FlashingText(double x, double y, int size, int rate, int colorR, int colorG, int colorB)
+	public FlashingText(int rate, int colorR, int colorG, int colorB)
 	{
-		X = x;
-		Y = y;
-
 		COUNTER = 0;
-		SIZE = size;
 		RATE = rate;
 		COLOR = new int [3];
 		COLOR [0] = colorR;
@@ -29,8 +25,11 @@ public class FlashingText{
 		COLOR [2] = colorB;
 	}
 	
-	public void draw( String message)
+	public void draw( String message, double x, double y, int size)
 	{
+		SIZE = size;
+		X =x;
+		Y=y;
 		MESSAGE = message;
 		
 		if(COUNTER > RATE/2)
