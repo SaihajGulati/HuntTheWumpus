@@ -115,7 +115,7 @@ public class GameControl
 						for (int c: GameLocations.getBatLocations())
 						{
 							if(room == c) {//
-								player.changeCoins(-1);
+								//player.changeCoins(-1);
 								room = GameLocations.triggerBat(); //hola
 								}
 							}
@@ -124,17 +124,23 @@ public class GameControl
 						{
 							if(room == c) 
 							{
-								player.changeCoins(-1);
+								//player.changeCoins(-1);
 								if(!Trivia.askQuestions(HOLE)) {
 									return;
 								}		
 							}
+							else {
+								break;
+							}
 						}
 						if (room == GameLocations.getWumpusLocation())
 						{
-							player.changeCoins(-1);
+							//player.changeCoins(-1);
 							if(!Trivia.askQuestions(WUMPUS)) {
 								return;
+							}
+							else {
+								break;
 							}
 						} 
 					}
