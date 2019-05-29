@@ -203,18 +203,25 @@ private int doors(int room1, int room2, int room3,double[] ballcords)
 	if(leftdoor(room1, ballcords))
 	{
 		toreturn = room1;
+		System.out.println(room1);
 	}
 	
 	if(rightdoor(room2, ballcords))
 	{
 		toreturn = room2;
+		System.out.println(room2);
 	}
 	
 	if(topdoor(room3, ballcords))
 	{
 		toreturn = room3;
+		System.out.println(room3);
 	}
 	
+	else
+		{
+		System.out.println("0");
+		}
 	return toreturn;	
 
 }
@@ -569,12 +576,12 @@ private static boolean inBox(double xcenter, double ycenter, double height, doub
     double x = xcord;
     double y = ycord;
     //System.out.println(x+" "+y);
-    if(x > xcenter-(width/10) && x< xcenter+(width/10))
+    if(x > xcenter-(width/50) && x< xcenter+(width/50))
     {
     	return true;
     }
     
-    if(y > ycenter-(height/10) && y < ycenter+(height/10))
+    if(y > ycenter-(height/50) && y < ycenter+(height/50))
     {
     	return true;
     }
