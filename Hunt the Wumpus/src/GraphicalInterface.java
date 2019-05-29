@@ -212,7 +212,8 @@ private int doors(int room1, int room2, int room3,double[] ballcords)
 			player[i] = new BallSprite(0.5,0.5,0.01,(0.01/500)*i, 0.3007, 0.3007);
 		}
 		
-		System.out.println(room1);
+		//System.out.println(room1);
+		StdDraw.pause(100);
 	}
 	
 	if(rightdoor(room2, ballcords))
@@ -226,7 +227,8 @@ private int doors(int room1, int room2, int room3,double[] ballcords)
 			player[i] = new BallSprite(0.5,0.5,0.01,(0.01/500)*i, 0.3007, 0.3007);
 		}
 		
-		System.out.println(room2);
+		//System.out.println(room2);
+		StdDraw.pause(100);
 	}
 	
 	if(topdoor(room3, ballcords))
@@ -240,7 +242,8 @@ private int doors(int room1, int room2, int room3,double[] ballcords)
 			player[i] = new BallSprite(0.5,0.5,0.01,(0.01/500)*i, 0.3007, 0.3007);
 		}
 		
-		System.out.println(room3);
+		//System.out.println(room3);
+		StdDraw.pause(100);
 	}
 	
 	if(ballcords[0] == 0.5)
@@ -248,10 +251,6 @@ private int doors(int room1, int room2, int room3,double[] ballcords)
 		return 0;
 	}
 	
-	else
-		{
-		System.out.println("0");
-		}
 	return toreturn;	
 
 }
@@ -606,17 +605,20 @@ private static boolean inBox(double xcenter, double ycenter, double height, doub
     double x = xcord;
     double y = ycord;
     //System.out.println(x+" "+y);
-    if(x > xcenter-(width/50) && x< xcenter+(width/50))
+    if((x < xcenter-(width) || x > xcenter+(width)) || (x>0.49 && x<0.51))
     {
-    	return true;
+    	return false;
     }
     
-    if(y > ycenter-(height/50) && y < ycenter+(height/50))
+    if((y < ycenter-(height) || y > ycenter+(height)) ||  (y>0.49 && y<0.51))
     {
-    	return true;
+    	
+    	return false;
     }
+    
     //System.out.println("YEE");
-    return false;     
+    System.out.println(x+" "+y);
+    return true;     
     
 }
 
