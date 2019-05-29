@@ -80,37 +80,100 @@ public class GameControl
 		
 		Scanner input = new Scanner(System.in);
 		System.out.println("Test");
-		//loop that runs the whole game while the player is alive;
-		String response;
-		int room;
-		boolean start;
-		int[] rooms;
-		int choice;
+		int response = 0; //response given by player in GI
+		int room; //room player is currently in
+		int[] temp; 
+		int[] rooms = new int[3];//the rooms around the player
+		int[] hazards = new int[3]; // 0: bat | 1 : Hole | 2 : Wumpus 
+		
+		//the while loop that runs the game while the player is alive, has arrows, and has coins
+		
 		while(player.getArrows() > 0 && player.getCoins() > 0 || player.getTurns() == 0) {
-			GI.gameGraphics();
-			start = false;
-			room = GameLocations.getPlayerLocation();
-			printHazardLocs(); //for testing purposes
-			System.out.println("You are in room " + room);
-			printHazardWarnings();
-			System.out.print("Do you want to move, shoot an arrow, purchase more arrows, or purchase a secret? ");
-			response = input.nextLine().toLowerCase();
-			rooms = cave.tunnels(room);
-			if (response.equals(""))
-			{
-				response = input.nextLine();
+			//while player hasn't chosen in GI yet
+			while(true) {
+				// simply sets the variables for later use
+				room = GameLocations.getPlayerLocation();
+				rooms = cave.tunnels(room);
+				hazards = GameLocations.warning();
+				response = GI.getRoom(rooms[0], rooms[1], rooms[2], hazards); //response gathered from player
+				if(response > 0)
+				{
+							player.movePlayer();
+							System.out.println(Trivia.giveTrivia()); 
+							//commit
+							GameLocations.movePlayer(response);//
+							room = GameLocations.getPlayerLocation();
+							for (int c: GameLocations.getBatLocations())
+							{
+								if(room == c) {//
+									player.changeCoins(-1);
+									room = GameLocations.triggerBat(); //hola
+									}
+								}
+							
+							for (int c: GameLocations.getPitLocations())
+							{
+								if(room == c) 
+								{
+									player.changeCoins(-1);
+									if(!Trivia.askQuestions(HOLE)) {
+										return;
+									}		
+								}
+								else {
+									break;
+								}
+							}
+							if (room == GameLocations.getWumpusLocation())
+							{
+								player.changeCoins(-1);
+								if(!Trivia.askQuestions(WUMPUS)) {
+									return;
+								}
+								else {
+									break;
+								}
+							} 
+						
+					}
+				else if (response == -1)
+				{
+					int arrowShot = 0;
+					
+					//while the player hasn't chosen a room yet, if -1 then it will go back
+					
+					while(arrowShot == 0 && arrowShot != -1) {
+						arrowShot = GI.shootArrow(rooms[0], rooms[1], rooms[2], hazards);
+					}
+						player.changeArrows(-1);
+						
+						//if the person decides to go back
+						
+						if(arrowShot != -1) {
+							if (GameLocations.shootArrow(arrowShot))
+							{
+								return; //player has won
+							}
+							else 
+							{
+								//add code for GI that states you missed
+							}	
+						}
+										
+					
+				}
 			}
-			if (response.indexOf("move") >= 0)
+			//printHazardLocs(); //for testing purposes
+			//saihaj is bad
+			
+			// If the player has chosen to move to a place instead of shooting
+			
+			if(response > 0)
 			{
-				System.out.print("From here, you can go to rooms " + arrayString(rooms, "or"));
-				System.out.print("Which room would you like to go to? ");
-				choice = input.nextInt();
-				for(int i : rooms) {
-					if(choice == i) {
 						player.movePlayer();
-						System.out.println(Trivia.giveTrivia());
+						System.out.println(Trivia.giveTrivia()); 
 						//commit
-						GameLocations.movePlayer(choice);//
+						GameLocations.movePlayer(response);//
 						room = GameLocations.getPlayerLocation();
 						for (int c: GameLocations.getBatLocations())
 						{
@@ -119,7 +182,7 @@ public class GameControl
 								room = GameLocations.triggerBat(); //hola
 								}
 							}
-						}
+						
 						for (int c: GameLocations.getPitLocations())
 						{
 							if(room == c) 
@@ -129,6 +192,9 @@ public class GameControl
 									return;
 								}		
 							}
+							else {
+								break;
+							}
 						}
 						if (room == GameLocations.getWumpusLocation())
 						{
@@ -136,51 +202,17 @@ public class GameControl
 							if(!Trivia.askQuestions(WUMPUS)) {
 								return;
 							}
+							else {
+								break;
+							}
 						} 
-					}
+					
 				}
 					
-			else if (response.indexOf("shoot") >= 0)
+			else if(response == 0)
 			{
-				System.out.print("What room would you like to shoot into. You can shoot into " + arrayString(rooms, "or"));
-				int roomShoot = input.nextInt();
-				while (findIndex(rooms, roomShoot) < 0)
-				{
-					System.out.println("Invalid room number typed. Please try again.");
-					System.out.print("What room would you like to shoot into. You can shoot into ");
-					arrayString(rooms, "or");
-					System.out.print(" ");
-					roomShoot = input.nextInt();
-				}
-				if (findIndex(rooms, roomShoot) >= 0)	
-				{
-					System.out.print("You have shot an arrow and ");
-					player.changeArrows(-1);
-					if (GameLocations.shootArrow(roomShoot))
-					{
-						System.out.print("you hit the Wumpus! You won!");
-						return;
-					}
-					else 
-					{
-						System.out.print("you missed the Wumpus. Now you only have " + player.getArrows());
-						if (player.getArrows() == 1)
-						{
-							System.out.print(" arrow left.");
-						}
-						else
-						{
-							System.out.println(" arrows left.");
-						}
-					}										
-				}
-				
+				// do nothing 
 			}
-			else if(response.equals(""))
-			{
-				System.out.println("Not a valid answer. Please try again.");
-			}
-			System.out.println();
 		}
 			
 	}
@@ -323,7 +355,7 @@ public class GameControl
 		return false;
 	}
 	
-	public static void printHazardLocs()
+	/*public static void printHazardLocs()
 	{
 		System.out.print("For testing:");
 		System.out.println();
@@ -331,7 +363,7 @@ public class GameControl
 		System.out.println("Pits are located in rooms " + arrayString(GameLocations.getPitLocations(), "and"));
 		System.out.println("Wumpus is located in room " + GameLocations.getWumpusLocation());
 		System.out.println();
-	}
+	}*/
 	
 	/**
 	 * prints out an array in normal english

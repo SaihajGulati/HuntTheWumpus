@@ -24,16 +24,19 @@ public class GraphicalInterface{
 	private int WUMPUS;
 	private int HOLE;
 	private BallSprite [] player;
-
-	public GraphicalInterface(int b, int w, int h)
+	private FlashingText WARNING;
+	
+	
+public GraphicalInterface(int b, int w, int h)
 	{
 		BAT = b;
 		WUMPUS = w;
 		HOLE = h;
+		WARNING = new FlashingText(350,180,0,0);
 		player = new BallSprite[500];
 		for(int i = 0; i<500;i++)
 		{
-			player[i] = new BallSprite(0.5,0.5,0.01,(0.01/500)*i, 0.3, 0.3);
+			player[i] = new BallSprite(0.5,0.5,0.01,(0.01/500)*i, 0.3007, 0.3007);
 		}
 		
 	}
@@ -45,31 +48,188 @@ public static void start()
 	StdDraw.setCanvasSize(1000, 700);
 }
 
-public void gameGraphics()
+//returns room or -1 for shoot arrow and -2 for buy a hint
+
+public int getRoom(int room1, int room2, int room3, int [] danger)
 {
+	int toreturn;
+	double[] ballcords = new double [2];
 	StdDraw.clear();
 	background();
 	room();
-	doors(true, true, true, false);
-	drawPlayer();
+	WariningSign(danger);
+	ballcords = drawPlayer();
+	toreturn = doors(room1, room2, room3,ballcords);
+	//ballcords = drawPlayer();
+	if(button(0.5, 0.1 , 0.15 , 0.055, "Shoot Arrow"))
+	{
+		toreturn = -1;
+	}
+	
+	if(button(0.2, 0.1 , 0.15 , 0.055, "Buy Hint"))
+	{
+		toreturn = -2;
+	}
+	
+	if(button(0.8, 0.1 , 0.15 , 0.055, "Exit"))
+	{
+		java.lang.System.exit(0);	
+	}
+
+	
 	StdDraw.show();
+	//System.out.println(toreturn);
+	return toreturn;
 }
 
-private void drawPlayer()
+public int shootArrow(int room1, int room2, int room3, int [] danger)
 {
-  	for(int i = 0; i<500;i++)
+	int toreturn;
+	double [] mousecords = {StdDraw.mouseX(), StdDraw.mouseY()};
+	StdDraw.clear();
+	background();
+	room();
+	WariningSign(danger);
+	toreturn = doors(room1, room2, room3,mousecords);
+
+	Font font = new Font("Copperplate Gothic Bold",0, 40);
+	StdDraw.setPenColor( 150,0,0);
+	StdDraw.setFont(font);
+	StdDraw.text(0.5, 0.25, "Click on a Room to Shoot");	
+	//ballcords = drawPlayer();
+	
+	if(button(0.5, 0.1 , 0.15 , 0.055, "Back"))
+	{
+		toreturn = -1;
+	}
+	arrowPath(toreturn);
+	StdDraw.show();
+	if(ClickedRelease() && toreturn > 0)
+	{
+	return toreturn;
+	}
+	
+	else if(toreturn<=0)
+	{
+		return toreturn;
+	}
+	
+	return 0;
+}
+
+private void arrowPath(int room)
+{
+	StdDraw.setPenColor(150,0,0);
+	if(room>0)
+	{
+		StdDraw.setPenColor(250,0,0);
+	}
+	StdDraw.setPenRadius(0.02);
+	StdDraw.line(0.5, 0.5, StdDraw.mouseX(), StdDraw.mouseY());
+	StdDraw.setPenRadius();
+}
+
+private void WariningSign(int [] danger)
+{
+	int dangers = 0;
+	int size = 0;
+	String message = " | ";
+	
+	for(int i = 0; i< danger.length;i++)
+	{
+		if(danger[i] > 0)
+		{
+			dangers++;
+			message+= dangerMessage(i)+" | ";
+		}
+	}
+	
+	if(dangers == 3)
+	{
+		size = 30;
+	}
+	
+	else if(dangers == 2)
+	{
+		size = 40;
+	}
+	
+	else if(dangers == 1)
+	{
+		size = 60;
+	}
+	
+	WARNING.draw(message,0.5, 0.9, size);	
+
+}
+
+private String dangerMessage (int danger)
+{
+	String toreturn = "";
+	if(danger == BAT)
+	{
+		toreturn += "There is a bat nearby";
+	}
+	
+	if(danger == WUMPUS)
+	{
+		toreturn += "I smell a wumpus";
+	}
+	
+	if(danger == HOLE)
+	{
+		toreturn += "I feel a draft";
+	}
+	
+	return toreturn;
+}
+
+private double[] drawPlayer()
+{
+  	for(int i = 0; i<499;i++)
   	{
   		player[i].draw();
   		//System.out.println("draw"+i);
   	}
+  	return player[499].draw();
 }
 
-private void doors(boolean left, boolean right, boolean topdoor, boolean bottomdoor)
+// Return room that player chose
+private int doors(int room1, int room2, int room3,double[] ballcords)
 {
-	leftdoor(left);
-	rightdoor(right);
-	topdoor(topdoor);
-	bottomdoor(bottomdoor);
+	int toreturn = 0; 
+	//ballcords = drawPlayer();
+	
+	
+	if(leftdoor(room1, ballcords))
+	{
+		toreturn = room1;
+		System.out.println(room1);
+	}
+	
+	if(rightdoor(room2, ballcords))
+	{
+		toreturn = room2;
+		System.out.println(room2);
+	}
+	
+	if(topdoor(room3, ballcords))
+	{
+		toreturn = room3;
+		System.out.println(room3);
+	}
+	
+	if(ballcords[0] == 0.5)
+	{
+		return 0;
+	}
+	
+	else
+		{
+		System.out.println("0");
+		}
+	return toreturn;	
+
 }
 
 private static void background()
@@ -84,50 +244,68 @@ private static void room()
 	StdDraw.filledRectangle(0.5, 0.5, 0.3 , 0.3);
 }
 
-private static void leftdoor(boolean active)
+private static boolean leftdoor(int room, double[] ballcords)
 {
+
 	StdDraw.setPenColor( 100,100,100);
-	if(active)
+	
+	if(room>0)
 	{
+	StdDraw.setPenColor( 255,255,255);
+	Font lable = new Font("Copperplate Gothic Bold",0, 20);
+	StdDraw.setFont(lable);
+	StdDraw.text(0.17, 0.5, ""+room);
 	StdDraw.setPenColor(150,0,0);
 	}
 	
 	StdDraw.filledRectangle(0.2, 0.5, 0.007 , 0.2);
+	
+	return inBox(0.2, 0.5, 0.007 , 0.2,ballcords[0], ballcords[1]);
 }
 
-private static void rightdoor(boolean active)
+private static boolean rightdoor(int room, double[] ballcords)
 {
-	StdDraw.setPenColor(100,100,100);
-	if(active)
+	StdDraw.setPenColor( 100,100,100);
+	
+	if(room>0)
 	{
+	StdDraw.setPenColor( 255,255,255);
+	Font lable = new Font("Copperplate Gothic Bold",0, 20);
+	StdDraw.setFont(lable);
+	StdDraw.text(0.83, 0.5, ""+room);
 	StdDraw.setPenColor(150,0,0);
 	}
 	
 	StdDraw.filledRectangle(0.8, 0.5, 0.007 , 0.2);
+	return inBox(0.8, 0.5, 0.007 , 0.2,ballcords[0], ballcords[1]);
 }
 
-private static void topdoor(boolean active)
+private static boolean topdoor(int room, double[] ballcords)
 {
-	StdDraw.setPenColor(100,100,100);
-	if(active)
+	StdDraw.setPenColor( 100,100,100);
+	
+	if(room>0)
 	{
+	StdDraw.setPenColor( 255,255,255);
+	Font lable = new Font("Copperplate Gothic Bold",0, 20);
+	StdDraw.setFont(lable);
+	StdDraw.text(0.5, 0.83, ""+room);
 	StdDraw.setPenColor(150,0,0);
 	}
-
+	
 	StdDraw.filledRectangle(0.5, 0.8, 0.2 , 0.007);
+	return inBox(0.5, 0.8, 0.2 , 0.007,ballcords[0], ballcords[1]);
+	
 }
 
 private static void bottomdoor(boolean active)
 {
-	StdDraw.setPenColor(100,100,100);
-	if(active)
-	{
+
 	StdDraw.setPenColor(150,0,0);
-	}
+
 
 	StdDraw.filledRectangle(0.5, 0.2, 0.2 , 0.007);
 }
-
 
 private static String getKeyTyped()
 {
@@ -202,7 +380,7 @@ public static String getName()
 	return name;
 }
 
-public static int caveSelection(ArrayList<String> scores)
+public int caveSelection(ArrayList<String> scores)
 {	double x = 0.2;
     double y = 0.5;
     double containerx= 0.15;
@@ -246,7 +424,7 @@ public static int caveSelection(ArrayList<String> scores)
 
 }
 
-public static int displayHighScores(ArrayList<String> scores)
+public int displayHighScores(ArrayList<String> scores)
 {
 	boolean displayscores = true;
 	while(displayscores)
@@ -258,7 +436,7 @@ public static int displayHighScores(ArrayList<String> scores)
 	
 }
 
-private static int displayCredits(ArrayList<String> scores)
+private int displayCredits(ArrayList<String> scores)
 {
 	boolean displaycredits = true;
 	while(displaycredits)
@@ -270,7 +448,7 @@ private static int displayCredits(ArrayList<String> scores)
 	
 }
 
-public static int mainmenu(ArrayList<String> scores)
+public int mainmenu(ArrayList<String> scores)
 {	
 	//System.out.println(scores);
 	int select = 0;
@@ -300,7 +478,6 @@ public static int mainmenu(ArrayList<String> scores)
 	   StdDraw.clear();
 	   return caveSelection(scores);		
 }
-
 private static int menubuttons()
 {	double x = 0.5;
     double y = 0.5;
@@ -401,6 +578,24 @@ private static boolean inBox(double xcenter, double ycenter, double height, doub
         
     }
 
+private static boolean inBox(double xcenter, double ycenter, double height, double width, double xcord, double ycord) {
+    double x = xcord;
+    double y = ycord;
+    //System.out.println(x+" "+y);
+    if(x > xcenter-(width/50) && x< xcenter+(width/50))
+    {
+    	return true;
+    }
+    
+    if(y > ycenter-(height/50) && y < ycenter+(height/50))
+    {
+    	return true;
+    }
+    //System.out.println("YEE");
+    return false;     
+    
+}
+
 private static boolean ClickedRelease() 
 {	
 	if(StdDraw.isMousePressed())
@@ -467,6 +662,5 @@ private static boolean credits(ArrayList<String> scores)
 	StdDraw.show();
 	return toMain;
 }
-
 
 }
