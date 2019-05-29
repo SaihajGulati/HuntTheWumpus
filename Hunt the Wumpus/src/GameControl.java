@@ -87,13 +87,12 @@ public class GameControl
 		int choice;
 		int[] hazards = new int[3]; // 0: bat | 1 : Hole | 2 : Wumpus
 		while(player.getArrows() > 0 && player.getCoins() > 0 || player.getTurns() == 0) {
+			room = GameLocations.getPlayerLocation();
 			rooms = cave.tunnels(room);
 			hazards = GameLocations.warning();
 			while(response == 0) {
 				response = GI.getRoom(rooms[0], rooms[1], rooms[2], hazards);
-			}
-			
-			room = GameLocations.getPlayerLocation();
+			}		
 			/*printHazardLocs(); //for testing purposes
 			System.out.println("You are in room " + room);
 			printHazardWarnings();
@@ -109,8 +108,6 @@ public class GameControl
 				//System.out.print("From here, you can go to rooms " + arrayString(rooms, "or"));
 				//System.out.print("Which room would you like to go to? ");
 				//choice = input.nextInt();
-				for(int i : rooms) {
-					if(choice == i) {
 						player.movePlayer();
 						System.out.println(Trivia.giveTrivia());
 						//commit
@@ -123,7 +120,7 @@ public class GameControl
 								room = GameLocations.triggerBat(); //hola
 								}
 							}
-						}
+						
 						for (int c: GameLocations.getPitLocations())
 						{
 							if(room == c) 
@@ -147,7 +144,7 @@ public class GameControl
 								break;
 							}
 						} 
-					}
+					
 				}
 					
 			else if (response == -1)
