@@ -144,7 +144,7 @@ public class Trivia
             /**Allows the method to keep asking questions for the Wumpus encounter, until either
              * 3 questions are answered correctly or a total of 5 questions have been asked.
              */
-            while (numCorrectAnswers < 3 && totalQuestions <= 5)
+            while (totalQuestions <= 5)
             {
                 int questionNum = (int)(Math.random() * triviaQuestions.size());
                 String correctAnswer = correctAnswers.get(questionNum);
@@ -169,10 +169,10 @@ public class Trivia
                 triviaQuestions.remove(questionNum);
                 triviaAnswers.remove(questionNum);
                 correctAnswers.remove(questionNum);
-            }
-            if(numCorrectAnswers >= 3)
-            {
-                return true;
+                if(numCorrectAnswers >= 3)
+                {
+                    return true;
+                }
             }
         }
         else
@@ -182,7 +182,7 @@ public class Trivia
              * Wumpus encounter, until either 2 questions have answered correctly or a total of 
              * 3 questions have been asked.
              */
-            while(numCorrectAnswers < 2 && totalQuestions <= 3)
+            while(totalQuestions <= 3)
             {
                 int questionNum = (int)(Math.random() * triviaQuestions.size());
                 String correctAnswer = correctAnswers.get(questionNum);
@@ -207,11 +207,12 @@ public class Trivia
                 triviaQuestions.remove(questionNum);
                 triviaAnswers.remove(questionNum);
                 correctAnswers.remove(questionNum);
+                if(numCorrectAnswers >= 2)
+                {
+                    return true;
+                }   
             }
-            if(numCorrectAnswers >= 2)
-            {
-                return true;
-            }           
+                    
         }
         return false;
     }
