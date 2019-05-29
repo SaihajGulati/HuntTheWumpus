@@ -82,15 +82,15 @@ public class GameControl
 		System.out.println("Test");
 		int response = 0; //response given by player in GI
 		int room; //room player is currently in
-		int[] rooms; //the rooms around the player
+		int[] temp; 
+		int[] rooms = new int[3];//the rooms around the player
 		int[] hazards = new int[3]; // 0: bat | 1 : Hole | 2 : Wumpus 
 		
 		//the while loop that runs the game while the player is alive, has arrows, and has coins
 		
 		while(player.getArrows() > 0 && player.getCoins() > 0 || player.getTurns() == 0) {
 			//while player hasn't chosen in GI yet
-			int x = 0;
-			while(x==0) {
+			while(true) {
 				// simply sets the variables for later use
 				room = GameLocations.getPlayerLocation();
 				rooms = cave.tunnels(room);
