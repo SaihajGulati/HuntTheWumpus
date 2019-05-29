@@ -88,15 +88,13 @@ public class GameControl
 		//the while loop that runs the game while the player is alive, has arrows, and has coins
 		
 		while(player.getArrows() > 0 && player.getCoins() > 0 || player.getTurns() == 0) {
-			// simply sets the variables for later use
-			room = GameLocations.getPlayerLocation();
-			rooms = cave.tunnels(room);
-			hazards = GameLocations.warning();
-			//
-			
 			//while player hasn't chosen in GI yet
 			int x = 0;
 			while(x==0) {
+				// simply sets the variables for later use
+				room = GameLocations.getPlayerLocation();
+				rooms = cave.tunnels(room);
+				hazards = GameLocations.warning();
 				response = GI.getRoom(rooms[0], rooms[1], rooms[2], hazards); //response gathered from player
 				if(response > 0)
 				{
@@ -138,6 +136,32 @@ public class GameControl
 							} 
 						
 					}
+				else if (response == -1)
+				{
+					int arrowShot = 0;
+					
+					//while the player hasn't chosen a room yet, if -1 then it will go back
+					
+					while(arrowShot == 0 && arrowShot != -1) {
+						arrowShot = GI.shootArrow(rooms[0], rooms[1], rooms[2], hazards);
+					}
+						player.changeArrows(-1);
+						
+						//if the person decides to go back
+						
+						if(arrowShot != -1) {
+							if (GameLocations.shootArrow(arrowShot))
+							{
+								return; //player has won
+							}
+							else 
+							{
+								//add code for GI that states you missed
+							}	
+						}
+										
+					
+				}
 			}
 			//printHazardLocs(); //for testing purposes
 			//saihaj is bad
@@ -185,32 +209,6 @@ public class GameControl
 					
 				}
 					
-			else if (response == -1)
-			{
-				int arrowShot = 0;
-				
-				//while the player hasn't chosen a room yet, if -1 then it will go back
-				
-				while(arrowShot == 0 && arrowShot != -1) {
-					arrowShot = GI.shootArrow(rooms[0], rooms[1], rooms[2], hazards);
-				}
-					player.changeArrows(-1);
-					
-					//if the person decides to go back
-					
-					if(arrowShot != -1) {
-						if (GameLocations.shootArrow(arrowShot))
-						{
-							return; //player has won
-						}
-						else 
-						{
-							//add code for GI that states you missed
-						}	
-					}
-									
-				
-			}
 			else if(response == 0)
 			{
 				// do nothing 
