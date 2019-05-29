@@ -99,7 +99,7 @@ public class GameControl
 			while(response == 0) {
 				response = GI.getRoom(rooms[0], rooms[1], rooms[2], hazards); //response gathered from player
 			}		
-			printHazardLocs(); //for testing purposes
+			//printHazardLocs(); //for testing purposes
 			
 			// If the player has chosen to move to a place instead of shooting
 			
@@ -316,7 +316,7 @@ public class GameControl
 		return false;
 	}
 	
-	public static void printHazardLocs()
+	/*public static void printHazardLocs()
 	{
 		System.out.print("For testing:");
 		System.out.println();
@@ -324,7 +324,7 @@ public class GameControl
 		System.out.println("Pits are located in rooms " + arrayString(GameLocations.getPitLocations(), "and"));
 		System.out.println("Wumpus is located in room " + GameLocations.getWumpusLocation());
 		System.out.println();
-	}
+	}*/
 	
 	/**
 	 * prints out an array in normal english
