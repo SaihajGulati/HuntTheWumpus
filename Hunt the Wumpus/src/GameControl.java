@@ -81,30 +81,35 @@ public class GameControl
 		Scanner input = new Scanner(System.in);
 		System.out.println("Test");
 		//loop that runs the whole game while the player is alive;
-		String response;
+		int response = 0;
 		int room;
 		boolean start;
 		int[] rooms;
 		int choice;
+		int[] hazards = new int[3]; // 0: bat | 1 : Hole | 2 : Wumpus
 		while(player.getArrows() > 0 && player.getCoins() > 0 || player.getTurns() == 0) {
-			GI.gameGraphics();
 			start = false;
+			while(response == 0) {
+				response = GI.getRoom(rooms[0], rooms[1], rooms[2], hazards);
+			}
+			
 			room = GameLocations.getPlayerLocation();
-			printHazardLocs(); //for testing purposes
+			/*printHazardLocs(); //for testing purposes
 			System.out.println("You are in room " + room);
 			printHazardWarnings();
 			System.out.print("Do you want to move, shoot an arrow, purchase more arrows, or purchase a secret? ");
 			response = input.nextLine().toLowerCase();
-			rooms = cave.tunnels(room);
 			if (response.equals(""))
 			{
 				response = input.nextLine();
 			}
-			if (response.indexOf("move") >= 0)
+			if (response.indexOf("move") >= 0)*/
+			rooms = cave.tunnels(room);
+			if(response > 0)
 			{
-				System.out.print("From here, you can go to rooms " + arrayString(rooms, "or"));
-				System.out.print("Which room would you like to go to? ");
-				choice = input.nextInt();
+				//System.out.print("From here, you can go to rooms " + arrayString(rooms, "or"));
+				//System.out.print("Which room would you like to go to? ");
+				//choice = input.nextInt();
 				for(int i : rooms) {
 					if(choice == i) {
 						player.movePlayer();
@@ -146,7 +151,7 @@ public class GameControl
 					}
 				}
 					
-			else if (response.indexOf("shoot") >= 0)
+			else if (response == -1)
 			{
 				System.out.print("What room would you like to shoot into. You can shoot into " + arrayString(rooms, "or"));
 				int roomShoot = input.nextInt();
@@ -182,7 +187,7 @@ public class GameControl
 				}
 				
 			}
-			else if(response.equals(""))
+			else if(response == 0)
 			{
 				System.out.println("Not a valid answer. Please try again.");
 			}
