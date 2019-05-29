@@ -42,6 +42,9 @@
  * 5/28/19: Version 2.2
  * Changed returnHint to now use the accessor methods of GameLocations when returning
  * the secrets. Also modified wumpusNearPlayer to use GameLocations' methods as well.
+ * 5/29/19: Version 2.3
+ * Replaced askedQuestions with getQuestion and checkAnswer (gameControl may now need to keep track
+ * of the number of correct answers).
 */
 import java.util.*;
 import java.io.*;
@@ -65,6 +68,8 @@ public class Trivia
                                          * every question asked.
                                          */
     private static ArrayList<String> secrets; //The secrets that will be given to the Player when he/she buys them.
+    private static int questionNum; /**The number of the question currently asked by Trivia, along
+    * with its corresponding answers.
     
     /**
      * The method for the Trivia class that will handle the File processing and fill the
@@ -115,106 +120,45 @@ public class Trivia
     }
     
     /**
-     * The purpose of this method is to ask the Player trivia questions and have him/her answer them by
-     * selecting one of four answer choices; it will
-     * then compare the Player's response to the question's corresponding one-letter answer String in the correctAnswers
-     * ArrayList and return a boolean of whether the Player has answered the minimum number of questions correctly
-     * (depending on the scenario). 
-     * Note: Answers are not case-sensitive.
+     * Gets a random question from the triviaQuestions ArrayList and adds its respective multiple-choice answers
+     * (on different lines using "\n"), before returning them to GameControl.
      * 
-     * @Param: scenario (The scenario that caused the Player to be asked the trivia, such as a Wumpus
-     * encounter for example).
+     * @Param: Void
      * 
-     * @Return: boolean (Whether the Player has answered the minimum number of questions correctly, 
-     * depending on their scenario)
+     * @return: String (the trivia question)
      * 
-     * Precondition: the Player's scenario is either buying arrows/hints, falling into a bottomless pit,
-     * or encountering the Wumpus.
-     * 
-     * Postcondition: Any question asked in the method will never be asked again.
-    */
-    public static boolean askQuestions(int scenario)
+     * Please note that GameControl will now have to keep track of the number of correct answers, since Trivia
+     * can no longer do that with these two methods rather than askQuestions.
+     */
+    public static String getQuestion()
     {
-        int numCorrectAnswers = 0;
-        int totalQuestions = 1;
-        Scanner playerResponse = new Scanner(System.in);       
-        if(scenario == 2)
-        //Encountering the Wumpus
+    	questionNum = (int)(Math.random() * triviaQuestions.size());
+    	String[] answers = triviaAnswers.get(questionNum).split(":");           
+    	String returnString = triviaQuestions.get(questionNum) + "\nPlease type either a, b, c, or d.";
+    	for(int i = 0; i < answers.length; i++)
         {
-            /**Allows the method to keep asking questions for the Wumpus encounter, until either
-             * 3 questions are answered correctly or a total of 5 questions have been asked.
-             */
-            while (numCorrectAnswers < 3 && totalQuestions <= 5)
-            {
-                int questionNum = (int)(Math.random() * triviaQuestions.size());
-                String correctAnswer = correctAnswers.get(questionNum);
-                String[] answers = triviaAnswers.get(questionNum).split(":");       
-                System.out.println(triviaQuestions.get(questionNum));
-                System.out.println("Please type either a, b, c, or d." + " ");
-                for(int i = 0; i < answers.length; i++)
-                {
-                    System.out.println(answers[i]); //System.out.println(answers[i].substring(14));
-                }
-                String answer = playerResponse.nextLine();
-                if(answer.equalsIgnoreCase(correctAnswer))
-                {
-                    System.out.println("Correct!");
-                    numCorrectAnswers++;
-                }
-                else
-                {
-                    System.out.println("Incorrect.");
-                }
-                totalQuestions++;
-                triviaQuestions.remove(questionNum);
-                triviaAnswers.remove(questionNum);
-                correctAnswers.remove(questionNum);                
-            }
-            if(numCorrectAnswers >= 3)
-            {
-                return true;
-            }
-            return false;
+          returnString += "\n" + answers[i];
         }
-        else
-        //Scenarios 0, 1: Buying arrows or hints, and falling into a bottomless pit
-        {
-            /**Allows the method to keep asking questions for all other scenarios besides the 
-             * Wumpus encounter, until either 2 questions have answered correctly or a total of 
-             * 3 questions have been asked.
-             */
-            while(numCorrectAnswers < 2 && totalQuestions <= 3)
-            {
-                int questionNum = (int)(Math.random() * triviaQuestions.size());
-                String correctAnswer = correctAnswers.get(questionNum);
-                String[] answers = triviaAnswers.get(questionNum).split(":");                
-                System.out.println(triviaQuestions.get(questionNum));
-                System.out.println("Please type either a, b, c, or d." + " ");
-                for(int i = 0; i < answers.length; i++)
-                {
-                   System.out.println(answers[i]);
-                }
-                String answer = playerResponse.nextLine();
-                if(answer.equalsIgnoreCase(correctAnswer))
-                {
-                   System.out.println("Correct!");
-                   numCorrectAnswers++;
-                }
-                else
-                {
-                    System.out.println("Incorrect.");
-                }
-                totalQuestions++;
-                triviaQuestions.remove(questionNum);
-                triviaAnswers.remove(questionNum);
-                correctAnswers.remove(questionNum);
-            }
-            if(numCorrectAnswers >= 2)
-            {
-                return true;
-            }   
-            return false;          
-        }
+    	return returnString;
+    }
+    
+    /**
+     * This method takes a String as a parameter (the user input) and compares it with the correct answer as
+     * specified by correctAnswers' respective answer (position of questionNum in the ArrayList).
+     * 
+     * @param: String answer (the user-inputted answer as a parameter given by GameControl
+     * 
+     * @return: boolean (whether the Player answered the question correctly)
+     * 
+     * Pre-Condition: getQuestion has already been called before checkAnswers.
+     */
+    public static boolean checkAnswer(String answer)
+    {
+    	String correctAnswer = correctAnswers.get(questionNum);
+    	triviaQuestions.remove(questionNum);
+        triviaAnswers.remove(questionNum);
+        correctAnswers.remove(questionNum);
+    	return answer.equalsIgnoreCase(correctAnswer);
     }
     
     /**
