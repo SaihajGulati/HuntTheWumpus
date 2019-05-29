@@ -136,7 +136,7 @@ public class Trivia
     public static boolean askQuestions(int scenario)
     {
         int numCorrectAnswers = 0;
-        int totalQuestions = 1;
+        int totalQuestions = 0;
         Scanner playerResponse = new Scanner(System.in);       
         if(scenario == 2)
         //Encountering the Wumpus
