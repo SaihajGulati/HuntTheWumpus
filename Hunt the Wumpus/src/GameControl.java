@@ -83,12 +83,12 @@ public class GameControl
 		//loop that runs the whole game while the player is alive;
 		int response = 0;
 		int room;
-		boolean start;
 		int[] rooms;
 		int choice;
 		int[] hazards = new int[3]; // 0: bat | 1 : Hole | 2 : Wumpus
 		while(player.getArrows() > 0 && player.getCoins() > 0 || player.getTurns() == 0) {
-			start = false;
+			rooms = cave.tunnels(room);
+			hazards = GameLocations.warning();
 			while(response == 0) {
 				response = GI.getRoom(rooms[0], rooms[1], rooms[2], hazards);
 			}
@@ -104,7 +104,6 @@ public class GameControl
 				response = input.nextLine();
 			}
 			if (response.indexOf("move") >= 0)*/
-			rooms = cave.tunnels(room);
 			if(response > 0)
 			{
 				//System.out.print("From here, you can go to rooms " + arrayString(rooms, "or"));
