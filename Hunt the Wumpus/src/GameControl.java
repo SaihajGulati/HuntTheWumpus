@@ -100,6 +100,7 @@ public class GameControl
 				response = GI.getRoom(rooms[0], rooms[1], rooms[2], hazards); //response gathered from player
 			}		
 			//printHazardLocs(); //for testing purposes
+			//saihaj is bad
 			
 			// If the player has chosen to move to a place instead of shooting
 			
