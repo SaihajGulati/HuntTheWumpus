@@ -186,8 +186,8 @@ public class GameControl
 	 * @param locations The GameLocations class
 	 * @throws FileNotFoundException 
 	 */
-	public static void endGame(int caveName, String Name, int score) {
-		
+	public static void endGame(int caveName, String Name, int score) throws FileNotFoundException{
+		HighScore.updateScoreBoard(score, Name, caveName);
 	}	
 	/**
 	 * prints what hazards there are in adjacent rooms
