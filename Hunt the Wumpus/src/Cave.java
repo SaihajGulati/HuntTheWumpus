@@ -47,6 +47,7 @@ public class Cave
 	{
 	    return caveMap;
 	}
+	//okay
 	
 	/**
 	 * 
