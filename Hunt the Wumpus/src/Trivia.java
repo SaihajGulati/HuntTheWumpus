@@ -174,6 +174,7 @@ public class Trivia
                     return true;
                 }
             }
+            return false;
         }
         else
         //Scenarios 0, 1: Buying arrows or hints, and falling into a bottomless pit
@@ -212,9 +213,8 @@ public class Trivia
                     return true;
                 }   
             }
-                    
+            return false;          
         }
-        return false;
     }
     
     /**
