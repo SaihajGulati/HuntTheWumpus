@@ -25,6 +25,7 @@ public class GraphicalInterface{
 	private int HOLE;
 	private BallSprite [] player;
 	private FlashingText WARNING;
+	private String NAME;
 	
 	
 public GraphicalInterface(int b, int w, int h)
@@ -32,6 +33,7 @@ public GraphicalInterface(int b, int w, int h)
 		BAT = b;
 		WUMPUS = w;
 		HOLE = h;
+		NAME = "NAME";
 		WARNING = new FlashingText(350,180,0,0);
 		player = new BallSprite[500];
 		for(int i = 0; i<500;i++)
@@ -50,7 +52,7 @@ public static void start()
 
 //returns room or -1 for shoot arrow and -2 for buy a hint
 
-public int getRoom(int room1, int room2, int room3, int [] danger)
+public int getRoom(int room1, int room2, int room3, int [] danger, int turn, int coins, int arrows)
 {
 	int toreturn;
 	double[] ballcords = new double [2];
@@ -60,6 +62,12 @@ public int getRoom(int room1, int room2, int room3, int [] danger)
 	WariningSign(danger);
 	ballcords = drawPlayer();
 	toreturn = doors(room1, room2, room3,ballcords);
+	
+	HUDtext(0.5,0.18,NAME);
+	HUDtext(0.9,0.8,"Round "+turn);
+	HUDtext(0.9,0.77,"Coins "+coins);
+	HUDtext(0.9,0.74,"Arrows "+arrows);
+	
 	//ballcords = drawPlayer();
 	if(button(0.5, 0.1 , 0.15 , 0.055, "Shoot Arrow"))
 	{
@@ -358,7 +366,7 @@ private static String delete(String s)
 	return "";
 }
 
-public static String getName()
+public String getName()
 {
 	String name = "";
 	boolean button = true;
@@ -400,6 +408,7 @@ public static String getName()
 	}
 	
 	StdDraw.clear();
+	NAME = name;
 	return name;
 }
 
@@ -729,7 +738,7 @@ public static void  betweenTurns(String hint, int room, int turn, int coins, int
 	}
 }
 
-public static ArrayList<String> splitUp (String split)
+private static ArrayList<String> splitUp (String split)
 {
 	ArrayList<String> splitarray = new ArrayList<String>();
 	String temp = split;
@@ -756,6 +765,15 @@ public static ArrayList<String> splitUp (String split)
 	}
 	
 	return splitarray;
+	
+}
+
+private static void HUDtext(double x, double y, String text)
+{
+	Font hudfont = new Font("Copperplate Gothic Bold",0, 20);
+	StdDraw.setPenColor( 255,255,255);
+	StdDraw.setFont(hudfont);
+	StdDraw.text(x, y, text);
 	
 }
 
