@@ -200,6 +200,7 @@ private int doors(int room1, int room2, int room3,double[] ballcords)
 	int toreturn = 0; 
 	//ballcords = drawPlayer();
 	
+	
 	if(leftdoor(room1, ballcords))
 	{
 		toreturn = room1;
@@ -216,6 +217,11 @@ private int doors(int room1, int room2, int room3,double[] ballcords)
 	{
 		toreturn = room3;
 		System.out.println(room3);
+	}
+	
+	if(ballcords[0] == 0.5)
+	{
+		return 0;
 	}
 	
 	else
