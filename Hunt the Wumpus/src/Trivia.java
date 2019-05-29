@@ -106,7 +106,7 @@ public class Trivia
                 {
                     secrets.add(triviaLine.substring(6));
                 }
-                else if(triviaLine.substring(0, 3).equals("Q: "))
+                else if(triviaLine.substring(0, 3).equals("Q. "))
                 {
                     triviaQuestions.add(triviaLine.substring(3));
                 }
