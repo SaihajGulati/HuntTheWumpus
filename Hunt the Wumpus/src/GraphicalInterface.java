@@ -689,11 +689,15 @@ private static boolean credits(ArrayList<String> scores)
 	return toMain;
 }
 
-public static void  betweenScreen(String hint, int room, int turn, int coins)
+public static void  betweenTurns(String hint, int room, int turn, int coins, int arrows)
 {	
-	while(!button(0.5, 0.1 , 0.15 , 0.055, "next"))
-	{
+	boolean waiting = true;
 	ArrayList<String> toprint = new ArrayList<String>();
+	toprint = splitUp(hint);
+	
+	while(waiting)
+	{
+	
 	StdDraw.clear();
 	
 	StdDraw.setPenColor( 0,0,0);
@@ -702,24 +706,56 @@ public static void  betweenScreen(String hint, int room, int turn, int coins)
 	StdDraw.setPenColor( 32,32,32);
 	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
 	
-	title(0.5, 0.9, "Turn "+turn);
-	title(0.5, 0.85, "Room "+room);
+	StdDraw.setPenColor( 255,255,255);
+	Font title = new Font("Copperplate Gothic Bold",0, 60);
+	StdDraw.setFont(title);
+	StdDraw.text(0.5, 0.85, "Round "+turn );
+	
+	title(0.5, 0.8, "Room "+room);
+	title(0.5, 0.75, "Coins "+coins);
+	title(0.5, 0.7, "Arrows "+arrows);
+	
 	Font font = new Font("Copperplate Gothic Bold",0, 30);
 	
 	for(int i = 0; i< toprint.size(); i++)
 	{
 		StdDraw.setPenColor( 255,255,255);
 		StdDraw.setFont(font);
-		StdDraw.text(0.5, 0.6-(0.1*i), toprint.get(i));		
+		StdDraw.text(0.5, 0.5-(0.05*i), toprint.get(i));		
 	}
 
-	
+	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
 	StdDraw.show();
 	}
 }
 
-private static ArrayList<String> splitUp (String split)
+public static ArrayList<String> splitUp (String split)
 {
+	ArrayList<String> splitarray = new ArrayList<String>();
+	String temp = split;
+	int masterlength = 30;
+	int length = masterlength;
+	//System.out.println(temp);
+	
+	while(temp.length() >= masterlength)
+	{
+		length = masterlength;
+			//System.out.println("test");
+			while(temp.charAt(length) != ' ' && length >=0)
+			{
+				//System.out.println("Toooost");
+				length--;
+			}
+		splitarray.add(temp.substring(0,length+1));
+		temp = temp.substring(length+1);
+	}
+	
+	if(temp.length() != 0)
+	{
+		splitarray.add(temp);
+	}
+	
+	return splitarray;
 	
 }
 
