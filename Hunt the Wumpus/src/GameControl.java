@@ -96,9 +96,9 @@ public class GameControl
 			
 			//while player hasn't chosen in GI yet
 			int x = 0;
-			while(x == 0) {
+			while(x==1 ) {
 				response = GI.getRoom(rooms[0], rooms[1], rooms[2], hazards); //response gathered from player
-			}		
+			}
 			//printHazardLocs(); //for testing purposes
 			//saihaj is bad
 			
