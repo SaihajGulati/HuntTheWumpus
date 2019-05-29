@@ -116,23 +116,23 @@ public class GameControl
 								if(room == c) 
 								{
 									player.changeCoins(-1);
-									if(!Trivia.askQuestions(HOLE)) {
+									/*if(!Trivia.askQuestions(HOLE)) {
 										return;
 									}		
 								}
 								else {
 									break;
-								}
+								*/}
 							}
 							if (room == GameLocations.getWumpusLocation())
 							{
 								player.changeCoins(-1);
-								if(!Trivia.askQuestions(WUMPUS)) {
+								/*if(!Trivia.askQuestions(WUMPUS)) {
 									return;
 								}
 								else {
 									break;
-								}
+								}*/
 							} 
 						
 					}
@@ -168,51 +168,6 @@ public class GameControl
 			
 			// If the player has chosen to move to a place instead of shooting
 			
-			if(response > 0)
-			{
-						player.movePlayer();
-						System.out.println(Trivia.giveTrivia()); 
-						//commit
-						GameLocations.movePlayer(response);//
-						room = GameLocations.getPlayerLocation();
-						for (int c: GameLocations.getBatLocations())
-						{
-							if(room == c) {//
-								player.changeCoins(-1);
-								room = GameLocations.triggerBat(); //hola
-								}
-							}
-						
-						for (int c: GameLocations.getPitLocations())
-						{
-							if(room == c) 
-							{
-								player.changeCoins(-1);
-								if(!Trivia.askQuestions(HOLE)) {
-									return;
-								}		
-							}
-							else {
-								break;
-							}
-						}
-						if (room == GameLocations.getWumpusLocation())
-						{
-							player.changeCoins(-1);
-							if(!Trivia.askQuestions(WUMPUS)) {
-								return;
-							}
-							else {
-								break;
-							}
-						} 
-					
-				}
-					
-			else if(response == 0)
-			{
-				// do nothing 
-			}
 		}
 			
 	}
