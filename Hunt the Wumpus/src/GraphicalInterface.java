@@ -605,12 +605,12 @@ private static boolean inBox(double xcenter, double ycenter, double height, doub
     double x = xcord;
     double y = ycord;
     //System.out.println(x+" "+y);
-    if((x < xcenter-(width) || x > xcenter+(width)))// || (x>0.49 && x<0.51))
+    if((x < xcenter-(height) || x > xcenter+(height)))
     {
     	return false;
     }
     
-    if((y < ycenter-(height) || y > ycenter+(height)))// ||  (y>0.49 && y<0.51))
+    if((y < ycenter-(width) || y > ycenter+(width)))
     {
     	
     	return false;
@@ -687,6 +687,40 @@ private static boolean credits(ArrayList<String> scores)
 	toMain = button(0.5, 0.1 , 0.15 , 0.055, "Main Menu");
 	StdDraw.show();
 	return toMain;
+}
+
+public static void  betweenScreen(String hint, int room, int turn, int coins)
+{	
+	while(!button(0.5, 0.1 , 0.15 , 0.055, "next"))
+	{
+	ArrayList<String> toprint = new ArrayList<String>();
+	StdDraw.clear();
+	
+	StdDraw.setPenColor( 0,0,0);
+	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	
+	StdDraw.setPenColor( 32,32,32);
+	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	
+	title(0.5, 0.9, "Turn "+turn);
+	title(0.5, 0.85, "Room "+room);
+	Font font = new Font("Copperplate Gothic Bold",0, 30);
+	
+	for(int i = 0; i< toprint.size(); i++)
+	{
+		StdDraw.setPenColor( 255,255,255);
+		StdDraw.setFont(font);
+		StdDraw.text(0.5, 0.6-(0.1*i), toprint.get(i));		
+	}
+
+	
+	StdDraw.show();
+	}
+}
+
+private static ArrayList<String> splitUp (String split)
+{
+	
 }
 
 }
