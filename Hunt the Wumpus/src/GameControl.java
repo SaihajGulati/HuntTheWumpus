@@ -65,7 +65,9 @@ public class GameControl
 		Cave cave = new Cave(caveSelect);
 		GameLocations locations = new GameLocations(cave);
 		//GI.gameGraphics();
-		startGame(GI, player, cave);
+		boolean gotWumpus = startGame(GI, player, cave);
+		int score = player.getScore(gotWumpus);
+		endGame(caveSelect, name, score);
 	}
 			
 	/**
@@ -75,7 +77,7 @@ public class GameControl
 	 * @param player is the player class
 	 * @param cave is the cave class
 	 */
-	public static void startGame(GraphicalInterface GI, Player player, Cave cave) throws FileNotFoundException
+	public static boolean startGame(GraphicalInterface GI, Player player, Cave cave) throws FileNotFoundException
 	{
 		
 		Scanner input = new Scanner(System.in);
@@ -90,7 +92,7 @@ public class GameControl
 		
 		while(player.getArrows() > 0 && player.getCoins() > 0 || player.getTurns() == 0) {
 			//while player hasn't chosen in GI yet
-			while(true) {
+			//while(true) {
 				// simply sets the variables for later use
 				room = GameLocations.getPlayerLocation();
 				rooms = cave.tunnels(room);
@@ -117,7 +119,7 @@ public class GameControl
 								{
 									player.changeCoins(-1);
 									/*if(!Trivia.askQuestions(HOLE)) {
-										return;
+										return false;
 									}		
 								}
 								else {
@@ -128,7 +130,7 @@ public class GameControl
 							{
 								player.changeCoins(-1);
 								/*if(!Trivia.askQuestions(WUMPUS)) {
-									return;
+									return false;
 								}
 								else {
 									break;
@@ -152,7 +154,7 @@ public class GameControl
 						if(arrowShot != -1) {
 							if (GameLocations.shootArrow(arrowShot))
 							{
-								return; //player has won
+								return true; //player has won
 							}
 							else 
 							{
@@ -162,13 +164,14 @@ public class GameControl
 										
 					
 				}
-			}
+			//}
 			//printHazardLocs(); //for testing purposes
 			//saihaj is bad
 			
 			// If the player has chosen to move to a place instead of shooting
 			
 		}
+		return false;
 			
 	}
 		//Testing out which oom they are in
@@ -183,12 +186,8 @@ public class GameControl
 	 * @param locations The GameLocations class
 	 * @throws FileNotFoundException 
 	 */
-	public static void endGame(GraphicalInterface GI, Player player, HighScore score, GameLocations locations, String Name, int CaveName) throws FileNotFoundException {
-
-			int endScore = player.getScore(GameLocations.shootArrow(GameLocations.getWumpusLocation()));
-			HighScore.updateScoreBoard(endScore, Name, CaveName);
-			//GI.displayHighscore(HighScore.getHighScores());
-
+	public static void endGame(int caveName, String Name, int score) {
+		
 	}	
 	/**
 	 * prints what hazards there are in adjacent rooms
