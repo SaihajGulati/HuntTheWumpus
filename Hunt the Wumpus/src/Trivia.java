@@ -40,8 +40,8 @@
  * so that the exceptions regarding the selection from triviaQuestions can be prevented (previously
  * that was a catch-all with just an else statement). 
  * 5/28/19: Version 2.2
- * Changed returnHint to now accept a GameLocations object and use its accessor methods when returning
- * the secrets.
+ * Changed returnHint to now use the accessor methods of GameLocations when returning
+ * the secrets. Also modified wumpusNearPlayer to use GameLocations' methods as well.
 */
 import java.util.*;
 import java.io.*;
@@ -220,12 +220,12 @@ public class Trivia
      * The purpose of this method is to return a hint or secret if the Player has bought one by successfully
      * answering 2 out of 3 trivia questions correctly. It will pick a random array to choose its return value
      * from (triviaInformation or secrets) and then select a random String from one of those arrays to return
-     * to the Player.
+     * to the Player, along with any fields from GameLocations that correspond with the secret.
      * 
-     * @Params: GameLocations (the GameLocation object)
+     * @Params: Void
      * 
      * @Return: String (the hint that the Player would eventually get from the purchase)
-     * test
+     * 
      * Other methods that returnHint may call: giveTrivia (if the array chosen happens to be triviaInformation where
      * the secret that the Player will receive is a piece of trivia, returnHint will call the giveTrivia method).
      * 
@@ -234,7 +234,7 @@ public class Trivia
      * Please note that this method may have to be called from gameControl after askQuestions returns its
      * boolean, as a method can only return one value at a time.
     */
-    public String returnHint(GameLocations locator)
+    public String returnHint()
     {
         int numReturn = (int)(Math.random() * 6);
         if(numReturn == 5)
@@ -243,14 +243,14 @@ public class Trivia
         }
         if(numReturn == 4)
         {
-            return wumpusNearPlayer(locator, numReturn);
+            return wumpusNearPlayer(numReturn);
         }
         //Work on this
         if(numReturn == 3)
         {
         	int i = 0;
         	String returnString = secrets.get(numReturn);
-            int[] pitRooms = locator.getPitLocations();
+            int[] pitRooms = GameLocations.getPitLocations();
             for(i = 0; i < pitRooms.length-1; i++)
             {
             	 returnString += " " + pitRooms[i] + ",";
@@ -263,7 +263,7 @@ public class Trivia
         {
         	int i = 0;
         	String returnString = secrets.get(numReturn);
-            int[] batRooms = locator.getBatLocations();
+            int[] batRooms = GameLocations.getBatLocations();
             for(i = 0; i < batRooms.length-1; i++)
             {
             	 returnString += " " + batRooms[i] + ",";
@@ -273,25 +273,26 @@ public class Trivia
         }
         if(numReturn == 1)
         {
-            return secrets.get(numReturn) + " " + locator.getWumpusLocation();
+            return secrets.get(numReturn) + " " + GameLocations.getWumpusLocation();
         }
-        return secrets.get(numReturn) + " " + locator.getPlayerLocation();
+        return secrets.get(numReturn) + " " + GameLocations.getPlayerLocation();
     }
     
     /**
-     * The purpose of this method is to determine whether the Wumpus is near the Player (based on the
-     * boolean passed from returnHint), then return the correct String depending on the location of the
+     * The purpose of this method is to determine whether the Wumpus is near the Player, then return the correct String depending on the location of the
      * Wumpus.
      * 
-     * @Param: GameLocation gameLocator (the GameLocations object, int num (the random number
-     * generated to pick a hint from the secrets ArrayList).
+     * @Param:  int num (the random number generated to pick a hint from the secrets ArrayList).
      * 
      * @Return: String (the String telling whether the Wumpus is near the Player or not).
     */
-    public String wumpusNearPlayer(GameLocations gameLocator, int num)
+    public String wumpusNearPlayer(int num)
     {
     	//Work on this
-        if(gameLocator.getWumpusLocation() == gameLocator.getPlayerLocation())
+    	int wumpLoc = GameLocations.getWumpusLocation();
+    	int currLoc = GameLocations.getPlayerLocation();
+        if(wumpLoc == currLoc-1 || wumpLoc == currLoc-6 || wumpLoc == currLoc+1 || 
+        		wumpLoc == currLoc+5 || wumpLoc == currLoc+6 || wumpLoc == currLoc+7)
         {
             return secrets.get(num);
         }
