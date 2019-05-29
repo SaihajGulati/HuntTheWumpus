@@ -80,38 +80,35 @@ public class GameControl
 		
 		Scanner input = new Scanner(System.in);
 		System.out.println("Test");
-		//loop that runs the whole game while the player is alive;
-		int response = 0;
-		int room;
-		int[] rooms;
-		int choice;
-		int[] hazards = new int[3]; // 0: bat | 1 : Hole | 2 : Wumpus
+		int response = 0; //response given by player in GI
+		int room; //room player is currently in
+		int[] rooms; //the rooms around the player
+		int[] hazards = new int[3]; // 0: bat | 1 : Hole | 2 : Wumpus 
+		
+		//the while loop that runs the game while the player is alive, has arrows, and has coins
+		
 		while(player.getArrows() > 0 && player.getCoins() > 0 || player.getTurns() == 0) {
+			// simply sets the variables for later use
 			room = GameLocations.getPlayerLocation();
 			rooms = cave.tunnels(room);
 			hazards = GameLocations.warning();
+			//
+			
+			//while player hasn't chosen in GI yet
+			
 			while(response == 0) {
-				response = GI.getRoom(rooms[0], rooms[1], rooms[2], hazards);
+				response = GI.getRoom(rooms[0], rooms[1], rooms[2], hazards); //response gathered from player
 			}		
-			/*printHazardLocs(); //for testing purposes
-			System.out.println("You are in room " + room);
-			printHazardWarnings();
-			System.out.print("Do you want to move, shoot an arrow, purchase more arrows, or purchase a secret? ");
-			response = input.nextLine().toLowerCase();
-			if (response.equals(""))
-			{
-				response = input.nextLine();
-			}
-			if (response.indexOf("move") >= 0)*/
+			printHazardLocs(); //for testing purposes
+			
+			// If the player has chosen to move to a place instead of shooting
+			
 			if(response > 0)
 			{
-				//System.out.print("From here, you can go to rooms " + arrayString(rooms, "or"));
-				//System.out.print("Which room would you like to go to? ");
-				//choice = input.nextInt();
 						player.movePlayer();
-						System.out.println(Trivia.giveTrivia());
+						System.out.println(Trivia.giveTrivia()); 
 						//commit
-						GameLocations.movePlayer(choice);//
+						GameLocations.movePlayer(response);//
 						room = GameLocations.getPlayerLocation();
 						for (int c: GameLocations.getBatLocations())
 						{
@@ -149,45 +146,34 @@ public class GameControl
 					
 			else if (response == -1)
 			{
-				System.out.print("What room would you like to shoot into. You can shoot into " + arrayString(rooms, "or"));
-				int roomShoot = input.nextInt();
-				while (findIndex(rooms, roomShoot) < 0)
-				{
-					System.out.println("Invalid room number typed. Please try again.");
-					System.out.print("What room would you like to shoot into. You can shoot into ");
-					arrayString(rooms, "or");
-					System.out.print(" ");
-					roomShoot = input.nextInt();
+				int arrowShot = 0;
+				
+				//while the player hasn't chosen a room yet, if -1 then it will go back
+				
+				while(arrowShot == 0 && arrowShot != -1) {
+					arrowShot = GI.shootArrow(rooms[0], rooms[1], rooms[2], hazards);
 				}
-				if (findIndex(rooms, roomShoot) >= 0)	
-				{
-					System.out.print("You have shot an arrow and ");
 					player.changeArrows(-1);
-					if (GameLocations.shootArrow(roomShoot))
-					{
-						System.out.print("you hit the Wumpus! You won!");
-						return;
+					
+					//if the person decides to go back
+					
+					if(arrowShot != -1) {
+						if (GameLocations.shootArrow(arrowShot))
+						{
+							return; //player has won
+						}
+						else 
+						{
+							//add code for GI that states you missed
+						}	
 					}
-					else 
-					{
-						System.out.print("you missed the Wumpus. Now you only have " + player.getArrows());
-						if (player.getArrows() == 1)
-						{
-							System.out.print(" arrow left.");
-						}
-						else
-						{
-							System.out.println(" arrows left.");
-						}
-					}										
-				}
+									
 				
 			}
 			else if(response == 0)
 			{
-				System.out.println("Not a valid answer. Please try again.");
+				// do nothing 
 			}
-			System.out.println();
 		}
 			
 	}
