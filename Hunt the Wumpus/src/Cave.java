@@ -55,7 +55,7 @@ public class Cave
 	 */
 	public int[] tunnels(int location)
 	{
-		int[] temp = new int[findIndex(caveMap[location-1], 0)];
+		int[] temp = new int[3];
 		for (int i= 0; i < temp.length; i++)
 		{
 			temp[i] = caveMap[location-1][i];
