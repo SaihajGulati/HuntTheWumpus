@@ -32,7 +32,7 @@ public class BallSprite{
 		BOUNDY = boundY;
 	}
 	
-	public void draw()
+	public double[] draw()
 	{
 
 		Y=Y+moveY(Y);
@@ -64,6 +64,9 @@ public class BallSprite{
 			SIZE = MAXSIZE;
 			COLOR = 250;
 		}
+		
+		double [] toreturn = {X,Y};
+		return toreturn;
 		
 	}
 	
