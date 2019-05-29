@@ -96,8 +96,48 @@ public class GameControl
 			
 			//while player hasn't chosen in GI yet
 			int x = 0;
-			while(x==1 ) {
+			while(x==0) {
 				response = GI.getRoom(rooms[0], rooms[1], rooms[2], hazards); //response gathered from player
+				if(response > 0)
+				{
+							player.movePlayer();
+							System.out.println(Trivia.giveTrivia()); 
+							//commit
+							GameLocations.movePlayer(response);//
+							room = GameLocations.getPlayerLocation();
+							for (int c: GameLocations.getBatLocations())
+							{
+								if(room == c) {//
+									player.changeCoins(-1);
+									room = GameLocations.triggerBat(); //hola
+									}
+								}
+							
+							for (int c: GameLocations.getPitLocations())
+							{
+								if(room == c) 
+								{
+									player.changeCoins(-1);
+									if(!Trivia.askQuestions(HOLE)) {
+										return;
+									}		
+								}
+								else {
+									break;
+								}
+							}
+							if (room == GameLocations.getWumpusLocation())
+							{
+								player.changeCoins(-1);
+								if(!Trivia.askQuestions(WUMPUS)) {
+									return;
+								}
+								else {
+									break;
+								}
+							} 
+						
+					}
 			}
 			//printHazardLocs(); //for testing purposes
 			//saihaj is bad
