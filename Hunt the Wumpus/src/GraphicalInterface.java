@@ -204,18 +204,42 @@ private int doors(int room1, int room2, int room3,double[] ballcords)
 	if(leftdoor(room1, ballcords))
 	{
 		toreturn = room1;
+
+		player = null;
+		player = new BallSprite[500];
+		for(int i = 0; i<500;i++)
+		{
+			player[i] = new BallSprite(0.5,0.5,0.01,(0.01/500)*i, 0.3007, 0.3007);
+		}
+		
 		System.out.println(room1);
 	}
 	
 	if(rightdoor(room2, ballcords))
 	{
 		toreturn = room2;
+
+		player = null;
+		player = new BallSprite[500];
+		for(int i = 0; i<500;i++)
+		{
+			player[i] = new BallSprite(0.5,0.5,0.01,(0.01/500)*i, 0.3007, 0.3007);
+		}
+		
 		System.out.println(room2);
 	}
 	
 	if(topdoor(room3, ballcords))
 	{
 		toreturn = room3;
+
+		player = null;
+		player = new BallSprite[500];
+		for(int i = 0; i<500;i++)
+		{
+			player[i] = new BallSprite(0.5,0.5,0.01,(0.01/500)*i, 0.3007, 0.3007);
+		}
+		
 		System.out.println(room3);
 	}
 	
