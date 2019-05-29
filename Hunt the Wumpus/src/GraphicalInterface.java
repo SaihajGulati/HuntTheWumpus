@@ -605,12 +605,12 @@ private static boolean inBox(double xcenter, double ycenter, double height, doub
     double x = xcord;
     double y = ycord;
     //System.out.println(x+" "+y);
-    if((x < xcenter-(width) || x > xcenter+(width)) || (x>0.49 && x<0.51))
+    if((x < xcenter-(width) || x > xcenter+(width)))// || (x>0.49 && x<0.51))
     {
     	return false;
     }
     
-    if((y < ycenter-(height) || y > ycenter+(height)) ||  (y>0.49 && y<0.51))
+    if((y < ycenter-(height) || y > ycenter+(height)))// ||  (y>0.49 && y<0.51))
     {
     	
     	return false;
