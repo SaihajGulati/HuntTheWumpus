@@ -163,7 +163,11 @@ public class GameControl
 				}
 				else if (response == -2)
 				{
-					int stuff = GI.buyItem();
+					int stuff = 0;
+					if(player.getCoins() > 0) {
+						stuff = GI.buyItem();
+					}
+					
 					if (stuff == 1)
 					{
 						
