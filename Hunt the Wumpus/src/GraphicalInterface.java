@@ -94,14 +94,17 @@ public int shootArrow(int room1, int room2, int room3, int [] danger, int turn, 
 {
 	int toreturn;
 	double [] mousecords = {StdDraw.mouseX(), StdDraw.mouseY()};
+	boolean loop = !button(0.5, 0.1 , 0.15 , 0.055, "Back");;
 	
-	while(!button(0.5, 0.1 , 0.15 , 0.055, "Back"))
+	while(loop)
 	{
 	StdDraw.clear();
 	background();
 	room();
 	WariningSign(danger);
 	toreturn = doors(room1, room2, room3,mousecords);
+	
+	loop = !button(0.5, 0.1 , 0.15 , 0.055, "Back");
 	
 	HUDtext(0.5,0.18,NAME);
 	HUDtext(0.9,0.8,"Round "+turn);
@@ -122,7 +125,7 @@ public int shootArrow(int room1, int room2, int room3, int [] danger, int turn, 
 		return toreturn;
 	}
 	}
-	
+	System.out.println("exit");
 	return 0;
 }
 
