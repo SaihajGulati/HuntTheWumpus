@@ -987,7 +987,7 @@ private static ArrayList<String> splitUp (String split)
 	int length = masterlength;
 	//System.out.println(temp);
 	
-	while(temp.length() >= masterlength)
+	while(temp.length() > masterlength)
 	{
 		length = masterlength;
 			//System.out.println("test");
