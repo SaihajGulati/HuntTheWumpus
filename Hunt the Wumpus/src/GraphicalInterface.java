@@ -1149,6 +1149,11 @@ public static void  endGame(boolean win)
 	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
 	
 	StdDraw.setPenColor( 250,250,250);
+	Font font = new Font("Copperplate Gothic Bold",0, 60);
+	StdDraw.setFont(font);
+	StdDraw.text(0.5, 0.8, "GAME OVER");
+	
+	StdDraw.setPenColor( 250,250,250);
 	Font title = new Font("Copperplate Gothic Bold",0, 30);
 	StdDraw.setFont(title);
 	
@@ -1161,6 +1166,41 @@ public static void  endGame(boolean win)
 	else
 	{
 	StdDraw.text(0.5, 0.6, "You have lost");
+	}
+
+	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
+	StdDraw.show();
+	}
+}
+
+public static void  arrowHit(boolean hit)
+{	
+	boolean waiting = true;
+	
+	while(waiting)
+	{
+	
+	StdDraw.clear();
+	
+	StdDraw.setPenColor( 0,0,0);
+	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	
+	StdDraw.setPenColor( 32,32,32);
+	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	
+	
+	StdDraw.setPenColor( 250,250,250);
+	Font title = new Font("Copperplate Gothic Bold",0, 30);
+	StdDraw.setFont(title);
+	
+	if(hit)
+	{
+	StdDraw.text(0.5, 0.6, "You hit the Wumpus");
+	}
+	
+	else
+	{
+	StdDraw.text(0.5, 0.6, "You missed");
 	}
 
 	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
