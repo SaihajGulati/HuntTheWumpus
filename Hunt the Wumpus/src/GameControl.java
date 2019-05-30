@@ -40,7 +40,7 @@ public class GameControl
 	{
 		//hello testing
 		
-		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
+		GraphicalInterface GI = new GraphicalInterface(BATS, WUMPUS, HOLE);
 		Player player = new Player();
 		ArrayList <String> scores = new ArrayList<String>();
 		Trivia trivia = new Trivia();
