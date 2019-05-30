@@ -92,9 +92,10 @@ public int getRoom(int room1, int room2, int room3, int [] danger, int turn, int
 
 public int shootArrow(int room1, int room2, int room3, int [] danger, int turn, int coins, int arrows)
 {
-	int toreturn;
+	int toreturn = 0;
 	double [] mousecords = {StdDraw.mouseX(), StdDraw.mouseY()};
-	boolean loop = !button(0.5, 0.1 , 0.15 , 0.055, "Back");;
+	boolean loop = true;
+	//StdDraw.pause(100);
 	
 	while(loop)
 	{
@@ -104,13 +105,14 @@ public int shootArrow(int room1, int room2, int room3, int [] danger, int turn, 
 	WariningSign(danger);
 	toreturn = doors(room1, room2, room3,mousecords);
 	
-	loop = !button(0.5, 0.1 , 0.15 , 0.055, "Back");
 	
 	HUDtext(0.5,0.18,NAME);
 	HUDtext(0.9,0.8,"Round "+turn);
 	HUDtext(0.9,0.77,"Coins "+coins);
 	HUDtext(0.9,0.74,"Arrows "+arrows);
 
+	loop = !button(0.5, 0.1 , 0.15 , 0.055, "Back");
+	
 	Font font = new Font("Copperplate Gothic Bold",0, 40);
 	StdDraw.setPenColor( 150,0,0);
 	StdDraw.setFont(font);
@@ -120,7 +122,7 @@ public int shootArrow(int room1, int room2, int room3, int [] danger, int turn, 
 	arrowPath(toreturn);
 	StdDraw.show();
 	
-	if(toreturn<=0)
+	if(toreturn>=0)
 	{
 		return toreturn;
 	}
