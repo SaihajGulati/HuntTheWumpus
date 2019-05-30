@@ -708,7 +708,7 @@ private static boolean credits(ArrayList<String> scores)
 	return toMain;
 }
 
-public static void  betweenTurns(String hint, int room, int turn, int coins, int arrows)
+public void  betweenTurns(String hint, int room, int turn, int coins, int arrows, int danger)
 {	
 	boolean waiting = true;
 	ArrayList<String> toprint = new ArrayList<String>();
@@ -725,14 +725,29 @@ public static void  betweenTurns(String hint, int room, int turn, int coins, int
 	StdDraw.setPenColor( 32,32,32);
 	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
 	
-	StdDraw.setPenColor( 255,255,255);
-	Font title = new Font("Copperplate Gothic Bold",0, 60);
-	StdDraw.setFont(title);
-	StdDraw.text(0.5, 0.85, "Round "+turn );
 	
-	title(0.5, 0.8, "Room "+room);
-	title(0.5, 0.75, "Coins "+coins);
-	title(0.5, 0.7, "Arrows "+arrows);
+	boolean hasdanger = false;
+	double shift = 0;
+	Font display = new Font("Copperplate Gothic Bold",0, 40);
+	StdDraw.setFont(display);
+	
+	if(danger != -1)
+	{
+			hasdanger = true;
+			shift = 0.05;
+	}
+	
+	if(hasdanger)
+	{
+		StdDraw.setPenColor( 150,0,0);
+		StdDraw.text(0.5, 0.9, dangerMessage(danger));;
+	}
+	
+	StdDraw.setPenColor( 250,250,250);
+	title(0.5, 0.85-shift, "Round "+turn );
+	title(0.5, 0.8-shift, "Room "+room);
+	title(0.5, 0.75-shift, "Coins "+coins);
+	title(0.5, 0.7-shift, "Arrows "+arrows);
 	
 	Font font = new Font("Copperplate Gothic Bold",0, 30);
 	
@@ -740,7 +755,7 @@ public static void  betweenTurns(String hint, int room, int turn, int coins, int
 	{
 		StdDraw.setPenColor( 255,255,255);
 		StdDraw.setFont(font);
-		StdDraw.text(0.5, 0.5-(0.05*i), toprint.get(i));		
+		StdDraw.text(0.5, 0.5-(0.05*i)-shift, toprint.get(i));		
 	}
 
 	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
