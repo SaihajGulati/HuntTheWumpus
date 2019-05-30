@@ -119,26 +119,8 @@ public class GameControl
 						if(room == c) 
 						{
 
-							int correct = 0;
-							int count = 0;
-							while (correct < 2 && count < 3)
-							{	
-								char answer = GI.getAnswer(triv.getQuestion(), triv.getA(), triv.getB(), triv.getC(), triv.getD());
-								if (triv.checkAnswer(answer))
-								{
-									correct++;
-									GI.postTrivia(true);
-								}
-								else
-								{
-									GI.postTrivia(false);
-								}
-								count++;
-								player.changeCoins(-1);
-							}
-							if (correct < 2)
+							if(!trivia(triv, GI, player, 3, 2))
 							{
-								System.out.println("You died");
 								return false;
 							}
 							
@@ -146,26 +128,8 @@ public class GameControl
 					}
 					if (room == GameLocations.getWumpusLocation())
 					{
-						int correct = 0;
-						int count = 0;
-						while (correct < 3 && count < 5)
-						{	
-							char answer = GI.getAnswer(triv.getQuestion(), triv.getA(), triv.getB(), triv.getC(), triv.getD());
-							if (triv.checkAnswer(answer))
-							{
-								correct++;
-								GI.postTrivia(true);
-							}
-							else
-							{
-								GI.postTrivia(false);
-							}
-							count++;
-							player.changeCoins(-1);
-						}
-						if (correct < 3)
+						if(!trivia(triv, GI, player, 5, 3))
 						{
-							System.out.println("You died");
 							return false;
 						}
 					} 
@@ -196,6 +160,25 @@ public class GameControl
 						}
 										
 					
+				}
+				else if (response == -2)
+				{
+					int stuff = GI.buyItem();
+					if (stuff == 1)
+					{
+						
+						if(trivia(triv, GI, player, 5, 3))
+						{
+
+							player.changeArrows(1);
+							GI.boughtArrow(player.getArrows());
+						}
+						else
+						{
+							//ljaslkdjsdklj
+							
+						}
+					}
 				}
 			//}
 			//printHazardLocs(); //for testing purposes
@@ -240,6 +223,38 @@ public class GameControl
 			System.out.println("I smell a Wumpus!");
 		}
 		return false;
+	}
+	
+	/**
+	 * handles asking the user for trivia
+	 * @param numQ the number of questions to ask
+	 * @param numc the number of qs that need to be answered correct
+	 */
+	public static boolean trivia(Trivia triv, GraphicalInterface GI, Player player, int numQ, int numC)
+	{
+		int correct = 0;
+		int count = 0;
+		while (correct < numC && count < numQ)
+		{	
+			char answer = GI.getAnswer(triv.getQuestion(), triv.getA(), triv.getB(), triv.getC(), triv.getD());
+			if (triv.checkAnswer(answer))
+			{
+				correct++;
+				GI.postTrivia(true);
+			}
+			else
+			{
+				GI.postTrivia(false);
+			}
+			count++;
+			player.changeCoins(-1);
+		}
+		if (correct < numC)
+		{
+			System.out.println("You died");
+			return false;
+		}
+		return true;
 	}
 	
 	public static void printHazardLocs()
