@@ -74,7 +74,7 @@ public int getRoom(int room1, int room2, int room3, int [] danger, int turn, int
 		toreturn = -1;
 	}
 	
-	if(button(0.2, 0.1 , 0.15 , 0.055, "Buy Hint"))
+	if(button(0.2, 0.1 , 0.15 , 0.055, "Buy Item"))
 	{
 		toreturn = -2;
 	}
@@ -997,7 +997,7 @@ private static ArrayList<String> splitUp (String split)
 				//System.out.println("Toooost");
 				length--;
 			}
-		System.out.println(splitarray);
+		//System.out.println(splitarray);
 		splitarray.add(temp.substring(0,length+1));
 		temp = temp.substring(length+1);
 	}
