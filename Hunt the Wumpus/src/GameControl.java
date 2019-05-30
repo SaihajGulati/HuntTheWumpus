@@ -163,7 +163,7 @@ public class GameControl
 			{
 				int arrowShot;
 				
-				//while the player hasn't chosen a room yet, if -1 then it will go back
+				//while the player hasn't chosen a room yet this loops
 			     arrowShot = GI.shootArrow(rooms[0], rooms[1], rooms[2], hazards, player.getTurns(), player.getCoins(), player.getArrows());
 
 				if (arrowShot != 0)
