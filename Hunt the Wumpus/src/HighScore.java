@@ -40,7 +40,8 @@ public class HighScore
 {
     private static Scanner input;
     private static File scoreBoard; //The File that will be used to load the high scores
-    private static ArrayList<Integer> highScores; /**
+    private static ArrayList<Integer> highScores;
+    /**
                                             * An ArrayList that will represent the high scores after they have
                                             * been loaded into the game; used either when displaying the high scores
                                             * or updating them after a game (when the Player's score qualifies).
@@ -156,7 +157,7 @@ public class HighScore
     public static ArrayList<Integer> updateScoreBoard(int totalScore, String name, int caveName) throws FileNotFoundException
     {
         //PrintStream output = new PrintStream(new File("testOutput.txt"));
-    	highScores.add(0);
+    	//highScores.add(Integer.MIN_VALUE);
         if(highScores.size() == 0 || totalScore >= highScores.get(0))
         {
             highScores.add(0, totalScore);
