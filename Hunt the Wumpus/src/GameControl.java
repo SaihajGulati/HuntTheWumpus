@@ -109,13 +109,13 @@ public class GameControl
 					room = GameLocations.getPlayerLocation();
 					for(int i : GameLocations.getPitLocations()) {
 						if(room == i) {
-							room_hazards[0] = 1;
+							room_hazards[1] = 1;
 						}
 						
 					}
 					for(int i : GameLocations.getBatLocations()) {
 						if(room == i) {
-							room_hazards[1] = 1;
+							room_hazards[0] = 1;
 						}
 						
 					}
