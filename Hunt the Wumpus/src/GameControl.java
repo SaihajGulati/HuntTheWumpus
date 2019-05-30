@@ -106,10 +106,10 @@ public class GameControl
 			{
 				player.movePlayer();
 				printHazardLocs();
-				GI.betweenTurns(triv.giveTrivia(), room, player.getTurns(), player.getCoins(), player.getArrows());
 				//commit
 				GameLocations.movePlayer(response);//
 				room = GameLocations.getPlayerLocation();
+				GI.betweenTurns(triv.giveTrivia(), room, player.getTurns(), player.getCoins(), player.getArrows());
 				for(int i : GameLocations.getPitLocations()) {
 					if(room == i) {
 						room_hazards[HOLE] = 1;
@@ -130,7 +130,6 @@ public class GameControl
 				for (int c: GameLocations.getBatLocations())
 				{
 					if(room == c) {//
-						player.changeCoins(-1);
 						room = GameLocations.triggerBat(); //hola
 					}
 				}
@@ -198,7 +197,7 @@ public class GameControl
 					if(trivia(triv, GI, player, 3, 2))
 					{
 
-						player.changeArrows(1);
+						player.changeArrows(2);
 						GI.boughtArrow(player.getArrows());
 					}
 					else
