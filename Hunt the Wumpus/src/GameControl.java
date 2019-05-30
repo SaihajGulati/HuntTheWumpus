@@ -164,9 +164,11 @@ public class GameControl
 				else if (response == -2)
 				{
 					int stuff = 0;
+					boolean enough = false;
 					if(player.getCoins() > 0) {
-						stuff = GI.buyItem();
+						enough = true;
 					}
+						stuff = GI.buyItem(enough);
 					
 					if (stuff == 1)
 					{
