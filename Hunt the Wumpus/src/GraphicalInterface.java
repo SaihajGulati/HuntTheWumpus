@@ -113,7 +113,7 @@ public int shootArrow(int room1, int room2, int room3, int [] danger, int turn, 
 	
 	if(button(0.5, 0.1 , 0.15 , 0.055, "Back"))
 	{
-		toreturn = -1;
+		return -1;
 	}
 	arrowPath(toreturn);
 	StdDraw.show();
