@@ -961,7 +961,7 @@ arrowDescription = splitUp("You can get ARROWS by getting two out of three trivi
 		Font funds = new Font("Copperplate Gothic Bold",0, 25);
 		StdDraw.setFont(funds);
 		StdDraw.setPenColor( 150,0,0);
-		StdDraw.text(0.5, 0.85, "NOT ENOUGH COINS");	
+		StdDraw.text(x, 0.85, "NOT ENOUGH COINS");	
 	}
 	
 	
@@ -1043,6 +1043,37 @@ private static ArrayList<String> splitUp (String split)
 	
 	return splitarray;
 	
+}
+
+public static void  endGame(boolean win)
+{	
+	boolean waiting = true;
+	
+	while(waiting)
+	{
+	
+	StdDraw.clear();
+	
+	StdDraw.setPenColor( 0,0,0);
+	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	
+	StdDraw.setPenColor( 32,32,32);
+	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	
+	if(win)
+	{
+	StdDraw.text(0.5, 0.6, "You have slain");
+	StdDraw.text(0.5, 0.6, "the WUMPUS");
+	}
+	
+	else
+	{
+	StdDraw.text(0.5, 0.6, "You have lost");
+	}
+
+	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
+	StdDraw.show();
+	}
 }
 
 private static void HUDtext(double x, double y, String text)
