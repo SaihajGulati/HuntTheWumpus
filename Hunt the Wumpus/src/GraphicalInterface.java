@@ -817,6 +817,33 @@ public static void  postTrivia(boolean correct)
 	}
 }
 
+public static void  boughtArrow(int arrows)
+{	
+	boolean waiting = true;
+	
+	while(waiting)
+	{
+	
+	StdDraw.clear();
+	
+	StdDraw.setPenColor( 0,0,0);
+	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	
+	StdDraw.setPenColor( 32,32,32);
+	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	
+	StdDraw.setPenColor( 255,255,255);
+	Font title = new Font("Copperplate Gothic Bold",0, 60);
+	StdDraw.setFont(title);
+	StdDraw.text(0.5, 0.6, "Arrows");
+	StdDraw.text(0.5, 0.50, ""+arrows);
+
+
+	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
+	StdDraw.show();
+	}
+}
+
 public static char  getAnswer(String question, String questionA, String questionB, String questionC, String questionD)
 {
 double x = 0.3;
