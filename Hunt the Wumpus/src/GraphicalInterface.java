@@ -103,8 +103,8 @@ public int shootArrow(int room1, int room2, int room3, int [] danger, int turn, 
 	background();
 	room();
 	WariningSign(danger);
-	toreturn = doors(room1, room2, room3,mousecords);
-	
+	double [] mouse = {StdDraw.mouseX(),StdDraw.mouseY()};
+	toreturn = doors(room1, room2, room3,mouse);
 	
 	HUDtext(0.5,0.18,NAME);
 	HUDtext(0.9,0.8,"Round "+turn);
@@ -121,14 +121,15 @@ public int shootArrow(int room1, int room2, int room3, int [] danger, int turn, 
 	
 	arrowPath(toreturn);
 	StdDraw.show();
+	//System.out.println(toreturn);
 	
-	if(toreturn>0)
+	if(toreturn>0 && ClickedRelease())
 	{
-		return toreturn;
+		loop = false;
 	}
 	}
 	System.out.println("exit");
-	return 0;
+	return toreturn;
 }
 
 private void arrowPath(int room)
@@ -229,7 +230,7 @@ private double[] drawPlayer()
   	return player[499].draw();
 }
 
-// Return room that player chose
+// Return room that player chose, or clicked
 private int doors(int room1, int room2, int room3,double[] ballcords)
 {
 	int toreturn = 0; 
@@ -281,10 +282,7 @@ private int doors(int room1, int room2, int room3,double[] ballcords)
 		StdDraw.pause(100);
 	}
 	
-	if(ballcords[0] == 0.5)
-	{
-		return 0;
-	}
+   //System.out.println(toreturn);
 	
 	return toreturn;	
 
