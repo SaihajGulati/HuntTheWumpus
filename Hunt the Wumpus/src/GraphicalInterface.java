@@ -748,6 +748,42 @@ public static void  betweenTurns(String hint, int room, int turn, int coins, int
 	}
 }
 
+public static void  tellSecret(String secret)
+{	
+	boolean waiting = true;
+	ArrayList<String> toprint = new ArrayList<String>();
+	toprint = splitUp(secret);
+	
+	while(waiting)
+	{
+	
+	StdDraw.clear();
+	
+	StdDraw.setPenColor( 0,0,0);
+	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	
+	StdDraw.setPenColor( 32,32,32);
+	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	
+	StdDraw.setPenColor( 255,255,255);
+	Font title = new Font("Copperplate Gothic Bold",0, 60);
+	StdDraw.setFont(title);
+	StdDraw.text(0.5, 0.85, "Secret");
+	
+	Font font = new Font("Copperplate Gothic Bold",0, 30);
+	
+	for(int i = 0; i< toprint.size(); i++)
+	{
+		StdDraw.setPenColor( 255,255,255);
+		StdDraw.setFont(font);
+		StdDraw.text(0.5, 0.5-(0.05*i), toprint.get(i));		
+	}
+
+	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
+	StdDraw.show();
+	}
+}
+
 public static void  postTrivia(boolean correct)
 {	
 	boolean waiting = true;
