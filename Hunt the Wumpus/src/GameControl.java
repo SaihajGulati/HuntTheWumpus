@@ -175,7 +175,7 @@ public class GameControl
 						}
 						else
 						{
-							//ljaslkdjsdklj
+						
 							
 						}
 					}
