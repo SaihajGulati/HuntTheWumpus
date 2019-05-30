@@ -807,7 +807,15 @@ public static void  tellSecret(String secret)
 
 public void  displayDanger(int [] dangers)
 {	
-	boolean waiting = true;
+	boolean waiting = false;
+	
+	for(int i = 0; i<dangers.length;i++)
+	{
+		if(dangers[i]>0)
+		{
+			waiting = true;
+		}
+	}
 	
 	while(waiting)
 	{
