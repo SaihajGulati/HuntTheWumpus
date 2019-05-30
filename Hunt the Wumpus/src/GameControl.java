@@ -67,7 +67,7 @@ public class GameControl
 		//GI.gameGraphics();
 		boolean gotWumpus = startGame(GI, player, cave, trivia);
 		int score = player.getScore(gotWumpus);
-		endGame(caveSelect, name, score);
+		endGame(caveSelect, name, score, gotWumpus);
 	}
 			
 	/**
@@ -215,8 +215,10 @@ public class GameControl
 	 * @param locations The GameLocations class
 	 * @throws FileNotFoundException 
 	 */
-	public static void endGame(int caveName, String Name, int score) throws FileNotFoundException{
+	public static void endGame(int caveName, String Name, int score, boolean win) throws FileNotFoundException{
+		GraphicalInterface.endGame(win);
 		HighScore.updateScoreBoard(score, Name, caveName);
+		
 	}	
 	/**
 	 * prints what hazards there are in adjacent rooms
