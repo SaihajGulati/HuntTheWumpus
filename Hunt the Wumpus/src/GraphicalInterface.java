@@ -1160,6 +1160,7 @@ public static void  endGame(boolean win)
 	{
 	StdDraw.text(0.5, 0.6, "You have slain");
 	StdDraw.text(0.5, 0.55, "the WUMPUS");
+	StdDraw.text(0.5, 0.5, "you WON");
 	}
 	
 	else
@@ -1206,6 +1207,63 @@ public static void  arrowHit(boolean hit, int arrows)
 	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
 	StdDraw.show();
 	}
+}
+
+public static void teamMessage()
+{	
+	
+double x = 0.2;
+double y = 0.5;
+double containerx= 0.15;
+double containery= 0.5;
+
+String teammessage;
+teammessage = "Thanks for playing Tesla Stem's Artesian Code team Hunt the Wumpus Game!";
+String [] names = {"Daniel Popa","Saihaj Gulati","Joshua Venable","Brian Yang", "Raj Sunku", "Hans Koduri" };
+
+ArrayList<String> messagearray = new ArrayList<String>();
+
+messagearray = splitUp(teammessage);
+
+
+ while(true)
+{
+	StdDraw.clear();
+	StdDraw.setPenColor(0,0,0);
+	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	//StdDraw.picture(0.5, 0.5, "C:\\Users\\s-dapopa\\Desktop\\cave.jpg",1, 1);
+	
+    StdDraw.setPenColor(32,32,32);
+	StdDraw.filledRectangle(x , y, containerx, containery);
+	title(x,0.9, "Artesian Code" );
+		
+	Font font = new Font("Copperplate Gothic Bold",0, 30);
+	double start = ((messagearray.size()*0.05)/2)+0.5;
+	double textcenter = 0.7;
+	
+	for(int i = 0; i< messagearray.size(); i++)
+	{
+		StdDraw.setPenColor( 255,255,255);
+		StdDraw.setFont(font);
+		StdDraw.text(textcenter, start-(0.07*i), messagearray.get(i));		
+	}
+	
+	Font creditsfont = new Font("Copperplate Gothic Bold",0, 20);
+	
+	for(int i = 0; i< names.length; i++)
+	{
+		StdDraw.setPenColor( 255,255,255);
+		StdDraw.setFont(creditsfont);
+		StdDraw.text(0.2, 0.75-(0.1*i), names[i]);		
+	}
+
+if(button(x,0.1, containerx,0.055,"Back"))
+{
+	    return;	
+}
+		
+StdDraw.show();
+}
 }
 
 private static void HUDtext(double x, double y, String text)
