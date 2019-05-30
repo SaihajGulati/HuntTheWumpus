@@ -835,8 +835,8 @@ public static void  boughtArrow(int arrows)
 	StdDraw.setPenColor( 255,255,255);
 	Font title = new Font("Copperplate Gothic Bold",0, 60);
 	StdDraw.setFont(title);
-	StdDraw.text(0.5, 0.6, "Arrows");
-	StdDraw.text(0.5, 0.50, ""+arrows);
+	StdDraw.text(0.5, 0.6, "Bought Arrows");
+	StdDraw.text(0.5, 0.50, arrows+" Arrows");
 
 
 	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
