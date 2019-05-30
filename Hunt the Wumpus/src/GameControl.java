@@ -101,88 +101,76 @@ public class GameControl
 				response = GI.getRoom(rooms[0], rooms[1], rooms[2], hazards, player.getTurns(), player.getCoins(), player.getArrows()); //response gathered from player
 				if(response > 0)
 				{
-							player.movePlayer();
-							GI.betweenTurns(triv.giveTrivia(), room, player.getTurns(), player.getCoins(), player.getArrows());
-							//commit
-							GameLocations.movePlayer(response);//
-							room = GameLocations.getPlayerLocation();
-							for (int c: GameLocations.getBatLocations())
-							{
-								if(room == c) {//
-									player.changeCoins(-1);
-									room = GameLocations.triggerBat(); //hola
-									}
-								}
-							
-							for (int c: GameLocations.getPitLocations())
-							{
-								if(room == c) 
-								{
-
-									int correct = 0;
-									int count = 0;
-									while (correct < 2 && count < 3)
-									{	
-										char answer = GI.getAnswer(triv.getQuestion(), triv.getA(), triv.getB(), triv.getC(), triv.getD());
-										if (triv.checkAnswer(answer))
-										{
-											correct++;
-											GI.postTrivia(true);
-										}
-										else
-										{
-											GI.postTrivia(false);
-										}
-										count++;
-										player.changeCoins(-1);
-									}
-									if (correct < 2)
-									{
-										System.out.println("You died");
-										return false;
-									}
-									
-									/*if(!Trivia.askQuestions(HOLE)) {
-										return false;
-									}		
-								}
-								else {asdas
-									break;
-								*/}
-							}
-							if (room == GameLocations.getWumpusLocation())
-							{
-								int correct = 0;
-								int count = 0;
-								while (correct < 3 && count < 5)
-								{	
-									char answer = GI.getAnswer(triv.getQuestion(), triv.getA(), triv.getB(), triv.getC(), triv.getD());
-									if (triv.checkAnswer(answer))
-									{
-										correct++;
-										GI.postTrivia(true);
-									}
-									else
-									{
-										GI.postTrivia(false);
-									}
-									count++;
-									player.changeCoins(-1);
-								}
-								if (correct < 3)
-								{
-									System.out.println("You died");
-									return false;
-								}
-								/*if(!Trivia.askQuestions(WUMPUS)) {
-									return false;
-								}
-								else {
-									break;
-								}*/
-							} 
-						
+					player.movePlayer();
+					GI.betweenTurns(triv.giveTrivia(), room, player.getTurns(), player.getCoins(), player.getArrows());
+					//commit
+					GameLocations.movePlayer(response);//
+					room = GameLocations.getPlayerLocation();
+					for (int c: GameLocations.getBatLocations())
+					{
+						if(room == c) {//
+							player.changeCoins(-1);
+							room = GameLocations.triggerBat(); //hola
+						}
 					}
+							
+					for (int c: GameLocations.getPitLocations())
+					{
+						if(room == c) 
+						{
+
+							int correct = 0;
+							int count = 0;
+							while (correct < 2 && count < 3)
+							{	
+								char answer = GI.getAnswer(triv.getQuestion(), triv.getA(), triv.getB(), triv.getC(), triv.getD());
+								if (triv.checkAnswer(answer))
+								{
+									correct++;
+									GI.postTrivia(true);
+								}
+								else
+								{
+									GI.postTrivia(false);
+								}
+								count++;
+								player.changeCoins(-1);
+							}
+							if (correct < 2)
+							{
+								System.out.println("You died");
+								return false;
+							}
+							
+						}
+					}
+					if (room == GameLocations.getWumpusLocation())
+					{
+						int correct = 0;
+						int count = 0;
+						while (correct < 3 && count < 5)
+						{	
+							char answer = GI.getAnswer(triv.getQuestion(), triv.getA(), triv.getB(), triv.getC(), triv.getD());
+							if (triv.checkAnswer(answer))
+							{
+								correct++;
+								GI.postTrivia(true);
+							}
+							else
+							{
+								GI.postTrivia(false);
+							}
+							count++;
+							player.changeCoins(-1);
+						}
+						if (correct < 3)
+						{
+							System.out.println("You died");
+							return false;
+						}
+					} 
+					
+				}
 				else if (response == -1)
 				{
 					int arrowShot = 0;
@@ -211,11 +199,10 @@ public class GameControl
 				}
 			//}
 			//printHazardLocs(); //for testing purposes
-			//saihaj is bad
-			
 			// If the player has chosen to move to a place instead of shooting
 			
 		}
+		System.out.print("Josh code ass");
 		return false;
 			
 	}
