@@ -809,7 +809,7 @@ public static void  postTrivia(boolean correct)
 	
 	else
 	{
-	StdDraw.text(0.5, 0.6, "Incorect" );
+	StdDraw.text(0.5, 0.6, "Incorrect" );
 	}
 
 	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
