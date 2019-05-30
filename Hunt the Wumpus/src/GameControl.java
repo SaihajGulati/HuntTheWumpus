@@ -26,15 +26,17 @@ import java.util.*;
  */
 public class GameControl
 {
-	public static int BATS = 0;
-	public static int HOLE = 1;
-	public static int WUMPUS = 2;
-	public static int SCORE = 0;
-	public static int ROUND = 0;
+	public static final int BATS = 0;
+	public static final int HOLE = 1;
+	public static final int WUMPUS = 2;
+	public static final int SCORE = 0;
+	public static final int ROUND = 0;
 	//following e-nums are for the start of the game and anywhere else so its easier to identify changes
-	public static int START = 0;
-	public static int HIGHSCORE = 1;
-	public static int QUIT = 2;
+	public static final int START = 0;
+	public static final int HIGHSCORE = 1;
+	public static final int QUIT = 2;
+	public static final int ARROW = -1;
+	public static final int BUY_ITEM = -2;
 	
 	public static void main(String[] args) throws FileNotFoundException
 	{
@@ -153,7 +155,7 @@ public class GameControl
 				} 
 				
 			}
-			else if (response == -1)
+			else if (response == ARROW)
 			{
 				int arrowShot = 0;
 				
@@ -169,17 +171,18 @@ public class GameControl
 					if(arrowShot != -1) {
 						if (GameLocations.shootArrow(arrowShot))
 						{
+							GI.arrowHit(true);
 							return true; //player has won
 						}
 						else 
 						{
-							//add code for GI that states you missed
+							GI.arrowHit(false);//add code for GI that states you missed
 						}	
 					}
 									
 				
 			}
-			else if (response == -2)
+			else if (response == BUY_ITEM)
 			{
 				int stuff = 0;
 				stuff = GI.buyItem(player.getCoins() > 3);
