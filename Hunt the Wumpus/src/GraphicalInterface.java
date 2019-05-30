@@ -838,6 +838,84 @@ StdDraw.show();
 
 }
 
+// 1 for arrow, 2 for secret, 0 to go back
+public static int  buyItem()
+{	
+	double x = 0.2;
+double y = 0.5;
+double containerx= 0.15;
+double containery= 0.5;
+
+ArrayList<String> secretDescription = new ArrayList<String>();
+ArrayList<String> arrowDescription = new ArrayList<String>();
+
+secretDescription = splitUp("You can get a SECRET by getting two out of three trivia questions right. SECRETS can very from very useful to very useless.");
+arrowDescription = splitUp("You can get ARROWS by getting two out of three trivia questions right, these are your weapons against the WUMPUS.");
+
+
+
+ while(true)
+{
+	StdDraw.clear();
+	StdDraw.setPenColor(0,0,0);
+	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	//StdDraw.picture(0.5, 0.5, "C:\\Users\\s-dapopa\\Desktop\\cave.jpg",1, 1);
+	
+    StdDraw.setPenColor(32,32,32);
+	StdDraw.filledRectangle(x , y, containerx, containery);
+	title(x,0.9, "Trivia" );
+	
+	
+	
+	if(inBox(x,0.65, containerx,0.055))
+	{
+		Font font = new Font("Copperplate Gothic Bold",0, 30);
+		double start = ((arrowDescription.size()*0.05)/2)+0.5;
+		double textcenter = 0.7;
+		
+		for(int i = 0; i< arrowDescription.size(); i++)
+		{
+			StdDraw.setPenColor( 255,255,255);
+			StdDraw.setFont(font);
+			StdDraw.text(textcenter, start-(0.05*i), arrowDescription.get(i));		
+		}
+	}
+	
+	if(inBox(x,0.54, containerx,0.055))
+	{
+		Font font = new Font("Copperplate Gothic Bold",0, 30);
+		double start = ((secretDescription.size()*0.05)/2)+0.5;
+		double textcenter = 0.7;
+		
+		for(int i = 0; i< secretDescription.size(); i++)
+		{
+			StdDraw.setPenColor( 255,255,255);
+			StdDraw.setFont(font);
+			StdDraw.text(textcenter, start-(0.05*i), secretDescription.get(i));		
+		}
+	}
+
+if(button(x,0.65, containerx,0.055,"Arrow"))
+	
+	    return 1;	
+
+if(button(x,0.54, containerx,0.055, "Secret"))
+	    return 2;	
+
+if(button(x,0.43, containerx,0.055,"Back"))
+	    return 0;	
+
+if(button(x,0.32, containerx,0.055,"EXIT"))
+	java.lang.System.exit(0);
+
+
+		
+StdDraw.show();
+}
+
+
+}
+
 private static ArrayList<String> splitUp (String split)
 {
 	ArrayList<String> splitarray = new ArrayList<String>();
@@ -855,6 +933,7 @@ private static ArrayList<String> splitUp (String split)
 				//System.out.println("Toooost");
 				length--;
 			}
+		System.out.println(splitarray);
 		splitarray.add(temp.substring(0,length+1));
 		temp = temp.substring(length+1);
 	}
