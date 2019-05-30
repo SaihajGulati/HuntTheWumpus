@@ -141,7 +141,7 @@ public class Trivia
     {
     	questionNum = (int)(Math.random() * triviaQuestions.size());
     	String[] answers = triviaAnswers.get(questionNum).split(":");           
-    	String returnString = triviaQuestions.get(questionNum) + "\nPlease type either a, b, c, or d.";
+    	String returnString = triviaQuestions.get(questionNum);
     	answerA = answers[0];
     	answerB = answers[1];
     	answerC = answers[2];
