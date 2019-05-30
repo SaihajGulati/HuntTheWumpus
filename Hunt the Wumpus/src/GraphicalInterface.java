@@ -94,6 +94,9 @@ public int shootArrow(int room1, int room2, int room3, int [] danger, int turn, 
 {
 	int toreturn;
 	double [] mousecords = {StdDraw.mouseX(), StdDraw.mouseY()};
+	
+	while(!button(0.5, 0.1 , 0.15 , 0.055, "Back"))
+	{
 	StdDraw.clear();
 	background();
 	room();
@@ -111,20 +114,13 @@ public int shootArrow(int room1, int room2, int room3, int [] danger, int turn, 
 	StdDraw.text(0.5, 0.25, "Click on a Room to Shoot");	
 	//ballcords = drawPlayer();
 	
-	if(button(0.5, 0.1 , 0.15 , 0.055, "Back"))
-	{
-		return -1;
-	}
 	arrowPath(toreturn);
 	StdDraw.show();
-	if(ClickedRelease() && toreturn > 0)
-	{
-	return toreturn;
-	}
 	
-	else if(toreturn<=0)
+	if(toreturn<=0)
 	{
 		return toreturn;
+	}
 	}
 	
 	return 0;
@@ -923,7 +919,7 @@ public static void  boughtArrow(int arrows)
 	StdDraw.setPenColor( 255,255,255);
 	Font title = new Font("Copperplate Gothic Bold",0, 60);
 	StdDraw.setFont(title);
-	StdDraw.text(0.5, 0.6, "You bought an arrow");
+	StdDraw.text(0.5, 0.6, "You bought 2 arrows");
 	StdDraw.text(0.5, 0.50, "You have "+arrows+" arrows");
 
 
@@ -1160,7 +1156,7 @@ public static void  endGame(boolean win)
 	if(win)
 	{
 	StdDraw.text(0.5, 0.6, "You have slain");
-	StdDraw.text(0.5, 0.6, "the WUMPUS");
+	StdDraw.text(0.5, 0.55, "the WUMPUS");
 	}
 	
 	else
