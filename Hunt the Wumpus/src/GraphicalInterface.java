@@ -122,7 +122,7 @@ public int shootArrow(int room1, int room2, int room3, int [] danger, int turn, 
 	arrowPath(toreturn);
 	StdDraw.show();
 	
-	if(toreturn>=0)
+	if(toreturn>0)
 	{
 		return toreturn;
 	}
