@@ -96,122 +96,122 @@ public class GameControl
 			//while player hasn't chosen in GI yet
 			//while(true) {
 				// simply sets the variables for later use
+			room = GameLocations.getPlayerLocation();
+			rooms = cave.tunnels(room);
+			hazards = GameLocations.warning();
+			response = GI.getRoom(rooms[0], rooms[1], rooms[2], hazards, player.getTurns(), player.getCoins(), player.getArrows()); //response gathered from player
+			if(response > 0)
+			{
+				player.movePlayer();
+				GI.betweenTurns(triv.giveTrivia(), room, player.getTurns(), player.getCoins(), player.getArrows());
+				//commit
+				GameLocations.movePlayer(response);//
 				room = GameLocations.getPlayerLocation();
-				rooms = cave.tunnels(room);
-				hazards = GameLocations.warning();
-				response = GI.getRoom(rooms[0], rooms[1], rooms[2], hazards, player.getTurns(), player.getCoins(), player.getArrows()); //response gathered from player
-				if(response > 0)
+				for(int i : GameLocations.getPitLocations()) {
+					if(room == i) {
+						room_hazards[1] = 1;
+					}
+					
+				}
+				for(int i : GameLocations.getBatLocations()) {
+					if(room == i) {
+						room_hazards[0] = 1;
+					}
+					
+				}
+				if(GameLocations.getPlayerLocation() == GameLocations.getWumpusLocation()) {
+					room_hazards[2] = 1;
+				}
+				GI.displayDanger(room_hazards);
+				room_hazards = new int[3];
+				for (int c: GameLocations.getBatLocations())
 				{
-					player.movePlayer();
-					GI.betweenTurns(triv.giveTrivia(), room, player.getTurns(), player.getCoins(), player.getArrows());
-					//commit
-					GameLocations.movePlayer(response);//
-					room = GameLocations.getPlayerLocation();
-					for(int i : GameLocations.getPitLocations()) {
-						if(room == i) {
-							room_hazards[1] = 1;
-						}
+					if(room == c) {//
+						player.changeCoins(-1);
+						room = GameLocations.triggerBat(); //hola
+					}
+				}
 						
-					}
-					for(int i : GameLocations.getBatLocations()) {
-						if(room == i) {
-							room_hazards[0] = 1;
-						}
-						
-					}
-					if(GameLocations.getPlayerLocation() == GameLocations.getWumpusLocation()) {
-						room_hazards[2] = 1;
-					}
-					GI.displayDanger(room_hazards);
-					room_hazards = new int[3];
-					for (int c: GameLocations.getBatLocations())
+				for (int c: GameLocations.getPitLocations())
+				{
+					if(room == c) 
 					{
-						if(room == c) {//
-							player.changeCoins(-1);
-							room = GameLocations.triggerBat(); //hola
-						}
-					}
-							
-					for (int c: GameLocations.getPitLocations())
-					{
-						if(room == c) 
-						{
 
-							if(!trivia(triv, GI, player, 3, 2))
-							{
-								return false;
-							}
-							
-						}
-					}
-					if (room == GameLocations.getWumpusLocation())
-					{
-						if(!trivia(triv, GI, player, 5, 3))
+						if(!trivia(triv, GI, player, 3, 2))
 						{
 							return false;
 						}
-					} 
-					
+						
+					}
 				}
-				else if (response == -1)
+				if (room == GameLocations.getWumpusLocation())
 				{
-					int arrowShot = 0;
-					
-					//while the player hasn't chosen a room yet, if -1 then it will go back
-					
-					while(arrowShot == 0 && arrowShot != -1) {
-						arrowShot = GI.shootArrow(rooms[0], rooms[1], rooms[2], hazards, player.getTurns(), player.getCoins(), player.getArrows());
+					if(!trivia(triv, GI, player, 5, 3))
+					{
+						return false;
 					}
-						player.changeArrows(-1);
-						
-						//if the person decides to go back
-						
-						if(arrowShot != -1) {
-							if (GameLocations.shootArrow(arrowShot))
-							{
-								return true; //player has won
-							}
-							else 
-							{
-								//add code for GI that states you missed
-							}	
-						}
-										
-					
+				} 
+				
+			}
+			else if (response == -1)
+			{
+				int arrowShot = 0;
+				
+				//while the player hasn't chosen a room yet, if -1 then it will go back
+				
+				while(arrowShot == 0 && arrowShot != -1) {
+					arrowShot = GI.shootArrow(rooms[0], rooms[1], rooms[2], hazards, player.getTurns(), player.getCoins(), player.getArrows());
 				}
-				else if (response == -2)
+					player.changeArrows(-1);
+					
+					//if the person decides to go back
+					
+					if(arrowShot != -1) {
+						if (GameLocations.shootArrow(arrowShot))
+						{
+							return true; //player has won
+						}
+						else 
+						{
+							//add code for GI that states you missed
+						}	
+					}
+									
+				
+			}
+			else if (response == -2)
+			{
+				int stuff = 0;
+				stuff = GI.buyItem(player.getCoins() > 3);
+				
+				if (stuff == 1)
 				{
-					int stuff = 0;
-					stuff = GI.buyItem(player.getCoins() > 3);
 					
-					if (stuff == 1)
+					if(trivia(triv, GI, player, 3, 2))
 					{
-						
-						if(trivia(triv, GI, player, 3, 2))
-						{
 
-							player.changeArrows(1);
-							GI.boughtArrow(player.getArrows());
-						}
-						else
-						{
-							GI.goof();
-						}
+						player.changeArrows(1);
+						GI.boughtArrow(player.getArrows());
 					}
-					else if (stuff == 2)
+					else
 					{
-						if(trivia(triv, GI, player, 3, 2))
-						{
-
-							GI.tellSecret(triv.returnHint());
-						}
-						else
-						{
-							GI.goof();
-						}
-						
+						GI.goof();
 					}
 				}
+				else if (stuff == 2)
+				{
+					if(trivia(triv, GI, player, 3, 2))
+					{
+
+						GI.tellSecret(triv.returnHint());
+					}
+					else
+					{
+						GI.goof();
+					}
+					
+				}
+			}
 			//}
 			//printHazardLocs(); //for testing purposes
 			// If the player has chosen to move to a place instead of shooting
