@@ -164,16 +164,12 @@ public class GameControl
 				else if (response == -2)
 				{
 					int stuff = 0;
-					boolean enough = false;
-					if(player.getCoins() > 0) {
-						enough = true;
-					}
-						stuff = GI.buyItem(enough);
+					stuff = GI.buyItem(player.getCoins() > 3);
 					
 					if (stuff == 1)
 					{
 						
-						if(trivia(triv, GI, player, 5, 3))
+						if(trivia(triv, GI, player, 3, 2))
 						{
 
 							player.changeArrows(1);
@@ -181,9 +177,21 @@ public class GameControl
 						}
 						else
 						{
-						
-							
+							GI.goof();
 						}
+					}
+					else if (stuff == 2)
+					{
+						if(trivia(triv, GI, player, 3, 2))
+						{
+
+							GI.tellSecret(triv.returnHint());
+						}
+						else
+						{
+							GI.goof();
+						}
+						
 					}
 				}
 			//}
