@@ -846,9 +846,10 @@ public static void  boughtArrow(int arrows)
 
 public static char  getAnswer(String question, String questionA, String questionB, String questionC, String questionD)
 {
-double x = 0.3;
+	//yeet
+double x = 0.27;
 double y = 0.5;
-double containerx= 0.25;
+double containerx= 0.27;
 double containery= 0.5;
 
 
