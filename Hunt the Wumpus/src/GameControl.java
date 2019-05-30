@@ -103,7 +103,7 @@ public class GameControl
 			hazards = GameLocations.warning();
 			response = GI.getRoom(rooms[0], rooms[1], rooms[2], hazards, player.getTurns(), player.getCoins(), player.getArrows()); //response gathered from player
 			if(response > 0)
-			{
+			{	
 				player.movePlayer();
 				printHazardLocs();
 				//commit
