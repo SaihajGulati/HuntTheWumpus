@@ -105,10 +105,16 @@ public class GameControl
 					player.movePlayer();
 					GI.betweenTurns(triv.giveTrivia(), room, player.getTurns(), player.getCoins(), player.getArrows());
 					for(int i : GameLocations.getPitLocations()) {
-						room_hazards[0] = 1;
+						if(room == i) {
+							room_hazards[0] = 1;
+						}
+						
 					}
 					for(int i : GameLocations.getBatLocations()) {
-						room_hazards[1] = 1;
+						if(room == i) {
+							room_hazards[1] = 1;
+						}
+						
 					}
 					if(GameLocations.getPlayerLocation() == GameLocations.getWumpusLocation()) {
 						room_hazards[2] = 1;
