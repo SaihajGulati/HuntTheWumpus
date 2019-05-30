@@ -80,6 +80,7 @@ public class HighScore
         String userName = "";
         highScores = new ArrayList<Integer>();
         names = new ArrayList<String>();
+        caves = new ArrayList<Integer>();
         //Adds high scores to the highScores ArrayList upon being scanned from the file, along with player names
         //to the names ArrayList and cave names to the caves ArrayList. 
         while(input.hasNext()) 
@@ -105,6 +106,9 @@ public class HighScore
                     System.out.println(inputLine);
                 }
             }
+            System.out.println("Names: " + names);
+            System.out.println("Score: " + highScores);
+            System.out.println("Cave:" + caves);
         }
     }
     
@@ -158,7 +162,7 @@ public class HighScore
     {
         //PrintStream output = new PrintStream(new File("testOutput.txt"));
     	//highScores.add(Integer.MIN_VALUE);
-        if(highScores.size() == 0 || totalScore >= highScores.get(0))
+        if(totalScore >= highScores.get(0))
         {
             highScores.add(0, totalScore);
             names.add(0, name);

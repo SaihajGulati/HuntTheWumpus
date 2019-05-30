@@ -44,6 +44,7 @@ public class GameControl
 		Player player = new Player();
 		ArrayList <String> scores = new ArrayList<String>();
 		Trivia trivia = new Trivia();
+		HighScore.loadFiles();
 		//starts the game
 		scores.add(" 1. Cave 1; Bob; 44");
 		 scores.add(" 2. Cave 1; Josh; 34");
@@ -67,7 +68,7 @@ public class GameControl
 		//GI.gameGraphics();
 		boolean gotWumpus = startGame(GI, player, cave, trivia);
 		int score = player.getScore(gotWumpus);
-		endGame(caveSelect, name, score, gotWumpus);
+		endGame(caveSelect, GI, name, score, gotWumpus);
 	}
 			
 	/**
@@ -215,8 +216,8 @@ public class GameControl
 	 * @param locations The GameLocations class
 	 * @throws FileNotFoundException 
 	 */
-	public static void endGame(int caveName, String Name, int score, boolean win) throws FileNotFoundException{
-		GraphicalInterface.endGame(win);
+	public static void endGame(int caveName, GraphicalInterface GI, String Name, int score, boolean win) throws FileNotFoundException{
+		GI.endGame(win);
 		HighScore.updateScoreBoard(score, Name, caveName);
 		
 	}	
@@ -250,7 +251,8 @@ public class GameControl
 	{
 		int correct = 0;
 		int count = 0;
-		while (correct < numC && count < numQ)
+		int wrong = 0;
+		while (correct < numC && count < numQ && wrong < numC)
 		{	
 			char answer = GI.getAnswer(triv.getQuestion(), triv.getA(), triv.getB(), triv.getC(), triv.getD());
 			if (triv.checkAnswer(answer))
@@ -261,6 +263,7 @@ public class GameControl
 			else
 			{
 				GI.postTrivia(false);
+				wrong++;
 			}
 			count++;
 			player.changeCoins(-1);
