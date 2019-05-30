@@ -97,11 +97,11 @@ public class GameControl
 				room = GameLocations.getPlayerLocation();
 				rooms = cave.tunnels(room);
 				hazards = GameLocations.warning();
-				response = GI.getRoom(rooms[0], rooms[1], rooms[2], hazards); //response gathered from player
+				response = GI.getRoom(rooms[0], rooms[1], rooms[2], hazards, player.getTurns(), player.getCoins(), player.getArrows()); //response gathered from player
 				if(response > 0)
 				{
 							player.movePlayer();
-							System.out.println(Trivia.giveTrivia()); 
+							GI.betweenTurns(Trivia.giveTrivia(), room, player.getTurns(), player.getCoins(), player.getArrows());
 							//commit
 							GameLocations.movePlayer(response);//
 							room = GameLocations.getPlayerLocation();
@@ -145,7 +145,7 @@ public class GameControl
 					//while the player hasn't chosen a room yet, if -1 then it will go back
 					
 					while(arrowShot == 0 && arrowShot != -1) {
-						arrowShot = GI.shootArrow(rooms[0], rooms[1], rooms[2], hazards);
+						arrowShot = GI.shootArrow(rooms[0], rooms[1], rooms[2], hazards, player.getTurns(), player.getCoins(), player.getArrows());
 					}
 						player.changeArrows(-1);
 						
