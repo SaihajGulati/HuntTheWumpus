@@ -42,35 +42,39 @@ public class GameControl
 	{
 		//hello testing
 		
-		GraphicalInterface GI = new GraphicalInterface(BATS, WUMPUS, HOLE);
-		Player player = new Player();
-		ArrayList <String> scores = new ArrayList<String>();
-		Trivia trivia = new Trivia();
-		HighScore.loadFiles();
-		//starts the game
-		scores.add(" 1. Cave 1; Bob; 44");
-		 scores.add(" 2. Cave 1; Josh; 34");
-		 scores.add(" 3. Cave 1; Brian; 64");
-		 scores.add(" 4. Cave 1; Okay; 74");
-		 scores.add(" 5. Cave 1; Hello; 84");
-		 scores.add(" 6. Cave 1; Why; 94");
-		 scores.add(" 7. Cave 1; No; 24");
-		 scores.add(" 8. Cave 1; Bye; 14");
-		 scores.add(" 9. Cave 1; Hello; 84");
-		 scores.add("10. Cave 1; Joe; 94");
-		GI.start();
-		String name = "";
-		int caveSelect = 0;
-		while(name.equals("")) {
-			caveSelect = GI.mainmenu(scores);
-			name = GI.getName();
+		while (true)
+		{
+			GraphicalInterface GI = new GraphicalInterface(BATS, WUMPUS, HOLE);
+			Player player = new Player();
+			ArrayList <String> scores = new ArrayList<String>();
+			Trivia trivia = new Trivia();
+			HighScore.loadFiles();
+			//starts the game
+			scores.add(" 1. Cave 1; Bob; 44");
+			 scores.add(" 2. Cave 1; Josh; 34");
+			 scores.add(" 3. Cave 1; Brian; 64");
+			 scores.add(" 4. Cave 1; Okay; 74");
+			 scores.add(" 5. Cave 1; Hello; 84");
+			 scores.add(" 6. Cave 1; Why; 94");
+			 scores.add(" 7. Cave 1; No; 24");
+			 scores.add(" 8. Cave 1; Bye; 14");
+			 scores.add(" 9. Cave 1; Hello; 84");
+			 scores.add("10. Cave 1; Joe; 94");
+			GI.start();
+			String name = "";
+			int caveSelect = 0;
+			while(name.equals("")) {
+				caveSelect = GI.mainmenu(scores);
+				name = GI.getName();
+			}
+			Cave cave = new Cave(caveSelect);
+			GameLocations locations = new GameLocations(cave);
+			//GI.gameGraphics();
+			boolean gotWumpus = startGame(GI, player, cave, trivia);
+			int score = player.getScore(gotWumpus);
+			endGame(caveSelect, GI, name, score, gotWumpus);
+			GI.teamMessage();
 		}
-		Cave cave = new Cave(caveSelect);
-		GameLocations locations = new GameLocations(cave);
-		//GI.gameGraphics();
-		boolean gotWumpus = startGame(GI, player, cave, trivia);
-		int score = player.getScore(gotWumpus);
-		endGame(caveSelect, GI, name, score, gotWumpus);
 	}
 			
 	/**
