@@ -90,7 +90,7 @@ public int getRoom(int room1, int room2, int room3, int [] danger, int turn, int
 	return toreturn;
 }
 
-public int shootArrow(int room1, int room2, int room3, int [] danger)
+public int shootArrow(int room1, int room2, int room3, int [] danger, int turn, int coins, int arrows)
 {
 	int toreturn;
 	double [] mousecords = {StdDraw.mouseX(), StdDraw.mouseY()};
@@ -99,6 +99,11 @@ public int shootArrow(int room1, int room2, int room3, int [] danger)
 	room();
 	WariningSign(danger);
 	toreturn = doors(room1, room2, room3,mousecords);
+	
+	HUDtext(0.5,0.18,NAME);
+	HUDtext(0.9,0.8,"Round "+turn);
+	HUDtext(0.9,0.77,"Coins "+coins);
+	HUDtext(0.9,0.74,"Arrows "+arrows);
 
 	Font font = new Font("Copperplate Gothic Bold",0, 40);
 	StdDraw.setPenColor( 150,0,0);
