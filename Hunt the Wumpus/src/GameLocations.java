@@ -144,7 +144,7 @@ public class GameLocations {
     		  return true;
     	   else
     	   {
-    		   if (Math.random() < 0.25)
+    		   if (Math.random() < 0.75)
     		   {
     			   moveWumpusOne();
     		   }
