@@ -863,6 +863,8 @@ public void  displayDanger(int [] dangers)
 		StdDraw.text(0.5, 0.6-shift, "A bat has moved you to a random room!");
 		shift+=0.05;
 	}
+	
+	if(dangers[WUMPUS] >0 || dangers[HOLE] >0)
 	StdDraw.text(0.5, 0.6-shift, "You must answer "+questions+" questions.");
 	
 	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
