@@ -171,12 +171,12 @@ public class GameControl
 					if(arrowShot != -1) {
 						if (GameLocations.shootArrow(arrowShot))
 						{
-							GI.arrowHit(true);
+							GI.arrowHit(true, player.getArrows());
 							return true; //player has won
 						}
 						else 
 						{
-							GI.arrowHit(false);//add code for GI that states you missed
+							GI.arrowHit(false, player.getArrows());//add code for GI that states you missed
 						}	
 					}
 									
