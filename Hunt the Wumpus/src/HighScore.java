@@ -156,6 +156,7 @@ public class HighScore
     public static ArrayList<Integer> updateScoreBoard(int totalScore, String name, int caveName) throws FileNotFoundException
     {
         //PrintStream output = new PrintStream(new File("testOutput.txt"));
+    	highScores.add(0);
         if(highScores.size() == 0 || totalScore >= highScores.get(0))
         {
             highScores.add(0, totalScore);
