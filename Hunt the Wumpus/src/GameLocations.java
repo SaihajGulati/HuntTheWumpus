@@ -52,9 +52,7 @@ public class GameLocations {
             	  playerLocation=originalPlayerLocation;
               }
               wumpusLocation=(int)(Math.random()*30+1);
-              while(wumpusLocation==pitLocations[0]||wumpusLocation==pitLocations[1]||
-            		  wumpusLocation==batLocations[0]||wumpusLocation==batLocations[1]||
-            		  wumpusLocation==playerLocation)
+              while(wumpusLocation==playerLocation)
               {
             	  wumpusLocation=(int)(Math.random()*30+1);
               }
@@ -116,7 +114,7 @@ public class GameLocations {
        public static int[] warning()
        {
     	   int[] warnings= {0,0,0};
-    	   int[] sides = cave.adjacentRooms(getPlayerLocation());
+    	   int[] sides = cave.tunnels(getPlayerLocation());
     	   for(int i=0; i<sides.length;i++)
     	   {
     		   if(batLocations[0]==sides[i]||batLocations[1]==sides[i])
