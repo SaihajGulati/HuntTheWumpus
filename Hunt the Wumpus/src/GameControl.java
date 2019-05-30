@@ -104,6 +104,9 @@ public class GameControl
 				{
 					player.movePlayer();
 					GI.betweenTurns(triv.giveTrivia(), room, player.getTurns(), player.getCoins(), player.getArrows());
+					//commit
+					GameLocations.movePlayer(response);//
+					room = GameLocations.getPlayerLocation();
 					for(int i : GameLocations.getPitLocations()) {
 						if(room == i) {
 							room_hazards[0] = 1;
@@ -121,9 +124,6 @@ public class GameControl
 					}
 					GI.displayDanger(room_hazards);
 					room_hazards = new int[3];
-					//commit
-					GameLocations.movePlayer(response);//
-					room = GameLocations.getPlayerLocation();
 					for (int c: GameLocations.getBatLocations())
 					{
 						if(room == c) {//
