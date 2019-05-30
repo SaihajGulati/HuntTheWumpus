@@ -804,7 +804,7 @@ public static void  postTrivia(boolean correct)
 	StdDraw.setFont(title);
 	if(correct)
 	{
-	StdDraw.text(0.5, 0.6, "Corect" );
+	StdDraw.text(0.5, 0.6, "Correct" );
 	}
 	
 	else
