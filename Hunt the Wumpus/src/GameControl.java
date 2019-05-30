@@ -109,18 +109,18 @@ public class GameControl
 				room = GameLocations.getPlayerLocation();
 				for(int i : GameLocations.getPitLocations()) {
 					if(room == i) {
-						room_hazards[1] = 1;
+						room_hazards[HOLE] = 1;
 					}
 					
 				}
 				for(int i : GameLocations.getBatLocations()) {
 					if(room == i) {
-						room_hazards[0] = 1;
+						room_hazards[BATS] = 1;
 					}
 					
 				}
 				if(GameLocations.getPlayerLocation() == GameLocations.getWumpusLocation()) {
-					room_hazards[2] = 1;
+					room_hazards[WUMPUS] = 1;
 				}
 				GI.displayDanger(room_hazards);
 				room_hazards = new int[3];
