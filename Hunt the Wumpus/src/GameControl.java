@@ -85,9 +85,9 @@ public class GameControl
 		System.out.println("Test");
 		int response = 0; //response given by player in GI
 		int room; //room player is currently in
-		int[] temp; 
 		int[] rooms = new int[3];//the rooms around the player
 		int[] hazards = new int[3]; // 0: bat | 1 : Hole | 2 : Wumpus 
+		int[] room_hazards = new int[3]; // same as hazards but for use with hazards in the room not just nearby
 		printHazardLocs();
 		
 		//the while loop that runs the game while the player is alive, has arrows, and has coins
@@ -104,6 +104,17 @@ public class GameControl
 				{
 					player.movePlayer();
 					GI.betweenTurns(triv.giveTrivia(), room, player.getTurns(), player.getCoins(), player.getArrows());
+					for(int i : GameLocations.getPitLocations()) {
+						room_hazards[0] = 1;
+					}
+					for(int i : GameLocations.getBatLocations()) {
+						room_hazards[1] = 1;
+					}
+					if(GameLocations.getPlayerLocation() == GameLocations.getWumpusLocation()) {
+						room_hazards[2] = 1;
+					}
+					GI.displayDanger(room_hazards);
+					room_hazards = new int[3];
 					//commit
 					GameLocations.movePlayer(response);//
 					room = GameLocations.getPlayerLocation();
