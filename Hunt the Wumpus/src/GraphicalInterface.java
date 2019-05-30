@@ -1173,7 +1173,7 @@ public static void  endGame(boolean win)
 	}
 }
 
-public static void  arrowHit(boolean hit)
+public static void  arrowHit(boolean hit, int arrows)
 {	
 	boolean waiting = true;
 	
@@ -1201,6 +1201,7 @@ public static void  arrowHit(boolean hit)
 	else
 	{
 	StdDraw.text(0.5, 0.6, "You missed");
+	StdDraw.text(0.5, 0.55, "You have "+arrows+" left");
 	}
 
 	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
