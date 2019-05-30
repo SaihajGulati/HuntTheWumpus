@@ -14,7 +14,7 @@
  * 3/19/19: Version 1.2
  * Implemented the methods askQuestions and getTrivia, along with the constructor for Trivia.
  * 3/21/19: Version 1.3
- * Made the method static
+ * Made the method 
  * 3/22/19: Version 1.4
  * Added the declaration/instantiation of the secrets ArrayList
  * 3/25/19: Version 1.5
@@ -50,33 +50,40 @@ import java.util.*;
 import java.io.*;
 public class Trivia 
 {
-    private static Scanner input; //The Scanner used for the Trivia object
-    private static File trivia; //The File that contains the trivia
-    private static ArrayList<String> triviaQuestions; //The trivia questions that will be asked during the game 
-    private static ArrayList<String> triviaAnswers;
+    private  Scanner input; //The Scanner used for the Trivia object
+    private  File trivia; //The File that contains the trivia
+    private  ArrayList<String> triviaQuestions; //The trivia questions that will be asked during the game 
+    private  ArrayList<String> triviaAnswers;
     										/**
                                               * The answers to the trivia questions; will be updated alongside
                                               * the triviaQuestions ArrayList.
                                               */
-    private static ArrayList<String> correctAnswers; /**
+    private  ArrayList<String> correctAnswers; /**
                                               * The correct answers to the trivia questions
                                               */
     
-    private static ArrayList<String> triviaInformation; /**
+    private  ArrayList<String> triviaInformation; /**
                                          * The trivia information that will be given out for every Player turn;
                                          * unlike the triviaAnswers ArrayList this array won't remove values for
                                          * every question asked.
                                          */
-    private static ArrayList<String> secrets; //The secrets that will be given to the Player when he/she buys them.
-    private static int questionNum; /**The number of the question currently asked by Trivia, along
+    private  ArrayList<String> secrets; //The secrets that will be given to the Player when he/she buys them.
+    private  int questionNum; /**The number of the question currently asked by Trivia, along
     * with its corresponding answers.
-    
+  
     /**
      * The method for the Trivia class that will handle the File processing and fill the
      * Trivia-related ArrayLists and arrays with their appropriate values, in addition to instantiating the
      * Scanner for user input.
     */
-    public static void loadFiles() throws FileNotFoundException
+  
+    //the a-d answer choices given to the user for each question
+    private String answerA; 
+    private String answerB;
+    private String answerC;
+    private String answerD;
+    
+    public  Trivia() throws FileNotFoundException
     {
         trivia = new File("input/Trivia.txt");
         input = new Scanner(trivia);
@@ -130,18 +137,57 @@ public class Trivia
      * Please note that GameControl will now have to keep track of the number of correct answers, since Trivia
      * can no longer do that with these two methods rather than askQuestions.
      */
-    public static String getQuestion()
+    public  String getQuestion()
     {
     	questionNum = (int)(Math.random() * triviaQuestions.size());
     	String[] answers = triviaAnswers.get(questionNum).split(":");           
     	String returnString = triviaQuestions.get(questionNum) + "\nPlease type either a, b, c, or d.";
-    	for(int i = 0; i < answers.length; i++)
+    	answerA = answers[0];
+    	answerB = answers[1];
+    	answerC = answers[2];
+    	answerD = answers[3];
+    	/*for(int i = 0; i < answers.length; i++)
         {
-          returnString += "\n" + answers[i];
-        }
+          returnString += "\n" + answers[i];lkjlkj
+        }*/
     	return returnString;
     }
     
+    /**
+     * getter for answerA
+     * @return answerA
+     */
+    public String getA()
+    {
+    	return answerA;
+    }
+    
+    /**
+     * getter for answerB
+     * @return answerB
+     */
+    public String getB()
+    {
+    	return answerB;
+    }
+    
+    /**
+     * getter for answerC
+     * @return answerC
+     */
+    public String getC()
+    {
+    	return answerC;
+    }
+    
+    /**
+     * getter for answerD
+     * @return answerD
+     */
+    public String getD()
+    {
+    	return answerD;
+    }
     /**
      * This method takes a String as a parameter (the user input) and compares it with the correct answer as
      * specified by correctAnswers' respective answer (position of questionNum in the ArrayList).
@@ -152,13 +198,13 @@ public class Trivia
      * 
      * Pre-Condition: getQuestion has already been called before checkAnswers.
      */
-    public static boolean checkAnswer(String answer)
+    public  boolean checkAnswer(char answer)
     {
     	String correctAnswer = correctAnswers.get(questionNum);
     	triviaQuestions.remove(questionNum);
         triviaAnswers.remove(questionNum);
         correctAnswers.remove(questionNum);
-    	return answer.equalsIgnoreCase(correctAnswer);
+    	return answer == correctAnswer.charAt(0);
     }
     
     /**
@@ -252,7 +298,7 @@ public class Trivia
      * 
      * @Return: String (the piece of trivia that the Player will eventually get)
     */
-    public static String giveTrivia()
+    public  String giveTrivia()
     {
         int infoNum = (int)(Math.random() * triviaInformation.size());
         String trivia = triviaInformation.get(infoNum);
@@ -260,37 +306,37 @@ public class Trivia
     }
     
     //Prints a description of the Trivia object rather than its address in computer's memory.
-    // public static String toString()
+    // public  String toString()
     // {
         // return "Trivia";
     // }
     
     //test accessor method for triviaQuestions ArrayList
-    public static ArrayList<String> getQuestions()
+    public  ArrayList<String> getQuestions()
     {
         return triviaQuestions;
     }
     
     //test accessor method for triviaAnswers ArrayList 
-    public static ArrayList<String> getAnswers()
+    public  ArrayList<String> getAnswers()
     {
         return triviaAnswers;
     }
     
     //test accessor method for triviaInformation ArrayList
-    public static ArrayList<String> getInformation()
+    public  ArrayList<String> getInformation()
     {
         return triviaInformation;
     }
     
     //test accessor method for secrets ArrayList
-    public static ArrayList<String> accessHints()
+    public  ArrayList<String> accessHints()
     {
         return secrets;
     }
     
     //test accessor method for correctAnswers ArrayList
-    public static ArrayList<String> getCorrectAnswers()
+    public  ArrayList<String> getCorrectAnswers()
     {
         return correctAnswers;
     }

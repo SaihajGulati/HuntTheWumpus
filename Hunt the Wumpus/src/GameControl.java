@@ -43,7 +43,7 @@ public class GameControl
 		GraphicalInterface GI = new GraphicalInterface(BATS, HOLE, WUMPUS);
 		Player player = new Player();
 		ArrayList <String> scores = new ArrayList<String>();
-		Trivia.loadFiles();
+		Trivia trivia = new Trivia();
 		//starts the game
 		scores.add(" 1. Cave 1; Bob; 44");
 		 scores.add(" 2. Cave 1; Josh; 34");
@@ -65,7 +65,7 @@ public class GameControl
 		Cave cave = new Cave(caveSelect);
 		GameLocations locations = new GameLocations(cave);
 		//GI.gameGraphics();
-		boolean gotWumpus = startGame(GI, player, cave);
+		boolean gotWumpus = startGame(GI, player, cave, trivia);
 		int score = player.getScore(gotWumpus);
 		endGame(caveSelect, name, score);
 	}
@@ -77,7 +77,7 @@ public class GameControl
 	 * @param player is the player class
 	 * @param cave is the cave class
 	 */
-	public static boolean startGame(GraphicalInterface GI, Player player, Cave cave) throws FileNotFoundException
+	public static boolean startGame(GraphicalInterface GI, Player player, Cave cave, Trivia triv) throws FileNotFoundException
 	{
 		
 		Scanner input = new Scanner(System.in);
@@ -87,6 +87,7 @@ public class GameControl
 		int[] temp; 
 		int[] rooms = new int[3];//the rooms around the player
 		int[] hazards = new int[3]; // 0: bat | 1 : Hole | 2 : Wumpus 
+		printHazardLocs();
 		
 		//the while loop that runs the game while the player is alive, has arrows, and has coins
 		
@@ -101,7 +102,7 @@ public class GameControl
 				if(response > 0)
 				{
 							player.movePlayer();
-							GI.betweenTurns(Trivia.giveTrivia(), room, player.getTurns(), player.getCoins(), player.getArrows());
+							GI.betweenTurns(triv.giveTrivia(), room, player.getTurns(), player.getCoins(), player.getArrows());
 							//commit
 							GameLocations.movePlayer(response);//
 							room = GameLocations.getPlayerLocation();
@@ -117,12 +118,30 @@ public class GameControl
 							{
 								if(room == c) 
 								{
-									player.changeCoins(-1);
+
+									int correct = 0;
+									int count = 0;
+									while (correct < 2 && count < 3)
+									{	
+										char answer = GI.getAnswer(triv.getQuestion(), triv.getA(), triv.getB(), triv.getC(), triv.getD());
+										if (triv.checkAnswer(answer))
+										{
+											correct++;
+										}
+										count++;
+										player.changeCoins(-1);
+									}
+									if (correct < 2)
+									{
+										System.out.println("You died");
+										return false;
+									}
+									
 									/*if(!Trivia.askQuestions(HOLE)) {
 										return false;
 									}		
 								}
-								else {
+								else {asdas
 									break;
 								*/}
 							}
@@ -210,7 +229,7 @@ public class GameControl
 		return false;
 	}
 	
-	/*public static void printHazardLocs()
+	public static void printHazardLocs()
 	{
 		System.out.print("For testing:");
 		System.out.println();
@@ -218,7 +237,7 @@ public class GameControl
 		System.out.println("Pits are located in rooms " + arrayString(GameLocations.getPitLocations(), "and"));
 		System.out.println("Wumpus is located in room " + GameLocations.getWumpusLocation());
 		System.out.println();
-	}*/
+	}
 	
 	/**
 	 * prints out an array in normal english
