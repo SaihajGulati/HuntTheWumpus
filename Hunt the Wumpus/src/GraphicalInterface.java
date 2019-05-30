@@ -930,7 +930,7 @@ StdDraw.show();
 }
 
 // 1 for arrow, 2 for secret, 0 to go back
-public static int  buyItem()
+public static int  buyItem(boolean enough)
 {	
 	double x = 0.2;
 double y = 0.5;
@@ -956,6 +956,13 @@ arrowDescription = splitUp("You can get ARROWS by getting two out of three trivi
 	StdDraw.filledRectangle(x , y, containerx, containery);
 	title(x,0.9, "Trivia" );
 	
+	if(!enough)
+	{
+		Font funds = new Font("Copperplate Gothic Bold",0, 25);
+		StdDraw.setFont(funds);
+		StdDraw.setPenColor( 150,0,0);
+		StdDraw.text(0.5, 0.85, "NOT ENOUGH COINS");	
+	}
 	
 	
 	if(inBox(x,0.65, containerx,0.055))
@@ -985,12 +992,12 @@ arrowDescription = splitUp("You can get ARROWS by getting two out of three trivi
 			StdDraw.text(textcenter, start-(0.05*i), secretDescription.get(i));		
 		}
 	}
-
-if(button(x,0.65, containerx,0.055,"Arrow"))
+//yeet
+if(button(x,0.65, containerx,0.055,"Arrow") && enough)
 	
 	    return 1;	
 
-if(button(x,0.54, containerx,0.055, "Secret"))
+if(button(x,0.54, containerx,0.055, "Secret") && enough)
 	    return 2;	
 
 if(button(x,0.43, containerx,0.055,"Back"))
