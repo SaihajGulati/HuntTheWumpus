@@ -510,6 +510,7 @@ public int mainmenu(ArrayList<String> scores)
 	   StdDraw.clear();
 	   return caveSelection(scores);		
 }
+
 private static int menubuttons()
 {	double x = 0.5;
     double y = 0.5;
@@ -735,6 +736,39 @@ public static void  betweenTurns(String hint, int room, int turn, int coins, int
 		StdDraw.setPenColor( 255,255,255);
 		StdDraw.setFont(font);
 		StdDraw.text(0.5, 0.5-(0.05*i), toprint.get(i));		
+	}
+
+	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
+	StdDraw.show();
+	}
+}
+
+public static void  postTrivia(boolean correct)
+{	
+	boolean waiting = true;
+	
+	while(waiting)
+	{
+	
+	StdDraw.clear();
+	
+	StdDraw.setPenColor( 0,0,0);
+	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	
+	StdDraw.setPenColor( 32,32,32);
+	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	
+	StdDraw.setPenColor( 255,255,255);
+	Font title = new Font("Copperplate Gothic Bold",0, 60);
+	StdDraw.setFont(title);
+	if(correct)
+	{
+	StdDraw.text(0.5, 0.6, "Corect" );
+	}
+	
+	else
+	{
+	StdDraw.text(0.5, 0.6, "Incorect" );
 	}
 
 	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
