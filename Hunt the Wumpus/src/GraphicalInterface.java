@@ -197,6 +197,27 @@ private String dangerMessage (int danger)
 	return toreturn;
 }
 
+private String getDanger (int danger)
+{
+	String toreturn = "";
+	if(danger == BAT)
+	{
+		toreturn += "BAT";
+	}
+	
+	if(danger == WUMPUS)
+	{
+		toreturn += "WUMPUS";
+	}
+	
+	if(danger == HOLE)
+	{
+		toreturn += " PIT";
+	}
+	
+	return toreturn;
+}
+
 private double[] drawPlayer()
 {
   	for(int i = 0; i<499;i++)
@@ -784,6 +805,63 @@ public static void  tellSecret(String secret)
 	}
 }
 
+public void  displayDanger(int [] dangers)
+{	
+	boolean waiting = true;
+	
+	while(waiting)
+	{
+	
+	StdDraw.clear();
+	double shift = 0;
+	int questions = 0;
+	
+	StdDraw.setPenColor( 0,0,0);
+	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	
+	StdDraw.setPenColor( 32,32,32);
+	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	WARNING.draw("Danger",0.5, 0.85, 100);
+	
+	StdDraw.setPenColor( 180,0,0);
+	Font title = new Font("Copperplate Gothic Bold",0, 45);
+	StdDraw.setFont(title);
+
+	StdDraw.text(0.5, 0.7, "You are in a room with:");
+	
+	for(int i = 0; i<dangers.length;i++)
+	{
+		if(dangers[i]>0)
+		{
+		StdDraw.text(0.5, 0.6-shift, getDanger(i));
+		shift +=0.1;
+		if(i == HOLE)
+		{
+			questions+=3;
+		}
+		
+		if(i == WUMPUS)
+		{
+			questions+=5;
+		}
+		}
+	}
+	
+	Font danger = new Font("Copperplate Gothic Bold",0,25); 
+	StdDraw.setFont(danger);
+	
+	if(dangers[BAT] >0)
+	{
+		StdDraw.text(0.5, 0.6-shift, "A bat has moved you to a random room!");
+		shift+=0.05;
+	}
+	StdDraw.text(0.5, 0.6-shift, "You must answer "+questions+" questions.");
+	
+	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
+	StdDraw.show();
+	}
+}
+
 public static void  postTrivia(boolean correct)
 {	
 	boolean waiting = true;
@@ -1059,6 +1137,10 @@ public static void  endGame(boolean win)
 	
 	StdDraw.setPenColor( 32,32,32);
 	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	
+	StdDraw.setPenColor( 250,250,250);
+	Font title = new Font("Copperplate Gothic Bold",0, 30);
+	StdDraw.setFont(title);
 	
 	if(win)
 	{
