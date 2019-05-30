@@ -70,7 +70,7 @@ public class GameLocations {
        }
        
        /*
-        * Moves Wumpus if player wins argument or every random amount of time
+        * Moves Wumpus 2-4 rooms away, if beaten in fight with player
         */
        public static void moveWumpus()
        {
@@ -81,6 +81,14 @@ public class GameLocations {
     	  }
        }
        
+       /*
+        * Moves the wumpus to the next room in a random direction
+        */
+       public static void moveWumpusOne()
+       {
+    	   int moveLocation=cave.tunnels(wumpusLocation)[(int)(Math.random()*cave.tunnels(wumpusLocation).length)];
+ 		   wumpusLocation=moveLocation;
+       }
        /* 
         * Moves Player to room if possible
         * @param room is the desired location to move to
@@ -138,7 +146,10 @@ public class GameLocations {
     		  return true;
     	   else
     	   {
-    		   moveWumpus();
+    		   if (Math.random() < 0.25)
+    		   {
+    			   moveWumpusOne();
+    		   }
               return false;
     	   }
        }

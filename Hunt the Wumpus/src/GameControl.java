@@ -105,6 +105,7 @@ public class GameControl
 			if(response > 0)
 			{
 				player.movePlayer();
+				printHazardLocs();
 				GI.betweenTurns(triv.giveTrivia(), room, player.getTurns(), player.getCoins(), player.getArrows());
 				//commit
 				GameLocations.movePlayer(response);//
@@ -151,6 +152,10 @@ public class GameControl
 					if(!trivia(triv, GI, player, 5, 3))
 					{
 						return false;
+					}
+					else
+					{
+						GameLocations.moveWumpus();
 					}
 				} 
 				
