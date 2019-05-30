@@ -558,7 +558,8 @@ private static boolean button(double x, double y, double high, double wide, Stri
 	
 	StdDraw.filledRectangle(x, y, high , wide);
 	StdDraw.setPenColor( 255,255,255);
-	Font buttonfont = new Font("Copperplate Gothic Bold",0, 20);
+	Font buttonfont;
+	buttonfont = new Font("Copperplate Gothic Bold",0, 20);
 	StdDraw.setFont(buttonfont);
 	StdDraw.text(x, y, message);
 	return hovering && ClickedRelease();
@@ -596,16 +597,19 @@ private static boolean inBox(double xcenter, double ycenter, double height, doub
         double x = StdDraw.mouseX();
         double y = StdDraw.mouseY();
         //System.out.println(x+" "+y);
-        if(x < xcenter-width*2.7 || x> xcenter+width*2.7)
+        if((x < xcenter-(height) || x > xcenter+(height)))
         {
         	return false;
         }
         
-        if(y < ycenter-height/2.7 || y> ycenter+height/2.7)
+        if((y < ycenter-(width) || y > ycenter+(width)))
         {
+        	
         	return false;
         }
+        
         //System.out.println("YEE");
+        //System.out.println(x+" "+y);
         return true;     
         
     }
@@ -626,7 +630,7 @@ private static boolean inBox(double xcenter, double ycenter, double height, doub
     }
     
     //System.out.println("YEE");
-    System.out.println(x+" "+y);
+    //System.out.println(x+" "+y);
     return true;     
     
 }
@@ -736,6 +740,63 @@ public static void  betweenTurns(String hint, int room, int turn, int coins, int
 	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
 	StdDraw.show();
 	}
+}
+
+public static char  getAnswer(String question, String questionA, String questionB, String questionC, String questionD)
+{
+double x = 0.3;
+double y = 0.5;
+double containerx= 0.25;
+double containery= 0.5;
+
+
+ArrayList<String> toprint = new ArrayList<String>();
+toprint = splitUp(question);
+
+ while(true)
+{
+	StdDraw.clear();
+	StdDraw.setPenColor(0,0,0);
+	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	//StdDraw.picture(0.5, 0.5, "C:\\Users\\s-dapopa\\Desktop\\cave.jpg",1, 1);
+	
+    StdDraw.setPenColor(32,32,32);
+	StdDraw.filledRectangle(x , y, containerx, containery);
+	title(x,0.9, "Trivia" );
+	
+	
+	Font font = new Font("Copperplate Gothic Bold",0, 25);
+	double start = ((toprint.size()*0.05)/2)+0.5;
+	double textcenter = 0.77;
+	
+	for(int i = 0; i< toprint.size(); i++)
+	{
+		StdDraw.setPenColor( 255,255,255);
+		StdDraw.setFont(font);
+		StdDraw.text(textcenter, start-(0.05*i), toprint.get(i));		
+	}	
+
+if(button(x,0.65, containerx,0.055,questionA))
+	
+	    return 'a';	
+
+if(button(x,0.54, containerx,0.055, questionB))
+	    return 'b';	
+
+if(button(x,0.43, containerx,0.055,questionC))
+	    return 'c';	
+
+if(button(x,0.32, containerx,0.055,questionD))
+        return 'd';
+
+if(button(x,0.09, containerx,0.055,"Exit"))
+	java.lang.System.exit(0);;
+
+		
+StdDraw.show();
+}
+
+
 }
 
 private static ArrayList<String> splitUp (String split)
