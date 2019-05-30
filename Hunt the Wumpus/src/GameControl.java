@@ -127,6 +127,11 @@ public class GameControl
 										if (triv.checkAnswer(answer))
 										{
 											correct++;
+											GI.postTrivia(true);
+										}
+										else
+										{
+											GI.postTrivia(false);
 										}
 										count++;
 										player.changeCoins(-1);
@@ -147,7 +152,28 @@ public class GameControl
 							}
 							if (room == GameLocations.getWumpusLocation())
 							{
-								player.changeCoins(-1);
+								int correct = 0;
+								int count = 0;
+								while (correct < 3 && count < 5)
+								{	
+									char answer = GI.getAnswer(triv.getQuestion(), triv.getA(), triv.getB(), triv.getC(), triv.getD());
+									if (triv.checkAnswer(answer))
+									{
+										correct++;
+										GI.postTrivia(true);
+									}
+									else
+									{
+										GI.postTrivia(false);
+									}
+									count++;
+									player.changeCoins(-1);
+								}
+								if (correct < 3)
+								{
+									System.out.println("You died");
+									return false;
+								}
 								/*if(!Trivia.askQuestions(WUMPUS)) {
 									return false;
 								}
