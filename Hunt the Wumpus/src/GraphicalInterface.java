@@ -74,7 +74,7 @@ public int getRoom(int room1, int room2, int room3, int [] danger, int turn, int
 		toreturn = -1;
 	}
 	
-	if(button(0.2, 0.1 , 0.15 , 0.055, "Buy Hint"))
+	if(button(0.2, 0.1 , 0.15 , 0.055, "Buy Item"))
 	{
 		toreturn = -2;
 	}
@@ -835,8 +835,8 @@ public static void  boughtArrow(int arrows)
 	StdDraw.setPenColor( 255,255,255);
 	Font title = new Font("Copperplate Gothic Bold",0, 60);
 	StdDraw.setFont(title);
-	StdDraw.text(0.5, 0.6, "Arrows");
-	StdDraw.text(0.5, 0.50, ""+arrows);
+	StdDraw.text(0.5, 0.6, "Bought Arrows");
+	StdDraw.text(0.5, 0.50, arrows+" Arrows");
 
 
 	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
@@ -997,7 +997,7 @@ private static ArrayList<String> splitUp (String split)
 				//System.out.println("Toooost");
 				length--;
 			}
-		System.out.println(splitarray);
+		//System.out.println(splitarray);
 		splitarray.add(temp.substring(0,length+1));
 		temp = temp.substring(length+1);
 	}
