@@ -70,9 +70,18 @@ public class GameControl
 			Cave cave = new Cave(caveSelect);
 			GameLocations locations = new GameLocations(cave);
 			//GI.gameGraphics();
-			String gotWumpus = startGame(GI, player, cave, trivia);
-			int score = player.getScore(gotWumpus);
-			endGame(caveSelect, GI, name, Player player, gotWumpus);
+			String reason = startGame(GI, player, cave, trivia);
+			
+			int score;
+			if (reason.equals("wumpus"))
+			{
+				score = player.getScore(true);
+			}
+			else
+			{
+				score = player.getScore(false);
+			}
+			endGame(caveSelect, GI, name, player, reason, score);
 			GI.teamMessage();
 		}
 	}
@@ -136,7 +145,7 @@ public class GameControl
 				{
 					if(!trivia(triv, GI, player, 5, 3))
 					{
-						return false;
+						return "wumpus";
 					}
 					else
 					{
@@ -157,7 +166,7 @@ public class GameControl
 
 						if(!trivia(triv, GI, player, 3, 2))
 						{
-							return false;
+							return "pits";
 						}
 						
 					}
@@ -182,7 +191,7 @@ public class GameControl
 					if (GameLocations.shootArrow(arrowShot))
 					{
 						GI.arrowHit(true, player.getArrows());
-						return true; //player has won
+						return "won"; //player has won
 					}
 					else 
 					{
@@ -231,7 +240,11 @@ public class GameControl
 			
 		}
 		System.out.print("Josh code ass");
-		return false;
+		if (player.getArrows() == 0)
+		{
+			return "arrows";
+		}
+		return "coins";
 			
 	}
 		//Testing out which oom they are in
@@ -246,16 +259,7 @@ public class GameControl
 	 * @param locations The GameLocations class
 	 * @throws FileNotFoundException 
 	 */
-	public static void endGame(int caveName, GraphicalInterface GI, String Name, Player player, String reason) throws FileNotFoundException{
-		int score;
-		if (reason.equals("wumpus"))
-		{
-			score = player.getScore(true);
-		}
-		else
-		{
-			score = player.getScore(false);
-		}
+	public static void endGame(int caveName, GraphicalInterface GI, String Name, Player player, String reason, int score) throws FileNotFoundException{
 		HighScore.updateScoreBoard(score, Name, caveName);
 		GI.endGame(reason, score, true);
 		
