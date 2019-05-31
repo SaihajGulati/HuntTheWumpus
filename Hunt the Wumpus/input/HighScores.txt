@@ -1,13 +1,13 @@
-Score 05
-Score 06
-Score 07
-Score 08
-Score 09
-Score 10
-Score 11
-Score 12
-Score 13
 Score 14
+Score 13
+Score 12
+Score 11
+Score 10
+Score 09
+Score 08
+Score 07
+Score 06
+Score 05
 
 Name a
 Name b
