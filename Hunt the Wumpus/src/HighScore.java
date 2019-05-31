@@ -33,6 +33,8 @@
  * and names, including their retrieval and their output to/from a file.
  * 5/15/19: Version 2.0
  * Changed the constructor to a static method called loadFiles.
+ * 5/30/19: Version 2.1
+ * Changed return type of updateScoreBoard from an ArrayList<Integer> to a boolean.
 */
 import java.util.*;
 import java.io.*;
@@ -40,8 +42,7 @@ public class HighScore
 {
     private static Scanner input;
     private static File scoreBoard; //The File that will be used to load the high scores
-    private static ArrayList<Integer> highScores;
-    /**
+    private static ArrayList<Integer> highScores; /**
                                             * An ArrayList that will represent the high scores after they have
                                             * been loaded into the game; used either when displaying the high scores
                                             * or updating them after a game (when the Player's score qualifies).
@@ -80,7 +81,6 @@ public class HighScore
         String userName = "";
         highScores = new ArrayList<Integer>();
         names = new ArrayList<String>();
-        caves = new ArrayList<Integer>();
         //Adds high scores to the highScores ArrayList upon being scanned from the file, along with player names
         //to the names ArrayList and cave names to the caves ArrayList. 
         while(input.hasNext()) 
@@ -106,9 +106,6 @@ public class HighScore
                     System.out.println(inputLine);
                 }
             }
-            System.out.println("Names: " + names);
-            System.out.println("Score: " + highScores);
-            System.out.println("Cave:" + caves);
         }
     }
     
@@ -151,22 +148,23 @@ public class HighScore
      * @Param: int totalScore (the final score of the Player, calculated in the Player object), String name (the
      * name of the Player), String caveName (The name of the cave that the Player played in) 
      * 
-     * @Return: Void
+     * @Return: boolean (whether the scoreBoard has been updated or not)
      * 
      * Pre-Condition: The Player will always give a totalScore, name, and caveName when this method is called.
      * 
      * Post-Condition: The ArrayLists will always be updated simultaneously so no IndexOutOfBounds exceptions
      * would show up under normal circumstances.
      */
-    public static ArrayList<Integer> updateScoreBoard(int totalScore, String name, int caveName) throws FileNotFoundException
+    public static boolean updateScoreBoard(int totalScore, String name, int caveName) throws FileNotFoundException
     {
+    	boolean isScoreAdded = false;
         //PrintStream output = new PrintStream(new File("testOutput.txt"));
-    	//highScores.add(Integer.MIN_VALUE);
-        if(totalScore >= highScores.get(0))
+        if(highScores.size() == 0 || totalScore >= highScores.get(0))
         {
             highScores.add(0, totalScore);
             names.add(0, name);
             caves.add(0, caveName);
+            isScoreAdded = true;
         }
         else
         {
@@ -178,6 +176,7 @@ public class HighScore
                     names.add(i, name);
                     caves.add(i, caveName);
                     i++;
+                    isScoreAdded = true;
                 }
             }
         }
@@ -193,7 +192,7 @@ public class HighScore
             caves.remove(caves.size()-1);
         }
         updateFile();
-        return highScores;
+        return isScoreAdded;
     }
     
     /**
