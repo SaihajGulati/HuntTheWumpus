@@ -119,9 +119,9 @@ public class GameLocations {
     	   {
     		   if(batLocations[0]==sides[i]||batLocations[1]==sides[i])
     			   warnings[0]++;
-    		   else if(pitLocations[0]==sides[i]||pitLocations[1]==sides[i])
+    		   if(pitLocations[0]==sides[i]||pitLocations[1]==sides[i])
     			   warnings[1]++;
-    		   else if(wumpusLocation==sides[i])
+    		   if(wumpusLocation==sides[i])
     			   warnings[2]++;
     	   }
               return warnings;
