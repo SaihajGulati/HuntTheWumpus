@@ -57,9 +57,12 @@ public class Cave
 	public int[] tunnels(int location)
 	{
 		int[] temp = new int[3];
-		for (int i= 0; i < temp.length; i++)
+		if (location > 0)
 		{
-			temp[i] = caveMap[location-1][i];
+			for (int i= 0; i < temp.length; i++)
+			{
+				temp[i] = caveMap[location-1][i];
+			}
 		}
 		return temp;
 	}
@@ -83,10 +86,10 @@ public class Cave
 		return -1;
 	}
 	
+	/*
 	/**
 	 * @param location the player is
 	 * @return the rooms adjacent to the room the player is in currently as an array
-	 */
 	public int[] adjacentRooms(int location)
 	{
 		int[] temp = new int[caveMap[location-1].length-1];
@@ -101,5 +104,7 @@ public class Cave
 			
 		return temp;
 	}
+	*/
+	
 	
 }
