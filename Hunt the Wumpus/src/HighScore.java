@@ -81,6 +81,7 @@ public class HighScore
         String userName = "";
         highScores = new ArrayList<Integer>();
         names = new ArrayList<String>();
+        caves = new ArrayList<Integer>();
         //Adds high scores to the highScores ArrayList upon being scanned from the file, along with player names
         //to the names ArrayList and cave names to the caves ArrayList. 
         while(input.hasNext()) 

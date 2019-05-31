@@ -63,11 +63,6 @@ Key: Highest-grossing Warner Bros blockbuster: Harry Potter & the Deathly Hallow
 Ans: The answer is a. Harry Potter & the Deathly Hallows Part 2
 Ans: a. Harry Potter & the Deathly Hallows Part 2:b. Aquaman:c. Lord of the Rings the Return of the King:d. Batman vs. Superman Dawn of Justice 
 
-Q. What is the highest-grossing film worldwide that didn't come out in the summer or holiday movie-going seasons?
-Key: highest-grossing film worldwide that wasn't released in the summer or holiday seasons: Furious 7
-Ans: The answer is b. Furious 7
-Ans: a. Black Panther:b. Furious 7:c. Captain Marvel:d. Fate of the Furious
-
 Q. What is the highest-grossing film in North America that didn't come out in the summer or holiday movie-going seasons?
 Key: highest-grossing film domestically that wasn't released in the summer or holiday seasons: Black Panther
 Ans: The answer is c. Black Panther
