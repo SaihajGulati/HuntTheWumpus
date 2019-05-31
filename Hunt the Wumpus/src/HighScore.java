@@ -205,7 +205,7 @@ public class HighScore
      */
     public static void updateFile() throws FileNotFoundException
     {
-        PrintStream output = new PrintStream(new File("HighScores.txt"));
+        PrintStream output = new PrintStream(new File("input/HighScores.txt"));
         /**
          * For each score in the highScores ArrayList, the loop will output the score with its
          * corresponding player name and cave name to a new file
@@ -216,10 +216,12 @@ public class HighScore
         {
             output.println("Score " + score);
         }
+        output.println();
         for(String name: names)
         {
         	output.println("Name " + name);
-        }        
+        }  
+        output.println();
         for(int caveNum: caves)
         {
         	output.println("Cave " + caveNum);
