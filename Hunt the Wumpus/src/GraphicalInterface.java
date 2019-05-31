@@ -1168,7 +1168,7 @@ private static ArrayList<String> splitUp (String split)
 	
 }
 
-public static void  endGame(boolean win)
+public static void  endGame(String reason, int score, boolean leaderboard)
 {	
 	boolean waiting = true;
 	
@@ -1192,20 +1192,48 @@ public static void  endGame(boolean win)
 	Font title = new Font("Copperplate Gothic Bold",0, 30);
 	StdDraw.setFont(title);
 	
-	if(win)
+	if(reason.equals("won"))
 	{
 	StdDraw.text(0.5, 0.6, "You have slain");
 	StdDraw.text(0.5, 0.55, "the WUMPUS");
 	StdDraw.text(0.5, 0.5, "you WON");
 	}
 	
-	else
+	else 
 	{
-	StdDraw.text(0.5, 0.6, "You have lost");
+	StdDraw.text(0.5, 0.6, "You have lost");		
+	if (reason.equals("wumpus"))
+	{
+	StdDraw.text(0.5, 0.55, "You answered 3 out of 5 incorrect");
+	StdDraw.text(0.5, 0.5, "and were killed by the Wumpus.");
+	}
+	else if (reason.equals("pits"))
+	{
+		StdDraw.text(0.5, 0.55, "You answered 2 out of 3 incorrect");
+		StdDraw.text(0.5, 0.5, "and are stuck in a pit forever, where you die.");
+	}
+	else if (reason.equals("coins"))
+	{
+		StdDraw.text(0.5, 0.55, "You ran out of coins");
+		StdDraw.text(0.5, 0.5, "and died because you couldn't feed yourself.");
+	}
+	else if (reason.equals("arrows"))
+	{
+		StdDraw.text(0.5, 0.55, "You ran out of arrows");
+		StdDraw.text(0.5, 0.5, "and died because you had no way to kill the wumpus.");
+	}
+	
+	StdDraw.text(0.5, 1, "Your score: " + score);
+	if (leaderboard)
+	{
+		StdDraw.text(0.5, 1, "P.S. you're score was good enough");
+		StdDraw.text(0.5, 1.05, "to make it on the leaderboard.");
+		StdDraw.text(0.5, 1.05, "Check it out in the main menu");
 	}
 
 	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
 	StdDraw.show();
+	}
 	}
 }
 

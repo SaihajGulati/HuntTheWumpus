@@ -70,9 +70,9 @@ public class GameControl
 			Cave cave = new Cave(caveSelect);
 			GameLocations locations = new GameLocations(cave);
 			//GI.gameGraphics();
-			boolean gotWumpus = startGame(GI, player, cave, trivia);
+			String gotWumpus = startGame(GI, player, cave, trivia);
 			int score = player.getScore(gotWumpus);
-			endGame(caveSelect, GI, name, score, gotWumpus);
+			endGame(caveSelect, GI, name, Player player, gotWumpus);
 			GI.teamMessage();
 		}
 	}
@@ -84,7 +84,7 @@ public class GameControl
 	 * @param player is the player class
 	 * @param cave is the cave class
 	 */
-	public static boolean startGame(GraphicalInterface GI, Player player, Cave cave, Trivia triv) throws FileNotFoundException
+	public static String startGame(GraphicalInterface GI, Player player, Cave cave, Trivia triv) throws FileNotFoundException
 	{
 		
 		Scanner input = new Scanner(System.in);
@@ -246,9 +246,18 @@ public class GameControl
 	 * @param locations The GameLocations class
 	 * @throws FileNotFoundException 
 	 */
-	public static void endGame(int caveName, GraphicalInterface GI, String Name, int score, boolean win) throws FileNotFoundException{
-		GI.endGame(win);
+	public static void endGame(int caveName, GraphicalInterface GI, String Name, Player player, String reason) throws FileNotFoundException{
+		int score;
+		if (reason.equals("wumpus"))
+		{
+			score = player.getScore(true);
+		}
+		else
+		{
+			score = player.getScore(false);
+		}
 		HighScore.updateScoreBoard(score, Name, caveName);
+		GI.endGame(reason, score, true);
 		
 	}	
 	/**
