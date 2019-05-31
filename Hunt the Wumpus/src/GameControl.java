@@ -42,9 +42,10 @@ public class GameControl
 	{
 		//hello testing
 		
+		GraphicalInterface GI = new GraphicalInterface(BATS, WUMPUS, HOLE);
+		GI.start();
 		while (true)
 		{
-			GraphicalInterface GI = new GraphicalInterface(BATS, WUMPUS, HOLE);
 			Player player = new Player();
 			ArrayList <String> scores = new ArrayList<String>();
 			Trivia trivia = new Trivia();
@@ -60,7 +61,6 @@ public class GameControl
 			 scores.add(" 8. Cave 1; Bye; 14");
 			 scores.add(" 9. Cave 1; Hello; 84");
 			 scores.add("10. Cave 1; Joe; 94");
-			GI.start();
 			String name = "";
 			int caveSelect = 0;
 			while(name.equals("")) {
@@ -301,14 +301,15 @@ public class GameControl
 			if (triv.checkAnswer(answer))
 			{
 				correct++;
-				GI.postTrivia(true);
+				count++;
+				GI.postTrivia(true, count, correct);
 			}
 			else
 			{
-				GI.postTrivia(false);
+				count++;
+				GI.postTrivia(false, count, correct);
 				wrong++;
 			}
-			count++;
 			player.changeCoins(-1);
 		}
 		if (correct < numC)
