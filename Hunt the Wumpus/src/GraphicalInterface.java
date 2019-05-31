@@ -51,7 +51,6 @@ public static void start()
 }
 
 //returns room or -1 for shoot arrow and -2 for buy a hint
-
 public int getRoom(int room1, int room2, int room3, int [] danger, int turn, int coins, int arrows)
 {
 	int toreturn;
@@ -499,6 +498,7 @@ public int caveSelection(ArrayList<String> scores)
 
 }
 
+
 public int displayHighScores(ArrayList<String> scores)
 {
 	boolean displayscores = true;
@@ -511,6 +511,7 @@ public int displayHighScores(ArrayList<String> scores)
 	
 }
 
+//Displays credits, comes back to main menu when player presses 
 private int displayCredits(ArrayList<String> scores)
 {
 	boolean displaycredits = true;
@@ -523,6 +524,7 @@ private int displayCredits(ArrayList<String> scores)
 	
 }
 
+//This reads inputs from the main menu screen and helps the navigation between main menu, high scores, and credits
 public int mainmenu(ArrayList<String> scores)
 {	
 	//System.out.println(scores);
@@ -554,6 +556,8 @@ public int mainmenu(ArrayList<String> scores)
 	   return caveSelection(scores);		
 }
 
+//This displays the main menu screen, returns 0 for no input, 1 for play, 2 for high scores and 3 for credits, 
+//this method does NOT loop by itself
 private static int menubuttons()
 {	double x = 0.5;
     double y = 0.5;
@@ -596,6 +600,7 @@ private static int menubuttons()
 
 }
 
+//Displays buttons that just turn red when hovering over them
 private static boolean button(double x, double y, double high, double wide, String message)
 {
 	boolean hovering = inBox(x,y,high,wide);
@@ -612,6 +617,7 @@ private static boolean button(double x, double y, double high, double wide, Stri
 	return hovering && ClickedRelease();
 }
 
+//Displays buttons that get bigger and turn red when hovering over them
 private static boolean menubutton(double x, double y, double high, double wide, String message)
 {
 	double thick = 0.015;
@@ -632,6 +638,7 @@ private static boolean menubutton(double x, double y, double high, double wide, 
 	return hovering && ClickedRelease();
 }
 
+//Displays large text
 private static void title(double x, double y, String message)
 {
 	Font titlefont = new Font("Copperplate Gothic Bold",0, 27);
@@ -640,6 +647,7 @@ private static void title(double x, double y, String message)
 	StdDraw.text(x, y, message);
 }
 
+//Return true if the mouse is inside the box given by the first for inputs
 private static boolean inBox(double xcenter, double ycenter, double height, double width) {
         double x = StdDraw.mouseX();
         double y = StdDraw.mouseY();
@@ -661,6 +669,7 @@ private static boolean inBox(double xcenter, double ycenter, double height, doub
         
     }
 
+//Return true if the x and y cord inputs are inside the box given by the first for inputs
 private static boolean inBox(double xcenter, double ycenter, double height, double width, double xcord, double ycord) {
     double x = xcord;
     double y = ycord;
@@ -682,6 +691,7 @@ private static boolean inBox(double xcenter, double ycenter, double height, doub
     
 }
 
+//Return true if the player clicked and released or pressed enter
 private static boolean ClickedRelease() 
 {	String typed = getKeyTyped();
 
@@ -696,11 +706,13 @@ private static boolean ClickedRelease()
   return false;
 }
 
+//Return true if the player clicked
 private static boolean Clicked() 
 {	
 	return StdDraw.isMousePressed();
 }
 
+//This method displays the team highscores, this method takes in scores so that it can work better in the main menu class
 private static boolean highScores(ArrayList<String> scores)
 {
 	boolean toMain;
@@ -725,6 +737,7 @@ private static boolean highScores(ArrayList<String> scores)
 	return toMain;
 }
 
+//This method displays the team credits, this method takes in scores so that it can work better in the main menu class
 private static boolean credits(ArrayList<String> scores)
 {	boolean toMain;
 	String [] names = {"Daniel Popa","Saihaj Gulati","Joshua Venable","Brian Yang", "Raj Sunku", "Hans Koduri" };
@@ -750,6 +763,9 @@ private static boolean credits(ArrayList<String> scores)
 	return toMain;
 }
 
+//Between every turn this screen must display, it loops by itself and stops when you press the next button, 
+//It tells the player a hint, the room they are in, coins they have and arrows
+//This loops by itself and is stopped with a next button
 public static void  betweenTurns(String hint, int room, int turn, int coins, int arrows)
 {	
 	boolean waiting = true;
@@ -790,6 +806,8 @@ public static void  betweenTurns(String hint, int room, int turn, int coins, int
 	}
 }
 
+//If the player successfully bought a secret, this creen takes the secret as a string and displayes it it the player
+// this has a next button
 public static void  tellSecret(String secret)
 {	
 	boolean waiting = true;
@@ -826,6 +844,8 @@ public static void  tellSecret(String secret)
 	}
 }
 
+//Takes an array of the dangers, using the class variables for BAT WUMPUS an HOLE it displays all the dangers in your room
+//It also displays how many questions you must answer, or if its a bat, that you've been moved to a randome room
 public void  displayDanger(int [] dangers)
 {	
 	boolean waiting = false;
@@ -906,6 +926,9 @@ public void  displayDanger(int [] dangers)
 	}
 }
 
+//After each trivial question, using the boolean it tells the user if they got the answer correct,
+// using the questions input it says how many questions have been asked till that point
+// and using answered it says how many have been answered correctly
 public static void  postTrivia(boolean correct, int questions, int answered)
 {	
 	boolean waiting = true;
@@ -943,7 +966,7 @@ public static void  postTrivia(boolean correct, int questions, int answered)
 	}
 }
 
-
+//Tells the player that they successfully bought two arrays, and using the input displays how many arrows they have
 public static void  boughtArrow(int arrows)
 {	
 	boolean waiting = true;
@@ -971,6 +994,7 @@ public static void  boughtArrow(int arrows)
 	}
 }
 
+//Asks the player if they are sure they want to exit, if yes it exits the game, if not it does nothing
 public static void  Exit()
 {	
 	boolean waiting = true;
@@ -1001,11 +1025,13 @@ public static void  Exit()
 	}
 }
 
+//This method calls other methods used to show the user how to play the game
 private static void tutorial()
 {
 	//teach stuff
 }
 
+//If the player answers too many questions wrong to buy an item, this method is called, it loops itself
 public static void  goof()
 {	
 	boolean waiting = true;
@@ -1033,6 +1059,7 @@ public static void  goof()
 	}
 }
 
+//displays the multiple choice questions for trivia, and returns a char a,b,c,d of what was answered
 public static char  getAnswer(String question, String questionA, String questionB, String questionC, String questionD)
 {
 	//yeet
@@ -1176,6 +1203,8 @@ StdDraw.show();
 
 }
 
+// Splits a string into an array list with each part only being 30 characters long, it splits by sentences
+//thiis is used to disply sentances that need t be shown on multiple rows, used with displayList
 private static ArrayList<String> splitUp (String split)
 {
 	ArrayList<String> splitarray = new ArrayList<String>();
@@ -1207,6 +1236,7 @@ private static ArrayList<String> splitUp (String split)
 	
 }
 
+//Takes a string of what caused you to die, or if you one, score, and if you got on the leaderboard, this loops by itself and has a next button
 public static void  endGame(String reason, int score, boolean leaderboard)
 {
 	boolean waiting = true;
@@ -1283,6 +1313,7 @@ public static void  endGame(String reason, int score, boolean leaderboard)
 	}
 }
 
+//This method takes a boolean on if the player hit the wumpus and the arrows left, and displays them, this loops by itself and has a next button
 public static void  arrowHit(boolean hit, int arrows)
 {	
 	boolean waiting = true;
@@ -1319,6 +1350,7 @@ public static void  arrowHit(boolean hit, int arrows)
 	}
 }
 
+//Method displays the team message saying thanks for playing, with the team names, loops on its own and has a next button
 public static void teamMessage()
 {	
 	
@@ -1376,6 +1408,7 @@ StdDraw.show();
 }
 }
 
+//Takes a list and displays it centered on the parameters, each new string in the array is a new line
 private static void displayList(ArrayList<String> messagearray, double textcenterx, double textcentery, double distance)
 {
 	double start = ((messagearray.size()*distance)/2)+textcentery;
@@ -1387,6 +1420,7 @@ private static void displayList(ArrayList<String> messagearray, double textcente
 	}
 }
 
+//Displays small text shown at the side of the screen while playing the game
 private static void HUDtext(double x, double y, String text)
 {
 	Font hudfont = new Font("Copperplate Gothic Bold",0, 20);
