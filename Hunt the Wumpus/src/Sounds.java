@@ -18,7 +18,7 @@ public class Sounds
 	/*
 	 * index 0 is move player, 1 is shoot arrow, 2 is moveWumpus, 3 is trivia pop-up, 4 is win, 5 is lose, 6 is bat, and 7 is pit
 	 */
-	private AudioClip[] currentSounds;
+	private static AudioClip[] currentSounds;
 	/*
 	 * Will read the config file
 	 */
@@ -60,7 +60,7 @@ public class Sounds
 	/*
 	 * @return the Sounds
 	 */
-	public AudioClip[] getSounds()
+	public static AudioClip[] getSounds()
 	{
 		return currentSounds;
 	}
@@ -68,42 +68,42 @@ public class Sounds
 	/*
 	 * rest of the methods are conditions where sounds can be played
 	 */
-	public void movePlayer()
+	public static void movePlayer()
 	{
 		currentSounds[0].play();
 	}
 	
-	public void shootArrow()
+	public static void shootArrow()
 	{
 		currentSounds[1].play();
 	}
 	
-	public void moveWumpus()
+	public static void moveWumpus()
 	{
 		currentSounds[2].play();
 	}
 	
-	public void triviaPopUp()
+	public static void triviaPopUp()
 	{
 		currentSounds[3].play();
 	}
 	
-	public void win()
+	public static void win()
 	{
 		currentSounds[4].play();
 	}
 	
-	public void lose()
+	public static void lose()
 	{
 		currentSounds[5].play();
 	}
 	
-	public void bat()
+	public static void bat()
 	{
 		currentSounds[6].play();
 	}
 	
-	public void pit()
+	public static void pit()
 	{
 		currentSounds[7].play();
 	}
