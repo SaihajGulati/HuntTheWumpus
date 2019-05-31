@@ -67,6 +67,7 @@ public class GameControl
 				caveSelect = GI.mainmenu(HighScore.getHighScores());
 				name = GI.getName();
 			}
+			//asdf
 			Cave cave = new Cave(caveSelect);
 			GameLocations locations = new GameLocations(cave);
 			//GI.gameGraphics();
