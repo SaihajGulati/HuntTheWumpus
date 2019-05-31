@@ -411,16 +411,22 @@ public String getName()
 	
 	typed = getKeyTyped();
 	
-	if((typed.length()>0 && ((int)(typed.charAt(0)) == 10)) || button(0.5, 0.21 , 0.15 , 0.055, "Play"))
+	if((typed.length()>0))
+			{
+	System.out.println(((int)(typed.charAt(0))));
+			}
+	
+	if(  button(0.5, 0.21 , 0.15 , 0.055, "Play") || (typed.length()>0 && ((int)(typed.charAt(0)) == 10)))
 	{
-		button = false;
+		button = false;	
+		typed = "";
 	}
 	
 	if(typed.equals("-1"))
 	{
 		name = delete(name);
 	}
-	else
+	else if (!((typed.length()>0 && (((int)(typed.charAt(0)) == 127)))))
 	{
 		name+=typed;
 	}
@@ -435,6 +441,13 @@ public String getName()
 		name = "";
 		button = false;
 	}
+	
+	if(!button && (name.equals("") || name.equals("Type a name")))
+	{
+		name = "Type a name";
+		button = true;
+	}
+	
 	StdDraw.show();
 	}
 	
