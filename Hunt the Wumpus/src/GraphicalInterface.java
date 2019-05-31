@@ -1169,8 +1169,15 @@ private static ArrayList<String> splitUp (String split)
 }
 
 public static void  endGame(String reason, int score, boolean leaderboard)
-{	
+{
 	boolean waiting = true;
+	
+	String wumpus = "You answered 3 out of 5 incorrect and were killed by the Wumpus.";
+	String pit = "You answered 2 out of 3 incorrect and are stuck in a pit forever,where you die.";
+	String coins = "\"You died because you're even throught you're rich in your heart\" - Mehar Gulati";
+	String arrows ="You ran out of arrows and died because you had no way to kill the wumpus.";
+	String highscore = "P.S. you're score was good enough to make it on the leaderboard.Check it out in the main menu";
+	double distance = 0.05;
 	
 	while(waiting)
 	{
@@ -1186,7 +1193,7 @@ public static void  endGame(String reason, int score, boolean leaderboard)
 	StdDraw.setPenColor( 250,250,250);
 	Font font = new Font("Copperplate Gothic Bold",0, 60);
 	StdDraw.setFont(font);
-	StdDraw.text(0.5, 0.8, "GAME OVER");
+	StdDraw.text(0.5, 0.85, "GAME OVER");
 	
 	StdDraw.setPenColor( 250,250,250);
 	Font title = new Font("Copperplate Gothic Bold",0, 30);
@@ -1201,34 +1208,34 @@ public static void  endGame(String reason, int score, boolean leaderboard)
 	
 	else 
 	{
-	StdDraw.text(0.5, 0.6, "You have lost");		
+	StdDraw.text(0.5, 0.75, "You have lost");
+	
 	if (reason.equals("wumpus"))
 	{
-	StdDraw.text(0.5, 0.55, "You answered 3 out of 5 incorrect");
-	StdDraw.text(0.5, 0.5, "and were killed by the Wumpus.");
+		displayList(splitUp(wumpus),0.5,0.55,distance);
+
 	}
 	else if (reason.equals("pits"))
 	{
-		StdDraw.text(0.5, 0.55, "You answered 2 out of 3 incorrect");
-		StdDraw.text(0.5, 0.5, "and are stuck in a pit forever, where you die.");
+		displayList(splitUp(pit),0.5,0.55,distance);
+
 	}
 	else if (reason.equals("coins"))
 	{
-		StdDraw.text(0.5, 0.55, "You ran out of coins");
-		StdDraw.text(0.5, 0.5, "and died because you couldn't feed yourself.");
+		displayList(splitUp(coins),0.5,0.55,distance);
+
 	}
 	else if (reason.equals("arrows"))
 	{
-		StdDraw.text(0.5, 0.55, "You ran out of arrows");
-		StdDraw.text(0.5, 0.5, "and died because you had no way to kill the wumpus.");
+		displayList(splitUp(arrows),0.5,0.55,distance);
+
 	}
 	
-	StdDraw.text(0.5, 1, "Your score: " + score);
+	StdDraw.setPenColor( 250,250,250);
+	StdDraw.text(0.5, 0.7, "Your score: " + score);
 	if (leaderboard)
 	{
-		StdDraw.text(0.5, 1, "P.S. you're score was good enough");
-		StdDraw.text(0.5, 1.05, "to make it on the leaderboard.");
-		StdDraw.text(0.5, 1.05, "Check it out in the main menu");
+		displayList(splitUp(highscore),0.5,0.3,distance);
 	}
 
 	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
@@ -1328,6 +1335,17 @@ if(button(x,0.1, containerx,0.055,"Back"))
 		
 StdDraw.show();
 }
+}
+
+private static void displayList(ArrayList<String> messagearray, double textcenterx, double textcentery, double distance)
+{
+	double start = ((messagearray.size()*distance)/2)+textcentery;
+	
+	for(int i = 0; i< messagearray.size(); i++)
+	{
+		StdDraw.setPenColor( 255,255,255);
+		StdDraw.text(textcenterx, start-(distance*i), messagearray.get(i));		
+	}
 }
 
 private static void HUDtext(double x, double y, String text)
