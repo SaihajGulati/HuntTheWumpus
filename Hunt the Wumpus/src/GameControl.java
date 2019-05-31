@@ -14,9 +14,10 @@
  * 6.0        5/15/19  Fixed alot of bugs with the main menu
  * 7.0        5/25/19  Added code for printing to the console for checkpoints 2 and 3
 */
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.*;
+import java.applet.*;
+import java.net.*;
 /**
  * MAJOR NOTES:
  * 
@@ -38,13 +39,14 @@ public class GameControl
 	public static final int ARROW = -1;
 	public static final int BUY_ITEM = -2;
 	
-	public static void main(String[] args) throws FileNotFoundException
+	public static void main(String[] args) throws FileNotFoundException, MalformedURLException
 	{
 		//hello testing
 		
 		GraphicalInterface GI = new GraphicalInterface(BATS, WUMPUS, HOLE);
 		GI.start();
 		HighScore.loadFiles();
+		Sounds sounds = new Sounds(2);
 		while (true)
 		{
 			Player player = new Player();
@@ -121,6 +123,7 @@ public class GameControl
 				player.movePlayer();
 				printHazardLocs();
 				GameLocations.movePlayer(response);//
+				Sounds.movePlayer();
 				room = GameLocations.getPlayerLocation();
 				GI.betweenTurns(triv.giveTrivia(), room, player.getTurns(), player.getCoins(), player.getArrows());
 
@@ -144,12 +147,15 @@ public class GameControl
 
 				if (room == GameLocations.getWumpusLocation())
 				{
+					Sounds.triviaPopUp();
 					if(!trivia(triv, GI, player, 5, 3))
 					{
+						Sounds.lose();
 						return "wumpus";
 					}
 					else
 					{
+						Sounds.moveWumpus();
 						GameLocations.moveWumpus();
 					}
 				} 
@@ -164,9 +170,10 @@ public class GameControl
 				{
 					if(room == c) 
 					{
-
+						Sounds.triviaPopUp();
 						if(!trivia(triv, GI, player, 3, 2))
 						{
+							Sounds.lose();
 							return "pits";
 						}
 						
@@ -180,7 +187,7 @@ public class GameControl
 				
 				//while the player hasn't chosen a room yet this loops
 			     arrowShot = GI.shootArrow(rooms[0], rooms[1], rooms[2], hazards, player.getTurns(), player.getCoins(), player.getArrows());
-
+			     Sounds.shootArrow();
 				/*if (arrowShot != 0)
 				{
 					player.changeArrows(-1);
@@ -192,11 +199,13 @@ public class GameControl
 					player.changeArrows(-1);
 					if (GameLocations.shootArrow(arrowShot))
 					{
+						Sounds.win();
 						GI.arrowHit(true, player.getArrows());
 						return "won"; //player has won
 					}
 					else 
 					{
+						Sounds.moveWumpus();
 						GI.arrowHit(false, player.getArrows());//add code for GI that states you missed
 					}	
 				}
@@ -210,7 +219,7 @@ public class GameControl
 				
 				if (stuff == 1)
 				{
-					
+					Sounds.triviaPopUp();
 					if(trivia(triv, GI, player, 3, 2))
 					{
 
@@ -224,6 +233,7 @@ public class GameControl
 				}
 				else if (stuff == 2)
 				{
+					Sounds.triviaPopUp();
 					if(trivia(triv, GI, player, 3, 2))
 					{
 
@@ -244,8 +254,10 @@ public class GameControl
 		System.out.print("Josh code ass");
 		if (player.getArrows() == 0)
 		{
+			Sounds.lose();
 			return "arrows";
 		}
+		Sounds.lose();
 		return "coins";
 			
 	}
