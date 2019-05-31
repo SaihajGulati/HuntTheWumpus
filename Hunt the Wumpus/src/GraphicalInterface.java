@@ -1001,35 +1001,6 @@ public static void  Exit()
 	}
 }
 
-public static void  howToPlay()
-{	
-	boolean waiting = true;
-	
-	while(waiting)
-	{
-	
-		StdDraw.clear();
-	StdDraw.setPenColor( 0,0,0);
-	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
-	
-	StdDraw.setPenColor( 32,32,32);
-	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
-	
-	StdDraw.setPenColor( 255,255,255);
-	Font title = new Font("Copperplate Gothic Bold",0, 30);
-	StdDraw.setFont(title);
-	StdDraw.text(0.5, 0.6, "Do you know how to play?");
-	
-	if(button(0.5, 0.1 , 0.15 , 0.055, "NO"))
-	{
-		tutorial();
-	}
-
-	waiting = !button(0.5, 0.21 , 0.15 , 0.055, "YES");
-	StdDraw.show();
-	}
-}
-
 private static void tutorial()
 {
 	//teach stuff
