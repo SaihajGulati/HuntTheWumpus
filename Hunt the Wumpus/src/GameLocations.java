@@ -72,10 +72,24 @@ public class GameLocations {
         */
        public static void moveWumpus()
        {
+    	  int[] x = {0,0,0,0,0,0};
     	  for(int i=0;i<(int)(Math.random()*3+2);i++)
     	  {
-    		  int moveLocation=cave.tunnels(wumpusLocation)[(int)(Math.random()*cave.tunnels(wumpusLocation).length)];
-    		  wumpusLocation=moveLocation;
+    		  x[i]=wumpusLocation;
+    		  boolean z = true;
+    		  while(z)
+    		  {
+    			  boolean y = false;
+	    		  int moveLocation=cave.tunnels(wumpusLocation)[(int)(Math.random()*cave.tunnels(wumpusLocation).length)];
+	    		  wumpusLocation=moveLocation;
+	    		  for(int j = 0;j<6;j++)
+	    		  {
+	    			  if(wumpusLocation==x[i])
+	    				  y=true;
+	    			  z=y;
+	    				  
+	    		  }
+    		  }
     	  }
        }
        
