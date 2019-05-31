@@ -890,6 +890,13 @@ public void  displayDanger(int [] dangers)
 	{
 	StdDraw.text(0.5, 0.6-shift, "You must answer "+correct+" out of ");
 	StdDraw.text(0.5, 0.55-shift, questions+" questions correctly.");
+	
+	if(dangers[WUMPUS] >0)
+	{
+		Font wumpus = new Font("Copperplate Gothic Bold",0,20); 
+		StdDraw.setFont(wumpus);
+		StdDraw.text(0.5, 0.5-shift, "If you get them correct, the wumpus will run away");
+	}
 	}
 	
 	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
