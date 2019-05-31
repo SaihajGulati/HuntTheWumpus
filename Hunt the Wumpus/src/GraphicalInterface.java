@@ -127,7 +127,7 @@ public int shootArrow(int room1, int room2, int room3, int [] danger, int turn, 
 		loop = false;
 	}
 	}
-	System.out.println("exit");
+
 	return toreturn;
 }
 
@@ -410,10 +410,6 @@ public String getName()
 	
 	typed = getKeyTyped();
 	
-	if((typed.length()>0))
-			{
-	System.out.println(((int)(typed.charAt(0))));
-			}
 	
 	if(  button(0.5, 0.21 , 0.15 , 0.055, "Play") || (typed.length()>0 && ((int)(typed.charAt(0)) == 10)))
 	{
@@ -1026,9 +1022,99 @@ public static void  Exit()
 }
 
 //This method calls other methods used to show the user how to play the game
-private static void tutorial()
+public static void tutorial()
+{	
+	double x = 0.2;
+double y = 0.5;
+double containerx= 0.15;
+double containery= 0.5;
+double topButton = 0.75;
+double shift = 0.11;
+
+String wumpusTutorial = "It is your objective to kill the WUMPUS. You can kill the WUMPUS by shooting an arrow into the door that leads to the room the wumps is in. ";
+wumpusTutorial += "If you miss the WUMPUS might run away, and if you are in the same room as the WUMPUS, you must answer three out of five trivia questions correct or die! ";
+wumpusTutorial+= "You know the WUMPUS is near because you will see the message \"I smell a WUMPUS\"";
+
+String batTutorial = "Super BATS are huge monsters that fly through the caves, if you are in a room with a BAT you will see the message \"Ther is a BAT nearby\". ";
+batTutorial+= "If you are in the same room as a BAT, you will be carried by the BAT to a random room.";
+
+String pitTutorial = "Some rooms in the caves contain PITS, if you ware in the same room as a pit you will fall in, and must answer 2 out of three trivia questions right to get out. ";
+pitTutorial+="If you don't get them right you die. If you are near a PIT you will see the message \"I feel a draft\"";
+
+String arrowTutorial = "ARROWS are your weapons against the WUMPUS. To shoot an ARROW press ont the \"SHOOT ARROW\" button, then press ont the red door you want to shoot the ARROW in. ";
+arrowTutorial+="To buy an ARROW you must answer two out of three trivia questions correctly. You die if you run out of ARROWS.";
+
+String coinTutorial = "You get COINS by going into another room in the cave. Every trivia question asked, from WUMPUS, PITS, or while buying an item costs one coin. ";
+coinTutorial += "You die if you run out of COINS";
+
+String navigationTutorial = "The player is represented by a white ball which follows the mouse. In order to navigate rooms lead the player into the red bars represnting the doors. ";
+navigationTutorial+= "A new round begins every time you enter a new room.";
+
+double distance = 0.05;
+double textx = 0.67;
+double texty = 0.5;
+
+ while(true)
 {
-	//teach stuff
+	StdDraw.clear();
+	StdDraw.setPenColor(0,0,0);
+	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	//StdDraw.picture(0.5, 0.5, "C:\\Users\\s-dapopa\\Desktop\\cave.jpg",1, 1);
+	
+    StdDraw.setPenColor(32,32,32);
+	StdDraw.filledRectangle(x , y, containerx, containery);
+	title(x,0.9, "How to Play" );
+	Font font = new Font("Copperplate Gothic Bold",0, 30);
+	StdDraw.setFont(font);
+	
+	if(inBox(x,topButton, containerx,0.055))
+	{
+		displayList(splitUp(wumpusTutorial),textx,texty,distance);
+	}
+	
+	if(inBox(x,topButton-shift, containerx,0.055))
+	{
+		displayList(splitUp(batTutorial),textx,texty,distance);
+	}
+	
+	if(inBox(x,topButton-shift*2, containerx,0.055))
+	{
+		displayList(splitUp(pitTutorial),textx,texty,distance);
+	}
+	
+	if(inBox(x,topButton-shift*3, containerx,0.055))
+	{
+		displayList(splitUp(arrowTutorial),textx,texty,distance);
+	}
+	
+	if(inBox(x,topButton-shift*4, containerx,0.055))
+	{
+		displayList(splitUp(coinTutorial),textx,texty,distance);
+	}
+	
+	if(inBox(x,topButton-shift*5, containerx,0.055))
+	{
+		displayList(splitUp(navigationTutorial),textx,texty,distance);
+	}
+
+	
+	button(x,topButton, containerx,0.055,"Wumpus");
+	button(x,topButton-shift, containerx,0.055, "Bats");
+	button(x,topButton-shift*2, containerx,0.055,"Pits");
+	button(x,topButton-shift*3, containerx,0.055, "Arrows");
+	button(x,topButton-shift*4, containerx,0.055,"Coins");
+	button(x,topButton-shift*5, containerx,0.055, "Navigation");
+	
+	if(button(x,topButton-shift*6, containerx,0.055, "Back"))
+	{
+		return;
+	}
+	
+
+
+		
+StdDraw.show();
+}
 }
 
 //If the player answers too many questions wrong to buy an item, this method is called, it loops itself
@@ -1267,7 +1353,6 @@ public static void  endGame(String reason, int score, boolean leaderboard)
 	StdDraw.setPenColor( 250,250,250);
 	Font title = new Font("Copperplate Gothic Bold",0, 30);
 	StdDraw.setFont(title);
-	System.out.print("Test1");
 	if(reason.equals("won"))
 	{
 		Font win = new Font("Copperplate Gothic Bold",0, 50);
