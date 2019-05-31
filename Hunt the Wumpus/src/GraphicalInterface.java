@@ -438,8 +438,7 @@ public String getName()
 	
 	if(button(0.5, 0.1 , 0.15 , 0.055, "Main Menu"))
 	{
-		name = "";
-		button = false;
+		return "";
 	}
 	
 	if(!button && (name.equals("") || name.equals("Type a name")))
