@@ -1173,7 +1173,7 @@ public static void  endGame(String reason, int score, boolean leaderboard)
 	boolean waiting = true;
 	
 	String wumpus = "You answered 3 out of 5 incorrect and were killed by the Wumpus.";
-	String pit = "You answered 2 out of 3 incorrect and are stuck in a pit forever,where you die.";
+	String pit = "You answered 2 out of 3 incorrect and are stuck in a pit forever, where you die.";
 	String coins = "\"You died because you're poor, even though you're rich in your heart\" - Mehar Gulati";
 	String arrows ="You ran out of arrows and died because you had no way to kill the wumpus.";
 	String highscore = "You're score was good enough to make it on the leaderboard! Check it out in the main menu";
