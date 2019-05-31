@@ -867,8 +867,10 @@ public void  displayDanger(int [] dangers)
 	}
 	
 	if(dangers[WUMPUS] >0 || dangers[HOLE] >0)
+	{
 	StdDraw.text(0.5, 0.6-shift, "You must answer "+correct+" out of ");
 	StdDraw.text(0.5, 0.55-shift, questions+" questions correctly.");
+	}
 	
 	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
 	StdDraw.show();
