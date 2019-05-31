@@ -204,17 +204,17 @@ private String getDanger (int danger)
 	String toreturn = "";
 	if(danger == BAT)
 	{
-		toreturn += "BAT";
+		toreturn += "A BAT";
 	}
 	
 	if(danger == WUMPUS)
 	{
-		toreturn += "WUMPUS";
+		toreturn += "A WUMPUS";
 	}
 	
 	if(danger == HOLE)
 	{
-		toreturn += " PIT";
+		toreturn += "A PIT";
 	}
 	
 	return toreturn;
@@ -822,6 +822,7 @@ public void  displayDanger(int [] dangers)
 	StdDraw.clear();
 	double shift = 0;
 	int questions = 0;
+	int correct = 0;
 	
 	StdDraw.setPenColor( 0,0,0);
 	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
@@ -845,11 +846,13 @@ public void  displayDanger(int [] dangers)
 		if(i == HOLE)
 		{
 			questions+=3;
+			correct +=2;
 		}
 		
 		if(i == WUMPUS)
 		{
 			questions+=5;
+			correct+=3;
 		}
 		}
 	}
@@ -864,7 +867,8 @@ public void  displayDanger(int [] dangers)
 	}
 	
 	if(dangers[WUMPUS] >0 || dangers[HOLE] >0)
-	StdDraw.text(0.5, 0.6-shift, "You must answer "+questions+" questions.");
+	StdDraw.text(0.5, 0.6-shift, "You must answer "+correct+" out of ");
+	StdDraw.text(0.5, 0.55-shift, questions+" questions correctly.");
 	
 	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
 	StdDraw.show();
