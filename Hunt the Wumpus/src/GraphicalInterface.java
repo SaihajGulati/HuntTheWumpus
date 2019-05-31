@@ -405,10 +405,17 @@ public String getName()
 	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
 	StdDraw.setPenColor( 32,32,32);
 	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
-	title(0.5, 0.9, "Enter Your Name");
+	title(0.5, 0.9, "Type Your Name");
 	title(0.5, 0.5, name);
+	StdDraw.line(0.3, 0.47, 0.7, 0.47);
 	
 	typed = getKeyTyped();
+	
+	if((typed.length()>0 && ((int)(typed.charAt(0)) == 10)) || button(0.5, 0.21 , 0.15 , 0.055, "Play"))
+	{
+		button = false;
+	}
+	
 	if(typed.equals("-1"))
 	{
 		name = delete(name);
@@ -421,8 +428,7 @@ public String getName()
 	if(name.length()>charLimit)//name length limit
 	{
 		name = delete(name);
-	}
-	button = !button(0.5, 0.21 , 0.15 , 0.055, "Play");
+	} 
 	
 	if(button(0.5, 0.1 , 0.15 , 0.055, "Main Menu"))
 	{
@@ -662,8 +668,9 @@ private static boolean inBox(double xcenter, double ycenter, double height, doub
 }
 
 private static boolean ClickedRelease() 
-{	
-	if(StdDraw.isMousePressed())
+{	String typed = getKeyTyped();
+
+	if(StdDraw.isMousePressed() ||  (typed.length()>0 && ((int)(typed.charAt(0)) == 10)))
 	{
 		while(StdDraw.isMousePressed())
 		{
