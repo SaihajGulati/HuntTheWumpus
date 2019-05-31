@@ -114,6 +114,10 @@ public class GameControl
 				GameLocations.movePlayer(response);//
 				room = GameLocations.getPlayerLocation();
 				GI.betweenTurns(triv.giveTrivia(), room, player.getTurns(), player.getCoins(), player.getArrows());
+
+				if(GameLocations.getPlayerLocation() == GameLocations.getWumpusLocation()) {
+					room_hazards[WUMPUS] = 1;
+				}
 				for(int i : GameLocations.getPitLocations()) {
 					if(room == i) {
 						room_hazards[HOLE] = 1;
@@ -126,11 +130,20 @@ public class GameControl
 					}
 					
 				}
-				if(GameLocations.getPlayerLocation() == GameLocations.getWumpusLocation()) {
-					room_hazards[WUMPUS] = 1;
-				}
 				GI.displayDanger(room_hazards);
 				room_hazards = new int[3];
+
+				if (room == GameLocations.getWumpusLocation())
+				{
+					if(!trivia(triv, GI, player, 5, 3))
+					{
+						return false;
+					}
+					else
+					{
+						GameLocations.moveWumpus();
+					}
+				} 
 				for (int c: GameLocations.getBatLocations())
 				{
 					if(room == c) {//
@@ -150,17 +163,6 @@ public class GameControl
 						
 					}
 				}
-				if (room == GameLocations.getWumpusLocation())
-				{
-					if(!trivia(triv, GI, player, 5, 3))
-					{
-						return false;
-					}
-					else
-					{
-						GameLocations.moveWumpus();
-					}
-				} 
 				
 			}
 			else if (response == ARROW)
