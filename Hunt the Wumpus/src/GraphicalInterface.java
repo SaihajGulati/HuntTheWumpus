@@ -81,7 +81,7 @@ public int getRoom(int room1, int room2, int room3, int [] danger, int turn, int
 	
 	if(button(0.8, 0.1 , 0.15 , 0.055, "Exit"))
 	{
-		java.lang.System.exit(0);	
+		Exit();	
 	}
 
 	
@@ -567,7 +567,7 @@ private static int menubuttons()
 
 	
 	if(menubutton(x,0.275, containerx,0.055,"EXIT"))
-		java.lang.System.exit(0);	
+		Exit();	
 
 			
 	StdDraw.show();
@@ -920,13 +920,43 @@ public static void  boughtArrow(int arrows)
 	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
 	
 	StdDraw.setPenColor( 255,255,255);
-	Font title = new Font("Copperplate Gothic Bold",0, 60);
+	Font title = new Font("Copperplate Gothic Bold",0, 45);
 	StdDraw.setFont(title);
 	StdDraw.text(0.5, 0.6, "You bought 2 arrows");
 	StdDraw.text(0.5, 0.50, "You have "+arrows+" arrows");
 
 
 	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
+	StdDraw.show();
+	}
+}
+
+public static void  Exit()
+{	
+	boolean waiting = true;
+	
+	while(waiting)
+	{
+	
+		StdDraw.clear();
+	StdDraw.setPenColor( 0,0,0);
+	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	
+	StdDraw.setPenColor( 32,32,32);
+	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	
+	StdDraw.setPenColor( 255,255,255);
+	Font title = new Font("Copperplate Gothic Bold",0, 45);
+	StdDraw.setFont(title);
+	StdDraw.text(0.5, 0.6, "Are you sure");
+	StdDraw.text(0.5, 0.50, "You want to EXIT?");
+	
+	if(button(0.5, 0.21 , 0.15 , 0.055, "YES"))
+	{
+		java.lang.System.exit(0);
+	}
+
+	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "NO");
 	StdDraw.show();
 	}
 }
@@ -1007,7 +1037,7 @@ if(button(x,0.32, containerx,0.055,questionD))
         return 'd';
 
 if(button(x,0.09, containerx,0.055,"Exit"))
-	java.lang.System.exit(0);;
+	Exit();
 
 		
 StdDraw.show();
@@ -1041,7 +1071,7 @@ arrowDescription = splitUp("You can get ARROWS by getting two out of three trivi
 	
     StdDraw.setPenColor(32,32,32);
 	StdDraw.filledRectangle(x , y, containerx, containery);
-	title(x,0.9, "Trivia" );
+	title(x,0.9, "Buy Items" );
 	
 	if(!enough)
 	{
@@ -1091,7 +1121,7 @@ if(button(x,0.43, containerx,0.055,"Back"))
 	    return 0;	
 
 if(button(x,0.32, containerx,0.055,"EXIT"))
-	java.lang.System.exit(0);
+	Exit();
 
 
 		
