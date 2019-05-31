@@ -507,19 +507,6 @@ public int displayHighScores(ArrayList<String> scores)
 	
 }
 
-//Displays credits, comes back to main menu when player presses 
-private int displayCredits(ArrayList<String> scores)
-{
-	boolean displaycredits = true;
-	while(displaycredits)
-			{
-		displaycredits = !credits(scores);
-		//System.out.println("credits");
-			}
-	return mainmenu(scores);
-	
-}
-
 //This reads inputs from the main menu screen and helps the navigation between main menu, high scores, and credits
 public int mainmenu(ArrayList<String> scores)
 {	
@@ -540,7 +527,8 @@ public int mainmenu(ArrayList<String> scores)
 	
 	if(select == 3)
 	{
-		return  displayCredits(scores);
+		teamMessage();
+		return  mainmenu(scores);
 	}
 	
 	if(select == 4)
@@ -580,10 +568,10 @@ private static int menubuttons()
 		    toreturn = 2;	
 
 	
-	if(menubutton(x,0.385, containerx,0.055,"CREDITS"))
+	if(menubutton(x,0.275, containerx,0.055,"CREDITS"))
 		    toreturn = 3;
 	
-	if(menubutton(x,0.275, containerx,0.055,"HOW TO PLAY"))
+	if(menubutton(x,0.385, containerx,0.055,"HOW TO PLAY"))
 	    tutorial();
 
 	
@@ -734,30 +722,6 @@ private static boolean highScores(ArrayList<String> scores)
 }
 
 //This method displays the team credits, this method takes in scores so that it can work better in the main menu class
-private static boolean credits(ArrayList<String> scores)
-{	boolean toMain;
-	String [] names = {"Daniel Popa","Saihaj Gulati","Joshua Venable","Brian Yang", "Raj Sunku", "Hans Koduri" };
-	StdDraw.clear();
-	StdDraw.setPenColor( 0,0,0);
-	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
-	
-	StdDraw.setPenColor( 32,32,32);
-	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
-	
-	title(0.5, 0.9, "Credits");
-	Font creditsfont = new Font("Copperplate Gothic Bold",0, 30);
-	
-	for(int i = 0; i< names.length; i++)
-	{
-		StdDraw.setPenColor( 255,255,255);
-		StdDraw.setFont(creditsfont);
-		StdDraw.text(0.5, 0.75-(0.1*i), names[i]);		
-	}
-
-	toMain = button(0.5, 0.1 , 0.15 , 0.055, "Main Menu");
-	StdDraw.show();
-	return toMain;
-}
 
 //Between every turn this screen must display, it loops by itself and stops when you press the next button, 
 //It tells the player a hint, the room they are in, coins they have and arrows
@@ -1358,8 +1322,8 @@ public static void  endGame(String reason, int score, boolean leaderboard)
 		Font win = new Font("Copperplate Gothic Bold",0, 50);
 		StdDraw.setFont(win);
 	StdDraw.text(0.5, 0.6, "You have slain");
-	StdDraw.text(0.5, 0.54, "the WUMPUS");
-	StdDraw.text(0.5, 0.48, "you WON");
+	StdDraw.text(0.5, 0.53, "the WUMPUS");
+	StdDraw.text(0.5, 0.47, "you WON");
 	}
 	
 	else 
