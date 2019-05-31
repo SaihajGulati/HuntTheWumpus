@@ -897,7 +897,7 @@ public void  displayDanger(int [] dangers)
 	}
 }
 
-public static void  postTrivia(boolean correct)
+public static void  postTrivia(boolean correct, int questions, int answered)
 {	
 	boolean waiting = true;
 	
@@ -924,6 +924,10 @@ public static void  postTrivia(boolean correct)
 	{
 	StdDraw.text(0.5, 0.6, "Incorrect" );
 	}
+	
+	Font sub = new Font("Copperplate Gothic Bold",0, 40);
+	StdDraw.setFont(sub);
+	StdDraw.text(0.5, 0.5, "So far you answered "+answered+" out of "+questions+" correct" );
 
 	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
 	StdDraw.show();
