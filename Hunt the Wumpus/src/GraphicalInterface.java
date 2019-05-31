@@ -581,10 +581,13 @@ private static int menubuttons()
 
 	
 	if(menubutton(x,0.385, containerx,0.055,"CREDITS"))
-		    toreturn = 3;	
+		    toreturn = 3;
+	
+	if(menubutton(x,0.275, containerx,0.055,"HOW TO PLAY"))
+	    tutorial();
 
 	
-	if(menubutton(x,0.275, containerx,0.055,"EXIT"))
+	if(menubutton(x,0.165, containerx,0.055,"EXIT"))
 		Exit();	
 
 			
@@ -931,7 +934,7 @@ public static void  postTrivia(boolean correct, int questions, int answered)
 	StdDraw.text(0.5, 0.6, "Incorrect" );
 	}
 	
-	Font sub = new Font("Copperplate Gothic Bold",0, 40);
+	Font sub = new Font("Copperplate Gothic Bold",0, 25);
 	StdDraw.setFont(sub);
 	StdDraw.text(0.5, 0.5, "So far you answered "+answered+" out of "+questions+" correct" );
 
@@ -939,6 +942,7 @@ public static void  postTrivia(boolean correct, int questions, int answered)
 	StdDraw.show();
 	}
 }
+
 
 public static void  boughtArrow(int arrows)
 {	
@@ -995,6 +999,40 @@ public static void  Exit()
 	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "NO");
 	StdDraw.show();
 	}
+}
+
+public static void  howToPlay()
+{	
+	boolean waiting = true;
+	
+	while(waiting)
+	{
+	
+		StdDraw.clear();
+	StdDraw.setPenColor( 0,0,0);
+	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	
+	StdDraw.setPenColor( 32,32,32);
+	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	
+	StdDraw.setPenColor( 255,255,255);
+	Font title = new Font("Copperplate Gothic Bold",0, 30);
+	StdDraw.setFont(title);
+	StdDraw.text(0.5, 0.6, "Do you know how to play?");
+	
+	if(button(0.5, 0.1 , 0.15 , 0.055, "NO"))
+	{
+		tutorial();
+	}
+
+	waiting = !button(0.5, 0.21 , 0.15 , 0.055, "YES");
+	StdDraw.show();
+	}
+}
+
+private static void tutorial()
+{
+	//teach stuff
 }
 
 public static void  goof()
