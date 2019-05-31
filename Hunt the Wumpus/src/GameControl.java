@@ -110,7 +110,6 @@ public class GameControl
 			{	
 				player.movePlayer();
 				printHazardLocs();
-				//commit
 				GameLocations.movePlayer(response);//
 				room = GameLocations.getPlayerLocation();
 				GI.betweenTurns(triv.giveTrivia(), room, player.getTurns(), player.getCoins(), player.getArrows());
