@@ -1267,12 +1267,14 @@ public static void  endGame(String reason, int score, boolean leaderboard)
 	StdDraw.setPenColor( 250,250,250);
 	Font title = new Font("Copperplate Gothic Bold",0, 30);
 	StdDraw.setFont(title);
-	
+	System.out.print("Test1");
 	if(reason.equals("won"))
 	{
+		Font win = new Font("Copperplate Gothic Bold",0, 50);
+		StdDraw.setFont(win);
 	StdDraw.text(0.5, 0.6, "You have slain");
-	StdDraw.text(0.5, 0.55, "the WUMPUS");
-	StdDraw.text(0.5, 0.5, "you WON");
+	StdDraw.text(0.5, 0.54, "the WUMPUS");
+	StdDraw.text(0.5, 0.48, "you WON");
 	}
 	
 	else 
@@ -1307,9 +1309,9 @@ public static void  endGame(String reason, int score, boolean leaderboard)
 		displayList(splitUp(highscore),0.5,0.3,distance);
 	}
 
+	}
 	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
 	StdDraw.show();
-	}
 	}
 }
 
