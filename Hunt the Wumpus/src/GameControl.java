@@ -44,12 +44,12 @@ public class GameControl
 		
 		GraphicalInterface GI = new GraphicalInterface(BATS, WUMPUS, HOLE);
 		GI.start();
+		HighScore.loadFiles();
 		while (true)
 		{
 			Player player = new Player();
 			ArrayList <String> scores = new ArrayList<String>();
 			Trivia trivia = new Trivia();
-			HighScore.loadFiles();
 			//starts the game
 			scores.add(" 1. Cave 1; Bob; 44");
 			 scores.add(" 2. Cave 1; Josh; 34");
@@ -64,7 +64,7 @@ public class GameControl
 			String name = "";
 			int caveSelect = 0;
 			while(name.equals("")) {
-				caveSelect = GI.mainmenu(scores);
+				caveSelect = GI.mainmenu(HighScore.getHighScores());
 				name = GI.getName();
 			}
 			Cave cave = new Cave(caveSelect);
@@ -260,8 +260,7 @@ public class GameControl
 	 * @throws FileNotFoundException 
 	 */
 	public static void endGame(int caveName, GraphicalInterface GI, String Name, Player player, String reason, int score) throws FileNotFoundException{
-		HighScore.updateScoreBoard(score, Name, caveName);
-		GI.endGame(reason, score, true);
+		GI.endGame(reason, score, HighScore.updateScoreBoard(score, Name, caveName));
 		
 	}	
 	/**

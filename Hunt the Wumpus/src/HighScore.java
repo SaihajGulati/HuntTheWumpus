@@ -246,7 +246,7 @@ public class HighScore
         ArrayList<String> returnString = new ArrayList<String>();
         for(int i = 0; i < highScores.size(); i++)
         {
-        	returnString.add(highScores.get(i) + ":" + names.get(i) + ":" + caves.get(i));
+        	returnString.add(i+1 + ". Cave " + caves.get(i) + "; " + names.get(i) + "; " + highScores.get(i));
         }
         return returnString;
     }
