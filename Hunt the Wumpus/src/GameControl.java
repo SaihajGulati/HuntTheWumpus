@@ -74,7 +74,8 @@ public class GameControl
 			String reason = startGame(GI, player, cave, trivia);
 			
 			int score;
-			if (reason.equals("wumpus"))
+			//fix
+			if (reason.equals("won"))
 			{
 				score = player.getScore(true);
 			}
@@ -98,7 +99,6 @@ public class GameControl
 	{
 		
 		Scanner input = new Scanner(System.in);
-		System.out.println("Test");
 		int response = 0; //response given by player in GI
 		int room; //room player is currently in
 		int[] rooms = new int[3];//the rooms around the player
@@ -156,7 +156,7 @@ public class GameControl
 				for (int c: GameLocations.getBatLocations())
 				{
 					if(room == c) {//
-						room = GameLocations.triggerBat(); //hola
+						room = GameLocations.triggerBat();
 					}
 				}
 						
@@ -181,14 +181,15 @@ public class GameControl
 				//while the player hasn't chosen a room yet this loops
 			     arrowShot = GI.shootArrow(rooms[0], rooms[1], rooms[2], hazards, player.getTurns(), player.getCoins(), player.getArrows());
 
-				if (arrowShot != 0)
+				/*if (arrowShot != 0)
 				{
 					player.changeArrows(-1);
-				}
+				}*/
 				
 				//if the person decides to go back
 				
 				if(arrowShot != 0) {
+					player.changeArrows(-1);
 					if (GameLocations.shootArrow(arrowShot))
 					{
 						GI.arrowHit(true, player.getArrows());
@@ -261,7 +262,7 @@ public class GameControl
 	 * @throws FileNotFoundException 
 	 */
 	public static void endGame(int caveName, GraphicalInterface GI, String Name, Player player, String reason, int score) throws FileNotFoundException{
-		GI.endGame(reason, score, HighScore.updateScoreBoard(score, Name, caveName));
+		GraphicalInterface.endGame(reason, score, HighScore.updateScoreBoard(score, Name, caveName));
 		
 	}	
 	/**
