@@ -72,7 +72,7 @@ public class GameControl
 			Player player = new Player();
 			if (!startNew)
 			{
-				caveSelect = GI.mainmenu(HighScore.getHighScores(), false);
+				caveSelect = GI.mainmenu(HighScore.getCaves(), HighScore.getNames(), HighScore.getScores(), false);
 				name = GI.getName();
 			}
 			//starts the game
@@ -260,7 +260,7 @@ public class GameControl
 			}
 			else if (response == MAIN_MENU)
 			{
-				int caveSelect = GI.mainmenu(HighScore.getHighScores(), true);
+				int caveSelect = GI.mainmenu(HighScore.getCaves(), HighScore.getNames(), HighScore.getScores(), true);
 				if (caveSelect > 0)
 				{
 					String name = GI.getName();
