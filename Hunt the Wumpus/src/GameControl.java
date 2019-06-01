@@ -66,8 +66,10 @@ public class GameControl
 		GraphicalInterface.start();
 		boolean startNew = false;
 		
+		//keeps game running
 		while (true)
 		{
+			//if the game is a new game
 			Trivia trivia = new Trivia();
 			Player player = new Player();
 			if (!startNew)
@@ -81,19 +83,22 @@ public class GameControl
 			String reason = startGame(GI, player, cave, trivia);
 			//sadf
 			int score = 0;
-			//fix
+			//error handling
 			if(!reason.equals(null)) {
+				//if player wins
 				if (reason.equals("won"))
 				{
 					score = player.getScore(true);
 					endGame(caveSelect, GI, name, player, reason, score);
 					startNew = false;
 				}
+				//if player left and saved game
 				else if (reason.substring(0,4).equals("menu")) {
 					caveSelect = Integer.parseInt(reason.substring(4,5));
 					name = reason.substring(5);
 					startNew = true;
 				}
+				//if player died
 				else
 				{
 					System.out.println(reason);
@@ -104,6 +109,7 @@ public class GameControl
 				}
 					
 			}
+			//error handling
 			else
 			{
 				System.out.println("Error Occured : reason was null");
@@ -136,21 +142,24 @@ public class GameControl
 		
 		while(player.getArrows() > 0 && player.getCoins() > 0 || player.getTurns() == 0) {
 			//while player hasn't chosen in GI yet
-			//while(true) {
 				// simply sets the variables for later use
 			room = GameLocations.getPlayerLocation();
 			rooms = cave.tunnels(room);
 			hazards = GameLocations.warning();
-			response = GI.getRoom(rooms[0], rooms[1], rooms[2], hazards, player.getTurns(), player.getCoins(), player.getArrows()); //response gathered from player
+			//response gathered from player for room/shoot/buy
+			response = GI.getRoom(rooms[0], rooms[1], rooms[2], hazards, player.getTurns(), player.getCoins(), player.getArrows()); 
+			
+			//if player moves
 			if(response > 0)
 			{	
 				player.movePlayer();
 				printHazardLocs();
-				GameLocations.movePlayer(response);//
+				GameLocations.movePlayer(response);
 				Sounds.movePlayer();
 				room = GameLocations.getPlayerLocation();
 				GI.betweenTurns(triv.giveTrivia(), room, player.getTurns(), player.getCoins(), player.getArrows());
 
+				//checks if player is in a room with a hazard
 				if(GameLocations.getPlayerLocation() == GameLocations.getWumpusLocation()) {
 					room_hazards[WUMPUS] = 1;
 				}
@@ -169,16 +178,19 @@ public class GameControl
 				GI.displayDanger(room_hazards);
 				room_hazards = new int[3];
 				survived = false;
+				//for encountering a wumpus, trivia pops up
 				if (room == GameLocations.getWumpusLocation())
 				{
 					Sounds.triviaPopUp();
 					if(!trivia(triv, GI, player, 5, 3))
 					{
+						//wumpus loss
 						Sounds.lose();
 						return "wumpus";
 					}
 					else
 					{
+						//wumpus moves
 						Sounds.moveWumpus();
 						GameLocations.moveWumpus();
 						hazardsSurvived[WUMPUS] = 1;
@@ -186,6 +198,7 @@ public class GameControl
 						System.out.println("survived wumpus");
 					}
 				} 
+				//triggers bat
 				for (int c: GameLocations.getBatLocations())
 				{
 					if(room == c) {//
@@ -193,6 +206,7 @@ public class GameControl
 					}
 				}
 						
+				//encounter a pit causes trivia
 				for (int c: GameLocations.getPitLocations())
 				{
 					if(room == c) 
@@ -200,11 +214,13 @@ public class GameControl
 						Sounds.triviaPopUp();
 						if(!trivia(triv, GI, player, 3, 2))
 						{
+							//pit loss
 							Sounds.lose();
 							return "pits";
 						}
 						else
 						{
+							//survived and escape pit
 							hazardsSurvived[HOLE] = 1;
 							survived = true;
 							System.out.println("survived pit");
@@ -213,7 +229,7 @@ public class GameControl
 						
 					}
 				}
-				System.out.println(survived);
+				//GI shows what dangers escaped
 				if (survived)
 				{
 					GI.escapedDanger(hazardsSurvived);
@@ -221,6 +237,8 @@ public class GameControl
 				
 				
 			}
+			
+			//if player shoots an arrow
 			else if (response == ARROW)
 			{
 				int arrowShot;
@@ -228,15 +246,12 @@ public class GameControl
 				//while the player hasn't chosen a room yet this loops
 			     arrowShot = GI.shootArrow(rooms[0], rooms[1], rooms[2], hazards, player.getTurns(), player.getCoins(), player.getArrows());
 			     Sounds.shootArrow();
-				/*if (arrowShot != 0)
-				{
-					player.changeArrows(-1);
-				}*/
 				
 				//if the person decides to go back
 				
 				if(arrowShot != 0) {
 					player.changeArrows(-1);
+					//if player hit wumpus
 					if (GameLocations.shootArrow(arrowShot))
 					{
 						Sounds.win();
@@ -258,6 +273,8 @@ public class GameControl
 									
 				
 			}
+			
+			//if player wants to leave game but not exit
 			else if (response == MAIN_MENU)
 			{
 				int caveSelect = GI.mainmenu(HighScore.getCaves(), HighScore.getNames(), HighScore.getScores(), true);
@@ -269,11 +286,13 @@ public class GameControl
 				}
 				
 			}
+			
+			//if player wants to buy an item
 			else if (response == BUY_ITEM)
 			{
 				int stuff = 0;
 				stuff = GraphicalInterface.buyItem(player.getCoins() > 3);
-				
+				//if they want to buy arrows
 				if (stuff == 1)
 				{
 					Sounds.triviaPopUp();
@@ -288,6 +307,7 @@ public class GameControl
 						GraphicalInterface.goof();
 					}
 				}
+				//if they want to buy a secret
 				else if (stuff == 2)
 				{
 					Sounds.triviaPopUp();
@@ -303,12 +323,10 @@ public class GameControl
 					
 				}
 			}
-			else {
-				//this is while player does not choose an option
-			}
-			// If the player has chosen to move to a place instead of shooting
+			
 			
 		}
+		//if player runs out of coins
 		Sounds.lose();
 		return "coins";
 			
@@ -326,7 +344,8 @@ public class GameControl
 	 * @throws FileNotFoundException 
 	 */
 	public static void endGame(int caveName, GraphicalInterface GI, String Name, Player player, String reason, int score) throws FileNotFoundException{
-		 try {
+			//error handling and shows end game score and updates score board
+		try {
 			GraphicalInterface.endGame(reason, score, HighScore.updateScoreBoard(score, Name, caveName));
 		}
 		catch(FileNotFoundException e) {
@@ -338,6 +357,7 @@ public class GameControl
 	/**
 	 * prints what hazards there are in adjacent rooms
 	 */
+	//for testing
 	public static boolean printHazardWarnings()
 	{
 		int[] hazards = GameLocations.warning();
@@ -366,15 +386,18 @@ public class GameControl
 		int correct = 0;
 		int count = 0;
 		int wrong = 0;
+		//while the player has answered less than required questions or required correct questions
 		while (correct < numC && count < numQ && wrong < numC)
 		{	
 			char answer = GI.getAnswer(triv.getQuestion(), triv.getA(), triv.getB(), triv.getC(), triv.getD());
+			//if answer is correct
 			if (triv.checkAnswer(answer))
 			{
 				correct++;
 				count++;
 				GraphicalInterface.postTrivia(true, count, correct);
 			}
+			//if answer is incorrect
 			else
 			{
 				count++;
@@ -383,6 +406,7 @@ public class GameControl
 			}
 			player.changeCoins(-1);
 		}
+		//player dies if correct is less than number of num questions
 		if (correct < numC)
 		{
 			System.out.println("You died");
