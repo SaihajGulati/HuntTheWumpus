@@ -116,6 +116,8 @@ public class GameControl
 		int[] hazards = new int[3]; // 0: bat | 1 : Hole | 2 : Wumpus 
 		int[] room_hazards = new int[3]; // same as hazards but for use with hazards in the room not just nearby
 		printHazardLocs();
+		int[] hazardsSurvived = new int[3];
+		boolean survived = false;
 		
 		//the while loop that runs the game while the player is alive, has arrows, and has coins
 		
@@ -166,12 +168,19 @@ public class GameControl
 					{
 						Sounds.moveWumpus();
 						GameLocations.moveWumpus();
+						hazardsSurvived[WUMPUS] = 1;
+						survived = true;
 					}
 				} 
 				for (int c: GameLocations.getBatLocations())
 				{
 					if(room == c) {//
 						room = GameLocations.triggerBat();
+					}
+					else
+					{
+						hazardsSurvived[BATS] = 1;
+						survived = true;
 					}
 				}
 						
@@ -185,9 +194,19 @@ public class GameControl
 							Sounds.lose();
 							return "pits";
 						}
+						else
+						{
+							hazardsSurvived[HOLE] = 1;
+							survived = true;
+						}
 						
 					}
 				}
+				if (survived)
+				{
+					GI.escapedDanger(hazardsSurvived);
+				}
+				
 				
 			}
 			else if (response == ARROW)

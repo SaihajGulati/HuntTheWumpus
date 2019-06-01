@@ -893,8 +893,8 @@ public void  escapedDanger(int [] dangers)
 	double textx = 0.67;
 	double texty = 0.5;
 	boolean waiting = false;
-	String survivedWumpus = "You've escaped the WUMPUS ... for now.";
-	String survivedPit = "You climbed out the PIT.";
+	String survivedWumpus = "You got 3 out of 5 questions correct and made the Wumpus run away. You have escaped the WUMPUS... for now.";
+	String survivedPit = "You got 2 out of 3 questions correct and you have climbed out the PIT. Hopefylly you don't fall into another one, because you won't be so lucky next time.";
 	
 	
 	for(int i = 0; i<dangers.length;i++)
