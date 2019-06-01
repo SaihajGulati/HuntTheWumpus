@@ -1112,8 +1112,8 @@ public static boolean  toMainMenu()
 	Font title = new Font("Copperplate Gothic Bold",0, 45);
 	StdDraw.setFont(title);
 	StdDraw.text(0.5, 0.7, "Are you sure");
-	StdDraw.text(0.5, 0.64, "You want to go back");
-	StdDraw.text(0.5, 0.52, "to the MAIN MENU?");
+	StdDraw.text(0.5, 0.7-0.04, "You want to go back");
+	StdDraw.text(0.5, 0.7-0.08, "to the MAIN MENU?");
 	
 	Font cansave = new Font("Copperplate Gothic Bold",0, 30);
 	StdDraw.setFont(cansave);
