@@ -1002,6 +1002,30 @@ public static void  postTrivia(boolean correct, int questions, int answered)
 	}
 }
 
+public static void  Error()
+{
+	boolean waiting = true;
+	
+	while(waiting)
+	{
+	
+	StdDraw.clear();
+	
+	background();
+	StdDraw.setPenColor( 32,32,32);
+	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	
+	StdDraw.setPenColor( 180,0,0);
+	Font title = new Font("Copperplate Gothic Bold",0, 60);
+	StdDraw.setFont(title);
+	StdDraw.text(0.5, 0.6, "ERROR" );
+
+	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "EXIT");
+	StdDraw.show();
+	}
+	java.lang.System.exit(0);
+}
+
 //Tells the player that they successfully bought two arrays, and using the input displays how many arrows they have
 public static void  boughtArrow(int arrows)
 {	
@@ -1372,7 +1396,7 @@ StdDraw.show();
 }
 
 // Splits a string into an array list with each part only being 30 characters long, it splits by sentences
-//thiis is used to disply sentances that need t be shown on multiple rows, used with displayList
+//this is used to display sentences that need t be shown on multiple rows, used with displayList
 private static ArrayList<String> splitUp (String split)
 {
 	ArrayList<String> splitarray = new ArrayList<String>();
@@ -1404,6 +1428,7 @@ private static ArrayList<String> splitUp (String split)
 	
 }
 
+//Returns true if the string has a character in it
 private static boolean hasChar (String name)
 {
 	
