@@ -310,8 +310,7 @@ private static void background()
 //Draws the large gray square in the center of the screen that is the room
 private static void room()
 {
-	StdDraw.setPenColor( 32,32,32);
-	StdDraw.filledRectangle(0.5, 0.5, 0.3 , 0.3);
+	strip(0.5, 0.5, 0.3 , 0.3);
 }
 
 //Draws the left door and returns true if the x y coordinates in the double array are in the doors hitbox
@@ -417,10 +416,10 @@ public String getName()
 	while(button)
 	{
 	StdDraw.clear();
-	StdDraw.setPenColor( 0,0,0);
-	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
-	StdDraw.setPenColor( 32,32,32);
-	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	background();
+
+	strip(0.5, 0.5, 0.30 , 0.5);
+	
 	title(0.5, 0.9, "Type Your Name");
 	title(0.5, 0.5, name);
 	StdDraw.line(0.3, 0.47, 0.7, 0.47);
@@ -477,12 +476,10 @@ public int caveSelection(ArrayList<String> scores)
      while(true)
     {
 		StdDraw.clear();
-		StdDraw.setPenColor(0,0,0);
-		StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
-		//StdDraw.picture(0.5, 0.5, "C:\\Users\\s-dapopa\\Desktop\\cave.jpg",1, 1);
+		background();
+
+		strip(x , y, containerx, containery);
 		
-	    StdDraw.setPenColor(32,32,32);
-		StdDraw.filledRectangle(x , y, containerx, containery);
 		title(containerx+0.05,0.9, "Hunt the Wumpus" );
 		
 
@@ -555,13 +552,12 @@ private static int menubuttons()
     double containery= 0.5;
     int toreturn = 0;
     
-        //StdDraw.disableDoubleBuffering();
+        
 		StdDraw.clear();
-		StdDraw.setPenColor(0,0,0);
-		StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+		background();
 		
-	    StdDraw.setPenColor(32,32,32);
-		StdDraw.filledRectangle(x , y, containerx, containery);
+		strip(x , y, containerx, containery);
+		
 		title(x,0.8, "Hunt The Wumpus" );
 		
 
@@ -708,11 +704,9 @@ private static void highScores(ArrayList<String> scores)
 	while(toMain)
 	{
 	StdDraw.clear();
-	StdDraw.setPenColor( 0,0,0);
-	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
-	
-	StdDraw.setPenColor( 32,32,32);
-	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	background();
+
+	strip(0.5, 0.5, 0.30 , 0.5);
 	
 	title(0.5, 0.9, "High Scores");
 	
@@ -745,11 +739,9 @@ public static void  betweenTurns(String hint, int room, int turn, int coins, int
 	
 	StdDraw.clear();
 	
-	StdDraw.setPenColor( 0,0,0);
-	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
-	
-	StdDraw.setPenColor( 32,32,32);
-	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	background();
+
+	strip(0.5, 0.5, 0.30 , 0.5);
 	
 	StdDraw.setPenColor( 255,255,255);
 	Font title = new Font("Copperplate Gothic Bold",0, 60);
@@ -787,11 +779,9 @@ public static void  tellSecret(String secret)
 	
 	StdDraw.clear();
 	
-	StdDraw.setPenColor( 0,0,0);
-	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
-	
-	StdDraw.setPenColor( 32,32,32);
-	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	background();
+
+	strip(0.5, 0.5, 0.30 , 0.5);
 	
 	StdDraw.setPenColor( 255,255,255);
 	Font title = new Font("Copperplate Gothic Bold",0, 60);
@@ -834,11 +824,9 @@ public void  displayDanger(int [] dangers)
 	int questions = 0;
 	int correct = 0;
 	
-	StdDraw.setPenColor( 0,0,0);
-	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	background();
 	
-	StdDraw.setPenColor( 32,32,32);
-	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	strip(0.5, 0.5, 0.30 , 0.5);
 	WARNING.draw("Danger",0.5, 0.85, 100);
 	
 	StdDraw.setPenColor( 180,0,0);
@@ -924,11 +912,9 @@ public void  escapedDanger(int [] dangers)
 	StdDraw.clear();
 	double shift = 0;
 	
-	StdDraw.setPenColor( 0,0,0);
-	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
-	
-	StdDraw.setPenColor( 32,32,32);
-	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	background();
+
+	strip(0.5, 0.5, 0.30 , 0.5);
 	
 	Font title = new Font("Copperplate Gothic Bold",0, 45);
 	StdDraw.setFont(title);
@@ -962,6 +948,12 @@ public void  escapedDanger(int [] dangers)
 	}
 }
 
+private static void strip(double x, double y, double wide, double tall)
+{
+	StdDraw.setPenColor( 32,32,32);
+	StdDraw.filledRectangle(x, y, wide , tall);
+}
+
 //After each trivial question, using the boolean it tells the user if they got the answer correct,
 // using the questions input it says how many questions have been asked till that point
 // and using answered it says how many have been answered correctly
@@ -974,11 +966,9 @@ public static void  postTrivia(boolean correct, int questions, int answered)
 	
 	StdDraw.clear();
 	
-	StdDraw.setPenColor( 0,0,0);
-	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	background();
 	
-	StdDraw.setPenColor( 32,32,32);
-	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	strip(0.5, 0.5, 0.30 , 0.5);
 	
 	StdDraw.setPenColor( 255,255,255);
 	Font title = new Font("Copperplate Gothic Bold",0, 60);
@@ -1002,6 +992,7 @@ public static void  postTrivia(boolean correct, int questions, int answered)
 	}
 }
 
+//Error screen in case of an error
 public static void  Error()
 {
 	boolean waiting = true;
@@ -1012,8 +1003,7 @@ public static void  Error()
 	StdDraw.clear();
 	
 	background();
-	StdDraw.setPenColor( 32,32,32);
-	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	strip(0.5, 0.5, 0.30 , 0.5);
 	
 	StdDraw.setPenColor( 180,0,0);
 	Font title = new Font("Copperplate Gothic Bold",0, 60);
@@ -1036,11 +1026,9 @@ public static void  boughtArrow(int arrows)
 	
 	StdDraw.clear();
 	
-	StdDraw.setPenColor( 0,0,0);
-	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	background();
 	
-	StdDraw.setPenColor( 32,32,32);
-	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	strip(0.5, 0.5, 0.30 , 0.5);
 	
 	StdDraw.setPenColor( 255,255,255);
 	Font title = new Font("Copperplate Gothic Bold",0, 45);
@@ -1063,11 +1051,9 @@ public static void  Exit()
 	{
 	
 		StdDraw.clear();
-	StdDraw.setPenColor( 0,0,0);
-	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+		background();
 	
-	StdDraw.setPenColor( 32,32,32);
-	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	strip(0.5, 0.5, 0.30 , 0.5);
 	
 	StdDraw.setPenColor( 255,255,255);
 	Font title = new Font("Copperplate Gothic Bold",0, 45);
@@ -1094,11 +1080,9 @@ public static boolean  toMainMenu()
 	{
 	
 		StdDraw.clear();
-	StdDraw.setPenColor( 0,0,0);
-	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
-	
-	StdDraw.setPenColor( 32,32,32);
-	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+		background();
+
+	strip(0.5, 0.5, 0.30 , 0.5);
 	
 	StdDraw.setPenColor( 255,255,255);
 	Font title = new Font("Copperplate Gothic Bold",0, 45);
@@ -1144,13 +1128,13 @@ batTutorial+= "If you are in the same room as a BAT, you will be carried by the 
 String pitTutorial = "Some rooms in the caves contain PITS, if you are in the same room as a pit you will fall in, and must answer 2 out of three trivia questions right to get out. ";
 pitTutorial+="If you don't get them right you die. If you are near a PIT you will see the message \"I feel a draft\"";
 
-String arrowTutorial = "ARROWS are your weapons against the WUMPUS. To shoot an ARROW press ont the \"SHOOT ARROW\" button, then press ont the red door you want to shoot the ARROW in. ";
+String arrowTutorial = "ARROWS are your weapons against the WUMPUS. To shoot an ARROW press the \"SHOOT ARROW\" button, then press the red door you want to shoot the ARROW in. ";
 arrowTutorial+="To buy an ARROW you must answer two out of three trivia questions correctly. You die if you run out of ARROWS.";
 
 String coinTutorial = "You get COINS by going into another room in the cave. Every trivia question asked, from WUMPUS, PITS, or while buying an item costs one coin. ";
 coinTutorial += "You die if you run out of COINS.";
 
-String navigationTutorial = "The player is represented by a white ball which follows the mouse. In order to navigate rooms lead the player into the red bars represnting the doors. ";
+String navigationTutorial = "The player is represented by a white ball which follows the mouse. In order to navigate rooms lead the player into the red bars representing the doors. ";
 navigationTutorial+= "A new round begins every time you enter a new room.";
 
 double distance = 0.05;
@@ -1160,12 +1144,10 @@ double texty = 0.5;
  while(true)
 {
 	StdDraw.clear();
-	StdDraw.setPenColor(0,0,0);
-	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
-	//StdDraw.picture(0.5, 0.5, "C:\\Users\\s-dapopa\\Desktop\\cave.jpg",1, 1);
+	background();;
 	
-    StdDraw.setPenColor(32,32,32);
-	StdDraw.filledRectangle(x , y, containerx, containery);
+	strip(x , y, containerx, containery);
+	
 	title(x,0.9, "How to Play" );
 	Font font = new Font("Copperplate Gothic Bold",0, 30);
 	StdDraw.setFont(font);
@@ -1230,11 +1212,9 @@ public static void  goof()
 	
 	StdDraw.clear();
 	
-	StdDraw.setPenColor( 0,0,0);
-	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
-	
-	StdDraw.setPenColor( 32,32,32);
-	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	background();
+
+	strip(0.5, 0.5, 0.30 , 0.5);
 	
 	StdDraw.setPenColor( 255,255,255);
 	Font title = new Font("Copperplate Gothic Bold",0, 60);
@@ -1264,11 +1244,10 @@ toprint = splitUp(question);
  while(true)
 {
 	StdDraw.clear();
-	StdDraw.setPenColor(0,0,0);
-	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	background();
 	
-    StdDraw.setPenColor(32,32,32);
-	StdDraw.filledRectangle(x , y, containerx, containery);
+	strip(x , y, containerx, containery);
+	
 	title(x,0.9, "Trivia" );
 	
 	
@@ -1330,11 +1309,10 @@ arrowDescription = splitUp("You can get ARROWS by getting two out of three trivi
  while(true)
 {
 	StdDraw.clear();
-	StdDraw.setPenColor(0,0,0);
-	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	background();
 	
-    StdDraw.setPenColor(32,32,32);
-	StdDraw.filledRectangle(x , y, containerx, containery);
+	strip(x , y, containerx, containery);
+	
 	title(x,0.9, "Buy Items" );
 	
 	if(!enough)
@@ -1460,11 +1438,9 @@ public static void  endGame(String reason, int score, boolean leaderboard)
 	
 	StdDraw.clear();
 	
-	StdDraw.setPenColor( 0,0,0);
-	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	background();
 	
-	StdDraw.setPenColor( 32,32,32);
-	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	strip(0.5, 0.5, 0.30 , 0.5);
 	
 	StdDraw.setPenColor( 250,250,250);
 	Font font = new Font("Copperplate Gothic Bold",0, 60);
@@ -1531,11 +1507,9 @@ public static void  arrowHit(boolean hit, int arrows)
 	
 	StdDraw.clear();
 	
-	StdDraw.setPenColor( 0,0,0);
-	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	background();
 	
-	StdDraw.setPenColor( 32,32,32);
-	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	strip(0.5, 0.5, 0.30 , 0.5);
 	
 	
 	StdDraw.setPenColor( 250,250,250);
@@ -1579,12 +1553,10 @@ messagearray = splitUp(teammessage);
  while(true)
 {
 	StdDraw.clear();
-	StdDraw.setPenColor(0,0,0);
-	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
-	//StdDraw.picture(0.5, 0.5, "C:\\Users\\s-dapopa\\Desktop\\cave.jpg",1, 1);
+	background();
+
+	strip(x , y, containerx, containery);
 	
-    StdDraw.setPenColor(32,32,32);
-	StdDraw.filledRectangle(x , y, containerx, containery);
 	title(x,0.9, "Artesian Code" );
 		
 	Font font = new Font("Copperplate Gothic Bold",0, 30);
