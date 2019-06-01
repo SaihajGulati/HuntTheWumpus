@@ -38,6 +38,7 @@ public class GameControl
 	public static final int QUIT = 2;
 	public static final int ARROW = -1;
 	public static final int BUY_ITEM = -2;
+	public static final int MAIN_MENU = -3;
 	
 	public static void main(String[] args) throws FileNotFoundException, MalformedURLException
 	{
@@ -60,12 +61,12 @@ public class GameControl
 			System.out.println("Error Occured : Loading Files");
 			GraphicalInterface.Error();
 		}
+		GraphicalInterface.start();
 		
 			while (true)
 			{
 				Trivia trivia = new Trivia();
 				Player player = new Player();
-				GraphicalInterface.start();
 				String name = "";
 				int caveSelect = 0;
 				while(name.equals("")) {
@@ -83,14 +84,18 @@ public class GameControl
 					if (reason.equals("won"))
 					{
 						score = player.getScore(true);
+						endGame(caveSelect, GI, name, player, reason, score);
 					}
-					else
+					else if (!reason.equals("menu"))
 					{
 						score = player.getScore(false);
+						endGame(caveSelect, GI, name, player, reason, score);
 					}
 				}
-				endGame(caveSelect, GI, name, player, reason, score);
-				GraphicalInterface.teamMessage();
+				else
+				{
+					GI.Error();
+				}
 			}
 		
 	}
@@ -214,6 +219,11 @@ public class GameControl
 					}	
 				}
 									
+				
+			}
+			else if (response == MAIN_MENU)
+			{
+				return "menu";
 				
 			}
 			else if (response == BUY_ITEM)
