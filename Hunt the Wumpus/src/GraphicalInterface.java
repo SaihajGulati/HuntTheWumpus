@@ -1127,7 +1127,7 @@ String arrowTutorial = "ARROWS are your weapons against the WUMPUS. To shoot an 
 arrowTutorial+="To buy an ARROW you must answer two out of three trivia questions correctly. You die if you run out of ARROWS.";
 
 String coinTutorial = "You get COINS by going into another room in the cave. Every trivia question asked, from WUMPUS, PITS, or while buying an item costs one coin. ";
-coinTutorial += "You die if you run out of COINS";
+coinTutorial += "You die if you run out of COINS.";
 
 String navigationTutorial = "The player is represented by a white ball which follows the mouse. In order to navigate rooms lead the player into the red bars represnting the doors. ";
 navigationTutorial+= "A new round begins every time you enter a new room.";
