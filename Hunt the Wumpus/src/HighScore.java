@@ -103,6 +103,7 @@ public class HighScore
                 }
                 else
                 {
+                	//asdfasd
                     System.out.println(inputLine);
                 }
             }
