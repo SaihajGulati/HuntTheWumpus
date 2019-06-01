@@ -724,9 +724,9 @@ private static void highScores(ArrayList<String> caves, ArrayList<String> names,
 	title(0.5, 0.9, "High Scores");
 	
 	
-	printScoreRow(caves,0.3,0.75,25,"CAVE");
-	printScoreRow(names,0.5,0.75,25,"NAME");
-	printScoreRow(scores,0.7,0.75,25,"SCORE");
+	printScoreRow(caves,0.3,0.7,25,"CAVE");
+	printScoreRow(names,0.5,0.7,25,"NAME");
+	printScoreRow(scores,0.7,0.7,25,"SCORE");
 
 	toMain = !button(0.5, 0.1 , 0.15 , 0.055, "Back");
 	StdDraw.show();
