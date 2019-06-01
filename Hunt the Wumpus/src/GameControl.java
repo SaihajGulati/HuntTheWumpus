@@ -53,7 +53,7 @@ public class GameControl
 			}
 			catch(MalformedURLException e) {
 				//GI.[method that opens up error screen];
-			}
+			}//
 						
 		}
 		catch(FileNotFoundException error) {
