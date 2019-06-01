@@ -122,4 +122,10 @@ public class Sounds
 	{
 		currentSounds[7].play();
 	}
+	
+	public static void background()
+	{
+		currentSounds[8].play();
+	}
+	
 }
