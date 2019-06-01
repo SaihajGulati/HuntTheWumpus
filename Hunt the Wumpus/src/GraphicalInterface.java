@@ -906,7 +906,7 @@ public void  escapedDanger(int [] dangers)
 {	
 	double distance = 0.05;
 	double textx = 0.5;
-	double texty = 0.5;
+	double texty = 0.6;
 	boolean waiting = false;
 	String survivedWumpus = "You got 3 out of 5 questions correct and made the Wumpus run away. You have escaped the WUMPUS... for now.";
 	String survivedPit = "You got 2 out of 3 questions correct and you have climbed out the PIT. Hopefylly you don't fall into another one, because you won't be so lucky next time.";
@@ -946,7 +946,7 @@ public void  escapedDanger(int [] dangers)
 
 	for(int i = 0; i<dangers.length;i++)
 	{
-		if(dangers[i]>0)
+		if(dangers[i]>0 && i != BAT)
 		{
 			if(i == WUMPUS)
 			{
@@ -957,7 +957,7 @@ public void  escapedDanger(int [] dangers)
 			{
 		      displayList(splitUp(survivedPit),textx,texty-shift,distance);
 			}
-		shift +=0.1;
+		shift +=0.30;
 
 		}
 	}
