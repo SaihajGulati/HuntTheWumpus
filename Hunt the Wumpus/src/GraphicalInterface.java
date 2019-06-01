@@ -1077,9 +1077,14 @@ public static void  Exit()
 
 
 //Asks the player if they are sure they want to go to main menu, if yes it return true, if not it returns false
+//Asks the player if they are sure they want to go to main menu, if yes it return true, if not it returns false
 public static boolean  toMainMenu()
 {	
-
+	double distance = 0.05;
+	double textx = 0.5;
+	double texty = 0.4;
+	String saveMessage = "Your data will be saved and you will be able to resume";
+	
 	while(true)
 	{
 	
@@ -1092,8 +1097,13 @@ public static boolean  toMainMenu()
 	Font title = new Font("Copperplate Gothic Bold",0, 45);
 	StdDraw.setFont(title);
 	StdDraw.text(0.5, 0.7, "Are you sure");
-	StdDraw.text(0.5, 0.60, "You want to go back");
-	StdDraw.text(0.5, 0.50, "to the MAIN MENU?");
+	StdDraw.text(0.5, 0.65, "You want to go back");
+	StdDraw.text(0.5, 0.6, "to the MAIN MENU?");
+	
+	Font cansave = new Font("Copperplate Gothic Bold",0, 30);
+	StdDraw.setFont(cansave);
+	displayList(splitUp(saveMessage),textx,texty,distance);
+	
 	
 	if(button(0.5, 0.21 , 0.15 , 0.055, "YES"))
 	{
