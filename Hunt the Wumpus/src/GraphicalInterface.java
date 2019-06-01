@@ -905,7 +905,7 @@ public void  displayDanger(int [] dangers)
 public void  escapedDanger(int [] dangers)
 {	
 	double distance = 0.05;
-	double textx = 0.67;
+	double textx = 0.5;
 	double texty = 0.5;
 	boolean waiting = false;
 	String survivedWumpus = "You got 3 out of 5 questions correct and made the Wumpus run away. You have escaped the WUMPUS... for now.";
@@ -935,6 +935,7 @@ public void  escapedDanger(int [] dangers)
 
 	strip(0.5, 0.5, 0.30 , 0.5);
 	
+	StdDraw.setPenColor(250,250,250);
 	Font title = new Font("Copperplate Gothic Bold",0, 45);
 	StdDraw.setFont(title);
 	StdDraw.text(0.5, 0.85, "You Survived");
@@ -1111,8 +1112,8 @@ public static boolean  toMainMenu()
 	Font title = new Font("Copperplate Gothic Bold",0, 45);
 	StdDraw.setFont(title);
 	StdDraw.text(0.5, 0.7, "Are you sure");
-	StdDraw.text(0.5, 0.7-0.04, "You want to go back");
-	StdDraw.text(0.5, 0.7-0.08, "to the MAIN MENU?");
+	StdDraw.text(0.5, 0.64, "You want to go back");
+	StdDraw.text(0.5, 0.58, "to the MAIN MENU?");
 	
 	Font cansave = new Font("Copperplate Gothic Bold",0, 30);
 	StdDraw.setFont(cansave);
