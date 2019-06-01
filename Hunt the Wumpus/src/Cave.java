@@ -24,7 +24,6 @@ import java.util.*;
 public class Cave
 {
 	int[][] caveMap;
-	//af
 	public Cave(int cave)
 	{
 		try {

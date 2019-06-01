@@ -23,7 +23,7 @@ import java.net.*;
  * 
  * 	Figure out how to get the adjacent room index?
  * 	Add Wumpus control methods but what do we need for that? 
- *
+ *please
  */
 public class GameControl
 {
