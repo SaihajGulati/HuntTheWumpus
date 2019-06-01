@@ -426,6 +426,10 @@ public String getName()
 	
 	typed = getKeyTyped();
 	
+	if(typed.length()>0 && name.equals("Type a name"))
+	{
+		name = "";
+	}
 	
 	if( button(0.5, 0.21 , 0.15 , 0.055, "Play") || (typed.length()>0 && ((int)(typed.charAt(0)) == 10)))
 	{
