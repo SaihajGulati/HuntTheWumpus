@@ -87,7 +87,6 @@ public class HighScore
         while(input.hasNext()) 
         {
             String inputLine = input.nextLine();
-            System.out.println(inputLine);
             if(!(inputLine.equals("")))
             {
                 if(inputLine.substring(0, 5).equals("Name "))

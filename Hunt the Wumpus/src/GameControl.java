@@ -49,7 +49,7 @@ public class GameControl
 		try {
 			HighScore.loadFiles();
 			try {
-				Sounds sounds = new Sounds(2);
+				Sounds sounds = new Sounds(1);
 			}
 			catch(MalformedURLException e) {
 				System.out.println("Error Occured : loading Sounds");
@@ -61,17 +61,22 @@ public class GameControl
 			System.out.println("Error Occured : Loading Files");
 			GraphicalInterface.Error();
 		}
+
+		String name = "";
+		int caveSelect = 0;
 		GraphicalInterface.start();
+		boolean startNew = false;
 		
 			while (true)
 			{
 				Trivia trivia = new Trivia();
 				Player player = new Player();
-				String name = "";
-				int caveSelect = 0;
-				while(name.equals("")) {
-					caveSelect = GI.mainmenu(HighScore.getHighScores());
-					name = GI.getName();
+				if (!startNew)
+				{
+					while(name.equals("")) {
+						caveSelect = GI.mainmenu(HighScore.getHighScores(), false);
+						name = GI.getName();
+					}
 				}
 				//starts the game
 				Cave cave = new Cave(caveSelect);
@@ -85,15 +90,26 @@ public class GameControl
 					{
 						score = player.getScore(true);
 						endGame(caveSelect, GI, name, player, reason, score);
+						startNew = false;
 					}
-					else if (!reason.equals("menu"))
+					else if (!reason.substring(0,4).equals("menu"))
 					{
 						score = player.getScore(false);
 						endGame(caveSelect, GI, name, player, reason, score);
+						startNew = false;
 					}
+					else
+					{
+						caveSelect = Integer.parseInt(reason.substring(4,5));
+						name = reason.substring(5);
+						startNew = true;
+						
+					}
+						
 				}
 				else
 				{
+					System.out.println("Error Occured : reason was null");
 					GI.Error();
 				}
 			}
@@ -242,7 +258,13 @@ public class GameControl
 			}
 			else if (response == MAIN_MENU)
 			{
-				return "menu";
+				int caveSelect = GI.mainmenu(HighScore.getHighScores(), true);
+				if (caveSelect > 0)
+				{
+					String name = GI.getName();
+					return "menu" + caveSelect + name;
+					
+				}
 				
 			}
 			else if (response == BUY_ITEM)

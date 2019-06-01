@@ -41,6 +41,7 @@ public class Cave
 			}
 		}
 		catch(FileNotFoundException e) {
+			System.out.println("Error Occured : Cave File Not Found");
 			GraphicalInterface.Error();
 		}
 		
