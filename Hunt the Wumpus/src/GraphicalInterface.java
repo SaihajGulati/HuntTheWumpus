@@ -50,9 +50,15 @@ public static void start()
 	StdDraw.setCanvasSize(1000, 700);
 }
 
-//returns room or -1 for shoot arrow and -2 for buy a hint
+//returns room or -1 for shoot arrow, -2 for buy a hint and -3 if they player wants to go to main menu
 public int getRoom(int room1, int room2, int room3, int [] danger, int turn, int coins, int arrows)
 {
+	
+	double buttonwidth = 0.1;
+	double buttonheight = 0.055;
+	double shift = (buttonwidth*2);
+	double buttonleft = 0.2;
+	
 	int toreturn;
 	double[] ballcords = new double [2];
 	StdDraw.clear();
@@ -68,17 +74,25 @@ public int getRoom(int room1, int room2, int room3, int [] danger, int turn, int
 	HUDtext(0.9,0.74,"Arrows "+arrows);
 	
 	//ballcords = drawPlayer();
-	if(button(0.5, 0.1 , 0.15 , 0.055, "Shoot Arrow"))
-	{
-		toreturn = -1;
-	}
-	
-	if(button(0.2, 0.1 , 0.15 , 0.055, "Buy Item"))
+	if(button(buttonleft, 0.1 , buttonwidth ,buttonheight, "Buy Item"))
 	{
 		toreturn = -2;
 	}
 	
-	if(button(0.8, 0.1 , 0.15 , 0.055, "Exit"))
+		if(button(buttonleft+shift*1, 0.1 , buttonwidth , buttonheight, "Shoot Arrow"))
+	{
+		toreturn = -1;
+	}
+		
+	if(button(buttonleft+shift*2, 0.1 , buttonwidth , buttonheight, "Main Menu"))
+	{
+		if(toMainMenu())
+		{
+			toreturn = -3;
+		}
+	}
+	
+	if(button(buttonleft+shift*3, 0.1 , buttonwidth , buttonheight, "Exit"))
 	{
 		Exit();	
 	}
@@ -89,10 +103,11 @@ public int getRoom(int room1, int room2, int room3, int [] danger, int turn, int
 	return toreturn;
 }
 
+
+//Draws the screen where you shoot an arrow, it loops untill you click on a room or press back 
 public int shootArrow(int room1, int room2, int room3, int [] danger, int turn, int coins, int arrows)
 {
 	int toreturn = 0;
-	double [] mousecords = {StdDraw.mouseX(), StdDraw.mouseY()};
 	boolean loop = true;
 	//StdDraw.pause(100);
 	
@@ -131,6 +146,7 @@ public int shootArrow(int room1, int room2, int room3, int [] danger, int turn, 
 	return toreturn;
 }
 
+//Draws a line representing the path of the arrow from the center of the screen
 private void arrowPath(int room)
 {
 	StdDraw.setPenColor(150,0,0);
@@ -143,6 +159,7 @@ private void arrowPath(int room)
 	StdDraw.setPenRadius();
 }
 
+//Displays a waning sign on the top of the screen, takes an int array of the possible hazards from Game control
 private void WariningSign(int [] danger)
 {
 	int dangers = 0;
@@ -177,6 +194,7 @@ private void WariningSign(int [] danger)
 
 }
 
+//Returns a string message for a hazard based on the number given in the graphical interface constructor for hazards
 private String dangerMessage (int danger)
 {
 	String toreturn = "";
@@ -198,27 +216,29 @@ private String dangerMessage (int danger)
 	return toreturn;
 }
 
+//Returns a string for a hazard based on the number given in the graphical interface constructor for hazards
 private String getDanger (int danger)
 {
 	String toreturn = "";
 	if(danger == BAT)
 	{
-		toreturn += "A BAT";
+		toreturn += "BAT";
 	}
 	
 	if(danger == WUMPUS)
 	{
-		toreturn += "A WUMPUS";
+		toreturn += "WUMPUS";
 	}
 	
 	if(danger == HOLE)
 	{
-		toreturn += "A PIT";
+		toreturn += "PIT";
 	}
 	
 	return toreturn;
 }
 
+//Returns coordinates of the player ball and draws all of the players "particles"
 private double[] drawPlayer()
 {
   	for(int i = 0; i<499;i++)
@@ -233,20 +253,13 @@ private double[] drawPlayer()
 private int doors(int room1, int room2, int room3,double[] ballcords)
 {
 	int toreturn = 0; 
-	//ballcords = drawPlayer();
 	
 	
 	if(leftdoor(room1, ballcords))
 	{
 		toreturn = room1;
 
-		player = null;
-		player = new BallSprite[500];
-		for(int i = 0; i<500;i++)
-		{
-			player[i] = new BallSprite(0.5,0.5,0.01,(0.01/500)*i, 0.3007, 0.3007);
-		}
-		
+		resetAndCreatePlayer();
 		//System.out.println(room1);
 		StdDraw.pause(100);
 	}
@@ -255,13 +268,7 @@ private int doors(int room1, int room2, int room3,double[] ballcords)
 	{
 		toreturn = room2;
 
-		player = null;
-		player = new BallSprite[500];
-		for(int i = 0; i<500;i++)
-		{
-			player[i] = new BallSprite(0.5,0.5,0.01,(0.01/500)*i, 0.3007, 0.3007);
-		}
-		
+		resetAndCreatePlayer();
 		//System.out.println(room2);
 		StdDraw.pause(100);
 	}
@@ -270,12 +277,7 @@ private int doors(int room1, int room2, int room3,double[] ballcords)
 	{
 		toreturn = room3;
 
-		player = null;
-		player = new BallSprite[500];
-		for(int i = 0; i<500;i++)
-		{
-			player[i] = new BallSprite(0.5,0.5,0.01,(0.01/500)*i, 0.3007, 0.3007);
-		}
+		resetAndCreatePlayer();
 		
 		//System.out.println(room3);
 		StdDraw.pause(100);
@@ -287,18 +289,33 @@ private int doors(int room1, int room2, int room3,double[] ballcords)
 
 }
 
+//Makes player null, then creates the player again at the center of the screen
+private void resetAndCreatePlayer()
+{
+	player = null;
+	player = new BallSprite[500];
+	for(int i = 0; i<500;i++)
+	{
+		player[i] = new BallSprite(0.5,0.5,0.01,(0.01/500)*i, 0.3007, 0.3007);
+	}
+}
+
+//Draws a black background
 private static void background()
 {
 	StdDraw.setPenColor(0,0,0);
 	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);
 }
 
+//Draws the large gray square in the center of the screen that is the room
 private static void room()
 {
 	StdDraw.setPenColor( 32,32,32);
 	StdDraw.filledRectangle(0.5, 0.5, 0.3 , 0.3);
 }
 
+//Draws the left door and returns true if the x y coordinates in the double array are in the doors hitbox
+//It also takes the door number as input
 private static boolean leftdoor(int room, double[] ballcords)
 {
 
@@ -318,6 +335,8 @@ private static boolean leftdoor(int room, double[] ballcords)
 	return inBox(0.2, 0.5, 0.007 , 0.2,ballcords[0], ballcords[1]);
 }
 
+//Draws the right door and returns true if the x y coordinates in the double array are in the doors hitbox
+//It also takes the door number as input
 private static boolean rightdoor(int room, double[] ballcords)
 {
 	StdDraw.setPenColor( 100,100,100);
@@ -335,6 +354,8 @@ private static boolean rightdoor(int room, double[] ballcords)
 	return inBox(0.8, 0.5, 0.007 , 0.2,ballcords[0], ballcords[1]);
 }
 
+//Draws the top door and returns true if the x y coordinates in the double array are in the doors hitbox
+// It also takes the door number as input
 private static boolean topdoor(int room, double[] ballcords)
 {
 	StdDraw.setPenColor( 100,100,100);
@@ -353,15 +374,7 @@ private static boolean topdoor(int room, double[] ballcords)
 	
 }
 
-private static void bottomdoor(boolean active)
-{
-
-	StdDraw.setPenColor(150,0,0);
-
-
-	StdDraw.filledRectangle(0.5, 0.2, 0.2 , 0.007);
-}
-
+//Returns the key typed by the user, or -1 if the delete button was pressed
 private static String getKeyTyped()
 {
 	char typed;
@@ -380,6 +393,7 @@ private static String getKeyTyped()
 	return "";
 }
 
+//This deletes the last character in a string and returns that string
 private static String delete(String s)
 {
 	if(s.length()>0)
@@ -390,6 +404,9 @@ private static String delete(String s)
 	return "";
 }
 
+//Returns the name selected by the player, this will not allow the name to be spaces, or empty
+// It will display "Type a name", and will not let you play until you type a name,
+//even if leave your name as "Type a name" it will not let you play
 public String getName()
 {
 	String name = "";
@@ -411,7 +428,7 @@ public String getName()
 	typed = getKeyTyped();
 	
 	
-	if(  button(0.5, 0.21 , 0.15 , 0.055, "Play") || (typed.length()>0 && ((int)(typed.charAt(0)) == 10)))
+	if( button(0.5, 0.21 , 0.15 , 0.055, "Play") || (typed.length()>0 && ((int)(typed.charAt(0)) == 10)))
 	{
 		button = false;	
 		typed = "";
@@ -436,7 +453,7 @@ public String getName()
 		return "";
 	}
 	
-	if(!button && (name.equals("") || name.equals("Type a name")))
+	if(!button && (name.equals("") || name.equals("Type a name") || !hasChar(name)))
 	{
 		name = "Type a name";
 		button = true;
@@ -450,6 +467,7 @@ public String getName()
 	return name;
 }
 
+//Returns the number of the cave selected by the user, or can go back to main menu by calling main menu
 public int caveSelection(ArrayList<String> scores)
 {	double x = 0.2;
     double y = 0.5;
@@ -494,19 +512,6 @@ public int caveSelection(ArrayList<String> scores)
 
 }
 
-
-public int displayHighScores(ArrayList<String> scores)
-{
-	boolean displayscores = true;
-	while(displayscores)
-			{
-		displayscores = !highScores(scores);
-		//System.out.println("score");
-			}
-	return mainmenu(scores);
-	
-}
-
 //This reads inputs from the main menu screen and helps the navigation between main menu, high scores, and credits
 public int mainmenu(ArrayList<String> scores)
 {	
@@ -521,7 +526,8 @@ public int mainmenu(ArrayList<String> scores)
 	
 	if(select == 2)
 	{
-		return displayHighScores(scores);
+		highScores(scores);
+		return mainmenu(scores);
 		
 	}
 	
@@ -553,7 +559,6 @@ private static int menubuttons()
 		StdDraw.clear();
 		StdDraw.setPenColor(0,0,0);
 		StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
-		//StdDraw.picture(0.5, 0.5, "C:\\Users\\s-dapopa\\Desktop\\cave.jpg",1, 1);
 		
 	    StdDraw.setPenColor(32,32,32);
 		StdDraw.filledRectangle(x , y, containerx, containery);
@@ -697,9 +702,11 @@ private static boolean Clicked()
 }
 
 //This method displays the team highscores, this method takes in scores so that it can work better in the main menu class
-private static boolean highScores(ArrayList<String> scores)
+private static void highScores(ArrayList<String> scores)
 {
-	boolean toMain;
+	boolean toMain = true;
+	while(toMain)
+	{
 	StdDraw.clear();
 	StdDraw.setPenColor( 0,0,0);
 	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
@@ -716,9 +723,10 @@ private static boolean highScores(ArrayList<String> scores)
 		StdDraw.text(0.5, 0.75-(0.05*i), scores.get(i));		
 	}
 
-	toMain = button(0.5, 0.1 , 0.15 , 0.055, "Main Menu");
+	toMain = !button(0.5, 0.1 , 0.15 , 0.055, "Back");
 	StdDraw.show();
-	return toMain;
+	}
+	
 }
 
 //This method displays the team credits, this method takes in scores so that it can work better in the main menu class
@@ -843,7 +851,7 @@ public void  displayDanger(int [] dangers)
 	{
 		if(dangers[i]>0)
 		{
-		StdDraw.text(0.5, 0.6-shift, getDanger(i));
+		StdDraw.text(0.5, 0.6-shift, "A "+getDanger(i));
 		shift +=0.1;
 		if(i == HOLE)
 		{
@@ -880,6 +888,74 @@ public void  displayDanger(int [] dangers)
 		StdDraw.text(0.5, 0.5-shift, "If you get them correct, the wumpus will run away");
 	}
 	}
+	
+	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
+	StdDraw.show();
+	}
+}
+
+//Prints out which dangers the player escaped, PIT or Wumpus, it can display both.
+public void  escapedDanger(int [] dangers)
+{	
+	double distance = 0.05;
+	double textx = 0.67;
+	double texty = 0.5;
+	boolean waiting = false;
+	String survivedWumpus = "You've escaped the WUMPUS ... for now.";
+	String survivedPit = "You climbed out the PIT.";
+	
+	
+	for(int i = 0; i<dangers.length;i++)
+	{
+		if(i == BAT)
+		{
+			i++;
+		}
+		
+		if(dangers[i]>0)
+		{
+			waiting = true;
+		}
+	}
+	
+	while(waiting)
+	{
+	
+	StdDraw.clear();
+	double shift = 0;
+	
+	StdDraw.setPenColor( 0,0,0);
+	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	
+	StdDraw.setPenColor( 32,32,32);
+	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	
+	Font title = new Font("Copperplate Gothic Bold",0, 45);
+	StdDraw.setFont(title);
+	StdDraw.text(0.5, 0.85, "You Survived");
+
+	Font danger = new Font("Copperplate Gothic Bold",0,25); 
+	StdDraw.setFont(danger);
+	StdDraw.setPenColor( 180,0,0);
+
+	for(int i = 0; i<dangers.length;i++)
+	{
+		if(dangers[i]>0)
+		{
+			if(i == WUMPUS)
+			{
+		      displayList(splitUp(survivedWumpus),textx,texty-shift,distance);
+			}
+			
+			if(i == HOLE)
+			{
+		      displayList(splitUp(survivedPit),textx,texty-shift,distance);
+			}
+		shift +=0.1;
+
+		}
+	}
+	
 	
 	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
 	StdDraw.show();
@@ -985,7 +1061,43 @@ public static void  Exit()
 	}
 }
 
-//This method calls other methods used to show the user how to play the game
+
+//Asks the player if they are sure they want to go to main menu, if yes it return true, if not it returns false
+public static boolean  toMainMenu()
+{	
+
+	while(true)
+	{
+	
+		StdDraw.clear();
+	StdDraw.setPenColor( 0,0,0);
+	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
+	
+	StdDraw.setPenColor( 32,32,32);
+	StdDraw.filledRectangle(0.5, 0.5, 0.30 , 0.5);
+	
+	StdDraw.setPenColor( 255,255,255);
+	Font title = new Font("Copperplate Gothic Bold",0, 45);
+	StdDraw.setFont(title);
+	StdDraw.text(0.5, 0.7, "Are you sure");
+	StdDraw.text(0.5, 0.60, "You want to go back");
+	StdDraw.text(0.5, 0.50, "to the MAIN MENU?");
+	
+	if(button(0.5, 0.21 , 0.15 , 0.055, "YES"))
+	{
+		return true;
+	}
+
+	if(button(0.5, 0.1 , 0.15 , 0.055, "NO"))
+	{
+		return false;
+	}
+	StdDraw.show();
+	}
+}
+
+//This method displays how to play the game when the players mouse hovers over a button, buttons don't do anything important other
+// than being drawn
 public static void tutorial()
 {	
 	double x = 0.2;
@@ -995,21 +1107,24 @@ double containery= 0.5;
 double topButton = 0.75;
 double shift = 0.11;
 
+
+//Messages shown to player, they are added instead of one big screen so that they all fit on one screen
 String wumpusTutorial = "It is your objective to kill the WUMPUS. You can kill the WUMPUS by shooting an arrow into the door that leads to the room the wumps is in. ";
 wumpusTutorial += "If you miss the WUMPUS might run away, and if you are in the same room as the WUMPUS, you must answer three out of five trivia questions correct or die! ";
+wumpusTutorial+= "If you get three out of five questions correct, the wumpus will run away. ";
 wumpusTutorial+= "You know the WUMPUS is near because you will see the message \"I smell a WUMPUS\"";
 
-String batTutorial = "Super BATS are huge monsters that fly through the caves, if you are in a room with a BAT you will see the message \"Ther is a BAT nearby\". ";
+String batTutorial = "Super BATS are huge monsters that fly through the caves, if you are in a room with a BAT you will see the message \"There is a BAT nearby\". ";
 batTutorial+= "If you are in the same room as a BAT, you will be carried by the BAT to a random room.";
 
-String pitTutorial = "Some rooms in the caves contain PITS, if you ware in the same room as a pit you will fall in, and must answer 2 out of three trivia questions right to get out. ";
+String pitTutorial = "Some rooms in the caves contain PITS, if you are in the same room as a pit you will fall in, and must answer 2 out of three trivia questions right to get out. ";
 pitTutorial+="If you don't get them right you die. If you are near a PIT you will see the message \"I feel a draft\"";
 
 String arrowTutorial = "ARROWS are your weapons against the WUMPUS. To shoot an ARROW press ont the \"SHOOT ARROW\" button, then press ont the red door you want to shoot the ARROW in. ";
 arrowTutorial+="To buy an ARROW you must answer two out of three trivia questions correctly. You die if you run out of ARROWS.";
 
 String coinTutorial = "You get COINS by going into another room in the cave. Every trivia question asked, from WUMPUS, PITS, or while buying an item costs one coin. ";
-coinTutorial += "You die if you run out of COINS";
+coinTutorial += "You die if you run out of COINS.";
 
 String navigationTutorial = "The player is represented by a white ball which follows the mouse. In order to navigate rooms lead the player into the red bars represnting the doors. ";
 navigationTutorial+= "A new round begins every time you enter a new room.";
@@ -1127,7 +1242,6 @@ toprint = splitUp(question);
 	StdDraw.clear();
 	StdDraw.setPenColor(0,0,0);
 	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
-	//StdDraw.picture(0.5, 0.5, "C:\\Users\\s-dapopa\\Desktop\\cave.jpg",1, 1);
 	
     StdDraw.setPenColor(32,32,32);
 	StdDraw.filledRectangle(x , y, containerx, containery);
@@ -1146,20 +1260,25 @@ toprint = splitUp(question);
 	}	
 
 if(button(x,0.65, containerx,0.055,questionA))
-	
+{
 	    return 'a';	
-
+}
+	    
 if(button(x,0.54, containerx,0.055, questionB))
+{
 	    return 'b';	
-
+}
+	    
 if(button(x,0.43, containerx,0.055,questionC))
+{
 	    return 'c';	
+}
 
 if(button(x,0.32, containerx,0.055,questionD))
+{
         return 'd';
+}
 
-if(button(x,0.09, containerx,0.055,"Exit"))
-	Exit();
 
 		
 StdDraw.show();
@@ -1168,7 +1287,7 @@ StdDraw.show();
 
 }
 
-// 1 for arrow, 2 for secret, 0 to go back
+//Screen to buy an item 1 for arrow, 2 for secret, 0 to go back
 public static int  buyItem(boolean enough)
 {	
 	double x = 0.2;
@@ -1189,7 +1308,6 @@ arrowDescription = splitUp("You can get ARROWS by getting two out of three trivi
 	StdDraw.clear();
 	StdDraw.setPenColor(0,0,0);
 	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
-	//StdDraw.picture(0.5, 0.5, "C:\\Users\\s-dapopa\\Desktop\\cave.jpg",1, 1);
 	
     StdDraw.setPenColor(32,32,32);
 	StdDraw.filledRectangle(x , y, containerx, containery);
@@ -1233,19 +1351,19 @@ arrowDescription = splitUp("You can get ARROWS by getting two out of three trivi
 	}
 //yeet
 if(button(x,0.65, containerx,0.055,"Arrow") && enough)
-	
+{
 	    return 1;	
+}
 
 if(button(x,0.54, containerx,0.055, "Secret") && enough)
-	    return 2;	
+{
+	return 2;	
+}
 
 if(button(x,0.43, containerx,0.055,"Back"))
-	    return 0;	
-
-if(button(x,0.32, containerx,0.055,"EXIT"))
-	Exit();
-
-
+{
+	return 0;	
+}
 		
 StdDraw.show();
 }
@@ -1286,6 +1404,20 @@ private static ArrayList<String> splitUp (String split)
 	
 }
 
+private static boolean hasChar (String name)
+{
+	
+	for(int i = 0; i<name.length();i++)
+	{
+		if(!name.substring(i,i+1).equals(" "))
+		{
+			return true;
+		}
+	}
+	
+	return false;
+}
+
 //Takes a string of what caused you to die, or if you one, score, and if you got on the leaderboard, this loops by itself and has a next button
 public static void  endGame(String reason, int score, boolean leaderboard)
 {
@@ -1295,7 +1427,7 @@ public static void  endGame(String reason, int score, boolean leaderboard)
 	String pit = "You answered 2 out of 3 incorrect and are stuck in a pit forever, where you die.";
 	String coins = "\"You died because you're poor, even though you're rich in your heart\" - Mehar Gulati";
 	String arrows ="You ran out of arrows and died because you had no way to kill the wumpus.";
-	String highscore = "You're score was good enough to make it on the leaderboard! Check it out in the main menu";
+	String highscore = "Your score was good enough to make it on the leaderboard! Check it out in the main menu";
 	double distance = 0.05;
 	
 	while(waiting)
