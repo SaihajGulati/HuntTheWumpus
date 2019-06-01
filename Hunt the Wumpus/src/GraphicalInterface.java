@@ -471,7 +471,7 @@ public String getName()
 }
 
 //Returns the number of the cave selected by the user, or can go back to main menu by calling main menu
-public int caveSelection(ArrayList<String> scores)
+public int caveSelection(ArrayList<String> scores,boolean saved)
 {	double x = 0.2;
     double y = 0.5;
     double containerx= 0.15;
@@ -504,7 +504,7 @@ public int caveSelection(ArrayList<String> scores)
         return 5;
 	
 	if(button(x,0.30-shift, containerx,0.055,"Main Menu"))
-		return mainmenu(scores);
+		return mainmenu(scores,saved);
 
 			
 	StdDraw.show();
@@ -513,7 +513,8 @@ public int caveSelection(ArrayList<String> scores)
 
 }
 
-//This reads inputs from the main menu screen and helps the navigation between main menu, high scores, and credits
+//This reads inputs from the main menu screen and helps the navigation between main menu, high scores, and credits,
+//returns the cave selected or -1 if the player wants to resume their game
 public int mainmenu(ArrayList<String> scores,boolean saved)
 {	
 	//System.out.println(scores);
@@ -544,7 +545,7 @@ public int mainmenu(ArrayList<String> scores,boolean saved)
 	}
 	
 	   StdDraw.clear();
-	   return caveSelection(scores);		
+	   return caveSelection(scores,saved);		
 }
 
 //This displays the main menu screen, returns 0 for no input, 1 for play, 2 for high scores and 3 for credits, 
