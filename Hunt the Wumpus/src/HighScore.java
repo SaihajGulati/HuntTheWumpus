@@ -244,7 +244,7 @@ public class HighScore
      * @Return: ArrayList<Integer> (the GraphicalInterface needs to be able to access the high score data 
      * from the highScores ArrayList in order to display them).
      */
-    public static ArrayList<String> getHighScores()
+    public static ArrayList<String> getScoresStrings()
     {
         ArrayList<String> returnString = new ArrayList<String>();
         for(int i = 0; i < highScores.size(); i++)
@@ -252,5 +252,24 @@ public class HighScore
         	returnString.add(i+1 + ". Cave " + caves.get(i) + "; " + names.get(i) + "; " + highScores.get(i));
         }
         return returnString;
+    }
+    
+    /**
+     * these are getters for the cave numbers, names, and scores
+     * @return
+     */
+    public static ArrayList<Integer> getCaves()
+    {
+    	return caves;
+    }
+    
+    public static ArrayList<String> getNames()
+    {
+    	return names;
+    }
+    
+    public static ArrayList<Integer> getScores()
+    {
+    	return highScores;
     }
 }
