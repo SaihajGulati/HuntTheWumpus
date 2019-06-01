@@ -41,53 +41,61 @@ public class GameControl
 	
 	public static void main(String[] args) throws FileNotFoundException, MalformedURLException
 	{
-		//hello testing
-		
+		//start program and builds GI
 		GraphicalInterface GI = new GraphicalInterface(BATS, WUMPUS, HOLE);
-		GI.start();
-		HighScore.loadFiles();
-		Sounds sounds = new Sounds(2);
-		while (true)
-		{
-			Player player = new Player();
-			ArrayList <String> scores = new ArrayList<String>();
-			Trivia trivia = new Trivia();
-			//starts the game
-			scores.add(" 1. Cave 1; Bob; 44");
-			 scores.add(" 2. Cave 1; Josh; 34");
-			 scores.add(" 3. Cave 1; Brian; 64");
-			 scores.add(" 4. Cave 1; Okay; 74");
-			 scores.add(" 5. Cave 1; Hello; 84");
-			 scores.add(" 6. Cave 1; Why; 94");
-			 scores.add(" 7. Cave 1; No; 24");
-			 scores.add(" 8. Cave 1; Bye; 14");
-			 scores.add(" 9. Cave 1; Hello; 84");
-			 scores.add("10. Cave 1; Joe; 94");
-			String name = "";
-			int caveSelect = 0;
-			while(name.equals("")) {
-				caveSelect = GI.mainmenu(HighScore.getHighScores());
-				name = GI.getName();
+		
+
+		//error handling for loading up files
+		try {
+			HighScore.loadFiles();
+			try {
+				Sounds sounds = new Sounds(2);
 			}
-			//asdf
-			Cave cave = new Cave(caveSelect);
-			GameLocations locations = new GameLocations(cave);
-			//GI.gameGraphics();
-			String reason = startGame(GI, player, cave, trivia);
-			
-			int score;
-			//fix
-			if (reason.equals("won"))
-			{
-				score = player.getScore(true);
+			catch(MalformedURLException e) {
+				//GI.[method that opens up error screen];
 			}
-			else
-			{
-				score = player.getScore(false);
-			}
-			endGame(caveSelect, GI, name, player, reason, score);
-			GI.teamMessage();
+						
 		}
+		catch(FileNotFoundException error) {
+			//GI.[method that opens up error screen];
+		}
+		
+			while (true)
+			{
+				Trivia trivia = new Trivia();
+				Player player = new Player();
+				ArrayList <String> scores = new ArrayList<String>();
+				GI.start();
+				
+				String name = "";
+				int caveSelect = 0;
+				while(name.equals("")) {
+					caveSelect = GI.mainmenu(HighScore.getHighScores());
+					name = GI.getName();
+				}
+				//starts the game
+
+
+				Cave cave = new Cave(caveSelect);
+				GameLocations locations = new GameLocations(cave);;
+				String reason = startGame(GI, player, cave, trivia);
+				
+				int score = 0;
+				//fix
+				if(!reason.equals(null)) {
+					if (reason.equals("won"))
+					{
+						score = player.getScore(true);
+					}
+					else
+					{
+						score = player.getScore(false);
+					}
+				}
+				endGame(caveSelect, GI, name, player, reason, score);
+				GI.teamMessage();
+			}
+		
 	}
 			
 	/**
@@ -97,9 +105,8 @@ public class GameControl
 	 * @param player is the player class
 	 * @param cave is the cave class
 	 */
-	public static String startGame(GraphicalInterface GI, Player player, Cave cave, Trivia triv) throws FileNotFoundException
+	public static String startGame(GraphicalInterface GI, Player player, Cave cave, Trivia triv)
 	{
-		
 		Scanner input = new Scanner(System.in);
 		int response = 0; //response given by player in GI
 		int room; //room player is currently in
