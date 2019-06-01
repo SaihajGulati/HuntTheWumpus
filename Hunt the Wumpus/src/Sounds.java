@@ -26,7 +26,7 @@ public class Sounds
 	{
 		try {
 			try {
-				currentSounds = new AudioClip[8];
+				currentSounds = new AudioClip[9];
 				if (theme==1)
 				{
 					currentSounds[0] = Applet.newAudioClip(new File("res/movePlayer1.wav").toURI().toURL());
@@ -37,6 +37,7 @@ public class Sounds
 					currentSounds[5] = Applet.newAudioClip(new File("res/lose1.wav").toURI().toURL());
 					currentSounds[6] = Applet.newAudioClip(new File("res/bat1.wav").toURI().toURL());
 					currentSounds[7] = Applet.newAudioClip(new File("res/pit1.wav").toURI().toURL());
+					currentSounds[8] = Applet.newAudioClip(new File("res/background1.wav").toURI().toURL());
 				}
 				else
 				{
