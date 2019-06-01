@@ -471,7 +471,7 @@ public String getName()
 }
 
 //Returns the number of the cave selected by the user, or can go back to main menu by calling main menu
-public int caveSelection(ArrayList<String> scores,boolean saved)
+public int caveSelection(ArrayList<String> caves, ArrayList<String> names, ArrayList<String> scores,boolean saved)
 {	double x = 0.2;
     double y = 0.5;
     double containerx= 0.15;
@@ -504,7 +504,7 @@ public int caveSelection(ArrayList<String> scores,boolean saved)
         return 5;
 	
 	if(button(x,0.30-shift, containerx,0.055,"Main Menu"))
-		return mainmenu(scores,saved);
+		return mainmenu(caves,names,scores,saved);
 
 			
 	StdDraw.show();
@@ -515,7 +515,7 @@ public int caveSelection(ArrayList<String> scores,boolean saved)
 
 //This reads inputs from the main menu screen and helps the navigation between main menu, high scores, and credits,
 //returns the cave selected or -1 if the player wants to resume their game
-public int mainmenu(ArrayList<String> scores,boolean saved)
+public int mainmenu(ArrayList<String> caves, ArrayList<String> names, ArrayList<String> scores, boolean saved)
 {	
 	//System.out.println(scores);
 	int select = 0;
@@ -528,15 +528,15 @@ public int mainmenu(ArrayList<String> scores,boolean saved)
 	
 	if(select == 2)
 	{
-		highScores(scores);
-		return mainmenu(scores,saved);
+		highScores(caves,names,scores);
+		return mainmenu(caves,names,scores,saved);
 		
 	}
 	
 	if(select == 3)
 	{
 		teamMessage();
-		return  mainmenu(scores,saved);
+		return  mainmenu(caves,names,scores,saved);
 	}
 	
 	if(select == 4)
@@ -545,7 +545,7 @@ public int mainmenu(ArrayList<String> scores,boolean saved)
 	}
 	
 	   StdDraw.clear();
-	   return caveSelection(scores,saved);		
+	   return caveSelection(caves,names,scores,saved);		
 }
 
 //This displays the main menu screen, returns 0 for no input, 1 for play, 2 for high scores and 3 for credits, 
@@ -711,7 +711,7 @@ private static boolean Clicked()
 }
 
 //This method displays the team highscores, this method takes in scores so that it can work better in the main menu class
-private static void highScores(ArrayList<String> scores)
+private static void highScores(ArrayList<String> caves, ArrayList<String> names, ArrayList<String> scores)
 {
 	boolean toMain = true;
 	while(toMain)
@@ -723,17 +723,32 @@ private static void highScores(ArrayList<String> scores)
 	
 	title(0.5, 0.9, "High Scores");
 	
-	for(int i = 0; i< Math.min(10, scores.size()); i++)
-	{	Font scoresfont = new Font("Copperplate Gothic Bold",0, 30);
-		StdDraw.setPenColor( 255,255,255);
-		StdDraw.setFont( scoresfont);
-		StdDraw.text(0.5, 0.75-(0.05*i), scores.get(i));		
-	}
+	
+	printScoreRow(caves,0.3,0.75,25,"CAVE");
+	printScoreRow(names,0.5,0.75,25,"NAME");
+	printScoreRow(scores,0.7,0.75,25,"SCORE");
 
 	toMain = !button(0.5, 0.1 , 0.15 , 0.055, "Back");
 	StdDraw.show();
 	}
 	
+}
+
+private static void printScoreRow(ArrayList<String> info, double x, double y, int size,String string)
+{
+	Font scoresfont = new Font("Copperplate Gothic Bold",0, size);
+	StdDraw.setPenColor( 255,255,255);
+	StdDraw.setFont( scoresfont);
+		
+	StdDraw.text(x, y+0.07, string);
+	
+	StdDraw.setPenRadius(0.005);
+	StdDraw.line(x+0.05, y+0.04, x-0.05, y+0.04);
+	StdDraw.setPenRadius();
+	for(int i = 0; i< Math.min(10, info.size()); i++)
+	{
+		StdDraw.text(x, y-(0.05*i), info.get(i));		
+	}
 }
 
 //This method displays the team credits, this method takes in scores so that it can work better in the main menu class
@@ -903,7 +918,7 @@ public void  escapedDanger(int [] dangers)
 	double texty = 0.6;
 	boolean waiting = false;
 	String survivedWumpus = "You got 3 out of 5 questions correct and made the Wumpus run away. You have escaped the WUMPUS... for now.";
-	String survivedPit = "You got 2 out of 3 questions correct and you have climbed out the PIT. Hopefylly you don't fall into another one, because you won't be so lucky next time.";
+	String survivedPit = "You got 2 out of 3 questions correct and you have climbed out the PIT. Hopefully you don't fall into another one, because you won't be so lucky next time.";
 	
 	
 	for(int i = 0; i<dangers.length;i++)
