@@ -549,7 +549,7 @@ public int mainmenu(ArrayList<String> scores,boolean saved)
 }
 
 //This displays the main menu screen, returns 0 for no input, 1 for play, 2 for high scores and 3 for credits, 
-//this method does NOT loop by itself, if the game has been saved, the boolean tells the mai menu that the game was saved and shows the "resume" button
+//this method does NOT loop by itself, if the game has been saved, the boolean tells the main menu that the game was saved and shows the "resume" button
 private static int menubuttons(boolean saved)
 {	double x = 0.5;
     double y = 0.5;
@@ -1112,8 +1112,8 @@ public static boolean  toMainMenu()
 	Font title = new Font("Copperplate Gothic Bold",0, 45);
 	StdDraw.setFont(title);
 	StdDraw.text(0.5, 0.7, "Are you sure");
-	StdDraw.text(0.5, 0.65, "You want to go back");
-	StdDraw.text(0.5, 0.6, "to the MAIN MENU?");
+	StdDraw.text(0.5, 0.64, "You want to go back");
+	StdDraw.text(0.5, 0.52, "to the MAIN MENU?");
 	
 	Font cansave = new Font("Copperplate Gothic Bold",0, 30);
 	StdDraw.setFont(cansave);
