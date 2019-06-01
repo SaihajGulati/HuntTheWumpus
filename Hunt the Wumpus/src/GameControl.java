@@ -43,7 +43,6 @@ public class GameControl
 	{
 		//start program and builds GI
 		GraphicalInterface GI = new GraphicalInterface(BATS, WUMPUS, HOLE);
-		
 
 		//error handling for loading up files
 		try {
@@ -52,21 +51,21 @@ public class GameControl
 				Sounds sounds = new Sounds(2);
 			}
 			catch(MalformedURLException e) {
-				//GI.[method that opens up error screen];
+				System.out.println("Error Occured : loading Sounds");
+				GraphicalInterface.Error();
 			}//
 						
 		}
 		catch(FileNotFoundException error) {
-			//GI.[method that opens up error screen];
+			System.out.println("Error Occured : Loading Files");
+			GraphicalInterface.Error();
 		}
 		
 			while (true)
 			{
 				Trivia trivia = new Trivia();
 				Player player = new Player();
-				ArrayList <String> scores = new ArrayList<String>();
-				GI.start();
-				
+				GraphicalInterface.start();
 				String name = "";
 				int caveSelect = 0;
 				while(name.equals("")) {
@@ -74,10 +73,8 @@ public class GameControl
 					name = GI.getName();
 				}
 				//starts the game
-
-
 				Cave cave = new Cave(caveSelect);
-				GameLocations locations = new GameLocations(cave);;
+				GameLocations locations = new GameLocations(cave);
 				String reason = startGame(GI, player, cave, trivia);
 				
 				int score = 0;
@@ -93,7 +90,7 @@ public class GameControl
 					}
 				}
 				endGame(caveSelect, GI, name, player, reason, score);
-				GI.teamMessage();
+				GraphicalInterface.teamMessage();
 			}
 		
 	}
@@ -109,7 +106,7 @@ public class GameControl
 	{
 		Scanner input = new Scanner(System.in);
 		int response = 0; //response given by player in GI
-		int room; //room player is currently in
+		int room = 0; //room player is currently in
 		int[] rooms = new int[3];//the rooms around the player
 		int[] hazards = new int[3]; // 0: bat | 1 : Hole | 2 : Wumpus 
 		int[] room_hazards = new int[3]; // same as hazards but for use with hazards in the room not just nearby
@@ -207,13 +204,13 @@ public class GameControl
 					if (GameLocations.shootArrow(arrowShot))
 					{
 						Sounds.win();
-						GI.arrowHit(true, player.getArrows());
+						GraphicalInterface.arrowHit(true, player.getArrows());
 						return "won"; //player has won
 					}
 					else 
 					{
 						Sounds.moveWumpus();
-						GI.arrowHit(false, player.getArrows());//add code for GI that states you missed
+						GraphicalInterface.arrowHit(false, player.getArrows());//add code for GI that states you missed
 					}	
 				}
 									
@@ -222,7 +219,7 @@ public class GameControl
 			else if (response == BUY_ITEM)
 			{
 				int stuff = 0;
-				stuff = GI.buyItem(player.getCoins() > 3);
+				stuff = GraphicalInterface.buyItem(player.getCoins() > 3);
 				
 				if (stuff == 1)
 				{
@@ -231,11 +228,11 @@ public class GameControl
 					{
 
 						player.changeArrows(2);
-						GI.boughtArrow(player.getArrows());
+						GraphicalInterface.boughtArrow(player.getArrows());
 					}
 					else
 					{
-						GI.goof();
+						GraphicalInterface.goof();
 					}
 				}
 				else if (stuff == 2)
@@ -244,21 +241,21 @@ public class GameControl
 					if(trivia(triv, GI, player, 3, 2))
 					{
 
-						GI.tellSecret(triv.returnHint());
+						GraphicalInterface.tellSecret(triv.returnHint());
 					}
 					else
 					{
-						GI.goof();
+						GraphicalInterface.goof();
 					}
 					
 				}
 			}
-			//}
-			//printHazardLocs(); //for testing purposes
+			else {
+				//this is while player does not choose an option
+			}
 			// If the player has chosen to move to a place instead of shooting
 			
 		}
-		System.out.print("Josh code ass");
 		if (player.getArrows() == 0)
 		{
 			Sounds.lose();
@@ -281,7 +278,13 @@ public class GameControl
 	 * @throws FileNotFoundException 
 	 */
 	public static void endGame(int caveName, GraphicalInterface GI, String Name, Player player, String reason, int score) throws FileNotFoundException{
-		GraphicalInterface.endGame(reason, score, HighScore.updateScoreBoard(score, Name, caveName));
+		 try {
+			GraphicalInterface.endGame(reason, score, HighScore.updateScoreBoard(score, Name, caveName));
+		}
+		catch(FileNotFoundException e) {
+			System.out.println("Error Occured : endGame method");
+			GI.Error();
+		}
 		
 	}	
 	/**
@@ -322,12 +325,12 @@ public class GameControl
 			{
 				correct++;
 				count++;
-				GI.postTrivia(true, count, correct);
+				GraphicalInterface.postTrivia(true, count, correct);
 			}
 			else
 			{
 				count++;
-				GI.postTrivia(false, count, correct);
+				GraphicalInterface.postTrivia(false, count, correct);
 				wrong++;
 			}
 			player.changeCoins(-1);
@@ -381,12 +384,19 @@ public class GameControl
 	
 	public static int findIndex(int[] array, int find)
 	{
-		for (int i = 0; i < array.length; i++)
-		{
-			if (array[i] == find)
+		try {
+			for (int i = 0; i < array.length; i++)
 			{
-				return i;
+				if (array[i] == find)
+				{
+					return i;
+				}
 			}
+			return -1;
+		}
+		catch(NullPointerException e) {
+			System.out.println("Error Occured : findIndex");
+			GraphicalInterface.Error();
 		}
 		return -1;
 	}

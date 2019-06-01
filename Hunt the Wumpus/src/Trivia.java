@@ -78,15 +78,22 @@ public class Trivia
     */
   
     //the a-d answer choices given to the user for each question
-    private String answerA; 
-    private String answerB;
-    private String answerC;
-    private String answerD;
+    private String answerA = "";
+    private String answerB = "";
+    private String answerC = "";
+    private String answerD = "";
     
-    public  Trivia() throws FileNotFoundException
+    public  Trivia()
     {
-        trivia = new File("input/Trivia.txt");
-        input = new Scanner(trivia);
+    	try{
+    		trivia = new File("input/Trivia.txt");
+            input = new Scanner(trivia);
+    	}
+    	catch(FileNotFoundException e) {
+    		System.out.println("Error Occured : Could not load File and input");
+    		GraphicalInterface.Error();
+    	}
+        
         triviaQuestions = new ArrayList<String>();
         triviaAnswers = new ArrayList<String>();
         correctAnswers = new ArrayList<String>();
@@ -121,6 +128,9 @@ public class Trivia
                 else if(triviaLine.substring(0, 3).equals("Q. "))
                 {
                     triviaQuestions.add(triviaLine.substring(3));
+                }
+                else {
+                	System.out.println("Error Occured: Reached end of triviaLine loop");
                 }
             }
         }
@@ -200,11 +210,24 @@ public class Trivia
      */
     public  boolean checkAnswer(char answer)
     {
-    	String correctAnswer = correctAnswers.get(questionNum);
-    	triviaQuestions.remove(questionNum);
-        triviaAnswers.remove(questionNum);
-        correctAnswers.remove(questionNum);
-    	return answer == correctAnswer.charAt(0);
+    	try {
+        	if(correctAnswers.size() != 0) {
+        		String correctAnswer = correctAnswers.get(questionNum);
+            	triviaQuestions.remove(questionNum);
+                triviaAnswers.remove(questionNum);
+                correctAnswers.remove(questionNum);
+            	return answer == correctAnswer.charAt(0);
+        	}
+        	else {
+        		System.out.println("Error occured : checkAnswer method reached end of if statement");
+        		
+        	}        	
+    	}
+    	catch(NullPointerException e) {
+    		System.out.println("Error Occured : checkAnswer method");
+    		GraphicalInterface.Error();
+    	}
+    	return false;
     }
     
     /**
@@ -280,14 +303,22 @@ public class Trivia
     public String wumpusNearPlayer(int num)
     {
     	//Work on this
-    	int wumpLoc = GameLocations.getWumpusLocation();
-    	int currLoc = GameLocations.getPlayerLocation();
-        if(wumpLoc == currLoc-1 || wumpLoc == currLoc-6 || wumpLoc == currLoc+1 || 
-        		wumpLoc == currLoc+5 || wumpLoc == currLoc+6 || wumpLoc == currLoc+7)
-        {
-            return secrets.get(num);
-        }
-        return secrets.get(num+1);
+    	try {
+        	int wumpLoc = GameLocations.getWumpusLocation();
+        	int currLoc = GameLocations.getPlayerLocation();
+            if(wumpLoc == currLoc-1 || wumpLoc == currLoc-6 || wumpLoc == currLoc+1 || 
+            		wumpLoc == currLoc+5 || wumpLoc == currLoc+6 || wumpLoc == currLoc+7)
+            {
+                return secrets.get(num);
+            }
+            return secrets.get(num+1);
+    	}
+    	catch(NullPointerException e) {
+    		System.out.println("Error Occured : wumpusNearPlayer method");
+    		GraphicalInterface.Error();
+    		return "";
+    	}
+
     }
     
     /**
@@ -314,30 +345,69 @@ public class Trivia
     //test accessor method for triviaQuestions ArrayList
     public  ArrayList<String> getQuestions()
     {
-        return triviaQuestions;
+    	try{
+    		return triviaQuestions;
+    	}
+        catch(NullPointerException e) {
+        	System.out.println("Error Occured : getQuestions");
+        	GraphicalInterface.Error();
+        	return new ArrayList<String>();
+        }
     }
     
     //test accessor method for triviaAnswers ArrayList 
     public  ArrayList<String> getAnswers()
     {
-        return triviaAnswers;
+    	try{
+    		 return triviaAnswers;
+    	}
+        catch(NullPointerException e) {
+        	System.out.println("Error Occured : getAnswers");
+        	GraphicalInterface.Error();
+        	return new ArrayList<String>();
+        }
+       
     }
     
     //test accessor method for triviaInformation ArrayList
     public  ArrayList<String> getInformation()
     {
-        return triviaInformation;
+    	try{
+    		return triviaInformation;
+    	}
+       catch(NullPointerException e) {
+       	System.out.println("Error Occured : getInformation");
+       	GraphicalInterface.Error();
+       	return new ArrayList<String>();
+       }	
+        
     }
     
     //test accessor method for secrets ArrayList
     public  ArrayList<String> accessHints()
     {
-        return secrets;
+    	try{
+            return secrets;
+    	}
+       catch(NullPointerException e) {
+       	System.out.println("Error Occured : accessHints");
+       	GraphicalInterface.Error();
+       	return new ArrayList<String>();
+       }	
+
     }
     
     //test accessor method for correctAnswers ArrayList
     public  ArrayList<String> getCorrectAnswers()
     {
-        return correctAnswers;
+    	try{
+    		 return correctAnswers;
+    	}
+       catch(NullPointerException e) {
+       	System.out.println("Error Occured : getCorrectAnswers");
+       	GraphicalInterface.Error();
+       	return new ArrayList<String>();
+       }
+       
     }
 }

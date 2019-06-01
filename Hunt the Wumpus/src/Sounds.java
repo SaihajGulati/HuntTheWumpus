@@ -22,31 +22,45 @@ public class Sounds
 	/*
 	 * Will read the config file
 	 */
-	public Sounds(int theme) throws MalformedURLException, FileNotFoundException
+	public Sounds(int theme) throws MalformedURLException
 	{
-		currentSounds = new AudioClip[8];
-		if (theme==1)
-		{
-			currentSounds[0] = Applet.newAudioClip(new File("res/movePlayer1.wav").toURI().toURL());
-			currentSounds[1] = Applet.newAudioClip(new File("res/shootArrow1.wav").toURI().toURL());
-			currentSounds[2] = Applet.newAudioClip(new File("res/moveWumpus1.wav").toURI().toURL());
-			currentSounds[3] = Applet.newAudioClip(new File("res/trivia1.wav").toURI().toURL());
-			currentSounds[4] = Applet.newAudioClip(new File("res/win1.wav").toURI().toURL());
-			currentSounds[5] = Applet.newAudioClip(new File("res/lose1.wav").toURI().toURL());
-			currentSounds[6] = Applet.newAudioClip(new File("res/bat1.wav").toURI().toURL());
-			currentSounds[7] = Applet.newAudioClip(new File("res/pit1.wav").toURI().toURL());
+		try {
+			try {
+				currentSounds = new AudioClip[8];
+				if (theme==1)
+				{
+					currentSounds[0] = Applet.newAudioClip(new File("res/movePlayer1.wav").toURI().toURL());
+					currentSounds[1] = Applet.newAudioClip(new File("res/shootArrow1.wav").toURI().toURL());
+					currentSounds[2] = Applet.newAudioClip(new File("res/moveWumpus1.wav").toURI().toURL());
+					currentSounds[3] = Applet.newAudioClip(new File("res/trivia1.wav").toURI().toURL());
+					currentSounds[4] = Applet.newAudioClip(new File("res/win1.wav").toURI().toURL());
+					currentSounds[5] = Applet.newAudioClip(new File("res/lose1.wav").toURI().toURL());
+					currentSounds[6] = Applet.newAudioClip(new File("res/bat1.wav").toURI().toURL());
+					currentSounds[7] = Applet.newAudioClip(new File("res/pit1.wav").toURI().toURL());
+				}
+				else
+				{
+					currentSounds[0] = Applet.newAudioClip(new File("res/movePlayer2.wav").toURI().toURL());
+					currentSounds[1] = Applet.newAudioClip(new File("res/shootArrow2.wav").toURI().toURL());
+					currentSounds[2] = Applet.newAudioClip(new File("res/moveWumpus2.wav").toURI().toURL());
+					currentSounds[3] = Applet.newAudioClip(new File("res/trivia2.wav").toURI().toURL());
+					currentSounds[4] = Applet.newAudioClip(new File("res/win2.wav").toURI().toURL());
+					currentSounds[5] = Applet.newAudioClip(new File("res/lose2.wav").toURI().toURL());
+					currentSounds[6] = Applet.newAudioClip(new File("res/bat2.wav").toURI().toURL());
+					currentSounds[7] = Applet.newAudioClip(new File("res/pit2.wav").toURI().toURL());
+				}
+			}
+			catch(NullPointerException e) {
+				System.out.println("Error Occured : Sound constuction : NullPointer");
+				GraphicalInterface.Error();
+			}
+			
 		}
-		else
-		{
-			currentSounds[0] = Applet.newAudioClip(new File("res/movePlayer2.wav").toURI().toURL());
-			currentSounds[1] = Applet.newAudioClip(new File("res/shootArrow2.wav").toURI().toURL());
-			currentSounds[2] = Applet.newAudioClip(new File("res/moveWumpus2.wav").toURI().toURL());
-			currentSounds[3] = Applet.newAudioClip(new File("res/trivia2.wav").toURI().toURL());
-			currentSounds[4] = Applet.newAudioClip(new File("res/win2.wav").toURI().toURL());
-			currentSounds[5] = Applet.newAudioClip(new File("res/lose2.wav").toURI().toURL());
-			currentSounds[6] = Applet.newAudioClip(new File("res/bat2.wav").toURI().toURL());
-			currentSounds[7] = Applet.newAudioClip(new File("res/pit2.wav").toURI().toURL());
+		catch(MalformedURLException e) {
+			System.out.println("Error Occured : Sound construction : MalformedURL");
+			GraphicalInterface.Error();
 		}
+
 	}
 	
 	/*

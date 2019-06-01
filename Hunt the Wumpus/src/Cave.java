@@ -24,20 +24,27 @@ import java.util.*;
 public class Cave
 {
 	int[][] caveMap;
-	public Cave(int cave) throws FileNotFoundException
+	public Cave(int cave)
 	{
-		File file = new File("input/cave" + cave + ".txt");
-		Scanner layout = new Scanner(file);
-		caveMap = new int[30][7];
-		String[][] temp= new String[30][7];
-		for (int i = 0; i < 30; i++)
-		{
-			temp[i] = layout.nextLine().split(" ");
-			for(int j=0;j<7;j++)
+		try {
+			File file = new File("input/cave" + cave + ".txt");
+			Scanner layout = new Scanner(file);
+			caveMap = new int[30][7];
+			String[][] temp= new String[30][7];
+			for (int i = 0; i < 30; i++)
 			{
-				caveMap[i][j]=Integer.parseInt(temp[i][j]);
+				temp[i] = layout.nextLine().split(" ");
+				for(int j=0;j<7;j++)
+				{
+					caveMap[i][j]=Integer.parseInt(temp[i][j]);
+				}
 			}
 		}
+		catch(FileNotFoundException e) {
+			GraphicalInterface.Error();
+		}
+		
+
 	}
 	
 	/**
@@ -45,7 +52,12 @@ public class Cave
 	 */
 	public int[][] getCaveMap()
 	{
-	    return caveMap;
+		if(caveMap.length == 0 || caveMap[0].length == 0) {
+			System.out.println("Error Occured : getCaveMap not instantiated");
+			GraphicalInterface.Error();
+		}
+		return caveMap;
+	    
 	}
 	//okay
 	
