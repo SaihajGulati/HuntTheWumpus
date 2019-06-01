@@ -258,9 +258,14 @@ public class HighScore
      * these are getters for the cave numbers, names, and scores
      * @return
      */
-    public static ArrayList<Integer> getCaves()
+    public static ArrayList<String> getCaves()
     {
-    	return caves;
+    	ArrayList<String> caveStrings = new ArrayList<String>();
+    	for (int i = 0; i < caves.size(); i++)
+    	{
+    		caveStrings.add(Integer.toString(caves.get(i)));
+    	}
+    	return caveStrings;
     }
     
     public static ArrayList<String> getNames()
@@ -268,8 +273,13 @@ public class HighScore
     	return names;
     }
     
-    public static ArrayList<Integer> getScores()
+    public static ArrayList<String> getScores()
     {
-    	return highScores;
+    	ArrayList<String> scoreStrings = new ArrayList<String>();
+    	for (int i = 0; i < highScores.size(); i++)
+    	{
+    		scoreStrings.add(Integer.toString(highScores.get(i)));
+    	}
+    	return scoreStrings;
     }
 }
