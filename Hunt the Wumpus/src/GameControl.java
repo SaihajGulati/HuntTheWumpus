@@ -249,6 +249,12 @@ public class GameControl
 						GraphicalInterface.arrowHit(false, player.getArrows());//add code for GI that states you missed
 					}	
 				}
+
+				if (player.getArrows() == 0)
+				{
+					Sounds.lose();
+					return "arrows";
+				}
 									
 				
 			}
@@ -302,11 +308,6 @@ public class GameControl
 			}
 			// If the player has chosen to move to a place instead of shooting
 			
-		}
-		if (player.getArrows() == 0)
-		{
-			Sounds.lose();
-			return "arrows";
 		}
 		Sounds.lose();
 		return "coins";
