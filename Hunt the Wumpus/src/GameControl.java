@@ -144,6 +144,7 @@ public class GameControl
 			response = GI.getRoom(rooms[0], rooms[1], rooms[2], hazards, player.getTurns(), player.getCoins(), player.getArrows()); //response gathered from player
 			if(response > 0)
 			{	
+				survived = false;
 				player.movePlayer();
 				printHazardLocs();
 				GameLocations.movePlayer(response);//
@@ -211,6 +212,7 @@ public class GameControl
 						{
 							hazardsSurvived[HOLE] = 1;
 							survived = true;
+							GameLocations.triggerPit();
 						}
 						
 					}
