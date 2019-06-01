@@ -61,7 +61,6 @@ public class GameControl
 			System.out.println("Error Occured : Loading Files");
 			GraphicalInterface.Error();
 		}
-
 		String name = "";
 		int caveSelect = 0;
 		GraphicalInterface.start();
