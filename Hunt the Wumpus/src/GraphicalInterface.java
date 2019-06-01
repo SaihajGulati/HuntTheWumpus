@@ -331,7 +331,7 @@ private static boolean leftdoor(int room, double[] ballcords)
 	
 	StdDraw.filledRectangle(0.2, 0.5, 0.007 , 0.2);
 	
-	return inBox(0.2, 0.5, 0.007 , 0.2,ballcords[0], ballcords[1]);
+	return inBox(0.15, 0.5, 0.057 , 0.2,ballcords[0], ballcords[1]);
 }
 
 //Draws the right door and returns true if the x y coordinates in the double array are in the doors hitbox
@@ -350,7 +350,7 @@ private static boolean rightdoor(int room, double[] ballcords)
 	}
 	
 	StdDraw.filledRectangle(0.8, 0.5, 0.007 , 0.2);
-	return inBox(0.8, 0.5, 0.007 , 0.2,ballcords[0], ballcords[1]);
+	return inBox(0.85, 0.5, 0.057 , 0.2,ballcords[0], ballcords[1]);
 }
 
 //Draws the top door and returns true if the x y coordinates in the double array are in the doors hitbox
@@ -369,7 +369,7 @@ private static boolean topdoor(int room, double[] ballcords)
 	}
 	
 	StdDraw.filledRectangle(0.5, 0.8, 0.2 , 0.007);
-	return inBox(0.5, 0.8, 0.2 , 0.007,ballcords[0], ballcords[1]);
+	return inBox(0.5, 0.85, 0.2 , 0.057,ballcords[0], ballcords[1]);
 	
 }
 
