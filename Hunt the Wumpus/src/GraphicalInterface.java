@@ -103,10 +103,11 @@ public int getRoom(int room1, int room2, int room3, int [] danger, int turn, int
 	return toreturn;
 }
 
+
+//Draws the screen where you shoot an arrow, it loops untill you click on a room or press back 
 public int shootArrow(int room1, int room2, int room3, int [] danger, int turn, int coins, int arrows)
 {
 	int toreturn = 0;
-	double [] mousecords = {StdDraw.mouseX(), StdDraw.mouseY()};
 	boolean loop = true;
 	//StdDraw.pause(100);
 	
@@ -145,6 +146,7 @@ public int shootArrow(int room1, int room2, int room3, int [] danger, int turn, 
 	return toreturn;
 }
 
+//Draws a line representing the path of the arrow from the center of the screen
 private void arrowPath(int room)
 {
 	StdDraw.setPenColor(150,0,0);
@@ -157,6 +159,7 @@ private void arrowPath(int room)
 	StdDraw.setPenRadius();
 }
 
+//Displays a waning sign on the top of the screen, takes an int array of the possible hazards from Game control
 private void WariningSign(int [] danger)
 {
 	int dangers = 0;
@@ -191,6 +194,7 @@ private void WariningSign(int [] danger)
 
 }
 
+//Returns a string message for a hazard based on the number given in the graphical interface constructor for hazards
 private String dangerMessage (int danger)
 {
 	String toreturn = "";
@@ -212,6 +216,7 @@ private String dangerMessage (int danger)
 	return toreturn;
 }
 
+//Returns a string for a hazard based on the number given in the graphical interface constructor for hazards
 private String getDanger (int danger)
 {
 	String toreturn = "";
@@ -233,6 +238,7 @@ private String getDanger (int danger)
 	return toreturn;
 }
 
+//Returns coordinates of the player ball and draws all of the players "particles"
 private double[] drawPlayer()
 {
   	for(int i = 0; i<499;i++)
@@ -247,20 +253,13 @@ private double[] drawPlayer()
 private int doors(int room1, int room2, int room3,double[] ballcords)
 {
 	int toreturn = 0; 
-	//ballcords = drawPlayer();
 	
 	
 	if(leftdoor(room1, ballcords))
 	{
 		toreturn = room1;
 
-		player = null;
-		player = new BallSprite[500];
-		for(int i = 0; i<500;i++)
-		{
-			player[i] = new BallSprite(0.5,0.5,0.01,(0.01/500)*i, 0.3007, 0.3007);
-		}
-		
+		resetAndCreatePlayer();
 		//System.out.println(room1);
 		StdDraw.pause(100);
 	}
@@ -269,13 +268,7 @@ private int doors(int room1, int room2, int room3,double[] ballcords)
 	{
 		toreturn = room2;
 
-		player = null;
-		player = new BallSprite[500];
-		for(int i = 0; i<500;i++)
-		{
-			player[i] = new BallSprite(0.5,0.5,0.01,(0.01/500)*i, 0.3007, 0.3007);
-		}
-		
+		resetAndCreatePlayer();
 		//System.out.println(room2);
 		StdDraw.pause(100);
 	}
@@ -284,12 +277,7 @@ private int doors(int room1, int room2, int room3,double[] ballcords)
 	{
 		toreturn = room3;
 
-		player = null;
-		player = new BallSprite[500];
-		for(int i = 0; i<500;i++)
-		{
-			player[i] = new BallSprite(0.5,0.5,0.01,(0.01/500)*i, 0.3007, 0.3007);
-		}
+		resetAndCreatePlayer();
 		
 		//System.out.println(room3);
 		StdDraw.pause(100);
@@ -301,18 +289,33 @@ private int doors(int room1, int room2, int room3,double[] ballcords)
 
 }
 
+//Makes player null, then creates the player again at the center of the screen
+private void resetAndCreatePlayer()
+{
+	player = null;
+	player = new BallSprite[500];
+	for(int i = 0; i<500;i++)
+	{
+		player[i] = new BallSprite(0.5,0.5,0.01,(0.01/500)*i, 0.3007, 0.3007);
+	}
+}
+
+//Draws a black background
 private static void background()
 {
 	StdDraw.setPenColor(0,0,0);
 	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);
 }
 
+//Draws the large gray square in the center of the screen that is the room
 private static void room()
 {
 	StdDraw.setPenColor( 32,32,32);
 	StdDraw.filledRectangle(0.5, 0.5, 0.3 , 0.3);
 }
 
+//Draws the left door and returns true if the x y coordinates in the double array are in the doors hitbox
+//It also takes the door number as input
 private static boolean leftdoor(int room, double[] ballcords)
 {
 
@@ -332,6 +335,8 @@ private static boolean leftdoor(int room, double[] ballcords)
 	return inBox(0.2, 0.5, 0.007 , 0.2,ballcords[0], ballcords[1]);
 }
 
+//Draws the right door and returns true if the x y coordinates in the double array are in the doors hitbox
+//It also takes the door number as input
 private static boolean rightdoor(int room, double[] ballcords)
 {
 	StdDraw.setPenColor( 100,100,100);
@@ -349,6 +354,8 @@ private static boolean rightdoor(int room, double[] ballcords)
 	return inBox(0.8, 0.5, 0.007 , 0.2,ballcords[0], ballcords[1]);
 }
 
+//Draws the top door and returns true if the x y coordinates in the double array are in the doors hitbox
+// It also takes the door number as input
 private static boolean topdoor(int room, double[] ballcords)
 {
 	StdDraw.setPenColor( 100,100,100);
@@ -367,15 +374,7 @@ private static boolean topdoor(int room, double[] ballcords)
 	
 }
 
-private static void bottomdoor(boolean active)
-{
-
-	StdDraw.setPenColor(150,0,0);
-
-
-	StdDraw.filledRectangle(0.5, 0.2, 0.2 , 0.007);
-}
-
+//Returns the key typed by the user, or -1 if the delete button was pressed
 private static String getKeyTyped()
 {
 	char typed;
@@ -394,6 +393,7 @@ private static String getKeyTyped()
 	return "";
 }
 
+//This deletes the last character in a string and returns that string
 private static String delete(String s)
 {
 	if(s.length()>0)
@@ -404,6 +404,9 @@ private static String delete(String s)
 	return "";
 }
 
+//Returns the name selected by the player, this will not allow the name to be spaces, or empty
+// It will display "Type a name", and will not let you play until you type a name,
+//even if leave your name as "Type a name" it will not let you play
 public String getName()
 {
 	String name = "";
@@ -464,6 +467,7 @@ public String getName()
 	return name;
 }
 
+//Returns the number of the cave selected by the user, or can go back to main menu by calling main menu
 public int caveSelection(ArrayList<String> scores)
 {	double x = 0.2;
     double y = 0.5;
@@ -508,19 +512,6 @@ public int caveSelection(ArrayList<String> scores)
 
 }
 
-
-public int displayHighScores(ArrayList<String> scores)
-{
-	boolean displayscores = true;
-	while(displayscores)
-			{
-		displayscores = !highScores(scores);
-		//System.out.println("score");
-			}
-	return mainmenu(scores);
-	
-}
-
 //This reads inputs from the main menu screen and helps the navigation between main menu, high scores, and credits
 public int mainmenu(ArrayList<String> scores)
 {	
@@ -535,7 +526,8 @@ public int mainmenu(ArrayList<String> scores)
 	
 	if(select == 2)
 	{
-		return displayHighScores(scores);
+		highScores(scores);
+		return mainmenu(scores);
 		
 	}
 	
@@ -567,7 +559,6 @@ private static int menubuttons()
 		StdDraw.clear();
 		StdDraw.setPenColor(0,0,0);
 		StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
-		//StdDraw.picture(0.5, 0.5, "C:\\Users\\s-dapopa\\Desktop\\cave.jpg",1, 1);
 		
 	    StdDraw.setPenColor(32,32,32);
 		StdDraw.filledRectangle(x , y, containerx, containery);
@@ -711,9 +702,11 @@ private static boolean Clicked()
 }
 
 //This method displays the team highscores, this method takes in scores so that it can work better in the main menu class
-private static boolean highScores(ArrayList<String> scores)
+private static void highScores(ArrayList<String> scores)
 {
-	boolean toMain;
+	boolean toMain = true;
+	while(toMain)
+	{
 	StdDraw.clear();
 	StdDraw.setPenColor( 0,0,0);
 	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);// background
@@ -730,9 +723,10 @@ private static boolean highScores(ArrayList<String> scores)
 		StdDraw.text(0.5, 0.75-(0.05*i), scores.get(i));		
 	}
 
-	toMain = button(0.5, 0.1 , 0.15 , 0.055, "Main Menu");
+	toMain = !button(0.5, 0.1 , 0.15 , 0.055, "Back");
 	StdDraw.show();
-	return toMain;
+	}
+	
 }
 
 //This method displays the team credits, this method takes in scores so that it can work better in the main menu class
@@ -1102,7 +1096,8 @@ public static boolean  toMainMenu()
 	}
 }
 
-//This method calls other methods used to show the user how to play the game
+//This method displays how to play the game when the players mouse hovers over a button, buttons don't do anything important other
+// than being drawn
 public static void tutorial()
 {	
 	double x = 0.2;
@@ -1112,6 +1107,8 @@ double containery= 0.5;
 double topButton = 0.75;
 double shift = 0.11;
 
+
+//Messages shown to player, they are added instead of one big screen so that they all fit on one screen
 String wumpusTutorial = "It is your objective to kill the WUMPUS. You can kill the WUMPUS by shooting an arrow into the door that leads to the room the wumps is in. ";
 wumpusTutorial += "If you miss the WUMPUS might run away, and if you are in the same room as the WUMPUS, you must answer three out of five trivia questions correct or die! ";
 wumpusTutorial+= "If you get three out of five questions correct, the wumpus will run away. ";
@@ -1290,7 +1287,7 @@ StdDraw.show();
 
 }
 
-// 1 for arrow, 2 for secret, 0 to go back
+//Screen to buy an item 1 for arrow, 2 for secret, 0 to go back
 public static int  buyItem(boolean enough)
 {	
 	double x = 0.2;
