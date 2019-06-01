@@ -144,7 +144,6 @@ public class GameControl
 			response = GI.getRoom(rooms[0], rooms[1], rooms[2], hazards, player.getTurns(), player.getCoins(), player.getArrows()); //response gathered from player
 			if(response > 0)
 			{	
-				survived = false;
 				player.movePlayer();
 				printHazardLocs();
 				GameLocations.movePlayer(response);//
@@ -169,7 +168,7 @@ public class GameControl
 				}
 				GI.displayDanger(room_hazards);
 				room_hazards = new int[3];
-
+				survived = false;
 				if (room == GameLocations.getWumpusLocation())
 				{
 					Sounds.triviaPopUp();
@@ -184,17 +183,13 @@ public class GameControl
 						GameLocations.moveWumpus();
 						hazardsSurvived[WUMPUS] = 1;
 						survived = true;
+						System.out.println("survived wumpus");
 					}
 				} 
 				for (int c: GameLocations.getBatLocations())
 				{
 					if(room == c) {//
 						room = GameLocations.triggerBat();
-					}
-					else
-					{
-						hazardsSurvived[BATS] = 1;
-						survived = true;
 					}
 				}
 						
@@ -212,11 +207,13 @@ public class GameControl
 						{
 							hazardsSurvived[HOLE] = 1;
 							survived = true;
+							System.out.println("survived pit");
 							GameLocations.triggerPit();
 						}
 						
 					}
 				}
+				System.out.println(survived);
 				if (survived)
 				{
 					GI.escapedDanger(hazardsSurvived);
