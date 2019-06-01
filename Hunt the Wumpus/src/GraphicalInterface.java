@@ -572,7 +572,7 @@ private static int menubuttons(boolean saved)
 		if(menubutton(x,buttontop+shift, containerx,0.055,"NEW GAME"))
 			
 		    toreturn = 1;
-		
+	
 		if(menubutton(x,buttontop, containerx,0.055,"RESUME GAME"))
 		    toreturn = 4;
 		}
@@ -1091,7 +1091,6 @@ public static void  Exit()
 }
 
 
-//Asks the player if they are sure they want to go to main menu, if yes it return true, if not it returns false
 //Asks the player if they are sure they want to go to main menu, if yes it return true, if not it returns false
 public static boolean  toMainMenu()
 {	
