@@ -67,52 +67,50 @@ public class GameControl
 		GraphicalInterface.start();
 		boolean startNew = false;
 		
-			while (true)
+		while (true)
+		{
+			Trivia trivia = new Trivia();
+			Player player = new Player();
+			if (!startNew)
 			{
-				Trivia trivia = new Trivia();
-				Player player = new Player();
-				if (!startNew)
+				caveSelect = GI.mainmenu(HighScore.getHighScores(), false);
+				name = GI.getName();
+			}
+			//starts the game
+			Cave cave = new Cave(caveSelect);
+			GameLocations locations = new GameLocations(cave);
+			String reason = startGame(GI, player, cave, trivia);
+			//sadf
+			int score = 0;
+			//fix
+			if(!reason.equals(null)) {
+				if (reason.equals("won"))
 				{
-					while(name.equals("")) {
-						caveSelect = GI.mainmenu(HighScore.getHighScores(), false);
-						name = GI.getName();
-					}
+					score = player.getScore(true);
+					endGame(caveSelect, GI, name, player, reason, score);
+					startNew = false;
 				}
-				//starts the game
-				Cave cave = new Cave(caveSelect);
-				GameLocations locations = new GameLocations(cave);
-				String reason = startGame(GI, player, cave, trivia);
-				//sadf
-				int score = 0;
-				//fix
-				if(!reason.equals(null)) {
-					if (reason.equals("won"))
-					{
-						score = player.getScore(true);
-						endGame(caveSelect, GI, name, player, reason, score);
-						startNew = false;
-					}
-					else if (!reason.substring(0,4).equals("menu"))
-					{
-						score = player.getScore(false);
-						endGame(caveSelect, GI, name, player, reason, score);
-						startNew = false;
-					}
-					else
-					{
-						caveSelect = Integer.parseInt(reason.substring(4,5));
-						name = reason.substring(5);
-						startNew = true;
-						
-					}
-						
+				else if (reason.substring(0,4).equals("menu")) {
+					caveSelect = Integer.parseInt(reason.substring(4,5));
+					name = reason.substring(5);
+					startNew = true;
 				}
 				else
 				{
-					System.out.println("Error Occured : reason was null");
-					GI.Error();
+					System.out.println(reason);
+					score = player.getScore(false);
+					endGame(caveSelect, GI, name, player, reason, score);
+					startNew = false;
+					System.out.println(startNew);
 				}
+					
 			}
+			else
+			{
+				System.out.println("Error Occured : reason was null");
+				GI.Error();
+			}
+		}
 		
 	}
 			
