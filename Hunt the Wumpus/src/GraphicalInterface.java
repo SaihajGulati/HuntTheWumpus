@@ -68,7 +68,7 @@ public int getRoom(int room1, int room2, int room3, int [] danger, int turn, int
 	ballcords = drawPlayer();
 	toreturn = doors(room1, room2, room3,ballcords);
 	
-	HUDtext(0.5,0.18,NAME);
+	HUDtext(0.5,0.175,NAME);
 	HUDtext(0.9,0.8,"Round "+turn);
 	HUDtext(0.9,0.77,"Coins "+coins);
 	HUDtext(0.9,0.74,"Arrows "+arrows);
@@ -120,7 +120,7 @@ public int shootArrow(int room1, int room2, int room3, int [] danger, int turn, 
 	double [] mouse = {StdDraw.mouseX(),StdDraw.mouseY()};
 	toreturn = doors(room1, room2, room3,mouse);
 	
-	HUDtext(0.5,0.18,NAME);
+	HUDtext(0.5,0.175,NAME);
 	HUDtext(0.9,0.8,"Round "+turn);
 	HUDtext(0.9,0.77,"Coins "+coins);
 	HUDtext(0.9,0.74,"Arrows "+arrows);
@@ -569,21 +569,15 @@ private static int menubuttons(boolean saved)
 		
 		if(saved)
 		{
-		if(menubutton(x,buttontop+shift, containerx,0.055,"NEW GAME"))
-			
-		    toreturn = 1;
 	
-		if(menubutton(x,buttontop, containerx,0.055,"RESUME GAME"))
+		if(menubutton(x,buttontop+shift, containerx,0.055,"RESUME GAME"))
 		    toreturn = 4;
 		}
-		
-		else
-		{
+
 	if(menubutton(x,buttontop, containerx,0.055,"NEW GAME"))
 		
 		    toreturn = 1;	
-		}
-	
+
 	if(menubutton(x,buttontop-shift, containerx,0.055,"HIGH SCORES"))
 		    toreturn = 2;	
 
