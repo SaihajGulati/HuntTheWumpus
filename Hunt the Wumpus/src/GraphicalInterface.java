@@ -514,7 +514,7 @@ public int caveSelection(ArrayList<String> scores)
 }
 
 //This reads inputs from the main menu screen and helps the navigation between main menu, high scores, and credits
-public int mainmenu(ArrayList<String> scores)
+public int mainmenu(ArrayList<String> scores,boolean saved)
 {	
 	//System.out.println(scores);
 	int select = 0;
@@ -522,25 +522,25 @@ public int mainmenu(ArrayList<String> scores)
 	while(select == 0)
 	{
 		StdDraw.clear();
-		select = menubuttons();
+		select = menubuttons(saved);
 	 }
 	
 	if(select == 2)
 	{
 		highScores(scores);
-		return mainmenu(scores);
+		return mainmenu(scores,saved);
 		
 	}
 	
 	if(select == 3)
 	{
 		teamMessage();
-		return  mainmenu(scores);
+		return  mainmenu(scores,saved);
 	}
 	
 	if(select == 4)
 	{
-		return 0;
+		return -1;
 	}
 	
 	   StdDraw.clear();
@@ -548,13 +548,15 @@ public int mainmenu(ArrayList<String> scores)
 }
 
 //This displays the main menu screen, returns 0 for no input, 1 for play, 2 for high scores and 3 for credits, 
-//this method does NOT loop by itself
-private static int menubuttons()
+//this method does NOT loop by itself, if the game has been saved, the boolean tells the mai menu that the game was saved and shows the "resume" button
+private static int menubuttons(boolean saved)
 {	double x = 0.5;
     double y = 0.5;
     double containerx= 0.15;
     double containery= 0.5;
     int toreturn = 0;
+    double buttontop = 0.605;
+    double shift = 0.11;
     
         
 		StdDraw.clear();
@@ -562,25 +564,37 @@ private static int menubuttons()
 		
 		strip(x , y, containerx, containery);
 		
-		title(x,0.8, "Hunt The Wumpus" );
+		title(x,0.85, "Hunt The Wumpus" );
 		
-
-	if(menubutton(x,0.605, containerx,0.055,"PLAY"))
+		if(saved)
+		{
+		if(menubutton(x,buttontop+shift, containerx,0.055,"NEW GAME"))
+			
+		    toreturn = 1;
+		
+		if(menubutton(x,buttontop, containerx,0.055,"RESUME GAME"))
+		    toreturn = 4;
+		}
+		
+		else
+		{
+	if(menubutton(x,buttontop, containerx,0.055,"NEW GAME"))
 		
 		    toreturn = 1;	
+		}
 	
-	if(menubutton(x,0.495, containerx,0.055,"HIGH SCORES"))
+	if(menubutton(x,buttontop-shift, containerx,0.055,"HIGH SCORES"))
 		    toreturn = 2;	
 
 	
-	if(menubutton(x,0.275, containerx,0.055,"CREDITS"))
+	if(menubutton(x,buttontop-shift*2, containerx,0.055,"CREDITS"))
 		    toreturn = 3;
 	
-	if(menubutton(x,0.385, containerx,0.055,"HOW TO PLAY"))
+	if(menubutton(x,buttontop-shift*3, containerx,0.055,"HOW TO PLAY"))
 	    tutorial();
 
 	
-	if(menubutton(x,0.165, containerx,0.055,"EXIT"))
+	if(menubutton(x,buttontop-shift*4, containerx,0.055,"EXIT"))
 		Exit();	
 
 			
