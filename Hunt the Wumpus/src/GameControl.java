@@ -190,11 +190,11 @@ public class GameControl
 					player.changeCoins(3); //add 3
 					coinsAdded = 3;
 				}
-				else if(coinChance < .15) { //15%
+				else if(coinChance < .8) { //8%
 					player.changeCoins(2); //add 2
 					coinsAdded = 2;
 				}
-				else if(coinChance < .25) { //25%
+				else if(coinChance < .13) { //13%
 					player.changeCoins(1); //add 1
 					coinsAdded = 1;
 				}
