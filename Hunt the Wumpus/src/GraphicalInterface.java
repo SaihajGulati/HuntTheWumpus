@@ -488,12 +488,6 @@ private static boolean enterkey(String typed)
 	return typed.length()>0 && ((int)(typed.charAt(0)) == 10);
 }
 
-private static boolean enterkey()
-{
-	String typed = getKeyTyped();
-	return typed.length()>0 && ((int)(typed.charAt(0)) == 10);
-}
-
 //Returns the number of the cave selected by the user, or can go back to main menu by calling main menu
 public int caveSelection(ArrayList<String> caves, ArrayList<String> names, ArrayList<String> scores,boolean saved)
 {	double x = 0.2;
@@ -1331,7 +1325,7 @@ boolean priority = true;
 		return;
 	}
 	
-	if(inBox(x,topButton-shift*6, containerx,0.055))
+	if(inBox(x,0.5, containerx,0.3))
 	{
 		priority = false;
 	}
@@ -1691,59 +1685,106 @@ public static void  arrowHit(boolean hit, int arrows)
 //Method displays the team message saying thanks for playing, with the team names, loops on its own and has a next button
 public static void teamMessage()
 {	
-	
-double x = 0.2;
+	double x = 0.2;
 double y = 0.5;
 double containerx= 0.15;
 double containery= 0.5;
+double topButton = 0.75;
+double shift = 0.11;
 
-String teammessage;
-teammessage = "Thanks for playing Tesla Stem's Artesian Code team Hunt the Wumpus Game!";
-String [] names = {"Daniel Popa","Saihaj Gulati","Joshua Venable","Brian Yang", "Raj Sunku", "Hans Koduri" };
 
-ArrayList<String> messagearray = new ArrayList<String>();
+//Messages shown to player, they are added instead of one big screen so that they all fit on one screen
+String Daniel = "Graphical Interface";
 
-messagearray = splitUp(teammessage);
+String Saihaj = "Player";
+
+String Josh = "Game Control";
+
+String Brian = "Triavia";
+
+String Raj = "Game Locations";
+
+String Hans = "Cave Maps";
+
+String teammessage = "Thanks for playing Tesla Stem's Artesian Code team Hunt the Wumpus Game!";
+
+double distance = 0.05;
+double textx = 0.67;
+double texty = 0.5;
 boolean priority = true;
 
  while(true)
 {
 	StdDraw.clear();
 	background();
-
+	boolean noButton = true;
+	
 	strip(x , y, containerx, containery);
 	
-	title(x,0.9, "Artesian Code" );
-		
+	title(x,0.9, "How to Play" );
 	Font font = new Font("Copperplate Gothic Bold",0, 30);
-	double start = ((messagearray.size()*0.05)/2)+0.5;
-	double textcenter = 0.7;
+	StdDraw.setFont(font);
 	
-	for(int i = 0; i< messagearray.size(); i++)
+	if(inBox(x,topButton, containerx,0.055))
 	{
-		StdDraw.setPenColor( 255,255,255);
-		StdDraw.setFont(font);
-		StdDraw.text(textcenter, start-(0.07*i), messagearray.get(i));		
+		displayList(splitUp(Daniel),textx,texty,distance);
+		noButton = false;
 	}
 	
-	Font creditsfont = new Font("Copperplate Gothic Bold",0, 20);
-	
-	for(int i = 0; i< names.length; i++)
+	if(inBox(x,topButton-shift, containerx,0.055))
 	{
-		StdDraw.setPenColor( 255,255,255);
-		StdDraw.setFont(creditsfont);
-		StdDraw.text(0.2, 0.75-(0.1*i), names[i]);		
+		displayList(splitUp(Saihaj),textx,texty,distance);
+		noButton = false;
 	}
+	
+	if(inBox(x,topButton-shift*2, containerx,0.055))
+	{
+		displayList(splitUp(Josh),textx,texty,distance);
+		noButton = false;
+	}
+	
+	if(inBox(x,topButton-shift*3, containerx,0.055))
+	{
+		displayList(splitUp(Brian),textx,texty,distance);
+		noButton = false;
+	}
+	
+	if(inBox(x,topButton-shift*4, containerx,0.055))
+	{
+		displayList(splitUp(Raj),textx,texty,distance);
+		noButton = false;
+	}
+	
+	if(inBox(x,topButton-shift*5, containerx,0.055))
+	{
+		displayList(splitUp(Hans),textx,texty,distance);
+		noButton = false;
+	}
+	
+	if(noButton)
+	{
+		displayList(splitUp(teammessage),textx,texty,distance);
+	}
+	
+	button(x,topButton, containerx,0.055,"DANIEL POPA",false);
+	button(x,topButton-shift, containerx,0.055, "Saihaj Gulati",false);
+	button(x,topButton-shift*2, containerx,0.055,"Joshua Venable",false);
+	button(x,topButton-shift*3, containerx,0.055, "Brian Yang",false);
+	button(x,topButton-shift*4, containerx,0.055,"Raj Sunku",false);
+	button(x,topButton-shift*5, containerx,0.055, "Hans Koduri",false);
+	
+	if(button(x,topButton-shift*6, containerx,0.055, "Back",priority))
+	{
+		return;
+	}
+	
+	if(inBox(x,0.5, containerx,0.3))
+	{
+		priority = false;
+	}
+	
 
-if(button(x,0.1, containerx,0.055,"Back",priority))
-{
-	    return;	
-}
 
-if(inBox(x,0.1, containerx,0.055))
-{
-	priority = false;
-}
 		
 StdDraw.show();
 }
