@@ -44,18 +44,17 @@ public class GameControl
 	{
 		//start program and builds GI
 		GraphicalInterface GI = new GraphicalInterface(BATS, WUMPUS, HOLE);
-
 		//error handling for loading up files
 		try {
 			HighScore.loadFiles();
 			try {
 				Sounds sounds = new Sounds(1);
-			}
+				}
 			catch(MalformedURLException e) {
 				System.out.println("Error Occured : loading Sounds");
 				GraphicalInterface.Error();
 			}//
-						
+		
 		}
 		catch(FileNotFoundException error) {
 			System.out.println("Error Occured : Loading Files");
@@ -156,6 +155,7 @@ public class GameControl
 		while(player.getArrows() > 0 && player.getCoins() > 0 || player.getTurns() == 0) {
 			//while player hasn't chosen in GI yet
 				// simply sets the variables for later use
+			Sounds.background();
 			room = GameLocations.getPlayerLocation();
 			rooms = cave.tunnels(room);
 			hazards = GameLocations.warning();
