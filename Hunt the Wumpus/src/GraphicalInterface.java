@@ -39,11 +39,7 @@ public GraphicalInterface(int b, int w, int h)
 		HOLE = h;
 		NAME = "NAME";
 		WARNING = new FlashingText(350,180,0,0);
-		player = new BallSprite[500];
-		for(int i = 0; i<500;i++)
-		{
-			player[i] = new BallSprite(0.5,0.5,0.01,(0.01/500)*i, 0.3007, 0.3007);
-		}
+		resetAndCreatePlayer();
 		
 	}
 
@@ -106,11 +102,6 @@ private static void setTextColor()
 private static void setInactiveColor()
 {
 	StdDraw.setPenColor(InactiveColor[0],InactiveColor[1],InactiveColor[2]);
-}
-
-private static void setInactiveColor(int shift, int shift1, int shift2)
-{
-	StdDraw.setPenColor(32+shift,32+shift1,32+shift2);
 }
 
 // Opens up the canvas for the game to be displayed on and enables double buffering
@@ -366,6 +357,20 @@ private void resetAndCreatePlayer()
 	}
 }
 
+private void resetAndCreateText()
+{
+	if(TextColor[2] == 75)
+	{
+		WARNING = null;
+		WARNING = new FlashingText(350,250,206,75);
+	}
+	else
+	{
+		WARNING = null;
+		WARNING = new FlashingText(350,180,0,0);
+	}
+}
+
 //Draws a black background
 private static void background()
 {
@@ -384,7 +389,7 @@ private static void room()
 private static boolean leftdoor(int room, double[] ballcords)
 {
 
-	setInactiveColor(70,70,70);
+	setInactiveColor();
 	
 	if(room>0)
 	{
@@ -404,7 +409,7 @@ private static boolean leftdoor(int room, double[] ballcords)
 //It also takes the door number as input
 private static boolean rightdoor(int room, double[] ballcords)
 {
-	setInactiveColor(70,70,70);
+	setInactiveColor();
 	
 	if(room>0)
 	{
@@ -423,7 +428,7 @@ private static boolean rightdoor(int room, double[] ballcords)
 // It also takes the door number as input
 private static boolean topdoor(int room, double[] ballcords)
 {
-	setInactiveColor(70,70,70);
+	setInactiveColor();
 	
 	if(room>0)
 	{
@@ -640,7 +645,7 @@ private static int menubuttons(boolean saved)
     double containerx= 0.15;
     double containery= 0.5;
     int toreturn = 0;
-    double buttontop = 0.605;
+    double buttontop = 0.625;
     double shift = 0.11;
     
         
@@ -885,7 +890,15 @@ public static void  betweenTurns(String hint, int room, int turn, int coins, int
 	
 	if(bonuscoin > 0)
 	{
-	title(0.5, 0.75, "Coins "+coins+" + "+bonuscoin+" bonus coins");
+		if(bonuscoin == 1)
+		{
+			title(0.5, 0.75, "Coins "+(coins-bonuscoin)+" + "+bonuscoin+" bonus coin");
+		}
+		
+		else
+		{
+			title(0.5, 0.75, "Coins "+(coins-bonuscoin)+" + "+bonuscoin+" bonus coins");
+		}
 	}
 	
 	else
@@ -895,7 +908,7 @@ public static void  betweenTurns(String hint, int room, int turn, int coins, int
 	
 	if(bonusarrow)
 	{
-		title(0.5, 0.7, "Arrows "+arrows+" a bonus arrow");
+		title(0.5, 0.7, "Arrows "+(arrows-1)+" and a bonus arrow");
 	}
 	else
 	{
@@ -1302,7 +1315,7 @@ public void  setTheme()
 
 	StdDraw.show();
 	}
-	Sounds.movePlayer();
+	resetAndCreateText();
 }
 
 
