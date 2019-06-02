@@ -17,7 +17,7 @@
 import java.util.*;
 import java.awt.Font;
 import java.util.ArrayList;
- 
+//hi
 public class GraphicalInterface{
 	
 	private int BAT;

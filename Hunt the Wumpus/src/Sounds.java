@@ -93,7 +93,7 @@ public class Sounds
 	
 	public static void win()
 	{
-		play("res/win"+themeNum+".wav",0);
+		play("res/win"+themeNum+".wav",-20.0);
 	}
 	
 	public static void lose()
