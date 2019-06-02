@@ -109,8 +109,6 @@ public int shootArrow(int room1, int room2, int room3, int [] danger, int turn, 
 {
 	int toreturn = 0;
 	boolean loop = true;
-	boolean priority = true;
-	//StdDraw.pause(100);
 	
 	while(loop)
 	{
@@ -126,12 +124,7 @@ public int shootArrow(int room1, int room2, int room3, int [] danger, int turn, 
 	HUDtext(0.9,0.77,"Coins "+coins);
 	HUDtext(0.9,0.74,"Arrows "+arrows);
 
-	loop = !button(0.5, 0.1 , 0.15 , 0.055, "Back",priority);
-	
-	if(inBox(0.5, 0.1 , 0.15 , 0.055))
-	{
-		priority = false;
-	}
+	loop = !button(0.5, 0.1 , 0.15 , 0.055, "Back",false);
 	
 	Font font = new Font("Copperplate Gothic Bold",0, 40);
 	StdDraw.setPenColor( 150,0,0);
@@ -1227,7 +1220,7 @@ double shift = 0.11;
 
 //Messages shown to player, they are added instead of one big screen so that they all fit on one screen
 String wumpusTutorial = "It is your objective to kill the WUMPUS. You can kill the WUMPUS by shooting an arrow into the door that leads to the room the wumps is in. ";
-wumpusTutorial += "If you miss the WUMPUS might run away, and if you are in the same room as the WUMPUS, you must answer three out of five trivia questions correct or die! ";
+wumpusTutorial += "If you miss, the WUMPUS might run away, and if you are in the same room as the WUMPUS, you must answer three out of five trivia questions correct or die! ";
 wumpusTutorial+= "If you get three out of five questions correct, the wumpus will run away. ";
 wumpusTutorial+= "You know the WUMPUS is near because you will see the message \"I smell a WUMPUS\"";
 
@@ -1597,7 +1590,10 @@ public static void  endGame(String reason, int score, boolean leaderboard)
 
 	}
 	}
+	
 	StdDraw.setPenColor( 250,250,250);
+	Font highscorefont = new Font("Copperplate Gothic Bold",0, 30);
+	StdDraw.setFont(highscorefont);
 	StdDraw.text(0.5, 0.7, "Your score: " + score);
 	if (leaderboard)
 	{
