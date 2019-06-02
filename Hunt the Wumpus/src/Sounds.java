@@ -81,7 +81,7 @@ public class Sounds
 	}
 	
 	/*
-	 * rest of the methods are conditions where sounds can be played 
+	 * rest of the methods are conditions where sounds can be played
 	 */
 	public static void movePlayer()
 	{
