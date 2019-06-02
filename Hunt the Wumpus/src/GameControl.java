@@ -179,17 +179,27 @@ public class GameControl
 				//chance that player may acquire an arrow or extra coins while moving to room
 				double ArrowChance = Math.random();
 				double coinChance = Math.random();
+				boolean addedArrow = false;
+				int coinsAdded = 0;
 				if(ArrowChance < .03) { //3%
 					player.changeArrows(1);
+					System.out.println("Added arrow");
+					addedArrow = true;
 				} 
 				if(coinChance < .05) { //5%
+					System.out.println("Added coins");
 					player.changeCoins(3); //add 3
+					coinsAdded = 3;
 				}
 				else if(coinChance < .15) { //15%
+					System.out.println("Added coins");
 					player.changeCoins(2); //add 2
+					coinsAdded = 2;
 				}
-				else if(coinChance < .3) { //30%
+				else if(coinChance < .25) { //25%
+					System.out.println("Added coins");
 					player.changeCoins(1); //add 1
+					coinsAdded = 1;
 				}
 				
 				GI.betweenTurns(triv.giveTrivia(), room, player.getTurns(), player.getCoins(), player.getArrows());
