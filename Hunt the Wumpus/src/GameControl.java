@@ -63,7 +63,7 @@ public class GameControl
 		GraphicalInterface.start();
 		boolean startNew = false;
 		Sounds.background();
-		
+		//asf
 		//keeps game running
 		while (true)
 		{

@@ -40,7 +40,7 @@ public class Sounds
 		clip.open(ais);
 		gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 		gainControl.setValue(-10.0f);
-		
+		//sfa
 		ais2 = AudioSystem.getAudioInputStream(new File("res/trivia1.wav").toURI().toURL());
 		clip2 = AudioSystem.getClip();
 		clip2.open(ais2);
