@@ -26,6 +26,10 @@ public class GraphicalInterface{
 	private BallSprite [] player;
 	private FlashingText WARNING;
 	private String NAME;
+	private static int RED;
+	private static int WHITE;
+	private static int GRAY;
+	private static int BLACK;
 	
 	
 public GraphicalInterface(int b, int w, int h)
@@ -42,6 +46,36 @@ public GraphicalInterface(int b, int w, int h)
 		}
 		
 	}
+
+private static void setBLACK()
+{
+	StdDraw.setPenColor(0,0,0);
+}
+
+private static void setRED(int shift)
+{
+	StdDraw.setPenColor(150+shift,0,0);
+}
+
+private static void setRED()
+{
+	StdDraw.setPenColor(150,0,0);
+}
+
+private static void setWHITE()
+{
+	StdDraw.setPenColor(250,250,250);
+}
+
+private static void setGRAY()
+{
+	StdDraw.setPenColor(32,32,32);
+}
+
+private static void setGRAY(int shift, int shift1, int shift2)
+{
+	StdDraw.setPenColor(32+shift,32+shift1,32+shift2);
+}
 
 // Opens up the canvas for the game to be displayed on and enables double buffering
 public static void start()
@@ -127,7 +161,7 @@ public int shootArrow(int room1, int room2, int room3, int [] danger, int turn, 
 	loop = !button(0.5, 0.1 , 0.15 , 0.055, "Back",false);
 	
 	Font font = new Font("Copperplate Gothic Bold",0, 40);
-	StdDraw.setPenColor( 150,0,0);
+	setRED();
 	StdDraw.setFont(font);
 	StdDraw.text(0.5, 0.25, "Click on a Room to Shoot");	
 	//ballcords = drawPlayer();
@@ -148,10 +182,10 @@ public int shootArrow(int room1, int room2, int room3, int [] danger, int turn, 
 //Draws a line representing the path of the arrow from the center of the screen
 private void arrowPath(int room)
 {
-	StdDraw.setPenColor(150,0,0);
+	setRED();
 	if(room>0)
 	{
-		StdDraw.setPenColor(250,0,0);
+		setRED(100);
 	}
 	StdDraw.setPenRadius(0.02);
 	StdDraw.line(0.5, 0.5, StdDraw.mouseX(), StdDraw.mouseY());
@@ -299,7 +333,7 @@ private void resetAndCreatePlayer()
 //Draws a black background
 private static void background()
 {
-	StdDraw.setPenColor(0,0,0);
+	setBLACK();
 	StdDraw.filledRectangle(0.5, 0.5, 0.5 , 0.5);
 }
 
@@ -314,15 +348,15 @@ private static void room()
 private static boolean leftdoor(int room, double[] ballcords)
 {
 
-	StdDraw.setPenColor( 100,100,100);
+	setGRAY(70,70,70);
 	
 	if(room>0)
 	{
-	StdDraw.setPenColor( 255,255,255);
+	setWHITE();
 	Font lable = new Font("Copperplate Gothic Bold",0, 20);
 	StdDraw.setFont(lable);
 	StdDraw.text(0.17, 0.5, ""+room);
-	StdDraw.setPenColor(150,0,0);
+	setRED();
 	}
 	
 	StdDraw.filledRectangle(0.2, 0.5, 0.007 , 0.2);
@@ -334,15 +368,15 @@ private static boolean leftdoor(int room, double[] ballcords)
 //It also takes the door number as input
 private static boolean rightdoor(int room, double[] ballcords)
 {
-	StdDraw.setPenColor( 100,100,100);
+	setGRAY(70,70,70);
 	
 	if(room>0)
 	{
-	StdDraw.setPenColor( 255,255,255);
+	setWHITE();
 	Font lable = new Font("Copperplate Gothic Bold",0, 20);
 	StdDraw.setFont(lable);
 	StdDraw.text(0.83, 0.5, ""+room);
-	StdDraw.setPenColor(150,0,0);
+	setRED();
 	}
 	
 	StdDraw.filledRectangle(0.8, 0.5, 0.007 , 0.2);
@@ -353,15 +387,15 @@ private static boolean rightdoor(int room, double[] ballcords)
 // It also takes the door number as input
 private static boolean topdoor(int room, double[] ballcords)
 {
-	StdDraw.setPenColor( 100,100,100);
+	setGRAY(70,70,70);
 	
 	if(room>0)
 	{
-	StdDraw.setPenColor( 255,255,255);
+	setWHITE();
 	Font lable = new Font("Copperplate Gothic Bold",0, 20);
 	StdDraw.setFont(lable);
 	StdDraw.text(0.5, 0.83, ""+room);
-	StdDraw.setPenColor(150,0,0);
+	setRED();
 	}
 	
 	StdDraw.filledRectangle(0.5, 0.8, 0.2 , 0.007);
@@ -610,12 +644,12 @@ private static boolean button(double x, double y, double high, double wide, Stri
 {
 	boolean hovering = inBox(x,y,high,wide);
 	String typed = getKeyTyped();
-	StdDraw.setPenColor( 32,32,32);
+	setGRAY();
 	if(hovering)
-		StdDraw.setPenColor(150,0,0);
+		setRED();
 	
 	StdDraw.filledRectangle(x, y, high , wide);
-	StdDraw.setPenColor( 255,255,255);
+	setWHITE();
 	Font buttonfont;
 	buttonfont = new Font("Copperplate Gothic Bold",0, 20);
 	StdDraw.setFont(buttonfont);
@@ -635,15 +669,15 @@ private static boolean menubutton(double x, double y, double high, double wide, 
 	double thick = 0.015;
 	boolean hovering = inBox(x,y,high,wide);
 	String typed = getKeyTyped();
-	StdDraw.setPenColor( 32,32,32);
+	setGRAY();
 	StdDraw.filledRectangle(x, y, high , wide);
 	if(hovering)
 	{
-		StdDraw.setPenColor(150,0,0);
+		setRED();
 	    StdDraw.filledRectangle(x, y, high+thick, wide);
 	}
 	
-	StdDraw.setPenColor( 255,255,255);
+	setWHITE();
 	Font buttonfont = new Font("Copperplate Gothic Bold",0, 20);
 	StdDraw.setFont(buttonfont);
 	StdDraw.text(x, y, message);
@@ -660,7 +694,7 @@ private static boolean menubutton(double x, double y, double high, double wide, 
 private static void title(double x, double y, String message)
 {
 	Font titlefont = new Font("Copperplate Gothic Bold",0, 27);
-	StdDraw.setPenColor( 255,255,255);
+	setWHITE();
 	StdDraw.setFont(titlefont);
 	StdDraw.text(x, y, message);
 }
@@ -762,7 +796,7 @@ private static void highScores(ArrayList<String> caves, ArrayList<String> names,
 private static void printScoreRow(ArrayList<String> info, double x, double y, int size,String string)
 {
 	Font scoresfont = new Font("Copperplate Gothic Bold",0, size);
-	StdDraw.setPenColor( 255,255,255);
+	setWHITE();
 	StdDraw.setFont( scoresfont);
 		
 	StdDraw.text(x, y+0.07, string);
@@ -797,7 +831,7 @@ public static void  betweenTurns(String hint, int room, int turn, int coins, int
 
 	strip(0.5, 0.5, 0.30 , 0.5);
 	
-	StdDraw.setPenColor( 255,255,255);
+	setWHITE();
 	Font title = new Font("Copperplate Gothic Bold",0, 60);
 	StdDraw.setFont(title);
 	StdDraw.text(0.5, 0.85, "Round "+turn );
@@ -810,7 +844,7 @@ public static void  betweenTurns(String hint, int room, int turn, int coins, int
 	
 	for(int i = 0; i< toprint.size(); i++)
 	{
-		StdDraw.setPenColor( 255,255,255);
+		setWHITE();
 		StdDraw.setFont(font);
 		StdDraw.text(0.5, 0.5-(0.05*i), toprint.get(i));		
 	}
@@ -839,7 +873,7 @@ public static void  tellSecret(String secret)
 
 	strip(0.5, 0.5, 0.30 , 0.5);
 	
-	StdDraw.setPenColor( 255,255,255);
+	setWHITE();
 	Font title = new Font("Copperplate Gothic Bold",0, 60);
 	StdDraw.setFont(title);
 	StdDraw.text(0.5, 0.85, "Secret");
@@ -848,7 +882,7 @@ public static void  tellSecret(String secret)
 	
 	for(int i = 0; i< toprint.size(); i++)
 	{
-		StdDraw.setPenColor( 255,255,255);
+		setWHITE();
 		StdDraw.setFont(font);
 		StdDraw.text(0.5, 0.5-(0.05*i), toprint.get(i));		
 	}
@@ -890,7 +924,7 @@ public void  displayDanger(int [] dangers)
 	strip(0.5, 0.5, 0.30 , 0.5);
 	WARNING.draw("Danger",0.5, 0.85, 100);
 	
-	StdDraw.setPenColor( 180,0,0);
+	setRED(30);
 	Font title = new Font("Copperplate Gothic Bold",0, 45);
 	StdDraw.setFont(title);
 
@@ -990,14 +1024,14 @@ public void  escapedDanger(int [] dangers)
 
 	strip(0.5, 0.5, 0.30 , 0.5);
 	
-	StdDraw.setPenColor(250,250,250);
+	setWHITE();
 	Font title = new Font("Copperplate Gothic Bold",0, 45);
 	StdDraw.setFont(title);
 	StdDraw.text(0.5, 0.85, "You Survived");
 
 	Font danger = new Font("Copperplate Gothic Bold",0,25); 
 	StdDraw.setFont(danger);
-	StdDraw.setPenColor( 180,0,0);
+	setRED(30);
 
 	for(int i = 0; i<dangers.length;i++)
 	{
@@ -1030,7 +1064,7 @@ public void  escapedDanger(int [] dangers)
 
 private static void strip(double x, double y, double wide, double tall)
 {
-	StdDraw.setPenColor( 32,32,32);
+	setGRAY();
 	StdDraw.filledRectangle(x, y, wide , tall);
 }
 
@@ -1051,7 +1085,7 @@ public static void  postTrivia(boolean correct, int questions, int answered)
 	
 	strip(0.5, 0.5, 0.30 , 0.5);
 	
-	StdDraw.setPenColor( 255,255,255);
+	setWHITE();
 	Font title = new Font("Copperplate Gothic Bold",0, 60);
 	StdDraw.setFont(title);
 	if(correct)
@@ -1087,7 +1121,7 @@ public static void  Error()
 	background();
 	strip(0.5, 0.5, 0.30 , 0.5);
 	
-	StdDraw.setPenColor( 180,0,0);
+	setRED(30);
 	Font title = new Font("Copperplate Gothic Bold",0, 60);
 	StdDraw.setFont(title);
 	StdDraw.text(0.5, 0.6, "ERROR" );
@@ -1117,7 +1151,7 @@ public static void  boughtArrow(int arrows)
 	
 	strip(0.5, 0.5, 0.30 , 0.5);
 	
-	StdDraw.setPenColor( 255,255,255);
+	setWHITE();
 	Font title = new Font("Copperplate Gothic Bold",0, 45);
 	StdDraw.setFont(title);
 	StdDraw.text(0.5, 0.6, "You bought 2 arrows");
@@ -1146,7 +1180,7 @@ public static void  Exit()
 	
 	strip(0.5, 0.5, 0.30 , 0.5);
 	
-	StdDraw.setPenColor( 255,255,255);
+	setWHITE();
 	Font title = new Font("Copperplate Gothic Bold",0, 45);
 	StdDraw.setFont(title);
 	StdDraw.text(0.5, 0.6, "Are you sure");
@@ -1182,7 +1216,7 @@ public static boolean  toMainMenu()
 
 	strip(0.5, 0.5, 0.30 , 0.5);
 	
-	StdDraw.setPenColor( 255,255,255);
+	setWHITE();
 	Font title = new Font("Copperplate Gothic Bold",0, 45);
 	StdDraw.setFont(title);
 	StdDraw.text(0.5, 0.7, "Are you sure");
@@ -1319,7 +1353,7 @@ public static void  goof()
 
 	strip(0.5, 0.5, 0.30 , 0.5);
 	
-	StdDraw.setPenColor( 255,255,255);
+	setWHITE();
 	Font title = new Font("Copperplate Gothic Bold",0, 60);
 	StdDraw.setFont(title);
 	StdDraw.text(0.5, 0.6, "Too many wrong");
@@ -1364,7 +1398,7 @@ toprint = splitUp(question);
 	
 	for(int i = 0; i< toprint.size(); i++)
 	{
-		StdDraw.setPenColor( 255,255,255);
+		setWHITE();
 		StdDraw.setFont(font);
 		StdDraw.text(textcenter, start-(0.05*i), toprint.get(i));		
 	}	
@@ -1426,7 +1460,7 @@ arrowDescription = splitUp("You can get ARROWS by getting two out of three trivi
 	{
 		Font funds = new Font("Copperplate Gothic Bold",0, 25);
 		StdDraw.setFont(funds);
-		StdDraw.setPenColor( 150,0,0);
+		setRED();
 		StdDraw.text(x, 0.85, "NOT ENOUGH COINS");	
 	}
 	
@@ -1439,7 +1473,7 @@ arrowDescription = splitUp("You can get ARROWS by getting two out of three trivi
 		
 		for(int i = 0; i< arrowDescription.size(); i++)
 		{
-			StdDraw.setPenColor( 255,255,255);
+			setWHITE();
 			StdDraw.setFont(font);
 			StdDraw.text(textcenter, start-(0.05*i), arrowDescription.get(i));		
 		}
@@ -1453,7 +1487,7 @@ arrowDescription = splitUp("You can get ARROWS by getting two out of three trivi
 		
 		for(int i = 0; i< secretDescription.size(); i++)
 		{
-			StdDraw.setPenColor( 255,255,255);
+			setWHITE();
 			StdDraw.setFont(font);
 			StdDraw.text(textcenter, start-(0.05*i), secretDescription.get(i));		
 		}
@@ -1550,12 +1584,12 @@ public static void  endGame(String reason, int score, boolean leaderboard)
 	
 	strip(0.5, 0.5, 0.30 , 0.5);
 	
-	StdDraw.setPenColor( 250,250,250);
+	setWHITE();
 	Font font = new Font("Copperplate Gothic Bold",0, 60);
 	StdDraw.setFont(font);
 	StdDraw.text(0.5, 0.85, "GAME OVER");
 	
-	StdDraw.setPenColor( 250,250,250);
+	setWHITE();
 	Font title = new Font("Copperplate Gothic Bold",0, 30);
 	StdDraw.setFont(title);
 	if(reason.equals("won"))
@@ -1593,7 +1627,7 @@ public static void  endGame(String reason, int score, boolean leaderboard)
 	}
 	}
 	
-	StdDraw.setPenColor( 250,250,250);
+	setWHITE();
 	Font highscorefont = new Font("Copperplate Gothic Bold",0, 30);
 	StdDraw.setFont(highscorefont);
 	StdDraw.text(0.5, 0.7, "Your score: " + score);
@@ -1628,7 +1662,7 @@ public static void  arrowHit(boolean hit, int arrows)
 	strip(0.5, 0.5, 0.30 , 0.5);
 	
 	
-	StdDraw.setPenColor( 250,250,250);
+	setWHITE();
 	Font title = new Font("Copperplate Gothic Bold",0, 30);
 	StdDraw.setFont(title);
 	
@@ -1758,7 +1792,7 @@ private static void displayList(ArrayList<String> messagearray, double textcente
 	
 	for(int i = 0; i< messagearray.size(); i++)
 	{
-		StdDraw.setPenColor( 255,255,255);
+		setWHITE();
 		StdDraw.text(textcenterx, start-(distance*i), messagearray.get(i));		
 	}
 }
@@ -1767,7 +1801,7 @@ private static void displayList(ArrayList<String> messagearray, double textcente
 private static void HUDtext(double x, double y, String text)
 {
 	Font hudfont = new Font("Copperplate Gothic Bold",0, 20);
-	StdDraw.setPenColor( 255,255,255);
+	setWHITE();
 	StdDraw.setFont(hudfont);
 	StdDraw.text(x, y, text);
 	
