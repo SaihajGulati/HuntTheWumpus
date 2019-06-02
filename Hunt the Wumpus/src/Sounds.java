@@ -65,7 +65,7 @@ public class Sounds
 	
 	public static void moveWumpus()
 	{
-		currentSounds[2].play();
+		play("res/moveWumpus"+themeNum+".wav",0);
 	}
 	
 	public static void triviaPopUp()
@@ -75,17 +75,17 @@ public class Sounds
 	
 	public static void win()
 	{
-		currentSounds[4].play();
+		play("res/win"+themeNum+".wav",0);
 	}
 	
 	public static void lose()
 	{
-		currentSounds[5].play();
+		play("res/lose"+themeNum+".wav",0);
 	}
 	
 	public static void bat()
 	{
-		currentSounds[6].play();
+		play("res/bat"+themeNum+".wav",0);
 	}
 	
 	public static void pit()
