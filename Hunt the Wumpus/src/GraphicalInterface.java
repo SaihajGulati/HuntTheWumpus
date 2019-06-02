@@ -496,8 +496,13 @@ public String getName()
 	title(0.5, 0.9, "Type Your Name");
 	title(0.5, 0.5, name);
 	StdDraw.line(0.3, 0.47, 0.7, 0.47);
-	
-	typed = getKeyTyped();
+	try {
+		typed = getKeyTyped();
+	}
+	catch(IllegalFormatException e) {
+		System.out.println("Error Occured : GetName Method");
+		Error();
+	}
 	
 	if(typed.length()>0 && name.equals("Type a name"))
 	{

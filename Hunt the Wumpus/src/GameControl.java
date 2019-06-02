@@ -43,6 +43,7 @@ public class GameControl
 	public static final int ARROW = -1;
 	public static final int BUY_ITEM = -2;
 	public static final int MAIN_MENU = -3;
+	public static String NAME = "";
 	
 	public static void main(String[] args) throws MalformedURLException, LineUnavailableException, UnsupportedAudioFileException, IOException
 	{
@@ -76,6 +77,7 @@ public class GameControl
 			{
 				caveSelect = GI.mainmenu(HighScore.getCaves(), HighScore.getNames(), HighScore.getScores(), false);
 				name = GI.getName();
+				NAME = name;
 				if(name.toLowerCase().equals("artesian code")) {
 					System.out.println("EASTER EGG");
 					player.changeCoins(50);
@@ -86,10 +88,11 @@ public class GameControl
 			//starts the game
 			Cave cave = new Cave(caveSelect);
 			GameLocations locations = new GameLocations(cave);
+			//plays game to get reason why the game ended 
 			String reason = startGame(GI, player, cave, trivia);
 			int score = 0;
 			//error handling
-			if(!reason.equals(null) || !reason.equals("")) {
+			if(!reason.equals(null)) {
 				//if player wins
 				if (reason.equals("won"))
 				{
@@ -106,9 +109,24 @@ public class GameControl
 				}
 				//if player left and saved game
 				else if (reason.substring(0,4).equals("menu")) {
-					caveSelect = Integer.parseInt(reason.substring(4,5));
-					name = reason.substring(5);
-					startNew = false;
+					try {
+						if(reason.substring(4,5).equals("-")) {
+							caveSelect = Integer.parseInt(reason.substring(5,6));
+							name = reason.substring(5);
+							startNew = false;
+						}
+						else {
+							caveSelect = Integer.parseInt(reason.substring(4,5));
+							name = reason.substring(5);
+							startNew = false;
+						}
+
+					}
+					catch(NumberFormatException e) {
+						System.out.println("Error Occured : Integer.parseInt");
+						GI.Error();
+					}
+					
 				}
 				//if player died
 				else
@@ -118,12 +136,13 @@ public class GameControl
 					try {
 
 						endGame(caveSelect, GI, name, player, reason, score);
+						startNew = true;
 					}
 					catch(FileNotFoundException e) {
 						System.out.println("Error Occured : Gamecontrol endGame method");
 						GI.Error();
 					}
-					startNew = true;
+					
 				}
 					
 			}
@@ -322,13 +341,24 @@ public class GameControl
 			//if player wants to leave game but not exit
 			else if (response == MAIN_MENU)
 			{
-				int caveSelect = GI.mainmenu(HighScore.getCaves(), HighScore.getNames(), HighScore.getScores(), true);
-				if (caveSelect > 0)
+				Sounds.stop();
+				String name = NAME;
+				int caveSelect = Integer.MAX_VALUE;
+				while (caveSelect > 0)
 				{
-					String name = GI.getName();
-					return "menu" + caveSelect + name;
+					caveSelect = GI.mainmenu(HighScore.getCaves(), HighScore.getNames(), HighScore.getScores(), true);
+					if(caveSelect != -1) {
+						name = "";
+						while(name.equals("")) {
+							name = GI.getName();
+						}
+						
+						return "menu" + caveSelect + name;
+					}
+					
 					
 				}
+				return "menu" + caveSelect + name;
 				
 			}
 			
@@ -466,6 +496,7 @@ public class GameControl
 	{
 		System.out.print("For testing:");
 		System.out.println();
+		System.out.println("You are located in room " + GameLocations.getPlayerLocation());
 		System.out.println("Bats are located in rooms " + arrayString(GameLocations.getBatLocations(), "and"));
 		System.out.println("Pits are located in rooms " + arrayString(GameLocations.getPitLocations(), "and"));
 		System.out.println("Wumpus is located in room " + GameLocations.getWumpusLocation());
