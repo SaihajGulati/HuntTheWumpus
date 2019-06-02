@@ -70,12 +70,9 @@ public class Trivia
     private  ArrayList<String> secrets; //The secrets that will be given to the Player when he/she buys them.
     private  int questionNum; /**The number of the question currently asked by Trivia, along
     * with its corresponding answers.
-  
-    /**
-     * The method for the Trivia class that will handle the File processing and fill the
-     * Trivia-related ArrayLists and arrays with their appropriate values, in addition to instantiating the
-     * Scanner for user input.
     */
+  
+   
   
     //the a-d answer choices given to the user for each question
     private String answerA = "";
@@ -83,6 +80,11 @@ public class Trivia
     private String answerC = "";
     private String answerD = "";
     
+     /**
+     * The constructor for the Trivia class that will handle the File processing and fill the
+     * Trivia-related ArrayLists and arrays with their appropriate values, in addition to instantiating the
+     * Scanner for user input.
+    */
     public  Trivia()
     {
     	try{
@@ -138,7 +140,7 @@ public class Trivia
     
     /**
      * Gets a random question from the triviaQuestions ArrayList and adds its respective multiple-choice answers
-     * (on different lines using "\n"), before returning them to GameControl.
+     * (on different lines by splitting them at the ":"s), before returning them to GameControl.
      * 
      * @Param: Void
      * 
@@ -199,10 +201,10 @@ public class Trivia
     	return answerD;
     }
     /**
-     * This method takes a String as a parameter (the user input) and compares it with the correct answer as
+     * This method takes a char as a parameter (the user input) and compares it with the correct answer as
      * specified by correctAnswers' respective answer (position of questionNum in the ArrayList).
      * 
-     * @param: String answer (the user-inputted answer as a parameter given by GameControl
+     * @param: char answer (the user-inputted answer as a parameter given by GameControl
      * 
      * @return: boolean (whether the Player answered the question correctly)
      * 
@@ -337,12 +339,12 @@ public class Trivia
     }
     
     //Prints a description of the Trivia object rather than its address in computer's memory.
-    // public  String toString()
-    // {
-        // return "Trivia";
-    // }
+    public  String toString()
+    {
+        return "Trivia";
+    }
     
-    //test accessor method for triviaQuestions ArrayList
+    //accessor method for triviaQuestions ArrayList
     public  ArrayList<String> getQuestions()
     {
     	try{
@@ -355,7 +357,7 @@ public class Trivia
         }
     }
     
-    //test accessor method for triviaAnswers ArrayList 
+    //accessor method for triviaAnswers ArrayList 
     public  ArrayList<String> getAnswers()
     {
     	try{
@@ -369,7 +371,7 @@ public class Trivia
        
     }
     
-    //test accessor method for triviaInformation ArrayList
+    //accessor method for triviaInformation ArrayList
     public  ArrayList<String> getInformation()
     {
     	try{
@@ -383,7 +385,7 @@ public class Trivia
         
     }
     
-    //test accessor method for secrets ArrayList
+    //accessor method for secrets ArrayList
     public  ArrayList<String> accessHints()
     {
     	try{
@@ -397,7 +399,7 @@ public class Trivia
 
     }
     
-    //test accessor method for correctAnswers ArrayList
+    //accessor method for correctAnswers ArrayList
     public  ArrayList<String> getCorrectAnswers()
     {
     	try{

@@ -84,7 +84,6 @@ public class HighScore
         caves = new ArrayList<Integer>();
         //Adds high scores to the highScores ArrayList upon being scanned from the file, along with player names
         //to the names ArrayList and cave names to the caves ArrayList.
-        //asfd
         while(input.hasNext()) 
         {
             String inputLine = input.nextLine();
@@ -144,7 +143,8 @@ public class HighScore
         
     /**
      * The purpose of this method is to take the Player's score, name, and cave played in after he/she finishes #
-     * a game (either by dying or shooting the Wumpus with an arrow), and update the scoreboard if the total 
+     * a game (either by running out of coins or arrows, dying from a pit or Wumpus encounter,
+     * or by shooting the Wumpus with an arrow), and update the scoreboard if the total 
      * score is able to qualify for it.
      * 
      * @Param: int totalScore (the final score of the Player, calculated in the Player object), String name (the
@@ -228,7 +228,7 @@ public class HighScore
         	output.println("Cave " + caveNum);
         }
     }
-    //asdf
+
    /**
      * The purpose of this method is to take the ArrayLists of highScores, names, and caves (the loading 
      * from a file will be handled in the constructor) and return them to the GraphicalInterface object 
@@ -256,7 +256,7 @@ public class HighScore
     
     /**
      * these are getters for the cave numbers, names, and scores
-     * @return
+     * @return: ArrayList<String> caveStrings, names, scoreStrings
      */
     public static ArrayList<String> getCaves()
     {
