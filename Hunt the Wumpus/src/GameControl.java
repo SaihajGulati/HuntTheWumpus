@@ -119,7 +119,6 @@ public class GameControl
 						GI.Error();
 					}
 					startNew = false;
-					System.out.println(startNew);
 				}
 					
 			}
@@ -210,7 +209,6 @@ public class GameControl
 						GameLocations.moveWumpus();
 						hazardsSurvived[WUMPUS] = 1;
 						survived = true;
-						System.out.println("survived wumpus");
 					}
 				} 
 				//triggers bat
@@ -239,7 +237,6 @@ public class GameControl
 							//survived and escape pit
 							hazardsSurvived[HOLE] = 1;
 							survived = true;
-							System.out.println("survived pit");
 							GameLocations.triggerPit();
 						}
 						
@@ -425,7 +422,6 @@ public class GameControl
 		//player dies if correct is less than number of num questions
 		if (correct < numC)
 		{
-			System.out.println("You died");
 			return false;
 		}
 		return true;
