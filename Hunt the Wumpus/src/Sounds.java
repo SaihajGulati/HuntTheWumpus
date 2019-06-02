@@ -95,7 +95,7 @@ public class Sounds
 	
 	//plays the background music in a continuous loop
 	public static void background()
-	{
+	{//sdf
 		try {
 			ais = AudioSystem.getAudioInputStream(new File("res/background" + themeNum + ".wav").toURI().toURL());
 			clip = AudioSystem.getClip();
