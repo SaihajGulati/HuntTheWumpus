@@ -241,7 +241,7 @@ public class GameControl
 						}
 						
 					}
-				}//asfd
+				}
 				//GI shows what dangers escaped
 				if (survived)
 				{
