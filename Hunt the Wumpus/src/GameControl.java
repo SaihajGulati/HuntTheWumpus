@@ -163,18 +163,35 @@ public class GameControl
 				// simply sets the variables for later use
 			room = GameLocations.getPlayerLocation();
 			rooms = cave.tunnels(room);
-			hazards = GameLocations.warning();
+			hazards = GameLocations.warning();//hazards near player
 			hazardsSurvived = new int[3];
-			//response gathered from player for room/shoot/buy
-			response = GI.getRoom(rooms[0], rooms[1], rooms[2], hazards, player.getTurns(), player.getCoins(), player.getArrows()); 
+			//response gathered from player for move/shoot/buy
+			response = GI.getRoom(rooms[0], rooms[1], rooms[2], hazards, player.getTurns(), player.getCoins(), player.getArrows());
 			//if player moves
 			if(response > 0)
 			{	
-				player.movePlayer();
+				player.movePlayer(); //does not move player, just increments coins, and other stuff
 				printHazardLocs();
-				GameLocations.movePlayer(response);
+				GameLocations.movePlayer(response); //actually moves the player
 				Sounds.movePlayer();
 				room = GameLocations.getPlayerLocation();
+				
+				//chance that player may acquire an arrow or extra coins while moving to room
+				double ArrowChance = Math.random();
+				double coinChance = Math.random();
+				if(ArrowChance < .03) { //3%
+					player.changeArrows(1);
+				} 
+				if(coinChance < .05) { //5%
+					player.changeCoins(3); //add 3
+				}
+				else if(coinChance < .15) { //15%
+					player.changeCoins(2); //add 2
+				}
+				else if(coinChance < .3) { //30%
+					player.changeCoins(1); //add 1
+				}
+				
 				GI.betweenTurns(triv.giveTrivia(), room, player.getTurns(), player.getCoins(), player.getArrows());
 
 				//checks if player is in a room with a hazard
@@ -195,6 +212,7 @@ public class GameControl
 					}
 					
 				}
+				//displays danger in same room as you
 				GI.displayDanger(room_hazards);
 				room_hazards = new int[3];
 				survived = false;
@@ -217,14 +235,6 @@ public class GameControl
 						survived = true;
 					}
 				} 
-				//triggers bat
-				for (int c: GameLocations.getBatLocations())
-				{
-					if(room == c) {//
-						room = GameLocations.triggerBat();
-					}
-				}
-						
 				//encounter a pit causes trivia
 				for (int c: GameLocations.getPitLocations())
 				{
@@ -246,13 +256,20 @@ public class GameControl
 						}
 						
 					}
-				}//asdf
+				}
+				//triggers bat
+				for (int c: GameLocations.getBatLocations())
+				{
+					if(room == c) {//
+						room = GameLocations.triggerBat();
+					}
+				}
+						
 				//GI shows what dangers escaped
 				if (survived)
 				{
 					GI.escapedDanger(hazardsSurvived);
 				}
-				
 				
 			}
 			else if (response != 0)
