@@ -88,9 +88,10 @@ public class Sounds
 		currentSounds[0].play();
 	}
 	
-	public static void shootArrow()
+	public static void shootArrow() throws InterruptedException
 	{
 		currentSounds[1].play();
+		currentSounds[1].wait();
 	}
 	
 	public static void moveWumpus()
@@ -125,7 +126,7 @@ public class Sounds
 	
 	public static void background()
 	{
-		currentSounds[8].play();
+		currentSounds[8].loop();
 	}
 	
 }
