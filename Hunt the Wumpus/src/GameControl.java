@@ -40,7 +40,7 @@ public class GameControl
 	public static final int BUY_ITEM = -2;
 	public static final int MAIN_MENU = -3;
 	
-	public static void main(String[] args) throws FileNotFoundException, MalformedURLException
+	public static void main(String[] args)
 	{
 		//start program and builds GI
 		GraphicalInterface GI = new GraphicalInterface(BATS, WUMPUS, HOLE);
@@ -89,7 +89,14 @@ public class GameControl
 				if (reason.equals("won"))
 				{
 					score = player.getScore(true);
-					endGame(caveSelect, GI, name, player, reason, score);
+					try {
+
+						endGame(caveSelect, GI, name, player, reason, score);
+					}
+					catch(FileNotFoundException e) {
+						System.out.println("Error Occured : Gamecontrol endGame method");
+						GI.Error();
+					}
 					startNew = false;
 				}
 				//if player left and saved game
@@ -103,9 +110,15 @@ public class GameControl
 				{
 					System.out.println(reason);
 					score = player.getScore(false);
-					endGame(caveSelect, GI, name, player, reason, score);
+					try {
+
+						endGame(caveSelect, GI, name, player, reason, score);
+					}
+					catch(FileNotFoundException e) {
+						System.out.println("Error Occured : Gamecontrol endGame method");
+						GI.Error();
+					}
 					startNew = false;
-					System.out.println(startNew);
 				}
 					
 			}
@@ -196,7 +209,6 @@ public class GameControl
 						GameLocations.moveWumpus();
 						hazardsSurvived[WUMPUS] = 1;
 						survived = true;
-						System.out.println("survived wumpus");
 					}
 				} 
 				//triggers bat
@@ -204,6 +216,7 @@ public class GameControl
 				{
 					if(room == c) {//
 						room = GameLocations.triggerBat();
+						Sounds.bat();
 					}
 				}
 						
@@ -224,7 +237,6 @@ public class GameControl
 							//survived and escape pit
 							hazardsSurvived[HOLE] = 1;
 							survived = true;
-							System.out.println("survived pit");
 							GameLocations.triggerPit();
 						}
 						
@@ -350,7 +362,7 @@ public class GameControl
 			GraphicalInterface.endGame(reason, score, HighScore.updateScoreBoard(score, Name, caveName));
 		}
 		catch(FileNotFoundException e) {
-			System.out.println("Error Occured : endGame method");
+			System.out.println("Error Occured : GI endGame method");
 			GI.Error();
 		}
 		
@@ -410,7 +422,6 @@ public class GameControl
 		//player dies if correct is less than number of num questions
 		if (correct < numC)
 		{
-			System.out.println("You died");
 			return false;
 		}
 		return true;
