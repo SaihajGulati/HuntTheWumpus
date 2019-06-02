@@ -22,7 +22,7 @@ public class Sounds
 	/*
 	 * Will read the config file
 	 */
-	public Sounds(int theme) throws MalformedURLException
+	public Sounds(int theme)
 	{
 		try {
 			try {
@@ -49,6 +49,7 @@ public class Sounds
 					currentSounds[5] = Applet.newAudioClip(new File("res/lose2.wav").toURI().toURL());
 					currentSounds[6] = Applet.newAudioClip(new File("res/bat2.wav").toURI().toURL());
 					currentSounds[7] = Applet.newAudioClip(new File("res/pit2.wav").toURI().toURL());
+					currentSounds[8] = Applet.newAudioClip(new File("res/background1.wav").toURI().toURL());
 				}
 			}
 			catch(NullPointerException e) {
@@ -127,5 +128,4 @@ public class Sounds
 	{
 		currentSounds[8].loop();
 	}
-	
 }
