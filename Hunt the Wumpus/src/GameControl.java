@@ -71,7 +71,7 @@ public class GameControl
 			Trivia trivia = new Trivia();
 			Player player = new Player();
 			Sounds.stop();
-			//while player has not chosen a name
+			//while player has not chosen a name or is a new game
 			while(startNew && name == "")
 			{
 				caveSelect = GI.mainmenu(HighScore.getCaves(), HighScore.getNames(), HighScore.getScores(), false);
