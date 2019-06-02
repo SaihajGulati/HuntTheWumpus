@@ -50,32 +50,31 @@ private static void changeToScary(boolean scary)
 	if(scary)
 	{
 		//RED
-		int [] active = {150,0,0};
-		//WHITE
-		int [] text = {250,250,250};	
-		//GRAY
-		int [] inactive = {32,32,32};	
-		//BLACK
-		int [] back = {0,0,0};
-		
-		BackColor = back;
-		ActiveColor = active;
-		TextColor = text;
-		InactiveColor = inactive;
-	}
-	
-	else
-	{
-		int [] active = {93,22,0};
-		int [] text = {250,206,75};		
-		int [] inactive = {130,47,5};		
-		int [] back = {181,53,6};
-		
-		BackColor = back;
-		ActiveColor = active;
-		TextColor = text;
-		InactiveColor = inactive;		
-	}
+				ActiveColor = new int[]{150,0,0};
+				//WHITE
+				TextColor = new int[]{250,250,250};	
+				//GRAY
+				InactiveColor = new int[]{32,32,32};	
+				//BLACK
+				BackColor = new int[]{0,0,0};
+			}
+			
+			else
+			{
+				/*int [] active = {93,22,0};
+				int [] text = {250,206,75};		
+				int [] inactive = {130,47,5};		
+				int [] back = {181,53,6};
+				*/
+				//Orange
+				ActiveColor = new int[]{230,110,0};
+				//WHITE
+				TextColor = new int[]{250,250,250};	
+				//Blue
+				InactiveColor = new int[]{3,37,108};	
+				//LightBlue
+				BackColor = new int[] {0,160,225};	
+			}
 
 }
 
