@@ -619,6 +619,11 @@ public int mainmenu(ArrayList<String> caves, ArrayList<String> names, ArrayList<
 	
 	if(select == 4)
 	{
+		return  -1;
+	}
+	
+	if(select == 5)
+	{
 		setTheme();
 		return  mainmenu(caves,names,scores,saved);
 	}
@@ -658,7 +663,7 @@ private static int menubuttons(boolean saved)
 		    toreturn = 1;	
 
 	if(menubutton(x,buttontop-shift, containerx,0.055,"THEME",false))
-	    toreturn = 4;
+	    toreturn = 5;
 	
 	if(menubutton(x,buttontop-shift*2, containerx,0.055,"HIGH SCORES",false))
 		    toreturn = 2;	
