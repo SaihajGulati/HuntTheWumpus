@@ -87,10 +87,9 @@ public class GameControl
 			Cave cave = new Cave(caveSelect);
 			GameLocations locations = new GameLocations(cave);
 			String reason = startGame(GI, player, cave, trivia);
-			//sadf
 			int score = 0;
 			//error handling
-			if(!reason.equals(null)) {
+			if(!reason.equals(null) || !reason.equals("")) {
 				//if player wins
 				if (reason.equals("won"))
 				{
