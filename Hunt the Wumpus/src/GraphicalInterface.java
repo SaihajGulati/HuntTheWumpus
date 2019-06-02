@@ -445,7 +445,7 @@ public String getName()
 		typed = "";
 	}
 	
-	if(inBox(0.5, 0.21 , 0.15 , 0.055))
+	if(inBox(0.5, 0.21 , 0.15 , 0.055) || inBox(0.5, 0.1 , 0.15 , 0.055))
 	{
 		priority = false;
 	}
