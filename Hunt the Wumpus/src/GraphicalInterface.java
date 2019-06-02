@@ -902,6 +902,17 @@ public void  displayDanger(int [] dangers)
 		Font wumpus = new Font("Copperplate Gothic Bold",0,20); 
 		StdDraw.setFont(wumpus);
 		StdDraw.text(0.5, 0.5-shift, "If you get them correct, the wumpus will run away");
+		shift+=0.05;
+	}
+	
+	if(dangers[HOLE] >0)
+	{
+		Font wumpus = new Font("Copperplate Gothic Bold",0,20); 
+		StdDraw.setFont(wumpus);
+		StdDraw.text(0.5, 0.5-shift, "If you survive,");
+		shift+=0.05;
+		StdDraw.text(0.5, 0.5-shift, "you will go back to the first room you were in.");
+		shift+=0.05;
 	}
 	}
 	
@@ -1163,8 +1174,8 @@ wumpusTutorial+= "You know the WUMPUS is near because you will see the message \
 String batTutorial = "Super BATS are huge monsters that fly through the caves, if you are in a room with a BAT you will see the message \"There is a BAT nearby\". ";
 batTutorial+= "If you are in the same room as a BAT, you will be carried by the BAT to a random room.";
 
-String pitTutorial = "Some rooms in the caves contain PITS, if you are in the same room as a pit you will fall in, and must answer 2 out of three trivia questions right to get out. ";
-pitTutorial+="If you don't get them right you die. If you are near a PIT you will see the message \"I feel a draft\"";
+String pitTutorial = "Some rooms in the caves contain PITS, if you are in the same room as a pit you will fall in, and must answer 2 out of three trivia questions right to get out, ";
+pitTutorial+="and go back to where you started. If you don't get them right you die. If you are near a PIT you will see the message \"I feel a draft\"";
 
 String arrowTutorial = "ARROWS are your weapons against the WUMPUS. To shoot an ARROW press the \"SHOOT ARROW\" button, then press the red door you want to shoot the ARROW in. ";
 arrowTutorial+="To buy an ARROW you must answer two out of three trivia questions correctly. You die if you run out of ARROWS.";
