@@ -619,7 +619,7 @@ private static boolean button(double x, double y, double high, double wide, Stri
 	boolean hovering = inBox(x,y,high,wide);
 	String typed = getKeyTyped();
 	StdDraw.setPenColor( 32,32,32);
-	if(hovering || priority)
+	if(hovering)
 		StdDraw.setPenColor(150,0,0);
 	
 	StdDraw.filledRectangle(x, y, high , wide);
@@ -645,7 +645,7 @@ private static boolean menubutton(double x, double y, double high, double wide, 
 	String typed = getKeyTyped();
 	StdDraw.setPenColor( 32,32,32);
 	StdDraw.filledRectangle(x, y, high , wide);
-	if(hovering || priority)
+	if(hovering)
 	{
 		StdDraw.setPenColor(150,0,0);
 	    StdDraw.filledRectangle(x, y, high+thick, wide);
@@ -760,11 +760,6 @@ private static void highScores(ArrayList<String> caves, ArrayList<String> names,
 
 	toMain = !button(0.5, 0.1 , 0.15 , 0.055, "Back",priority);
 	
-	if(inBox(0.5, 0.1 , 0.15 , 0.055))
-	{
-		priority = false;
-	}
-	
 	StdDraw.show();
 	}
 	
@@ -829,10 +824,6 @@ public static void  betweenTurns(String hint, int room, int turn, int coins, int
 	}
 
 	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next",priority);
-	if(inBox(0.5, 0.1 , 0.15 , 0.055))
-	{
-		priority = false;
-	}
 	
 	StdDraw.show();
 	}
@@ -967,10 +958,6 @@ public void  displayDanger(int [] dangers)
 	}
 	
 	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next",priority);
-	if(inBox(0.5, 0.1 , 0.15 , 0.055))
-	{
-		priority = false;
-	}
 	
 	StdDraw.show();
 	}
@@ -1090,10 +1077,6 @@ public static void  postTrivia(boolean correct, int questions, int answered)
 	StdDraw.text(0.5, 0.5, "So far you answered "+answered+" out of "+questions+" correct" );
 
 	waiting = !button(0.5, 0.1 , 0.15 , 0.055 ,"Next",priority);
-	if(inBox(0.5, 0.1 , 0.15 , 0.055))
-	{
-		priority = false;
-	}
 	StdDraw.show();
 	}
 }
@@ -1266,7 +1249,6 @@ navigationTutorial+= "A new round begins every time you enter a new room.";
 double distance = 0.05;
 double textx = 0.67;
 double texty = 0.5;
-boolean priority = true;
 
  while(true)
 {
@@ -1317,17 +1299,10 @@ boolean priority = true;
 	button(x,topButton-shift*4, containerx,0.055,"Coins",false);
 	button(x,topButton-shift*5, containerx,0.055, "Navigation",false);
 	
-	if(button(x,topButton-shift*6, containerx,0.055, "Back",priority))
+	if(button(x,topButton-shift*6, containerx,0.055, "Back",false))
 	{
 		return;
 	}
-	
-	if(inBox(x,0.5, containerx,0.3))
-	{
-		priority = false;
-	}
-	
-
 
 		
 StdDraw.show();
@@ -1693,7 +1668,7 @@ double shift = 0.11;
 //Messages shown to player, they are added instead of one big screen so that they all fit on one screen
 String Daniel = "Graphical Interface";
 
-String Saihaj = "Player and  Game Control";
+String Saihaj = "Player, Game Control and Project Manager";
 
 String Josh = "Game Control";
 
@@ -1708,7 +1683,6 @@ String teammessage = "Thanks for playing Tesla Stem's Artesian Code team Hunt th
 double distance = 0.05;
 double textx = 0.67;
 double texty = 0.5;
-boolean priority = true;
 
  while(true)
 {
@@ -1770,18 +1744,10 @@ boolean priority = true;
 	button(x,topButton-shift*4, containerx,0.055,"Raj Sunku",false);
 	button(x,topButton-shift*5, containerx,0.055, "Hans Koduri",false);
 	
-	if(button(x,topButton-shift*6, containerx,0.055, "Back",priority))
+	if(button(x,topButton-shift*6, containerx,0.055, "Back",false))
 	{
 		return;
 	}
-	
-	if(inBox(x,0.5, containerx,0.3))
-	{
-		priority = false;
-	}
-	
-
-
 		
 StdDraw.show();
 }
