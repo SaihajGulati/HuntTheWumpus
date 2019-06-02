@@ -74,17 +74,17 @@ public int getRoom(int room1, int room2, int room3, int [] danger, int turn, int
 	HUDtext(0.9,0.74,"Arrows "+arrows);
 	
 	//ballcords = drawPlayer();
-	if(button(buttonleft, 0.1 , buttonwidth ,buttonheight, "Buy Item"))
+	if(button(buttonleft, 0.1 , buttonwidth ,buttonheight, "Buy Item",false))
 	{
 		toreturn = -2;
 	}
 	
-		if(button(buttonleft+shift*1, 0.1 , buttonwidth , buttonheight, "Shoot Arrow"))
+		if(button(buttonleft+shift*1, 0.1 , buttonwidth , buttonheight, "Shoot Arrow",false))
 	{
 		toreturn = -1;
 	}
 		
-	if(button(buttonleft+shift*2, 0.1 , buttonwidth , buttonheight, "Main Menu"))
+	if(button(buttonleft+shift*2, 0.1 , buttonwidth , buttonheight, "Main Menu",false))
 	{
 		if(toMainMenu())
 		{
@@ -92,7 +92,7 @@ public int getRoom(int room1, int room2, int room3, int [] danger, int turn, int
 		}
 	}
 	
-	if(button(buttonleft+shift*3, 0.1 , buttonwidth , buttonheight, "Exit"))
+	if(button(buttonleft+shift*3, 0.1 , buttonwidth , buttonheight, "Exit",false))
 	{
 		Exit();	
 	}
@@ -109,6 +109,7 @@ public int shootArrow(int room1, int room2, int room3, int [] danger, int turn, 
 {
 	int toreturn = 0;
 	boolean loop = true;
+	boolean priority = true;
 	//StdDraw.pause(100);
 	
 	while(loop)
@@ -125,7 +126,12 @@ public int shootArrow(int room1, int room2, int room3, int [] danger, int turn, 
 	HUDtext(0.9,0.77,"Coins "+coins);
 	HUDtext(0.9,0.74,"Arrows "+arrows);
 
-	loop = !button(0.5, 0.1 , 0.15 , 0.055, "Back");
+	loop = !button(0.5, 0.1 , 0.15 , 0.055, "Back",priority);
+	
+	if(inBox(0.5, 0.1 , 0.15 , 0.055))
+	{
+		priority = false;
+	}
 	
 	Font font = new Font("Copperplate Gothic Bold",0, 40);
 	StdDraw.setPenColor( 150,0,0);
@@ -412,6 +418,8 @@ public String getName()
 	boolean button = true;
 	String typed = "";
 	int charLimit = 20;
+	boolean priority = true;
+	
 	
 	while(button)
 	{
@@ -431,10 +439,15 @@ public String getName()
 		name = "";
 	}
 	
-	if( button(0.5, 0.21 , 0.15 , 0.055, "Play") || (typed.length()>0 && ((int)(typed.charAt(0)) == 10)))
+	if( button(0.5, 0.21 , 0.15 , 0.055, "Play",priority) || enterkey(typed))
 	{
 		button = false;	
 		typed = "";
+	}
+	
+	if(inBox(0.5, 0.21 , 0.15 , 0.055))
+	{
+		priority = false;
 	}
 	
 	if(typed.equals("-1"))
@@ -451,7 +464,7 @@ public String getName()
 		name = delete(name);
 	} 
 	
-	if(button(0.5, 0.1 , 0.15 , 0.055, "Main Menu"))
+	if(button(0.5, 0.1 , 0.15 , 0.055, "Main Menu",false))
 	{
 		return "";
 	}
@@ -468,6 +481,17 @@ public String getName()
 	StdDraw.clear();
 	NAME = name;
 	return name;
+}
+
+private static boolean enterkey(String typed)
+{
+	return typed.length()>0 && ((int)(typed.charAt(0)) == 10);
+}
+
+private static boolean enterkey()
+{
+	String typed = getKeyTyped();
+	return typed.length()>0 && ((int)(typed.charAt(0)) == 10);
 }
 
 //Returns the number of the cave selected by the user, or can go back to main menu by calling main menu
@@ -487,23 +511,23 @@ public int caveSelection(ArrayList<String> caves, ArrayList<String> names, Array
 		title(containerx+0.05,0.9, "Hunt the Wumpus" );
 		
 
-	if(menubutton(x,0.85-shift, containerx,0.055,"Cave 1"))
+	if(menubutton(x,0.85-shift, containerx,0.055,"Cave 1",false))
 		
 		    return 1;	
 	
-	if(menubutton(x,0.74-shift, containerx,0.055,"Cave 2"))
+	if(menubutton(x,0.74-shift, containerx,0.055,"Cave 2",false))
 		    return 2;	
 	
-	if(menubutton(x,0.63-shift, containerx,0.055,"Cave 3"))
+	if(menubutton(x,0.63-shift, containerx,0.055,"Cave 3",false))
 		    return 3;	
 
-	if(menubutton(x,0.52-shift, containerx,0.055,"Cave 4"))
+	if(menubutton(x,0.52-shift, containerx,0.055,"Cave 4",false))
 	        return 4;
 	
-	if(menubutton(x,0.41-shift, containerx,0.055,"Cave 5"))
+	if(menubutton(x,0.41-shift, containerx,0.055,"Cave 5",false))
         return 5;
 	
-	if(menubutton(x,0.30-shift, containerx,0.055,"Main Menu"))
+	if(menubutton(x,0.30-shift, containerx,0.055,"Main Menu",false))
 		return mainmenu(caves,names,scores,saved);
 
 			
@@ -570,26 +594,26 @@ private static int menubuttons(boolean saved)
 		if(saved)
 		{
 	
-		if(menubutton(x,buttontop+shift, containerx,0.055,"RESUME GAME"))
+		if(menubutton(x,buttontop+shift, containerx,0.055,"RESUME GAME",false))
 		    toreturn = 4;
 		}
 
-	if(menubutton(x,buttontop, containerx,0.055,"NEW GAME"))
+	if(menubutton(x,buttontop, containerx,0.055,"NEW GAME",false))
 		
 		    toreturn = 1;	
 
-	if(menubutton(x,buttontop-shift, containerx,0.055,"HIGH SCORES"))
+	if(menubutton(x,buttontop-shift, containerx,0.055,"HIGH SCORES",false))
 		    toreturn = 2;	
 
 	
-	if(menubutton(x,buttontop-shift*2, containerx,0.055,"CREDITS"))
+	if(menubutton(x,buttontop-shift*2, containerx,0.055,"CREDITS",false))
 		    toreturn = 3;
 	
-	if(menubutton(x,buttontop-shift*3, containerx,0.055,"HOW TO PLAY"))
+	if(menubutton(x,buttontop-shift*3, containerx,0.055,"HOW TO PLAY",false))
 	    tutorial();
 
 	
-	if(menubutton(x,buttontop-shift*4, containerx,0.055,"EXIT"))
+	if(menubutton(x,buttontop-shift*4, containerx,0.055,"EXIT",false))
 		Exit();	
 
 			
@@ -598,12 +622,13 @@ private static int menubuttons(boolean saved)
 
 }
 
-//Displays buttons that just turn red when hovering over them
-private static boolean button(double x, double y, double high, double wide, String message)
+//Displays buttons that just turn red when hovering over them or if they have priority
+private static boolean button(double x, double y, double high, double wide, String message, boolean priority)
 {
 	boolean hovering = inBox(x,y,high,wide);
+	String typed = getKeyTyped();
 	StdDraw.setPenColor( 32,32,32);
-	if(hovering)
+	if(hovering || priority)
 		StdDraw.setPenColor(150,0,0);
 	
 	StdDraw.filledRectangle(x, y, high , wide);
@@ -612,17 +637,24 @@ private static boolean button(double x, double y, double high, double wide, Stri
 	buttonfont = new Font("Copperplate Gothic Bold",0, 20);
 	StdDraw.setFont(buttonfont);
 	StdDraw.text(x, y, message);
-	return hovering && ClickedRelease();
+	
+	if(priority && enterkey(typed))
+	{
+		return true;
+	}
+	
+	return (hovering && ClickedRelease());
 }
 
-//Displays buttons that get bigger and turn red when hovering over them
-private static boolean menubutton(double x, double y, double high, double wide, String message)
+//Displays buttons that get bigger and turn red when hovering over them or if they have priority
+private static boolean menubutton(double x, double y, double high, double wide, String message, boolean priority)
 {
 	double thick = 0.015;
 	boolean hovering = inBox(x,y,high,wide);
+	String typed = getKeyTyped();
 	StdDraw.setPenColor( 32,32,32);
 	StdDraw.filledRectangle(x, y, high , wide);
-	if(hovering)
+	if(hovering || priority)
 	{
 		StdDraw.setPenColor(150,0,0);
 	    StdDraw.filledRectangle(x, y, high+thick, wide);
@@ -632,6 +664,11 @@ private static boolean menubutton(double x, double y, double high, double wide, 
 	Font buttonfont = new Font("Copperplate Gothic Bold",0, 20);
 	StdDraw.setFont(buttonfont);
 	StdDraw.text(x, y, message);
+	
+	if(priority && enterkey(typed))
+	{
+		return true;
+	}
 	
 	return hovering && ClickedRelease();
 }
@@ -714,6 +751,8 @@ private static boolean Clicked()
 private static void highScores(ArrayList<String> caves, ArrayList<String> names, ArrayList<String> scores)
 {
 	boolean toMain = true;
+	boolean priority  =true;
+	
 	while(toMain)
 	{
 	StdDraw.clear();
@@ -728,7 +767,13 @@ private static void highScores(ArrayList<String> caves, ArrayList<String> names,
 	printScoreRow(names,0.5,0.7,25,"NAME");
 	printScoreRow(scores,0.7,0.7,25,"SCORE");
 
-	toMain = !button(0.5, 0.1 , 0.15 , 0.055, "Back");
+	toMain = !button(0.5, 0.1 , 0.15 , 0.055, "Back",priority);
+	
+	if(inBox(0.5, 0.1 , 0.15 , 0.055))
+	{
+		priority = false;
+	}
+	
 	StdDraw.show();
 	}
 	
@@ -761,6 +806,7 @@ private static void printScoreRow(ArrayList<String> info, double x, double y, in
 public static void  betweenTurns(String hint, int room, int turn, int coins, int arrows)
 {	
 	boolean waiting = true;
+	boolean priority = true;
 	ArrayList<String> toprint = new ArrayList<String>();
 	toprint = splitUp(hint);
 	
@@ -791,7 +837,12 @@ public static void  betweenTurns(String hint, int room, int turn, int coins, int
 		StdDraw.text(0.5, 0.5-(0.05*i), toprint.get(i));		
 	}
 
-	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
+	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next",priority);
+	if(inBox(0.5, 0.1 , 0.15 , 0.055))
+	{
+		priority = false;
+	}
+	
 	StdDraw.show();
 	}
 }
@@ -803,6 +854,7 @@ public static void  tellSecret(String secret)
 	boolean waiting = true;
 	ArrayList<String> toprint = new ArrayList<String>();
 	toprint = splitUp(secret);
+	boolean priority = false;
 	
 	while(waiting)
 	{
@@ -827,7 +879,11 @@ public static void  tellSecret(String secret)
 		StdDraw.text(0.5, 0.5-(0.05*i), toprint.get(i));		
 	}
 
-	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
+	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next",priority);
+	if(inBox(0.5, 0.1 , 0.15 , 0.055))
+	{
+		priority = false;
+	}
 	StdDraw.show();
 	}
 }
@@ -837,6 +893,7 @@ public static void  tellSecret(String secret)
 public void  displayDanger(int [] dangers)
 {	
 	boolean waiting = false;
+	boolean priority = true;
 	
 	for(int i = 0; i<dangers.length;i++)
 	{
@@ -918,7 +975,12 @@ public void  displayDanger(int [] dangers)
 	}
 	}
 	
-	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
+	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next",priority);
+	if(inBox(0.5, 0.1 , 0.15 , 0.055))
+	{
+		priority = false;
+	}
+	
 	StdDraw.show();
 	}
 }
@@ -930,6 +992,7 @@ public void  escapedDanger(int [] dangers)
 	double textx = 0.5;
 	double texty = 0.6;
 	boolean waiting = false;
+	boolean priority = true;
 	String survivedWumpus = "You got 3 out of 5 questions correct and made the Wumpus run away. You have escaped the WUMPUS... for now.";
 	String survivedPit = "You got 2 out of 3 questions correct and you have climbed out the PIT. Hopefully you don't fall into another one, because you won't be so lucky next time.";
 	
@@ -985,7 +1048,12 @@ public void  escapedDanger(int [] dangers)
 	}
 	
 	
-	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
+	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next",priority);
+	if(inBox(0.5, 0.1 , 0.15 , 0.055))
+	{
+		priority = false;
+	}
+	
 	StdDraw.show();
 	}
 }
@@ -1002,6 +1070,7 @@ private static void strip(double x, double y, double wide, double tall)
 public static void  postTrivia(boolean correct, int questions, int answered)
 {	
 	boolean waiting = true;
+	boolean priority = true;
 	
 	while(waiting)
 	{
@@ -1029,7 +1098,11 @@ public static void  postTrivia(boolean correct, int questions, int answered)
 	StdDraw.setFont(sub);
 	StdDraw.text(0.5, 0.5, "So far you answered "+answered+" out of "+questions+" correct" );
 
-	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
+	waiting = !button(0.5, 0.1 , 0.15 , 0.055 ,"Next",priority);
+	if(inBox(0.5, 0.1 , 0.15 , 0.055))
+	{
+		priority = false;
+	}
 	StdDraw.show();
 	}
 }
@@ -1038,6 +1111,7 @@ public static void  postTrivia(boolean correct, int questions, int answered)
 public static void  Error()
 {
 	boolean waiting = true;
+	boolean priority = false;
 	
 	while(waiting)
 	{
@@ -1052,7 +1126,11 @@ public static void  Error()
 	StdDraw.setFont(title);
 	StdDraw.text(0.5, 0.6, "ERROR" );
 
-	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "EXIT");
+	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "EXIT",priority);
+	if(inBox(0.5, 0.1 , 0.15 , 0.055))
+	{
+		priority = false;
+	}
 	StdDraw.show();
 	}
 	java.lang.System.exit(0);
@@ -1062,6 +1140,7 @@ public static void  Error()
 public static void  boughtArrow(int arrows)
 {	
 	boolean waiting = true;
+	boolean priority = true;
 	
 	while(waiting)
 	{
@@ -1079,7 +1158,11 @@ public static void  boughtArrow(int arrows)
 	StdDraw.text(0.5, 0.50, "You have "+arrows+" arrows");
 
 
-	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
+	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next",priority);
+	if(inBox(0.5, 0.1 , 0.15 , 0.055))
+	{
+		priority = false;
+	}
 	StdDraw.show();
 	}
 }
@@ -1088,6 +1171,7 @@ public static void  boughtArrow(int arrows)
 public static void  Exit()
 {	
 	boolean waiting = true;
+	boolean priority = true;
 	
 	while(waiting)
 	{
@@ -1103,12 +1187,16 @@ public static void  Exit()
 	StdDraw.text(0.5, 0.6, "Are you sure");
 	StdDraw.text(0.5, 0.50, "You want to EXIT?");
 	
-	if(button(0.5, 0.21 , 0.15 , 0.055, "YES"))
+	if(button(0.5, 0.21 , 0.15 , 0.055, "YES",false))
 	{
 		java.lang.System.exit(0);
 	}
 
-	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "NO");
+	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "NO",priority);
+	if(inBox(0.5, 0.1 , 0.15 , 0.055))
+	{
+		priority = false;
+	}
 	StdDraw.show();
 	}
 }
@@ -1121,6 +1209,7 @@ public static boolean  toMainMenu()
 	double textx = 0.5;
 	double texty = 0.4;
 	String saveMessage = "Your progress will be saved and you will be able to resume";
+	boolean priority = true;
 	
 	while(true)
 	{
@@ -1142,12 +1231,17 @@ public static boolean  toMainMenu()
 	displayList(splitUp(saveMessage),textx,texty,distance);
 	
 	
-	if(button(0.5, 0.21 , 0.15 , 0.055, "YES"))
+	if(button(0.5, 0.21 , 0.15 , 0.055, "YES",priority))
 	{
 		return true;
 	}
 
-	if(button(0.5, 0.1 , 0.15 , 0.055, "NO"))
+	if(inBox(0.5, 0.21 , 0.15 , 0.055))
+	{
+		priority = false;
+	}
+	
+	if(button(0.5, 0.1 , 0.15 , 0.055, "NO",false))
 	{
 		return false;
 	}
@@ -1191,6 +1285,7 @@ navigationTutorial+= "A new round begins every time you enter a new room.";
 double distance = 0.05;
 double textx = 0.67;
 double texty = 0.5;
+boolean priority = true;
 
  while(true)
 {
@@ -1234,16 +1329,21 @@ double texty = 0.5;
 	}
 
 	
-	button(x,topButton, containerx,0.055,"Wumpus");
-	button(x,topButton-shift, containerx,0.055, "Bats");
-	button(x,topButton-shift*2, containerx,0.055,"Pits");
-	button(x,topButton-shift*3, containerx,0.055, "Arrows");
-	button(x,topButton-shift*4, containerx,0.055,"Coins");
-	button(x,topButton-shift*5, containerx,0.055, "Navigation");
+	button(x,topButton, containerx,0.055,"Wumpus",false);
+	button(x,topButton-shift, containerx,0.055, "Bats",false);
+	button(x,topButton-shift*2, containerx,0.055,"Pits",false);
+	button(x,topButton-shift*3, containerx,0.055, "Arrows",false);
+	button(x,topButton-shift*4, containerx,0.055,"Coins",false);
+	button(x,topButton-shift*5, containerx,0.055, "Navigation",false);
 	
-	if(button(x,topButton-shift*6, containerx,0.055, "Back"))
+	if(button(x,topButton-shift*6, containerx,0.055, "Back",priority))
 	{
 		return;
+	}
+	
+	if(inBox(x,topButton-shift*6, containerx,0.055))
+	{
+		priority = false;
 	}
 	
 
@@ -1256,6 +1356,7 @@ StdDraw.show();
 //If the player answers too many questions wrong to buy an item, this method is called, it loops itself
 public static void  goof()
 {	
+	boolean priority = true;
 	boolean waiting = true;
 	
 	while(waiting)
@@ -1274,7 +1375,11 @@ public static void  goof()
 	StdDraw.text(0.5, 0.50, "to buy item.");
 
 
-	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
+	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next",priority);
+	if(inBox(0.5, 0.1 , 0.15 , 0.055))
+	{
+		priority = false;
+	}
 	StdDraw.show();
 	}
 }
@@ -1313,22 +1418,22 @@ toprint = splitUp(question);
 		StdDraw.text(textcenter, start-(0.05*i), toprint.get(i));		
 	}	
 
-if(button(x,0.65, containerx,0.055,questionA))
+if(button(x,0.65, containerx,0.055,questionA,false))
 {
 	    return 'a';	
 }
 	    
-if(button(x,0.54, containerx,0.055, questionB))
+if(button(x,0.54, containerx,0.055, questionB,false))
 {
 	    return 'b';	
 }
 	    
-if(button(x,0.43, containerx,0.055,questionC))
+if(button(x,0.43, containerx,0.055,questionC,false))
 {
 	    return 'c';	
 }
 
-if(button(x,0.32, containerx,0.055,questionD))
+if(button(x,0.32, containerx,0.055,questionD,false))
 {
         return 'd';
 }
@@ -1403,17 +1508,17 @@ arrowDescription = splitUp("You can get ARROWS by getting two out of three trivi
 		}
 	}
 //yeet
-if(button(x,0.65, containerx,0.055,"Arrow") && enough)
+if(button(x,0.65, containerx,0.055,"Arrow",false) && enough)
 {
 	    return 1;	
 }
 
-if(button(x,0.54, containerx,0.055, "Secret") && enough)
+if(button(x,0.54, containerx,0.055, "Secret",false) && enough)
 {
 	return 2;	
 }
 
-if(button(x,0.43, containerx,0.055,"Back"))
+if(button(x,0.43, containerx,0.055,"Back",false))
 {
 	return 0;	
 }
@@ -1483,6 +1588,7 @@ public static void  endGame(String reason, int score, boolean leaderboard)
 	String arrows ="You ran out of arrows and died because you had no way to kill the wumpus.";
 	String highscore = "Your score was good enough to make it on the leaderboard! Check it out in the main menu";
 	double distance = 0.05;
+	boolean priority = true;
 	
 	while(waiting)
 	{
@@ -1543,7 +1649,11 @@ public static void  endGame(String reason, int score, boolean leaderboard)
 	}
 
 	}
-	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
+	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next",priority);
+	if(inBox(0.5, 0.1 , 0.15 , 0.05))
+	{
+		priority = false;
+	}
 	StdDraw.show();
 	}
 }
@@ -1552,6 +1662,7 @@ public static void  endGame(String reason, int score, boolean leaderboard)
 public static void  arrowHit(boolean hit, int arrows)
 {	
 	boolean waiting = true;
+	boolean priority = true;
 	
 	while(waiting)
 	{
@@ -1578,7 +1689,11 @@ public static void  arrowHit(boolean hit, int arrows)
 	StdDraw.text(0.5, 0.55, "You have "+arrows+" arrows left");
 	}
 
-	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next");
+	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next",priority);
+	if(inBox(0.5, 0.1 , 0.15 , 0.055))
+	{
+		priority = false;
+	}
 	StdDraw.show();
 	}
 }
@@ -1599,7 +1714,7 @@ String [] names = {"Daniel Popa","Saihaj Gulati","Joshua Venable","Brian Yang", 
 ArrayList<String> messagearray = new ArrayList<String>();
 
 messagearray = splitUp(teammessage);
-
+boolean priority = true;
 
  while(true)
 {
@@ -1629,10 +1744,15 @@ messagearray = splitUp(teammessage);
 		StdDraw.setFont(creditsfont);
 		StdDraw.text(0.2, 0.75-(0.1*i), names[i]);		
 	}
-//yeet
-if(button(x,0.1, containerx,0.055,"Back"))
+
+if(button(x,0.1, containerx,0.055,"Back",priority))
 {
 	    return;	
+}
+
+if(inBox(x,0.1, containerx,0.055))
+{
+	priority = false;
 }
 		
 StdDraw.show();
