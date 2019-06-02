@@ -88,8 +88,14 @@ private static void setActiveColor(int shift)
 	if (ActiveColor[0] + shift > 255)
 	{
 
-		StdDraw.setPenColor(255,ActiveColor[1]-shift/3,ActiveColor[2]);
-		
+		if (ActiveColor[0] + shift > 270)
+		{
+			StdDraw.setPenColor(255,ActiveColor[1]-shift/3,ActiveColor[2]);
+		}
+		else
+		{
+			StdDraw.setPenColor(255,ActiveColor[1],ActiveColor[2]);
+		}
 	}
 	else
 	{
