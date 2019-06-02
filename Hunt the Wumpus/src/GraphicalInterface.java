@@ -855,7 +855,7 @@ private static void printScoreRow(ArrayList<String> info, double x, double y, in
 //Between every turn this screen must display, it loops by itself and stops when you press the next button, 
 //It tells the player a hint, the room they are in, coins they have and arrows
 //This loops by itself and is stopped with a next button
-public static void  betweenTurns(String hint, int room, int turn, int coins, int arrows)
+public static void  betweenTurns(String hint, int room, int turn, int coins, int arrows,boolean bonusarrow, int bonuscoin)
 {	
 	boolean waiting = true;
 	boolean priority = true;
@@ -877,8 +877,25 @@ public static void  betweenTurns(String hint, int room, int turn, int coins, int
 	StdDraw.text(0.5, 0.85, "Round "+turn );
 	
 	title(0.5, 0.8, "Room "+room);
-	title(0.5, 0.75, "Coins "+coins);
+	
+	if(bonuscoin > 0)
+	{
+	title(0.5, 0.75, "Coins "+coins+" + "+bonuscoin+" bonus coins");
+	}
+	
+	else
+	{
+		title(0.5, 0.75, "Coins "+coins);
+	}
+	
+	if(bonusarrow)
+	{
+		title(0.5, 0.7, "Arrows "+arrows+" a bonus arrow");
+	}
+	else
+	{
 	title(0.5, 0.7, "Arrows "+arrows);
+	}
 	
 	Font font = new Font("Copperplate Gothic Bold",0, 30);
 	
