@@ -30,7 +30,7 @@ public class Sounds
 	private static Clip clip2;
 	private static FloatControl gainControl2;
 	/*
-	 * Will read the config file
+	 * Will read the config file 
 	 */
 	public Sounds(int theme) throws LineUnavailableException, MalformedURLException, UnsupportedAudioFileException, IOException 
 	{
