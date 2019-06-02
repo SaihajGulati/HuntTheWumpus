@@ -930,20 +930,19 @@ public void  displayDanger(int [] dangers)
 	if(dangers[BAT] >0)
 	{
 		StdDraw.text(0.5, 0.6-shift, "A bat has moved you to a random room!");
-		shift+=0.03;
+		shift+=0.04;
 	}
 	
 	if(dangers[WUMPUS] >0 || dangers[HOLE] >0)
 	{
 	StdDraw.text(0.5, 0.6-shift, "You must answer "+correct+" out of ");
-	shift =-0.03;
-	StdDraw.text(0.5, 0.6-shift, questions+" questions correctly.");
+	StdDraw.text(0.5, 0.56-shift, questions+" questions correctly.");
 	
 	if(dangers[WUMPUS] >0)
 	{
 		Font wumpus = new Font("Copperplate Gothic Bold",0,20); 
 		StdDraw.setFont(wumpus);
-		StdDraw.text(0.5, 0.5-shift, "If you get them correct, the wumpus will run away");
+		StdDraw.text(0.5, 0.5-shift, "If you get them correct, the wumpus will run away.");
 		shift+=0.03;
 	}
 	
