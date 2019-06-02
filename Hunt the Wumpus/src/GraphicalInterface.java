@@ -487,23 +487,23 @@ public int caveSelection(ArrayList<String> caves, ArrayList<String> names, Array
 		title(containerx+0.05,0.9, "Hunt the Wumpus" );
 		
 
-	if(button(x,0.85-shift, containerx,0.055,"Cave 1"))
+	if(menubutton(x,0.85-shift, containerx,0.055,"Cave 1"))
 		
 		    return 1;	
 	
-	if(button(x,0.74-shift, containerx,0.055,"Cave 2"))
+	if(menubutton(x,0.74-shift, containerx,0.055,"Cave 2"))
 		    return 2;	
 	
-	if(button(x,0.63-shift, containerx,0.055,"Cave 3"))
+	if(menubutton(x,0.63-shift, containerx,0.055,"Cave 3"))
 		    return 3;	
 
-	if(button(x,0.52-shift, containerx,0.055,"Cave 4"))
+	if(menubutton(x,0.52-shift, containerx,0.055,"Cave 4"))
 	        return 4;
 	
-	if(button(x,0.41-shift, containerx,0.055,"Cave 5"))
+	if(menubutton(x,0.41-shift, containerx,0.055,"Cave 5"))
         return 5;
 	
-	if(button(x,0.30-shift, containerx,0.055,"Main Menu"))
+	if(menubutton(x,0.30-shift, containerx,0.055,"Main Menu"))
 		return mainmenu(caves,names,scores,saved);
 
 			
@@ -1120,7 +1120,7 @@ public static boolean  toMainMenu()
 	double distance = 0.05;
 	double textx = 0.5;
 	double texty = 0.4;
-	String saveMessage = "Your data will be saved and you will be able to resume";
+	String saveMessage = "Your progress will be saved and you will be able to resume";
 	
 	while(true)
 	{
@@ -1135,7 +1135,7 @@ public static boolean  toMainMenu()
 	StdDraw.setFont(title);
 	StdDraw.text(0.5, 0.7, "Are you sure");
 	StdDraw.text(0.5, 0.64, "You want to go back");
-	StdDraw.text(0.5, 0.58, "to the MAIN MENU?");
+	StdDraw.text(0.5, 0.58, "to the main menu?");
 	
 	Font cansave = new Font("Copperplate Gothic Bold",0, 30);
 	StdDraw.setFont(cansave);
