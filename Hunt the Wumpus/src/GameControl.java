@@ -16,6 +16,10 @@
 */
 import java.io.*;
 import java.util.*;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import java.applet.*;
 import java.net.*;
 /**
@@ -40,7 +44,7 @@ public class GameControl
 	public static final int BUY_ITEM = -2;
 	public static final int MAIN_MENU = -3;
 	
-	public static void main(String[] args)
+	public static void main(String[] args) throws MalformedURLException, LineUnavailableException, UnsupportedAudioFileException, IOException
 	{
 		//start program and builds GI
 		GraphicalInterface GI = new GraphicalInterface(BATS, WUMPUS, HOLE);
@@ -58,6 +62,7 @@ public class GameControl
 		int caveSelect = 0;
 		GraphicalInterface.start();
 		boolean startNew = false;
+		Sounds.background();
 		
 		//keeps game running
 		while (true)
@@ -173,12 +178,14 @@ public class GameControl
 				for(int i : GameLocations.getPitLocations()) {
 					if(room == i) {
 						room_hazards[HOLE] = 1;
+						Sounds.pit();
 					}
 					
 				}
 				for(int i : GameLocations.getBatLocations()) {
 					if(room == i) {
 						room_hazards[BATS] = 1;
+						Sounds.bat();
 					}
 					
 				}
@@ -209,7 +216,6 @@ public class GameControl
 				{
 					if(room == c) {//
 						room = GameLocations.triggerBat();
-						Sounds.bat();
 					}
 				}
 						

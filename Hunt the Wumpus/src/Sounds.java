@@ -12,6 +12,9 @@
 
 import java.applet.*;
 import java.net.*;
+
+import javax.sound.sampled.*;
+
 import java.io.*;
 public class Sounds
 {
@@ -19,14 +22,32 @@ public class Sounds
 	 * index 0 is move player, 1 is shoot arrow, 2 is moveWumpus, 3 is trivia pop-up, 4 is win, 5 is lose, 6 is bat, and 7 is pit
 	 */
 	private static AudioClip[] currentSounds;
+	private static AudioInputStream ais;
+	private static Clip clip;
+	private static FloatControl gainControl;
+	
+	private static AudioInputStream ais2;
+	private static Clip clip2;
+	private static FloatControl gainControl2;
 	/*
 	 * Will read the config file
 	 */
-	public Sounds(int theme)
+	public Sounds(int theme) throws LineUnavailableException, MalformedURLException, UnsupportedAudioFileException, IOException 
 	{
+		currentSounds = new AudioClip[9];
+		ais = AudioSystem.getAudioInputStream(new File("res/background1.wav").toURI().toURL());
+		clip = AudioSystem.getClip();
+		clip.open(ais);
+		gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+		gainControl.setValue(-10.0f);
+		
+		ais2 = AudioSystem.getAudioInputStream(new File("res/trivia1.wav").toURI().toURL());
+		clip2 = AudioSystem.getClip();
+		clip2.open(ais2);
+		FloatControl gainControl2 = (FloatControl) clip2.getControl(FloatControl.Type.MASTER_GAIN);
+		gainControl2.setValue(-20.0f);
 		try {
 			try {
-				currentSounds = new AudioClip[9];
 				if (theme==1)
 				{
 					currentSounds[0] = Applet.newAudioClip(new File("res/movePlayer1.wav").toURI().toURL());
@@ -101,7 +122,8 @@ public class Sounds
 	
 	public static void triviaPopUp()
 	{
-		currentSounds[3].play();
+		clip2.start();
+		clip2.drain();
 	}
 	
 	public static void win()
@@ -126,6 +148,6 @@ public class Sounds
 	
 	public static void background()
 	{
-		currentSounds[8].loop();
+		clip.loop(Clip.LOOP_CONTINUOUSLY);
 	}
 }
