@@ -8,10 +8,8 @@
  * 4/18/2019:   Constructor and toString made
  * 4/24/2019:   Studded Methods added 
  * 5/03/2019:   All methods implemented
+ * 5/31/19      Class fully finished
  */
-
-import java.applet.*;
-import java.net.*;
 
 import javax.sound.sampled.*;
 
@@ -21,15 +19,15 @@ public class Sounds
 	/*
 	 * index 0 is move player, 1 is shoot arrow, 2 is moveWumpus, 3 is trivia pop-up, 4 is win, 5 is lose, 6 is bat, and 7 is pit
 	 */
-	private static AudioClip[] currentSounds;
 	private static AudioInputStream ais;
 	private static Clip clip;
 	private static FloatControl gainControl;
+	private static Clip clipBackground;
 	private static int themeNum;
 	/*
-	 * Will read the config file
+	 * Will set the theme
 	 */
-	public Sounds(int theme) throws LineUnavailableException, MalformedURLException, UnsupportedAudioFileException, IOException 
+	public Sounds(int theme)
 	{
 		themeNum = theme;
 	}
@@ -42,25 +40,45 @@ public class Sounds
 		return "Sounds";
 	}
 	
-	/*
-	 * @return the Sounds
-	 */
-	public static AudioClip[] getSounds()
-	{
-		return currentSounds;
-	}
 	
 	/*
 	 * rest of the methods are conditions where sounds can be played 
 	 */
 	public static void movePlayer()
 	{
-		play("res/movePlayer" + themeNum + ".wav", 0.0);
+		if (clip != null)
+		{
+			clip.stop();
+		}
+		try {
+			ais = AudioSystem.getAudioInputStream(new File("res/movePlayer" + themeNum + ".wav").toURI().toURL());
+			clip = AudioSystem.getClip();
+			clip.open(ais);
+		} catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+
+			System.out.println("Error : playing movePlayer Sound");
+			GraphicalInterface.Error();
+		}
+		
+		gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+		gainControl.setValue(0.0f);
+		/*clip.start();
+		clip.drain();*/
+		clip.loop(Clip.LOOP_CONTINUOUSLY);
+	}
+	 //stops whatever sound (non-background music) is playing
+	public static void stop()
+	{
+		if (clip != null)
+		{
+			clip.stop();
+		}
+		
 	}
 	
 	public static void shootArrow()
 	{
-		play("res/shootArrow" + themeNum + ".wav", 0.0);
+		play("res/shootArrow" + themeNum + ".wav", -5);
 	}
 	
 	public static void moveWumpus()
@@ -70,7 +88,7 @@ public class Sounds
 	
 	public static void triviaPopUp()
 	{
-		play("res/trivia" + themeNum + ".wav", -20.0);
+		play("res/trivia" + themeNum + ".wav", -15.0);
 	}
 	
 	public static void win()
@@ -85,12 +103,12 @@ public class Sounds
 	
 	public static void bat()
 	{
-		play("res/bat"+themeNum+".wav",0);
+		play("res/bat"+themeNum+".wav",-2);
 	}
 	
 	public static void pit()
 	{
-		play("res/pit" + themeNum + ".wav", 0);
+		play("res/pit" + themeNum + ".wav", +2);
 	}
 	
 	//plays the background music in a continuous loop
@@ -98,16 +116,16 @@ public class Sounds
 	{//sdf
 		try {
 			ais = AudioSystem.getAudioInputStream(new File("res/background" + themeNum + ".wav").toURI().toURL());
-			clip = AudioSystem.getClip();
-			clip.open(ais);
+			clipBackground = AudioSystem.getClip();
+			clipBackground.open(ais);
 		} catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
 
 			System.out.println("Error : playing background music");
 			GraphicalInterface.Error();
 		}
-		gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+		gainControl = (FloatControl) clipBackground.getControl(FloatControl.Type.MASTER_GAIN);
 		gainControl.setValue(-10.0f);
-		clip.loop(Clip.LOOP_CONTINUOUSLY);
+		clipBackground.loop(Clip.LOOP_CONTINUOUSLY);
 	}
 	
 	/**
@@ -117,6 +135,7 @@ public class Sounds
 	 */
 	public static void play(String file, double volChange)
 	{
+		
 		try {
 			ais = AudioSystem.getAudioInputStream(new File(file).toURI().toURL());
 			clip = AudioSystem.getClip();
@@ -128,6 +147,5 @@ public class Sounds
 		gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 		gainControl.setValue((float)volChange);
 		clip.start();
-		clip.drain();
 	}
 }

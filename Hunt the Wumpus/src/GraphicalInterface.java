@@ -600,7 +600,6 @@ private static int menubuttons(boolean saved)
 	if(menubutton(x,buttontop-shift*4, containerx,0.055,"EXIT",false))
 		Exit();	
 
-			
 	StdDraw.show();
 	return toreturn;
 
@@ -1138,7 +1137,7 @@ public static void  boughtArrow(int arrows)
 public static void  Exit()
 {	
 	boolean waiting = true;
-	
+	Sounds.stop();
 	while(waiting)
 	{
 	
@@ -1162,12 +1161,14 @@ public static void  Exit()
 
 	StdDraw.show();
 	}
+	Sounds.movePlayer();
 }
 
 
 //Asks the player if they are sure they want to go to main menu, if yes it return true, if not it returns false
 public static boolean  toMainMenu()
 {	
+	Sounds.stop();
 	double distance = 0.05;
 	double textx = 0.5;
 	double texty = 0.4;
@@ -1200,6 +1201,7 @@ public static boolean  toMainMenu()
 	
 	if(button(0.5, 0.1 , 0.15 , 0.055, "NO",false))
 	{
+		Sounds.movePlayer();
 		return false;
 	}
 	StdDraw.show();

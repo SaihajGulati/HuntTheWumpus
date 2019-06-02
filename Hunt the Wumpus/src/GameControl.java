@@ -61,7 +61,7 @@ public class GameControl
 		String name = "";
 		int caveSelect = 0;
 		GraphicalInterface.start();
-		boolean startNew = false;
+		boolean startNew = true;
 		Sounds.background();
 		//asf
 		//keeps game running
@@ -70,11 +70,13 @@ public class GameControl
 			//if the game is a new game
 			Trivia trivia = new Trivia();
 			Player player = new Player();
-			if (!startNew)
+			Sounds.stop();
+			if (startNew)
 			{
 				caveSelect = GI.mainmenu(HighScore.getCaves(), HighScore.getNames(), HighScore.getScores(), false);
 				name = GI.getName();
 			}
+			Sounds.movePlayer();
 			//starts the game
 			Cave cave = new Cave(caveSelect);
 			GameLocations locations = new GameLocations(cave);
@@ -95,19 +97,19 @@ public class GameControl
 						System.out.println("Error Occured : Gamecontrol endGame method");
 						GI.Error();
 					}
-					startNew = false;
+					startNew = true;
 				}
 				//if player left and saved game
 				else if (reason.substring(0,4).equals("menu")) {
 					caveSelect = Integer.parseInt(reason.substring(4,5));
 					name = reason.substring(5);
-					startNew = true;
+					startNew = false;
 				}
 				//if player died
 				else
 				{
-					System.out.println(reason);
 					score = player.getScore(false);
+					Sounds.lose();
 					try {
 
 						endGame(caveSelect, GI, name, player, reason, score);
@@ -116,7 +118,7 @@ public class GameControl
 						System.out.println("Error Occured : Gamecontrol endGame method");
 						GI.Error();
 					}
-					startNew = false;
+					startNew = true;
 				}
 					
 			}
@@ -160,7 +162,6 @@ public class GameControl
 			hazardsSurvived = new int[3];
 			//response gathered from player for room/shoot/buy
 			response = GI.getRoom(rooms[0], rooms[1], rooms[2], hazards, player.getTurns(), player.getCoins(), player.getArrows()); 
-			
 			//if player moves
 			if(response > 0)
 			{	
@@ -199,7 +200,7 @@ public class GameControl
 					if(!trivia(triv, GI, player, 5, 3))
 					{
 						//wumpus loss
-						Sounds.lose();
+						
 						return "wumpus";
 					}
 					else
@@ -228,7 +229,7 @@ public class GameControl
 						if(!trivia(triv, GI, player, 3, 2))
 						{
 							//pit loss
-							Sounds.lose();
+							
 							return "pits";
 						}
 						else
@@ -249,19 +250,22 @@ public class GameControl
 				
 				
 			}
+			else if (response != 0)
+			{
+				Sounds.stop();
 			
 			//if player shoots an arrow
-			else if (response == ARROW)
+			if (response == ARROW)
 			{
 				int arrowShot;
 				
 				//while the player hasn't chosen a room yet this loops
 			     arrowShot = GI.shootArrow(rooms[0], rooms[1], rooms[2], hazards, player.getTurns(), player.getCoins(), player.getArrows());
-			     Sounds.shootArrow();
 				
 				//if the person decides to go back
 				
 				if(arrowShot != 0) {
+					Sounds.shootArrow();
 					player.changeArrows(-1);
 					//if player hit wumpus
 					if (GameLocations.shootArrow(arrowShot))
@@ -279,7 +283,7 @@ public class GameControl
 
 				if (player.getArrows() == 0)
 				{
-					Sounds.lose();
+					
 					return "arrows";
 				}
 									
@@ -335,11 +339,14 @@ public class GameControl
 					
 				}
 			}
+			Sounds.movePlayer();
+			}
 			
 			
 		}
+
 		//if player runs out of coins
-		Sounds.lose();
+		
 		return "coins";
 			
 	}
