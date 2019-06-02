@@ -199,7 +199,7 @@ public class GameControl
 					coinsAdded = 1;
 				}
 				
-				GI.betweenTurns(triv.giveTrivia(), room, player.getTurns(), player.getCoins(), player.getArrows());
+				GI.betweenTurns(triv.giveTrivia(), room, player.getTurns(), player.getCoins(), player.getArrows(), addedArrow, coinsAdded);
 
 				//checks if player is in a room with a hazard
 				if(GameLocations.getPlayerLocation() == GameLocations.getWumpusLocation()) {
