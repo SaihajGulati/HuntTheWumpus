@@ -88,10 +88,9 @@ public class Sounds
 		currentSounds[0].play();
 	}
 	
-	public static void shootArrow() throws InterruptedException
+	public static void shootArrow()
 	{
 		currentSounds[1].play();
-		currentSounds[1].wait();
 	}
 	
 	public static void moveWumpus()
