@@ -1696,11 +1696,11 @@ double shift = 0.11;
 //Messages shown to player, they are added instead of one big screen so that they all fit on one screen
 String Daniel = "Graphical Interface";
 
-String Saihaj = "Loser who BIFFED";
+String Saihaj = "Player and  Game Control";
 
 String Josh = "Game Control";
 
-String Brian = "Triavia";
+String Brian = "Travia";
 
 String Raj = "Game Locations";
 
