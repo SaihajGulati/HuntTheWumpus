@@ -25,65 +25,13 @@ public class Sounds
 	private static AudioInputStream ais;
 	private static Clip clip;
 	private static FloatControl gainControl;
-	
-	private static AudioInputStream ais2;
-	private static Clip clip2;
-	private static FloatControl gainControl2;
+	private static int themeNum;
 	/*
-	 * Will read the config file 
+	 * Will read the config file
 	 */
 	public Sounds(int theme) throws LineUnavailableException, MalformedURLException, UnsupportedAudioFileException, IOException 
 	{
-		currentSounds = new AudioClip[9];
-		ais = AudioSystem.getAudioInputStream(new File("res/background1.wav").toURI().toURL());
-		clip = AudioSystem.getClip();
-		clip.open(ais);
-		gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-		gainControl.setValue(-10.0f);
-		//sfa
-		ais2 = AudioSystem.getAudioInputStream(new File("res/trivia1.wav").toURI().toURL());
-		clip2 = AudioSystem.getClip();
-		clip2.open(ais2);
-		FloatControl gainControl2 = (FloatControl) clip2.getControl(FloatControl.Type.MASTER_GAIN);
-		gainControl2.setValue(-20.0f);
-		try {
-			try {
-				if (theme==1)
-				{
-					currentSounds[0] = Applet.newAudioClip(new File("res/movePlayer1.wav").toURI().toURL());
-					currentSounds[1] = Applet.newAudioClip(new File("res/shootArrow1.wav").toURI().toURL());
-					currentSounds[2] = Applet.newAudioClip(new File("res/moveWumpus1.wav").toURI().toURL());
-					currentSounds[3] = Applet.newAudioClip(new File("res/trivia1.wav").toURI().toURL());
-					currentSounds[4] = Applet.newAudioClip(new File("res/win1.wav").toURI().toURL());
-					currentSounds[5] = Applet.newAudioClip(new File("res/lose1.wav").toURI().toURL());
-					currentSounds[6] = Applet.newAudioClip(new File("res/bat1.wav").toURI().toURL());
-					currentSounds[7] = Applet.newAudioClip(new File("res/pit1.wav").toURI().toURL());
-					currentSounds[8] = Applet.newAudioClip(new File("res/background1.wav").toURI().toURL());
-				}
-				else
-				{
-					currentSounds[0] = Applet.newAudioClip(new File("res/movePlayer2.wav").toURI().toURL());
-					currentSounds[1] = Applet.newAudioClip(new File("res/shootArrow2.wav").toURI().toURL());
-					currentSounds[2] = Applet.newAudioClip(new File("res/moveWumpus2.wav").toURI().toURL());
-					currentSounds[3] = Applet.newAudioClip(new File("res/trivia2.wav").toURI().toURL());
-					currentSounds[4] = Applet.newAudioClip(new File("res/win2.wav").toURI().toURL());
-					currentSounds[5] = Applet.newAudioClip(new File("res/lose2.wav").toURI().toURL());
-					currentSounds[6] = Applet.newAudioClip(new File("res/bat2.wav").toURI().toURL());
-					currentSounds[7] = Applet.newAudioClip(new File("res/pit2.wav").toURI().toURL());
-					currentSounds[8] = Applet.newAudioClip(new File("res/background1.wav").toURI().toURL());
-				}
-			}
-			catch(NullPointerException e) {
-				System.out.println("Error Occured : Sound constuction : NullPointer");
-				GraphicalInterface.Error();
-			}
-			
-		}
-		catch(MalformedURLException e) {
-			System.out.println("Error Occured : Sound construction : MalformedURL");
-			GraphicalInterface.Error();
-		}
-
+		themeNum = theme;
 	}
 	
 	/*
@@ -107,12 +55,12 @@ public class Sounds
 	 */
 	public static void movePlayer()
 	{
-		currentSounds[0].play();
+		play("res/movePlayer" + themeNum + ".wav", 0.0);
 	}
 	
 	public static void shootArrow()
 	{
-		currentSounds[1].play();
+		play("res/shootArrow" + themeNum + ".wav", 0.0);
 	}
 	
 	public static void moveWumpus()
@@ -122,8 +70,7 @@ public class Sounds
 	
 	public static void triviaPopUp()
 	{
-		clip2.start();
-		clip2.drain();
+		play("res/trivia" + themeNum + ".wav", -20.0);
 	}
 	
 	public static void win()
@@ -143,11 +90,43 @@ public class Sounds
 	
 	public static void pit()
 	{
-		currentSounds[7].play();
+		play("res/pit" + themeNum + ".wav", 0);
 	}
 	
+	//plays the background music in a continuous loop
 	public static void background()
 	{
+		try {
+			ais = AudioSystem.getAudioInputStream(new File("background" + themeNum + ".wav").toURI().toURL());
+			clip = AudioSystem.getClip();
+			clip.open(ais);
+		} catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+			GraphicalInterface.Error();
+			System.out.println("Error : playing background music");
+		}
+		gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+		gainControl.setValue(-10.0f);
 		clip.loop(Clip.LOOP_CONTINUOUSLY);
+	}
+	
+	/**
+	 * this is the method that is called to play a sound
+	 * @param file, the name/path of the file as a string
+	 * @param volChange, the volume to change the sound by
+	 */
+	public static void play(String file, double volChange)
+	{
+		try {
+			ais = AudioSystem.getAudioInputStream(new File(file).toURI().toURL());
+			clip = AudioSystem.getClip();
+			clip.open(ais);
+		} catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+			GraphicalInterface.Error();
+			System.out.println("Error : playing file");
+		}
+		gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+		gainControl.setValue((float)volChange);
+		clip.start();
+		clip.drain();
 	}
 }
