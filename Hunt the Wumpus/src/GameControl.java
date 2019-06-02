@@ -179,6 +179,7 @@ public class GameControl
 				//chance that player may acquire an arrow or extra coins while moving to room
 				double ArrowChance = Math.random();
 				double coinChance = Math.random();
+				System.out.println(ArrowChance + ", " + coinChance);
 				boolean addedArrow = false;
 				int coinsAdded = 0;
 				if(ArrowChance < .03) { //3%
@@ -189,7 +190,7 @@ public class GameControl
 					player.changeCoins(3); //add 3
 					coinsAdded = 3;
 				}
-				else if(coinChance < .8) { //8%
+				else if(coinChance < .08) { //8%
 					player.changeCoins(2); //add 2
 					coinsAdded = 2;
 				}
