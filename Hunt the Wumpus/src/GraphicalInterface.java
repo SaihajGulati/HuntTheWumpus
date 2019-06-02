@@ -734,6 +734,8 @@ private static void highScores(ArrayList<String> caves, ArrayList<String> names,
 	
 }
 
+
+//Prints the high score row with a line under the score title
 private static void printScoreRow(ArrayList<String> info, double x, double y, int size,String string)
 {
 	Font scoresfont = new Font("Copperplate Gothic Bold",0, size);
@@ -1175,7 +1177,7 @@ String batTutorial = "Super BATS are huge monsters that fly through the caves, i
 batTutorial+= "If you are in the same room as a BAT, you will be carried by the BAT to a random room.";
 
 String pitTutorial = "Some rooms in the caves contain PITS, if you are in the same room as a pit you will fall in, and must answer 2 out of three trivia questions right to get out, ";
-pitTutorial+="and go back to where you started. If you don't get them right you die. If you are near a PIT you will see the message \"I feel a draft\"";
+pitTutorial+="and go back to where you started the game. If you don't get them right you die. If you are near a PIT you will see the message \"I feel a draft\"";
 
 String arrowTutorial = "ARROWS are your weapons against the WUMPUS. To shoot an ARROW press the \"SHOOT ARROW\" button, then press the red door you want to shoot the ARROW in. ";
 arrowTutorial+="To buy an ARROW you must answer two out of three trivia questions correctly. You die if you run out of ARROWS.";
