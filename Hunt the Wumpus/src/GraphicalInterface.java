@@ -1219,7 +1219,7 @@ double shift = 0.11;
 
 
 //Messages shown to player, they are added instead of one big screen so that they all fit on one screen
-String wumpusTutorial = "It is your objective to kill the WUMPUS. You can kill the WUMPUS by shooting an arrow into the door that leads to the room the wumps is in. ";
+String wumpusTutorial = "It is your objective to kill the WUMPUS. You can kill the WUMPUS by shooting an arrow into the door that leads to the room the WUMPUS is in. ";
 wumpusTutorial += "If you miss, the WUMPUS might run away, and if you are in the same room as the WUMPUS, you must answer three out of five trivia questions correct or die! ";
 wumpusTutorial+= "If you get three out of five questions correct, the wumpus will run away. ";
 wumpusTutorial+= "You know the WUMPUS is near because you will see the message \"I smell a WUMPUS\"";
@@ -1668,7 +1668,7 @@ String Saihaj = "Player, Game Control and Project Manager";
 
 String Josh = "Game Control";
 
-String Brian = "Travia";
+String Brian = "Trivia";
 
 String Raj = "Game Locations";
 
