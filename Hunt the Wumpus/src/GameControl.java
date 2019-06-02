@@ -146,6 +146,7 @@ public class GameControl
 			room = GameLocations.getPlayerLocation();
 			rooms = cave.tunnels(room);
 			hazards = GameLocations.warning();
+			hazardsSurvived = new int[3];
 			//response gathered from player for room/shoot/buy
 			response = GI.getRoom(rooms[0], rooms[1], rooms[2], hazards, player.getTurns(), player.getCoins(), player.getArrows()); 
 			
