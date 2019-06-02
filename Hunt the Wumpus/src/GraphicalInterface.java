@@ -267,8 +267,7 @@ private int doors(int room1, int room2, int room3,double[] ballcords)
 
 		resetAndCreatePlayer();
 		//System.out.println(room1);
-		StdDraw.pause(100);
-	}
+		}
 	
 	if(rightdoor(room2, ballcords))
 	{
@@ -276,7 +275,6 @@ private int doors(int room1, int room2, int room3,double[] ballcords)
 
 		resetAndCreatePlayer();
 		//System.out.println(room2);
-		StdDraw.pause(100);
 	}
 	
 	if(topdoor(room3, ballcords))
@@ -286,7 +284,6 @@ private int doors(int room1, int room2, int room3,double[] ballcords)
 		resetAndCreatePlayer();
 		
 		//System.out.println(room3);
-		StdDraw.pause(100);
 	}
 	
    //System.out.println(toreturn);
