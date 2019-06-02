@@ -67,13 +67,13 @@ private static void changeToScary(boolean scary)
 				int [] back = {181,53,6};
 				*/
 				//Orange
-				ActiveColor = new int[]{230,110,0};
+				ActiveColor = new int[]{240,110,0};
 				//WHITE
 				TextColor = new int[]{250,250,250};	
 				//Blue
 				InactiveColor = new int[]{3,37,108};	
 				//LightBlue
-				BackColor = new int[] {0,160,225};	
+				BackColor = new int[] {0,160,225};
 			}
 
 }
@@ -85,7 +85,16 @@ private static void setBackColor()
 
 private static void setActiveColor(int shift)
 {
-	StdDraw.setPenColor(ActiveColor[0]+shift,ActiveColor[1],ActiveColor[2]);
+	if (ActiveColor[0] + shift > 255)
+	{
+
+		StdDraw.setPenColor(255,ActiveColor[1]-shift/3,ActiveColor[2]);
+		
+	}
+	else
+	{
+		StdDraw.setPenColor(ActiveColor[0]+shift,ActiveColor[1],ActiveColor[2]);
+	}
 }
 
 private static void setActiveColor()
@@ -187,7 +196,7 @@ public int shootArrow(int room1, int room2, int room3, int [] danger, int turn, 
 	loop = !button(0.5, 0.1 , 0.15 , 0.055, "Back",false);
 	
 	Font font = new Font("Copperplate Gothic Bold",0, 40);
-	setActiveColor();
+	setActiveColor(100);
 	StdDraw.setFont(font);
 	StdDraw.text(0.5, 0.25, "Click on a Room to Shoot");	
 	//ballcords = drawPlayer();
