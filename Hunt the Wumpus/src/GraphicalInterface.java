@@ -871,7 +871,7 @@ public static void  tellSecret(String secret)
 }
 
 //Takes an array of the dangers, using the class variables for BAT WUMPUS an HOLE it displays all the dangers in your room
-//It also displays how many questions you must answer, or if its a bat, that you've been moved to a randome room
+//It also displays how many questions you must answer, or if its a bat, that you've been moved to a random room
 public void  displayDanger(int [] dangers)
 {	
 	boolean waiting = false;
@@ -936,7 +936,8 @@ public void  displayDanger(int [] dangers)
 	if(dangers[WUMPUS] >0 || dangers[HOLE] >0)
 	{
 	StdDraw.text(0.5, 0.6-shift, "You must answer "+correct+" out of ");
-	StdDraw.text(0.5, 0.55-shift, questions+" questions correctly.");
+	shift =-0.03;
+	StdDraw.text(0.5, 0.6-shift, questions+" questions correctly.");
 	
 	if(dangers[WUMPUS] >0)
 	{
@@ -1568,8 +1569,8 @@ public static void  endGame(String reason, int score, boolean leaderboard)
 		Font win = new Font("Copperplate Gothic Bold",0, 50);
 		StdDraw.setFont(win);
 	StdDraw.text(0.5, 0.6, "You have slain");
-	StdDraw.text(0.5, 0.53, "the WUMPUS");
-	StdDraw.text(0.5, 0.47, "you WON");
+	StdDraw.text(0.5, 0.53, "the wumpus");
+	StdDraw.text(0.5, 0.47, "you won");
 	}
 	
 	else 
@@ -1596,7 +1597,7 @@ public static void  endGame(String reason, int score, boolean leaderboard)
 		displayList(splitUp(arrows),0.5,0.55,distance);
 
 	}
-	
+	}
 	StdDraw.setPenColor( 250,250,250);
 	StdDraw.text(0.5, 0.7, "Your score: " + score);
 	if (leaderboard)
@@ -1604,7 +1605,7 @@ public static void  endGame(String reason, int score, boolean leaderboard)
 		displayList(splitUp(highscore),0.5,0.3,distance);
 	}
 
-	}
+	
 	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next",priority);
 	if(inBox(0.5, 0.1 , 0.15 , 0.05))
 	{
