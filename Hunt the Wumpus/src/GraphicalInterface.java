@@ -964,7 +964,7 @@ public void  displayDanger(int [] dangers)
 		StdDraw.setFont(wumpus);
 		StdDraw.text(0.5, 0.5-shift, "If you survive,");
 		shift+=0.05;
-		StdDraw.text(0.5, 0.5-shift, "you will go back to the first room you were in.");
+		StdDraw.text(0.5, 0.5-shift/2, "you will go back to the first room you were in.");
 		shift+=0.05;
 	}
 	}
