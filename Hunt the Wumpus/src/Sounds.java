@@ -97,12 +97,13 @@ public class Sounds
 	public static void background()
 	{
 		try {
-			ais = AudioSystem.getAudioInputStream(new File("background" + themeNum + ".wav").toURI().toURL());
+			ais = AudioSystem.getAudioInputStream(new File("res/background" + themeNum + ".wav").toURI().toURL());
 			clip = AudioSystem.getClip();
 			clip.open(ais);
 		} catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
-			GraphicalInterface.Error();
+
 			System.out.println("Error : playing background music");
+			GraphicalInterface.Error();
 		}
 		gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 		gainControl.setValue(-10.0f);
@@ -121,8 +122,8 @@ public class Sounds
 			clip = AudioSystem.getClip();
 			clip.open(ais);
 		} catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
-			GraphicalInterface.Error();
 			System.out.println("Error : playing file");
+			GraphicalInterface.Error();
 		}
 		gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 		gainControl.setValue((float)volChange);
