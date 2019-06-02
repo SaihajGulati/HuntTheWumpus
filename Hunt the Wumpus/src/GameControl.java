@@ -71,7 +71,8 @@ public class GameControl
 			Trivia trivia = new Trivia();
 			Player player = new Player();
 			Sounds.stop();
-			if (startNew)
+			//while player has not chosen a name
+			while(startNew && name == "")
 			{
 				caveSelect = GI.mainmenu(HighScore.getCaves(), HighScore.getNames(), HighScore.getScores(), false);
 				name = GI.getName();
@@ -183,21 +184,17 @@ public class GameControl
 				int coinsAdded = 0;
 				if(ArrowChance < .03) { //3%
 					player.changeArrows(1);
-					System.out.println("Added arrow");
 					addedArrow = true;
 				} 
 				if(coinChance < .05) { //5%
-					System.out.println("Added coins");
 					player.changeCoins(3); //add 3
 					coinsAdded = 3;
 				}
 				else if(coinChance < .15) { //15%
-					System.out.println("Added coins");
 					player.changeCoins(2); //add 2
 					coinsAdded = 2;
 				}
 				else if(coinChance < .25) { //25%
-					System.out.println("Added coins");
 					player.changeCoins(1); //add 1
 					coinsAdded = 1;
 				}
