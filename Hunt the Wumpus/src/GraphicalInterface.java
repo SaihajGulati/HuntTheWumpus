@@ -1171,7 +1171,6 @@ public static void  boughtArrow(int arrows)
 public static void  Exit()
 {	
 	boolean waiting = true;
-	boolean priority = true;
 	
 	while(waiting)
 	{
@@ -1192,11 +1191,8 @@ public static void  Exit()
 		java.lang.System.exit(0);
 	}
 
-	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "NO",priority);
-	if(inBox(0.5, 0.1 , 0.15 , 0.055))
-	{
-		priority = false;
-	}
+	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "NO",false);
+
 	StdDraw.show();
 	}
 }
@@ -1209,7 +1205,6 @@ public static boolean  toMainMenu()
 	double textx = 0.5;
 	double texty = 0.4;
 	String saveMessage = "Your progress will be saved and you will be able to resume";
-	boolean priority = true;
 	
 	while(true)
 	{
@@ -1231,14 +1226,9 @@ public static boolean  toMainMenu()
 	displayList(splitUp(saveMessage),textx,texty,distance);
 	
 	
-	if(button(0.5, 0.21 , 0.15 , 0.055, "YES",priority))
+	if(button(0.5, 0.21 , 0.15 , 0.055, "YES",false))
 	{
 		return true;
-	}
-
-	if(inBox(0.5, 0.21 , 0.15 , 0.055))
-	{
-		priority = false;
 	}
 	
 	if(button(0.5, 0.1 , 0.15 , 0.055, "NO",false))
