@@ -379,7 +379,7 @@ private void resetAndCreatePlayer()
 private void resetAndCreateText()
 {
 		WARNING = null;
-		WARNING = new FlashingText(350,ActiveColor[0],ActiveColor[0],ActiveColor[0]) ;
+		WARNING = new FlashingText(350,ActiveColor[0],ActiveColor[1],ActiveColor[2]) ;
 }
 
 //Draws a black background
