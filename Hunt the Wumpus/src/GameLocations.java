@@ -184,8 +184,7 @@ public class GameLocations {
            {
     		   batLocations[i]=(int)(Math.random()*30+1);
            }
-    	   while(playerLocation==pitLocations[0]||playerLocation==pitLocations[1]||
-    			   playerLocation==batLocations[0]||playerLocation==batLocations[1]||playerLocation==x)
+    	   while(playerLocation==batLocations[0]||playerLocation==batLocations[1]||playerLocation==x)
            {
          	  playerLocation=(int)(Math.random()*30+1);
            }

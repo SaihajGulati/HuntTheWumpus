@@ -80,10 +80,6 @@ public class GameControl
 					player.changeArrows(7);
 				}
 			}
-			/*if (caveSelect < 0)
-			{
-				Sounds.setTheme(-1*caveSelect);
-			}*/
 			Sounds.movePlayer();
 			//starts the game
 			Cave cave = new Cave(caveSelect);
@@ -208,27 +204,33 @@ public class GameControl
 				room_hazards = new int[3];
 				survived = false;
 				//for encountering a wumpus, trivia pops up
-				
+				int[] bats = GameLocations.getBatLocations();		
 				//triggers bat
-				for (int c: GameLocations.getBatLocations())
+				for (int d = 0; d < bats.length; d++)
 				{
-					if(room == c && room != GameLocations.getWumpusLocation()) {//
+					//only do this if wumpus is not in room since wumpus takes precedent
+					if(room != GameLocations.getWumpusLocation() && room == bats[d]) {
 						room = GameLocations.triggerBat();
-						if (room == GameLocations.getWumpusLocation())
-						{
+						if(room == GameLocations.getWumpusLocation()) {
 							room_hazards[WUMPUS] = 1;
-							for(int i : GameLocations.getPitLocations()) {
-								if(room == i) {
-									room_hazards[HOLE] = 1;
-									Sounds.pit();
-								}
-								
-							}
-							GI.displayDanger(room_hazards);
-							room_hazards = new int[3];
 						}
+						for(int i : GameLocations.getPitLocations()) {
+							if(room == i) {
+								room_hazards[HOLE] = 1;
+								Sounds.pit();
+							}
+							
+						}
+						for(int i : GameLocations.getBatLocations()) {
+							if(room == i) {
+								room_hazards[BATS] = 1;
+								Sounds.bat();
+							}
+							
+						}
+						GI.displayDanger(room_hazards);
+						room_hazards = new int[3];
 					}
-					
 				}
 				if (room == GameLocations.getWumpusLocation())
 				{
@@ -245,8 +247,16 @@ public class GameControl
 						GameLocations.moveWumpus();
 						hazardsSurvived[WUMPUS] = 1;
 						survived = true;
+						bats = GameLocations.getBatLocations();
+						for(int i : GameLocations.getBatLocations()) {
+							if(room == i) {
+								GameLocations.triggerBat();
+							}
+						}
 					}
-				}//encounter a pit causes trivia
+				}
+				//encounter a pit causes trivia
+				room_hazards = new int [3];
 				for (int c: GameLocations.getPitLocations())
 				{
 					if(room == c) 

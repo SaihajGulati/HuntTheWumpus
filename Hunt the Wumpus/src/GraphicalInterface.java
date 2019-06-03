@@ -1045,14 +1045,21 @@ public void  displayDanger(int [] dangers)
 	}
 	
 	Font danger = new Font("Copperplate Gothic Bold",0,25); 
+	Font wumpus = new Font("Copperplate Gothic Bold",0,20); 
 	StdDraw.setFont(danger);
 	
-	if(dangers[BAT] >0)
+	if(dangers[BAT] >0 && dangers[WUMPUS] <= 0)
 	{
 		StdDraw.text(0.5, 0.6-shift, "A bat has moved you to a random room!");
 		shift+=0.04;
 	}
-	
+	if(dangers[BAT] >0 && dangers[WUMPUS] > 0)
+	{
+		StdDraw.text(0.5, 0.6-shift, "Even if you survive the wumpus, ");
+		StdDraw.text(0.5, 0.56-shift, "the bat will move you to a random room!");
+		shift+=0.1;
+		StdDraw.setFont(danger);
+	}
 	if(dangers[WUMPUS] >0 || dangers[HOLE] >0)
 	{
 	StdDraw.text(0.5, 0.6-shift, "You must answer "+correct+" out of ");
@@ -1060,7 +1067,6 @@ public void  displayDanger(int [] dangers)
 	
 	if(dangers[WUMPUS] >0)
 	{
-		Font wumpus = new Font("Copperplate Gothic Bold",0,20); 
 		StdDraw.setFont(wumpus);
 		StdDraw.text(0.5, 0.5-shift, "If you get them correct, the wumpus will run away.");
 		shift+=0.03;
@@ -1068,7 +1074,6 @@ public void  displayDanger(int [] dangers)
 	
 	if(dangers[HOLE] >0)
 	{
-		Font wumpus = new Font("Copperplate Gothic Bold",0,20); 
 		StdDraw.setFont(wumpus);
 		StdDraw.text(0.5, 0.5-shift, "If you survive,");
 		shift+=0.03;
