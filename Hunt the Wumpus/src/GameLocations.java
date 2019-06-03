@@ -180,7 +180,7 @@ public class GameLocations {
     		   i=1;
     	   while(batLocations[i]==pitLocations[0]||batLocations[i]==pitLocations[1]||
     			   batLocations[i]==batLocations[(i+1)%2]||batLocations[i]==originalPlayerLocation||
-    			   batLocations[i]==playerLocation)
+    			   batLocations[i]==playerLocation||batLocations[i]==x)
            {
     		   batLocations[i]=(int)(Math.random()*30+1);
            }

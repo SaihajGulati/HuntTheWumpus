@@ -1086,6 +1086,7 @@ public void  displayDanger(int [] dangers)
 	
 	StdDraw.show();
 	}
+	Sounds.movePlayer();
 }
 
 //Prints out which dangers the player escaped, PIT or Wumpus, it can display both.
@@ -1159,6 +1160,7 @@ public void  escapedDanger(int [] dangers)
 	
 	StdDraw.show();
 	}
+	Sounds.movePlayer();
 }
 
 private static void strip(double x, double y, double wide, double tall)
