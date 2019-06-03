@@ -141,8 +141,8 @@ public class GameControl
 		int response = 0; //response given by player in GI
 		int room = 0; //room player is currently in
 		int[] rooms = new int[3];//the rooms around the player
-		int[] hazards = new int[3]; // 0: bat | 1 : Hole | 2 : Wumpus 
-		int[] room_hazards = new int[3]; // same as hazards but for use with hazards in the room not just nearby
+		int[] hazards = new int[3]; // 0: bat | 1 : Hole | 2 : Wumpus, represents the hazards in the rooms nearby 
+		int[] room_hazards = new int[3]; // represents hazards in the room
 		//printHazardLocs();
 		int[] hazardsSurvived = new int[3];
 		boolean survived = false;
