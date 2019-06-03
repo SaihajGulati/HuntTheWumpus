@@ -71,9 +71,7 @@ public class Trivia
     private  int questionNum; /**The number of the question currently asked by Trivia, along
     * with its corresponding answers.
     */
-  
-   
-  
+    
     //the a-d answer choices given to the user for each question
     private String answerA = "";
     private String answerB = "";
@@ -158,10 +156,6 @@ public class Trivia
     	answerB = answers[1];
     	answerC = answers[2];
     	answerD = answers[3];
-    	/*for(int i = 0; i < answers.length; i++)
-        {
-          returnString += "\n" + answers[i];lkjlkj
-        }*/
     	return returnString;
     }
     
@@ -221,8 +215,7 @@ public class Trivia
             	return answer == correctAnswer.charAt(0);
         	}
         	else {
-        		System.out.println("Error occured : checkAnswer method reached end of if statement");
-        		
+        		System.out.println("Error occured : checkAnswer method reached end of if statement");      		
         	}        	
     	}
     	catch(NullPointerException e) {
@@ -320,7 +313,6 @@ public class Trivia
     		GraphicalInterface.Error();
     		return "";
     	}
-
     }
     
     /**
@@ -367,8 +359,7 @@ public class Trivia
         	System.out.println("Error Occured : getAnswers");
         	GraphicalInterface.Error();
         	return new ArrayList<String>();
-        }
-       
+        }       
     }
     
     //accessor method for triviaInformation ArrayList
@@ -381,8 +372,7 @@ public class Trivia
        	System.out.println("Error Occured : getInformation");
        	GraphicalInterface.Error();
        	return new ArrayList<String>();
-       }	
-        
+       }	        
     }
     
     //accessor method for secrets ArrayList
@@ -396,7 +386,6 @@ public class Trivia
        	GraphicalInterface.Error();
        	return new ArrayList<String>();
        }	
-
     }
     
     //accessor method for correctAnswers ArrayList
