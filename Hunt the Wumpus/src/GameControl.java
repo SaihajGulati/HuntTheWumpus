@@ -26,7 +26,7 @@ import java.net.*;
  * MAJOR NOTES:
  * 
  * 	Figure out how to get the adjacent room index?
- * 	Add Wumpus control methods but what do we need for that? //
+ * 	Add Wumpus control methods but what do we need for that? 
  *please
  */
 public class GameControl
@@ -43,7 +43,6 @@ public class GameControl
 	public static final int ARROW = -1;
 	public static final int BUY_ITEM = -2;
 	public static final int MAIN_MENU = -3;
-	public static String NAME = "";
 	
 	public static void main(String[] args) throws MalformedURLException, LineUnavailableException, UnsupportedAudioFileException, IOException
 	{
@@ -52,7 +51,7 @@ public class GameControl
 		//error handling for loading up files
 		try {
 			HighScore.loadFiles();
-			Sounds sounds = new Sounds(1);
+			Sounds.setTheme(1);
 		
 		}
 		catch(FileNotFoundException error) {
@@ -63,7 +62,6 @@ public class GameControl
 		int caveSelect = 0;
 		GraphicalInterface.start();
 		boolean startNew = true;
-		Sounds.background();
 		//asf
 		//keeps game running
 		while (true)
@@ -72,24 +70,21 @@ public class GameControl
 			Trivia trivia = new Trivia();
 			Player player = new Player();
 			Sounds.stop();
-			//while player has not chosen a name or is a new game
-			while(startNew && name == "")
+			if (startNew)
 			{
 				caveSelect = GI.mainmenu(HighScore.getCaves(), HighScore.getNames(), HighScore.getScores(), false);
 				name = GI.getName();
-				NAME = name;
-				if(name.toLowerCase().equals("artesian code")) {
-					System.out.println("EASTER EGG");
-					player.changeCoins(50);
-					player.changeArrows(7);
-				}
 			}
+			/*if (caveSelect < 0)
+			{
+				Sounds.setTheme(-1*caveSelect);
+			}*/
 			Sounds.movePlayer();
 			//starts the game
 			Cave cave = new Cave(caveSelect);
 			GameLocations locations = new GameLocations(cave);
-			//plays game to get reason why the game ended 
 			String reason = startGame(GI, player, cave, trivia);
+			//sadf
 			int score = 0;
 			//error handling
 			if(!reason.equals(null)) {
@@ -109,24 +104,9 @@ public class GameControl
 				}
 				//if player left and saved game
 				else if (reason.substring(0,4).equals("menu")) {
-					try {
-						if(reason.substring(4,5).equals("-")) {
-							caveSelect = Integer.parseInt(reason.substring(5,6));
-							name = reason.substring(5);
-							startNew = false;
-						}
-						else {
-							caveSelect = Integer.parseInt(reason.substring(4,5));
-							name = reason.substring(5);
-							startNew = false;
-						}
-
-					}
-					catch(NumberFormatException e) {
-						System.out.println("Error Occured : Integer.parseInt");
-						GI.Error();
-					}
-					
+					caveSelect = Integer.parseInt(reason.substring(4,5));
+					name = reason.substring(5);
+					startNew = false;
 				}
 				//if player died
 				else
@@ -136,13 +116,12 @@ public class GameControl
 					try {
 
 						endGame(caveSelect, GI, name, player, reason, score);
-						startNew = true;
 					}
 					catch(FileNotFoundException e) {
 						System.out.println("Error Occured : Gamecontrol endGame method");
 						GI.Error();
 					}
-					
+					startNew = true;
 				}
 					
 			}
@@ -182,43 +161,19 @@ public class GameControl
 				// simply sets the variables for later use
 			room = GameLocations.getPlayerLocation();
 			rooms = cave.tunnels(room);
-			hazards = GameLocations.warning();//hazards near player
+			hazards = GameLocations.warning();
 			hazardsSurvived = new int[3];
-			//response gathered from player for move/shoot/buy
-			response = GI.getRoom(rooms[0], rooms[1], rooms[2], hazards, player.getTurns(), player.getCoins(), player.getArrows());
+			//response gathered from player for room/shoot/buy
+			response = GI.getRoom(rooms[0], rooms[1], rooms[2], hazards, player.getTurns(), player.getCoins(), player.getArrows()); 
 			//if player moves
 			if(response > 0)
 			{	
-				player.movePlayer(); //does not move player, just increments coins, and other stuff
+				player.movePlayer();
 				printHazardLocs();
-				GameLocations.movePlayer(response); //actually moves the player
+				GameLocations.movePlayer(response);
 				Sounds.movePlayer();
 				room = GameLocations.getPlayerLocation();
-				
-				//chance that player may acquire an arrow or extra coins while moving to room
-				double ArrowChance = Math.random();
-				double coinChance = Math.random();
-				System.out.println(ArrowChance + ", " + coinChance);
-				boolean addedArrow = false;
-				int coinsAdded = 0;
-				if(ArrowChance < .03) { //3%
-					player.changeArrows(1);
-					addedArrow = true;
-				} 
-				if(coinChance < .05) { //5%
-					player.changeCoins(3); //add 3
-					coinsAdded = 3;
-				}
-				else if(coinChance < .08) { //8%
-					player.changeCoins(2); //add 2
-					coinsAdded = 2;
-				}
-				else if(coinChance < .13) { //13%
-					player.changeCoins(1); //add 1
-					coinsAdded = 1;
-				}
-				
-				GI.betweenTurns(triv.giveTrivia(), room, player.getTurns(), player.getCoins(), player.getArrows(), addedArrow, coinsAdded);
+				GI.betweenTurns(triv.giveTrivia(), room, player.getTurns(), player.getCoins(), player.getArrows(), false, 0);
 
 				//checks if player is in a room with a hazard
 				if(GameLocations.getPlayerLocation() == GameLocations.getWumpusLocation()) {
@@ -238,7 +193,6 @@ public class GameControl
 					}
 					
 				}
-				//displays danger in same room as you
 				GI.displayDanger(room_hazards);
 				room_hazards = new int[3];
 				survived = false;
@@ -261,6 +215,14 @@ public class GameControl
 						survived = true;
 					}
 				} 
+				//triggers bat
+				for (int c: GameLocations.getBatLocations())
+				{
+					if(room == c) {//
+						room = GameLocations.triggerBat();
+					}
+				}
+						
 				//encounter a pit causes trivia
 				for (int c: GameLocations.getPitLocations())
 				{
@@ -283,19 +245,12 @@ public class GameControl
 						
 					}
 				}
-				//triggers bat
-				for (int c: GameLocations.getBatLocations())
-				{
-					if(room == c) {//
-						room = GameLocations.triggerBat();
-					}
-				}
-						
 				//GI shows what dangers escaped
 				if (survived)
 				{
 					GI.escapedDanger(hazardsSurvived);
 				}
+				
 				
 			}
 			else if (response != 0)
@@ -341,24 +296,13 @@ public class GameControl
 			//if player wants to leave game but not exit
 			else if (response == MAIN_MENU)
 			{
-				Sounds.stop();
-				String name = NAME;
-				int caveSelect = Integer.MAX_VALUE;
-				while (caveSelect > 0)
+				int caveSelect = GI.mainmenu(HighScore.getCaves(), HighScore.getNames(), HighScore.getScores(), true);
+				if (caveSelect > 0)
 				{
-					caveSelect = GI.mainmenu(HighScore.getCaves(), HighScore.getNames(), HighScore.getScores(), true);
-					if(caveSelect != -1) {
-						name = "";
-						while(name.equals("")) {
-							name = GI.getName();
-						}
-						
-						return "menu" + caveSelect + name;
-					}
-					
+					String name = GI.getName();
+					return "menu" + caveSelect + name;
 					
 				}
-				return "menu" + caveSelect + name;
 				
 			}
 			
@@ -496,7 +440,6 @@ public class GameControl
 	{
 		System.out.print("For testing:");
 		System.out.println();
-		System.out.println("You are located in room " + GameLocations.getPlayerLocation());
 		System.out.println("Bats are located in rooms " + arrayString(GameLocations.getBatLocations(), "and"));
 		System.out.println("Pits are located in rooms " + arrayString(GameLocations.getPitLocations(), "and"));
 		System.out.println("Wumpus is located in room " + GameLocations.getWumpusLocation());
