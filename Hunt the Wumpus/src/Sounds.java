@@ -27,9 +27,18 @@ public class Sounds
 	/*
 	 * Will set the theme
 	 */
-	public Sounds(int theme)
+	public static void setTheme(int theme)
 	{
+		if (clip != null)
+		{
+			clip.stop();
+		}
+		if (clipBackground != null)
+		{
+			clipBackground.stop();
+		}
 		themeNum = theme;
+		background();
 	}
 	
 	/*
