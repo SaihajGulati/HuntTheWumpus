@@ -26,6 +26,7 @@ public class Sounds
 	private static int themeNum;
 	/*
 	 * Will set the theme
+	 * Will also stop whatever was playing so that a new theme can be started with nothing playing from the old one
 	 */
 	public static void setTheme(int theme)
 	{
