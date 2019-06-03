@@ -70,9 +70,15 @@ public class Sounds
 		}
 		
 		gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-		gainControl.setValue(-5.0f);
-		/*clip.start();
-		clip.drain();*/
+		if (themeNum == 2)
+		{
+			gainControl.setValue(-20.0f);
+			
+		}
+		else
+		{
+			gainControl.setValue(-5.0f);
+		}
 		clip.loop(Clip.LOOP_CONTINUOUSLY);
 	}
 	 //stops whatever sound (non-background music) is playing
