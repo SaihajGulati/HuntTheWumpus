@@ -1600,7 +1600,7 @@ double containery= 0.5;
 ArrayList<String> secretDescription = new ArrayList<String>();
 ArrayList<String> arrowDescription = new ArrayList<String>();
 
-secretDescription = splitUp("You can get a SECRET by getting two out of three trivia questions right. SECRETS can very from very useful to very useless.");
+secretDescription = splitUp("You can get a SECRET by getting two out of three trivia questions right. SECRETS can vary from very useful to useless.");
 arrowDescription = splitUp("You can get ARROWS by getting two out of three trivia questions right, these are your weapons against the WUMPUS.");
 
 
