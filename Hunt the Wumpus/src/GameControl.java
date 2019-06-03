@@ -210,6 +210,7 @@ public class GameControl
 					//only do this if wumpus is not in room since wumpus takes precedent ;
 					if(room != GameLocations.getWumpusLocation() && room == bats[d]) {
 						room = GameLocations.triggerBat();
+						//checks if the rooms the bat moved to has any other hazards
 						if(room == GameLocations.getWumpusLocation()) {
 							room_hazards[WUMPUS] = 1;
 						}

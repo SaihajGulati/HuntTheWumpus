@@ -24,6 +24,10 @@ import java.util.*;
 public class Cave
 {
 	int[][] caveMap;
+	/**
+	 * initiiaizes the file for the cave
+	 * @param cave number
+	 */
 	public Cave(int cave)
 	{
 		try {
@@ -49,6 +53,7 @@ public class Cave
 	}
 	
 	/**
+	 * return's the 2d array representing the cave
 	 * @return caveMap
 	 */
 	public int[][] getCaveMap()
@@ -63,7 +68,6 @@ public class Cave
 	//okay
 	
 	/**
-	 * 
 	 * @param location the player is
 	 * @return the tunnels/rooms the player can move to as an array
 	 */
@@ -98,26 +102,6 @@ public class Cave
 		}
 		return -1;
 	}
-	
-	/*
-	/**
-	 * @param location the player is
-	 * @return the rooms adjacent to the room the player is in currently as an array
-	public int[] adjacentRooms(int location)
-	{
-		int[] temp = new int[caveMap[location-1].length-1];
-		for(int i = 0; i < findIndex(caveMap[location-1], 0); i++)
-		{
-			temp[i]=caveMap[location-1][i];
-		}
-		for(int i = findIndex(caveMap[location-1], 0) + 1; i < caveMap[location-1].length; i++)
-		{
-			temp[i-1]=caveMap[location-1][i];
-		}
-			
-		return temp;
-	}
-	*/
 	
 	
 }
