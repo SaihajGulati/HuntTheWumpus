@@ -69,6 +69,10 @@ public class Player
 	public int changeCoins(int amt)
 	{
 		coins += amt;
+		if (coins > 100)
+		{
+			coins = 100;
+		}
 		return coins;
 	}
 	
