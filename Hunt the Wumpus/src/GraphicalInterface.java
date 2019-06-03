@@ -30,6 +30,7 @@ public class GraphicalInterface{
 	private static int [] TextColor = {250,250,250};
 	private static int [] InactiveColor = {32,32,32};
 	private static int [] BackColor = {0,0,0};
+	private static int theme = 1;
 	
 	
 public GraphicalInterface(int b, int w, int h)
@@ -643,13 +644,13 @@ public int mainmenu(ArrayList<String> caves, ArrayList<String> names, ArrayList<
 	
 	if(select == 4)
 	{
-		return  -1;
+		return  0;
 	}
 	
 	if(select == 5)
 	{
 		setTheme();
-		return  mainmenu(caves,names,scores,saved);
+		return mainmenu(caves,names,scores,saved);
 	}
 	
 	   StdDraw.clear();
@@ -1295,6 +1296,7 @@ public static void  Exit()
 public void  setTheme()
 {	
 	boolean waiting = true;
+	int themeNew = theme;
 	while(waiting)
 	{
 	
@@ -1314,12 +1316,14 @@ public void  setTheme()
 	if(button(0.5, 0.32 , 0.15 , 0.055, "DARK",false))
 	{
 		changeToScary(true);
+		themeNew = 1;
 		waiting = false;
 	}
 	
 	if(button(0.5, 0.21 , 0.15 , 0.055, "LIGHT",false))
 	{
 		changeToScary(false);
+		themeNew = 2;
 		waiting = false;
 	}
 	
@@ -1333,6 +1337,11 @@ public void  setTheme()
 	}
 
 	StdDraw.show();
+	}
+	if (themeNew != theme)
+	{
+		theme = themeNew;
+		Sounds.setTheme(theme);
 	}
 	resetAndCreateText();
 }
