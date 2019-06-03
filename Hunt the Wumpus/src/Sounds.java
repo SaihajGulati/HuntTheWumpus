@@ -91,7 +91,6 @@ public class Sounds
 		}
 		
 	}
-	
 	public static void shootArrow()
 	{
 		play("res/shootArrow" + themeNum + ".wav", -5);

@@ -89,6 +89,7 @@ public class GameControl
 			Cave cave = new Cave(caveSelect);
 			GameLocations locations = new GameLocations(cave);
 			String reason = startGame(GI, player, cave, trivia);
+			Sounds.stop();
 			//sadf
 			int score = 0;
 			//error handling
