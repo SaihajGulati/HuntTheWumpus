@@ -30,6 +30,7 @@ public class GraphicalInterface{
 	private static int [] TextColor = {250,250,250};
 	private static int [] InactiveColor = {32,32,32};
 	private static int [] BackColor = {0,0,0};
+	private static int [] ClosedDoor = {100,100,100};
 	private static int theme = 1;
 	
 	
@@ -39,7 +40,7 @@ public GraphicalInterface(int b, int w, int h)
 		WUMPUS = w;
 		HOLE = h;
 		NAME = "NAME";
-		WARNING = new FlashingText(350,180,0,0);
+		resetAndCreateText();
 		resetAndCreatePlayer();
 		
 	}
@@ -47,10 +48,9 @@ public GraphicalInterface(int b, int w, int h)
 private static void changeToScary(boolean scary)
 {
 
-	
 	if(scary)
 	{
-		//RED
+		        //RED
 				ActiveColor = new int[]{150,0,0};
 				//WHITE
 				TextColor = new int[]{250,250,250};	
@@ -58,15 +58,12 @@ private static void changeToScary(boolean scary)
 				InactiveColor = new int[]{32,32,32};	
 				//BLACK
 				BackColor = new int[]{0,0,0};
+				//Light gray
+				ClosedDoor = new int[]{100,100,100};
 			}
 			
 			else
 			{
-				/*int [] active = {93,22,0};
-				int [] text = {250,206,75};		
-				int [] inactive = {130,47,5};		
-				int [] back = {181,53,6};
-				*/
 				//Orange
 				ActiveColor = new int[]{240,110,0};
 				//WHITE
@@ -75,6 +72,8 @@ private static void changeToScary(boolean scary)
 				InactiveColor = new int[]{3,37,108};	
 				//LightBlue
 				BackColor = new int[] {0,160,225};
+				//
+				ClosedDoor = new int[] {0,139,178};
 			}
 
 }
@@ -117,6 +116,11 @@ private static void setTextColor()
 private static void setInactiveColor()
 {
 	StdDraw.setPenColor(InactiveColor[0],InactiveColor[1],InactiveColor[2]);
+}
+
+private static void setClosedDoor()
+{
+	StdDraw.setPenColor(ClosedDoor[0],ClosedDoor[1],ClosedDoor[2]);
 }
 
 // Opens up the canvas for the game to be displayed on and enables double buffering
@@ -374,16 +378,8 @@ private void resetAndCreatePlayer()
 
 private void resetAndCreateText()
 {
-	if(TextColor[2] == 75)
-	{
 		WARNING = null;
-		WARNING = new FlashingText(350,250,206,75);
-	}
-	else
-	{
-		WARNING = null;
-		WARNING = new FlashingText(350,180,0,0);
-	}
+		WARNING = new FlashingText(350,ActiveColor[0],ActiveColor[0],ActiveColor[0]) ;
 }
 
 //Draws a black background
@@ -404,7 +400,7 @@ private static void room()
 private static boolean leftdoor(int room, double[] ballcords)
 {
 
-	setInactiveColor();
+	setClosedDoor();
 	
 	if(room>0)
 	{
@@ -424,7 +420,7 @@ private static boolean leftdoor(int room, double[] ballcords)
 //It also takes the door number as input
 private static boolean rightdoor(int room, double[] ballcords)
 {
-	setInactiveColor();
+	setClosedDoor();
 	
 	if(room>0)
 	{
@@ -443,7 +439,7 @@ private static boolean rightdoor(int room, double[] ballcords)
 // It also takes the door number as input
 private static boolean topdoor(int room, double[] ballcords)
 {
-	setInactiveColor();
+	setClosedDoor();
 	
 	if(room>0)
 	{
