@@ -31,7 +31,7 @@ public class GraphicalInterface{
 	private static int [] InactiveColor = {32,32,32};
 	private static int [] BackColor = {0,0,0};
 	private static int [] ClosedDoor = {100,100,100};
-	private static int theme = 1;
+	private static boolean theme = true;
 	
 	
 public GraphicalInterface(int b, int w, int h)
@@ -45,6 +45,7 @@ public GraphicalInterface(int b, int w, int h)
 		
 	}
 
+//Changes the themes depending on the boolean scary, scary makes the dark theme if true, or light theme if false
 private static void changeToScary(boolean scary)
 {
 
@@ -82,6 +83,7 @@ private static void setBackColor()
 {
 	StdDraw.setPenColor(BackColor[0],BackColor[1],BackColor[2]);
 }
+
 
 private static void setActiveColor(int shift)
 {
@@ -376,6 +378,7 @@ private void resetAndCreatePlayer()
 	}
 }
 
+//Make stext null and recreates it, this lets it change colors when themes change
 private void resetAndCreateText()
 {
 		WARNING = null;
@@ -1292,7 +1295,7 @@ public static void  Exit()
 public void  setTheme()
 {	
 	boolean waiting = true;
-	int themeNew = theme;
+	boolean themeset = theme;
 	while(waiting)
 	{
 	
@@ -1312,14 +1315,14 @@ public void  setTheme()
 	if(button(0.5, 0.32 , 0.15 , 0.055, "DARK",false))
 	{
 		changeToScary(true);
-		themeNew = 1;
+		theme = true;
 		waiting = false;
 	}
 	
 	if(button(0.5, 0.21 , 0.15 , 0.055, "LIGHT",false))
 	{
 		changeToScary(false);
-		themeNew = 2;
+		theme = false;
 		waiting = false;
 	}
 	
@@ -1327,18 +1330,20 @@ public void  setTheme()
 	{
 		changeToScary(false);
 	}
-	else
+	
+	else if(inBox(0.5, 0.32 , 0.15 , 0.055))
 	{
 		changeToScary(true);
 	}
-
+	
+	else
+	{
+		changeToScary(themeset);
+	}
+	
 	StdDraw.show();
 	}
-	if (themeNew != theme)
-	{
-		theme = themeNew;
-		Sounds.setTheme(theme);
-	}
+	
 	resetAndCreateText();
 }
 
