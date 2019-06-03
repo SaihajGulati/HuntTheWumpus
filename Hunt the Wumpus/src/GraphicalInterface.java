@@ -1280,7 +1280,7 @@ public static void  Exit()
 	StdDraw.text(0.5, 0.6, "Are you sure");
 	StdDraw.text(0.5, 0.50, "You want to EXIT?");
 	
-	if(button(0.5, 0.21 , 0.15 , 0.055, "YES",false))
+	if(button(0.5, 0.21 , 0.15 , 0.055, "YES",true))
 	{
 		java.lang.System.exit(0);
 	}
@@ -1379,7 +1379,7 @@ public static boolean  toMainMenu()
 	displayList(splitUp(saveMessage),textx,texty,distance);
 	
 	
-	if(button(0.5, 0.21 , 0.15 , 0.055, "YES",false))
+	if(button(0.5, 0.21 , 0.15 , 0.055, "YES",true))
 	{
 		return true;
 	}
