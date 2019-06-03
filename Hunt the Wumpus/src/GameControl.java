@@ -61,7 +61,7 @@ public class GameControl
 		String name = "";
 		int caveSelect = 0;
 		GraphicalInterface.start();
-		boolean startNew = true;
+		boolean startNew = false;
 		//asf
 		//keeps game running
 		while (true)
@@ -70,7 +70,7 @@ public class GameControl
 			Trivia trivia = new Trivia();
 			Player player = new Player();
 			Sounds.stop();
-			if (startNew)
+			while (name.equals("") || startNew)
 			{
 				caveSelect = GI.mainmenu(HighScore.getCaves(), HighScore.getNames(), HighScore.getScores(), false);
 				name = GI.getName();
@@ -101,7 +101,7 @@ public class GameControl
 						endGame(caveSelect, GI, name, player, reason, score);
 					}
 					catch(FileNotFoundException e) {
-						System.out.println("Error Occured : Gamecontrol endGame method call");
+						System.out.println("Error Occured : Gamecontrol endGame method");
 						GI.Error();
 					}
 					startNew = true;
@@ -112,12 +112,11 @@ public class GameControl
 						caveSelect = Integer.parseInt(reason.substring(4,5));
 						name = reason.substring(5);
 						startNew = false;
-					}
-					catch(IllegalArgumentException e) {
-						System.out.println("Error Occured : GameControl parsing string");
+					} catch (IllegalArgumentException e)
+					{
+						System.out.println("Error Ocurred: GameControl Parsing String");
 						GI.Error();
 					}
-					
 				}
 				//if player died
 				else
