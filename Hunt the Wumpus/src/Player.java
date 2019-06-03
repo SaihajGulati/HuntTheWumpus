@@ -104,7 +104,7 @@ public class Player
 		return score;
 	}
 	
-	/**
+	/**s
 	 * accessor for arrows
 	 * @return number of arrows
 	 */

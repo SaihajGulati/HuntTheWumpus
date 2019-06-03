@@ -68,7 +68,7 @@ public class GameControl
 		{
 			//if the game is a new game
 			Trivia trivia = new Trivia();
-			Player player = new Player();
+			Player player = new Player();//s
 			Sounds.stop();
 			while (name.equals("") || startNew)
 			{
