@@ -70,7 +70,7 @@ public class Sounds
 		}
 		
 		gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-		gainControl.setValue(0.0f);
+		gainControl.setValue(-5.0f);
 		/*clip.start();
 		clip.drain();*/
 		clip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -112,7 +112,7 @@ public class Sounds
 	
 	public static void bat()
 	{
-		play("res/bat"+themeNum+".wav",-2);
+		play("res/bat"+themeNum+".wav",-5);
 	}
 	
 	public static void pit()
