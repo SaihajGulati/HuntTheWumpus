@@ -1858,15 +1858,15 @@ double shift = 0.11;
 //Messages shown to player, they are added instead of one big screen so that they all fit on one screen
 String Daniel = "Graphical Interface";
 
-String Saihaj = "Player, Game Control and Project Manager";
+String Saihaj = "Player, Game Control, and Project Manager";
 
 String Josh = "Game Control";
 
-String Brian = "Trivia";
+String Brian = "Trivia and High Scores";
 
-String Raj = "Game Locations";
+String Raj = "Game Locations and Sound";
 
-String Hans = "Cave Maps";
+String Hans = "Cave Maps and Code";
 
 String teammessage = "Thanks for playing Tesla Stem's Artesian Code team Hunt the Wumpus Game!";
 
