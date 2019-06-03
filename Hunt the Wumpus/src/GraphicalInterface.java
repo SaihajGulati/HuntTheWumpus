@@ -1321,7 +1321,7 @@ public void  setTheme()
 	}
 	
 	if(button(0.5, 0.21 , 0.15 , 0.055, "weird",false))
-	{
+	{ 
 		changeToScary(false);
 		scaryTheme = false;
 		Sounds.setTheme(2);

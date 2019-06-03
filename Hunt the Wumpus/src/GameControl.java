@@ -12,7 +12,7 @@
  * 4.0        3/25/19  Added starting point in main however needs to be fixed with GI
  * 5.0		  4/3/19   Fixed GI problems and added loop for main menu
  * 6.0        5/15/19  Fixed alot of bugs with the main menu
- * 7.0        5/25/19  Added code for printing to the console for checkpoints 2 and 3
+ * 7.0        5/25/19  Added code for printing to the console for checkpoints 2 and 3 .
 */
 import java.io.*;
 import java.util.*;
@@ -479,7 +479,7 @@ public class GameControl
 		}
 		return word;
 	}
-	
+
 	/**
 	 * @param array which is the array to search in
 	 * @param find which is the value to find
