@@ -187,7 +187,7 @@ public class GameControl
 				GI.betweenTurns(triv.giveTrivia(), room, player.getTurns(), player.getCoins(), player.getArrows(), false, 0);
 
 				//checks if player is in a room with a hazard
-				if(GameLocations.getPlayerLocation() == GameLocations.getWumpusLocation()) {
+				if(room == GameLocations.getWumpusLocation()) {
 					room_hazards[WUMPUS] = 1;
 				}
 				for(int i : GameLocations.getPitLocations()) {
@@ -208,9 +208,30 @@ public class GameControl
 				room_hazards = new int[3];
 				survived = false;
 				//for encountering a wumpus, trivia pops up
+				
+				//triggers bat
+				for (int c: GameLocations.getBatLocations())
+				{
+					if(room == c && room != GameLocations.getWumpusLocation()) {//
+						room = GameLocations.triggerBat();
+						if (room == GameLocations.getWumpusLocation())
+						{
+							room_hazards[WUMPUS] = 1;
+							for(int i : GameLocations.getPitLocations()) {
+								if(room == i) {
+									room_hazards[HOLE] = 1;
+									Sounds.pit();
+								}
+								
+							}
+							GI.displayDanger(room_hazards);
+							room_hazards = new int[3];
+						}
+					}
+					
+				}
 				if (room == GameLocations.getWumpusLocation())
 				{
-					Sounds.triviaPopUp();
 					if(!trivia(triv, GI, player, 5, 3))
 					{
 						//wumpus loss
@@ -225,21 +246,12 @@ public class GameControl
 						hazardsSurvived[WUMPUS] = 1;
 						survived = true;
 					}
-				} 
-				//triggers bat
-				for (int c: GameLocations.getBatLocations())
-				{
-					if(room == c) {//
-						room = GameLocations.triggerBat();
-					}
-				}
-						
-				//encounter a pit causes trivia
+				}//encounter a pit causes trivia
 				for (int c: GameLocations.getPitLocations())
 				{
 					if(room == c) 
 					{
-						Sounds.triviaPopUp();
+						
 						if(!trivia(triv, GI, player, 3, 2))
 						{
 							//pit loss
@@ -325,7 +337,7 @@ public class GameControl
 				//if they want to buy arrows
 				if (stuff == 1)
 				{
-					Sounds.triviaPopUp();
+					
 					if(trivia(triv, GI, player, 3, 2))
 					{
 
@@ -340,7 +352,7 @@ public class GameControl
 				//if they want to buy a secret
 				else if (stuff == 2)
 				{
-					Sounds.triviaPopUp();
+					
 					if(trivia(triv, GI, player, 3, 2))
 					{
 
@@ -416,6 +428,7 @@ public class GameControl
 	 */
 	public static boolean trivia(Trivia triv, GraphicalInterface GI, Player player, int numQ, int numC)
 	{
+		Sounds.triviaPopUp();
 		int correct = 0;
 		int count = 0;
 		int wrong = 0;
