@@ -62,7 +62,6 @@ public class GameControl
 		int caveSelect = 0;
 		GraphicalInterface.start();
 		boolean startNew = false;
-		//asf
 		//keeps game running
 		while (true)
 		{
@@ -158,7 +157,7 @@ public class GameControl
 		int[] rooms = new int[3];//the rooms around the player
 		int[] hazards = new int[3]; // 0: bat | 1 : Hole | 2 : Wumpus 
 		int[] room_hazards = new int[3]; // same as hazards but for use with hazards in the room not just nearby
-		printHazardLocs();
+		//printHazardLocs();
 		int[] hazardsSurvived = new int[3];
 		boolean survived = false;
 		//the while loop that runs the game while the player is alive, has arrows, and has coins
