@@ -74,6 +74,10 @@ public class GameControl
 			{
 				caveSelect = GI.mainmenu(HighScore.getCaves(), HighScore.getNames(), HighScore.getScores(), false);
 				name = GI.getName();
+				if(name.toLowerCase().equals("artesian code")) {
+					player.changeCoins(50);
+					player.changeArrows(7);
+				}
 			}
 			/*if (caveSelect < 0)
 			{
