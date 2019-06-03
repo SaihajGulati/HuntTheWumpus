@@ -39,7 +39,7 @@ public GraphicalInterface(int b, int w, int h)
 		BAT = b;
 		WUMPUS = w;
 		HOLE = h;
-		NAME = "NAME";
+		NAME = "";
 		resetAndCreateText();
 		resetAndCreatePlayer();
 		
@@ -729,7 +729,7 @@ private static boolean button(double x, double y, double high, double wide, Stri
 		return true;
 	}
 	
-	return (hovering && ClickedRelease());
+	return hovering && ClickedRelease();
 }
 
 //Displays buttons that get bigger and turn red when hovering over them or if they have priority
