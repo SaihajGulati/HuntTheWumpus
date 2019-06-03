@@ -814,11 +814,11 @@ private static boolean inBox(double xcenter, double ycenter, double height, doub
 
 //Return true if the player clicked and released or pressed enter
 private static boolean ClickedRelease() 
-{	String typed = getKeyTyped();
+{	
 
-	if(StdDraw.isMousePressed() ||  (typed.length()>0 && ((int)(typed.charAt(0)) == 10)))
+	if(StdDraw.isMousePressed())
 	{
-		while(StdDraw.isMousePressed())
+		while(StdDraw.isMousePressed() )
 		{
 			//do nothing
 		}
@@ -1320,7 +1320,7 @@ public void  setTheme()
 		waiting = false;
 	}
 	
-	if(button(0.5, 0.21 , 0.15 , 0.055, "wack",false))
+	if(button(0.5, 0.21 , 0.15 , 0.055, "weird",false))
 	{
 		changeToScary(false);
 		scaryTheme = false;
@@ -1875,7 +1875,7 @@ double texty = 0.5;
 	
 	strip(x , y, containerx, containery);
 	
-	title(x,0.9, "How to Play" );
+	title(x,0.9, "CREDITS" );
 	Font font = new Font("Copperplate Gothic Bold",0, 30);
 	StdDraw.setFont(font);
 	
