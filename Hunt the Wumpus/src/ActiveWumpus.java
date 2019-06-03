@@ -30,6 +30,7 @@ public class ActiveWumpus
 		wakeTurn = (int)(Math.random() * 6 + (turns + 5));
 	}
 	
+	//Increments the number of turns for the LazyWumpus object.
 	public void incrementTurns(LazyWumpus lazy, String condition)
 	{
 		double teleportChance = Math.random();
