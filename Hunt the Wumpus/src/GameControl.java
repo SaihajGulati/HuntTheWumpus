@@ -76,7 +76,7 @@ public class GameControl
 				name = GI.getName();
 				startNew = false;
 				if(name.toLowerCase().equals("artesian code")) {
-					player.changeCoins(50);
+					player.addCoins(50);
 					player.changeArrows(7);
 				}
 			}
@@ -437,7 +437,7 @@ public class GameControl
 				GraphicalInterface.postTrivia(false, count, correct);
 				wrong++;
 			}
-			player.changeCoins(-1);
+			player.loseCoins(1);
 		}
 		//player dies if correct is less than number of num questions
 		if (correct < numC)

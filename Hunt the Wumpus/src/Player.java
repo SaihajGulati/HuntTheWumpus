@@ -17,6 +17,7 @@ public class Player
 	private int turns;
 	private int arrows;
 	private int coins;
+	private int totalCoins;
 	
 	/**
 	 * This constructs the player object and sets default values of the fields
@@ -28,6 +29,7 @@ public class Player
 		turns = 0;
 		arrows = 3;
 		coins = 0;
+		totalCoins = 100;
 	}
 	
 	/**
@@ -63,16 +65,27 @@ public class Player
 	
 	/**
 	 * This method changes the number of coins by the parameter.
-	 * @param amount to change number of coins by
+	 * @param amount to add to number of coins
 	 * @return number of coins
 	 */
-	public int changeCoins(int amt)
+	public int addCoins(int amt)
 	{
-		coins += amt;
-		if (coins > 100)
+		if (totalCoins >= amt)
 		{
-			coins = 100;
+			coins += amt;
+			totalCoins -= amt;
 		}
+		return coins;
+	}
+	
+	/**
+	 * This method changes the number of coins by the parameter. Is only for losing coins
+	 * @param amount to subtract number of coins by
+	 * @return number of coins
+	 */
+	public int loseCoins(int amt)
+	{
+		coins -= amt;
 		return coins;
 	}
 	
