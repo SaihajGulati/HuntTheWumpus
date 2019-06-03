@@ -74,10 +74,11 @@ public class GameControl
 				caveSelect = GI.mainmenu(HighScore.getCaves(), HighScore.getNames(), HighScore.getScores(), false);
 				name = GI.getName();
 				startNew = false;
-				if(name.toLowerCase().equals("artesian code")) {
-					player.addCoins(50);
-					player.changeArrows(7);
-				}
+			}
+			if(name.toLowerCase().equals("artesian code")) {
+				player.addCoins(50);
+				player.changeArrows(7);
+				System.out.println("Easter Egg!");
 			}
 			Sounds.movePlayer();
 			//starts the game
