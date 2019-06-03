@@ -1312,7 +1312,7 @@ public void  setTheme()
 	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Back",false);
 
 	
-	if(button(0.5, 0.32 , 0.15 , 0.055, "DARK",false))
+	if(button(0.5, 0.32 , 0.15 , 0.055, "ominous",false))
 	{
 		changeToScary(true);
 		scaryTheme = true;
@@ -1320,7 +1320,7 @@ public void  setTheme()
 		waiting = false;
 	}
 	
-	if(button(0.5, 0.21 , 0.15 , 0.055, "LIGHT",false))
+	if(button(0.5, 0.21 , 0.15 , 0.055, "wack",false))
 	{
 		changeToScary(false);
 		scaryTheme = false;
