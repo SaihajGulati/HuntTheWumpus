@@ -101,16 +101,23 @@ public class GameControl
 						endGame(caveSelect, GI, name, player, reason, score);
 					}
 					catch(FileNotFoundException e) {
-						System.out.println("Error Occured : Gamecontrol endGame method");
+						System.out.println("Error Occured : Gamecontrol endGame method call");
 						GI.Error();
 					}
 					startNew = true;
 				}
 				//if player left and saved game
 				else if (reason.substring(0,4).equals("menu")) {
-					caveSelect = Integer.parseInt(reason.substring(4,5));
-					name = reason.substring(5);
-					startNew = false;
+					try {
+						caveSelect = Integer.parseInt(reason.substring(4,5));
+						name = reason.substring(5);
+						startNew = false;
+					}
+					catch(IllegalArgumentException e) {
+						System.out.println("Error Occured : GameControl parsing string");
+						GI.Error();
+					}
+					
 				}
 				//if player died
 				else
