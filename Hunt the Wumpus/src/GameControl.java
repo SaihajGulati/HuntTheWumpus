@@ -208,7 +208,7 @@ public class GameControl
 				//triggers bat
 				for (int d = 0; d < bats.length; d++)
 				{
-					//only do this if wumpus is not in room since wumpus takes precedent
+					//only do this if wumpus is not in room since wumpus takes precedent ;
 					if(room != GameLocations.getWumpusLocation() && room == bats[d]) {
 						room = GameLocations.triggerBat();
 						if(room == GameLocations.getWumpusLocation()) {

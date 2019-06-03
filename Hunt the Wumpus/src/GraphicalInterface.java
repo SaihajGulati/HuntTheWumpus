@@ -1053,7 +1053,7 @@ public void  displayDanger(int [] dangers)
 		StdDraw.text(0.5, 0.6-shift, "A bat has moved you to a random room!");
 		shift+=0.04;
 	}
-	if(dangers[BAT] >0 && dangers[WUMPUS] > 0)
+	if(dangers[BAT] >0 && dangers[WUMPUS] > 0)//;
 	{
 		StdDraw.text(0.5, 0.6-shift, "Even if you survive the wumpus, ");
 		StdDraw.text(0.5, 0.56-shift, "the bat will move you to a random room!");

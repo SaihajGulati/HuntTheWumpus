@@ -51,7 +51,7 @@ public class GameLocations {
             	  originalPlayerLocation=(int)(Math.random()*30+1);
             	  playerLocation=originalPlayerLocation;
               }
-              wumpusLocation=(int)(Math.random()*30+1);
+              wumpusLocation=(int)(Math.random()*30+1);//;
               while(wumpusLocation==playerLocation)
               {
             	  wumpusLocation=(int)(Math.random()*30+1);
