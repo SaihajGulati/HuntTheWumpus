@@ -31,7 +31,7 @@ public class GraphicalInterface{
 	private static int [] InactiveColor = {32,32,32};
 	private static int [] BackColor = {0,0,0};
 	private static int [] ClosedDoor = {100,100,100};
-	private static boolean theme = true;
+	private static boolean scaryTheme = true;
 	
 	
 public GraphicalInterface(int b, int w, int h)
@@ -1295,7 +1295,7 @@ public static void  Exit()
 public void  setTheme()
 {	
 	boolean waiting = true;
-	boolean themeset = theme;
+	boolean themeset = scaryTheme;
 	while(waiting)
 	{
 	
@@ -1315,14 +1315,16 @@ public void  setTheme()
 	if(button(0.5, 0.32 , 0.15 , 0.055, "DARK",false))
 	{
 		changeToScary(true);
-		theme = true;
+		scaryTheme = true;
+		Sounds.setTheme(1);
 		waiting = false;
 	}
 	
 	if(button(0.5, 0.21 , 0.15 , 0.055, "LIGHT",false))
 	{
 		changeToScary(false);
-		theme = false;
+		scaryTheme = false;
+		Sounds.setTheme(2);
 		waiting = false;
 	}
 	
