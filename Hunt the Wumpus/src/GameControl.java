@@ -164,7 +164,6 @@ public class GameControl
 		printHazardLocs();
 		int[] hazardsSurvived = new int[3];
 		boolean survived = false;
-		
 		//the while loop that runs the game while the player is alive, has arrows, and has coins
 		
 		while(player.getArrows() > 0 && player.getCoins() > 0 || player.getTurns() == 0) {

@@ -151,7 +151,7 @@ public class Sounds
 	 */
 	public static void play(String file, double volChange)
 	{
-		
+		clip.stop();
 		try {
 			ais = AudioSystem.getAudioInputStream(new File(file).toURI().toURL());
 			clip = AudioSystem.getClip();
