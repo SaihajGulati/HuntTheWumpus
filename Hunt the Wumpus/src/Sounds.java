@@ -77,7 +77,7 @@ public class Sounds
 		}
 		else
 		{
-			gainControl.setValue(-5.0f);
+			gainControl.setValue(-8.0f);
 		}
 		clip.loop(Clip.LOOP_CONTINUOUSLY);
 	}
