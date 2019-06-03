@@ -382,6 +382,7 @@ public class GameControl
 	 * @param player the player class
 	 * @param score the HighScore Class
 	 * @param locations The GameLocations class
+	 * 
 	 */
 	public static void endGame(int caveName, GraphicalInterface GI, String Name, Player player, String reason, int score) {
 			//error handling and shows end game score and updates score board
