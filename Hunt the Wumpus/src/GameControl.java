@@ -44,7 +44,7 @@ public class GameControl
 	public static final int BUY_ITEM = -2;
 	public static final int MAIN_MENU = -3;
 	
-	public static void main(String[] args) throws MalformedURLException, LineUnavailableException, UnsupportedAudioFileException, IOException
+	public static void main(String[] args)
 	{
 		//start program and builds GI
 		GraphicalInterface GI = new GraphicalInterface(BATS, WUMPUS, HOLE);
@@ -93,14 +93,7 @@ public class GameControl
 				if (reason.equals("won"))
 				{
 					score = player.getScore(true);
-					try {
-
-						endGame(caveSelect, GI, name, player, reason, score);
-					}
-					catch(FileNotFoundException e) {
-						System.out.println("Error Occured : Gamecontrol endGame method");
-						GI.Error();
-					}
+					endGame(caveSelect, GI, name, player, reason, score);
 					startNew = true;
 				}
 				//if player left and saved game
@@ -120,14 +113,7 @@ public class GameControl
 				{
 					score = player.getScore(false);
 					Sounds.lose();
-					try {
-
-						endGame(caveSelect, GI, name, player, reason, score);
-					}
-					catch(FileNotFoundException e) {
-						System.out.println("Error Occured : Gamecontrol endGame method");
-						GI.Error();
-					}
+					endGame(caveSelect, GI, name, player, reason, score);
 					startNew = true;
 				}
 					
@@ -396,9 +382,8 @@ public class GameControl
 	 * @param player the player class
 	 * @param score the HighScore Class
 	 * @param locations The GameLocations class
-	 * @throws FileNotFoundException 
 	 */
-	public static void endGame(int caveName, GraphicalInterface GI, String Name, Player player, String reason, int score) throws FileNotFoundException{
+	public static void endGame(int caveName, GraphicalInterface GI, String Name, Player player, String reason, int score) {
 			//error handling and shows end game score and updates score board
 		try {
 			GraphicalInterface.endGame(reason, score, HighScore.updateScoreBoard(score, Name, caveName));
