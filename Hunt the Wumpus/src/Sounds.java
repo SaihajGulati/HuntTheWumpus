@@ -32,11 +32,11 @@ public class Sounds
 	{
 		if (clip != null)
 		{
-			clip.stop();
+			clip.close();
 		}
 		if (clipBackground != null)
 		{
-			clipBackground.stop();
+			clipBackground.close();
 		}
 		themeNum = theme;
 		background();
@@ -58,7 +58,7 @@ public class Sounds
 	{
 		if (clip != null)
 		{
-			clip.stop();
+			clip.close();
 		}
 		try {
 			ais = AudioSystem.getAudioInputStream(new File("res/movePlayer" + themeNum + ".wav").toURI().toURL());
@@ -87,7 +87,7 @@ public class Sounds
 	{
 		if (clip != null)
 		{
-			clip.stop();
+			clip.close();
 		}
 		
 	}
@@ -129,18 +129,26 @@ public class Sounds
 	//plays the background music in a continuous loop
 	public static void background()
 	{//sdf
+
+		if (clipBackground != null)
+		{
+			clipBackground.close();
+		}
+
 		try {
+			System.out.println("HI");
 			ais = AudioSystem.getAudioInputStream(new File("res/background" + themeNum + ".wav").toURI().toURL());
 			clipBackground = AudioSystem.getClip();
 			clipBackground.open(ais);
+			gainControl = (FloatControl) clipBackground.getControl(FloatControl.Type.MASTER_GAIN);
+			gainControl.setValue(-10.0f);
+			clipBackground.loop(Clip.LOOP_CONTINUOUSLY);
 		} catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
 
 			System.out.println("Error : playing background music");
 			GraphicalInterface.Error();
 		}
-		gainControl = (FloatControl) clipBackground.getControl(FloatControl.Type.MASTER_GAIN);
-		gainControl.setValue(-10.0f);
-		clipBackground.loop(Clip.LOOP_CONTINUOUSLY);
+		
 	}
 	
 	/**
@@ -150,7 +158,10 @@ public class Sounds
 	 */
 	public static void play(String file, double volChange)
 	{
-		clip.stop();
+		if (clip != null)
+		{
+			clip.close();
+		}
 		try {
 			ais = AudioSystem.getAudioInputStream(new File(file).toURI().toURL());
 			clip = AudioSystem.getClip();
