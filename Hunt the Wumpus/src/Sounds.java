@@ -136,7 +136,7 @@ public class Sounds
 		}
 
 		try {
-			System.out.println("HI");
+			//System.out.println("HI");
 			ais = AudioSystem.getAudioInputStream(new File("res/background" + themeNum + ".wav").toURI().toURL());
 			clipBackground = AudioSystem.getClip();
 			clipBackground.open(ais);
