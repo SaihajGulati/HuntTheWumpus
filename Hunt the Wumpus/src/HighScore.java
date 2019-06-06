@@ -161,7 +161,7 @@ public class HighScore
     {
     	boolean isScoreAdded = false;
         //PrintStream output = new PrintStream(new File("testOutput.txt"));
-        if(highScores.size() == 0 || totalScore >= highScores.get(0))
+        if(highScores.size() == 0 || totalScore > highScores.get(0))
         {
             highScores.add(0, totalScore);
             names.add(0, name);
