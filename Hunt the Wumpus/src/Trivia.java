@@ -209,9 +209,6 @@ public class Trivia
     	try {
         	if(correctAnswers.size() != 0) {
         		String correctAnswer = correctAnswers.get(questionNum);
-            	triviaQuestions.remove(questionNum);
-                triviaAnswers.remove(questionNum);
-                correctAnswers.remove(questionNum);
             	return answer == correctAnswer.charAt(0);
         	}
         	else {
