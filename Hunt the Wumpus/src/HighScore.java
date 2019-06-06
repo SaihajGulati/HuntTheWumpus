@@ -160,7 +160,7 @@ public class HighScore
     public static boolean updateScoreBoard(int totalScore, String name, int caveName) throws FileNotFoundException
     {
     	boolean isScoreAdded = false;
-        //PrintStream output = new PrintStream(new File("testOutput.txt"));
+        //PrintStream output = new PrintStream(new File("testOutput.txt"));lj
         if(highScores.size() == 0 || totalScore > highScores.get(0))
         {
             highScores.add(0, totalScore);
