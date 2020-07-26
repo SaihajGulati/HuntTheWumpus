@@ -1431,7 +1431,7 @@ String coinTutorial = "You get COINS by going into another room in the cave. Eve
 coinTutorial += "You die if you run out of COINS.";
 
 String navigationTutorial = "The player is represented by a white ball which follows the mouse. In order to navigate rooms lead the player into the red bars representing the doors. ";
-navigationTutorial+= "A new round begins every time you enter a new room.";
+navigationTutorial+= "Every time you enter a new room a new round starts and you are given one coin and one piece of trivia. They might help you later!";
 
 double distance = 0.05;
 double textx = 0.67;
