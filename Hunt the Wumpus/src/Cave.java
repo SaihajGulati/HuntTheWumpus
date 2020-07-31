@@ -43,6 +43,7 @@ public class Cave
 					caveMap[i][j]=Integer.parseInt(temp[i][j]);
 				}
 			}
+			layout.close();
 		}
 		catch(FileNotFoundException e) {
 			System.out.println("Error Occured : Cave File Not Found");

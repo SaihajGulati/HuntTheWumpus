@@ -138,7 +138,7 @@ public class GameControl
 	 */
 	public static String startGame(GraphicalInterface GI, Player player, Cave cave, Trivia triv)
 	{
-		Scanner input = new Scanner(System.in);
+		//Scanner input = new Scanner(System.in);
 		int response = 0; //response given by player in GI
 		int room = 0; //room player is currently in
 		int[] rooms = new int[3];//the rooms around the player

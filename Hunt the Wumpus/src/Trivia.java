@@ -134,6 +134,7 @@ public class Trivia
                 }
             }
         }
+        input.close();
     }
     
     /**

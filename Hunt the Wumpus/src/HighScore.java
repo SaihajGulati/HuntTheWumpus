@@ -108,6 +108,7 @@ public class HighScore
                 }
             }
         }
+        input.close();
     }
     
     /**
