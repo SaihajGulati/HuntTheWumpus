@@ -1,6 +1,6 @@
 /*
  * 
- * @author : Joshua Venable
+ * @author : Joshua Venable 
  * @Class : AP Computer Science A
  * @Object : Game Control : Controls the interaction between every other object
  * 

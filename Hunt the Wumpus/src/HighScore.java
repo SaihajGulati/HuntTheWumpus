@@ -1,4 +1,4 @@
-/** Name: Brian Yang
+/** Name: Brian Yang 
  * Class: APCSA Period 3
  * Teacher: Mrs. Kankelborg
  * The HighScore object manages the high scores by saving new scores on a leaderboard if they qualify for it,

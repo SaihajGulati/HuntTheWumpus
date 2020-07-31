@@ -1,5 +1,5 @@
 /*
-Class Header:
+Class Header: 
 Hans Koduri
 Class: Cave
 Description: The Cave is the main setting for the game, and controls many aspects including

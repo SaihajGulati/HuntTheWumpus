@@ -1,5 +1,5 @@
 /** 
- * Name: Brian Yang
+ * Name: Brian Yang 
  * Class: APCSA Period 3
  * Teacher: Mrs. Kankelborg
  * The Trivia object handles the trivia questions asked during the game, such as loading them from a file
