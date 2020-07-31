@@ -61,7 +61,7 @@ public class Sounds
 			clip.close();
 		}
 		try {
-			ais = AudioSystem.getAudioInputStream(new File("res/movePlayer" + themeNum + ".wav").toURI().toURL());
+			ais = AudioSystem.getAudioInputStream(new File("Hunt the Wumpus/res/movePlayer" + themeNum + ".wav").toURI().toURL());
 			clip = AudioSystem.getClip();
 			clip.open(ais);
 		} catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
@@ -93,37 +93,37 @@ public class Sounds
 	}
 	public static void shootArrow()
 	{
-		play("res/shootArrow" + themeNum + ".wav", -5);
+		play("Hunt the Wumpus/res/shootArrow" + themeNum + ".wav", -5);
 	}
 	
 	public static void moveWumpus()
 	{
-		play("res/moveWumpus"+themeNum+".wav",0);
+		play("Hunt the Wumpus/res/moveWumpus"+themeNum+".wav",0);
 	}
 	
 	public static void triviaPopUp()
 	{
-		play("res/trivia" + themeNum + ".wav", -15.0);
+		play("Hunt the Wumpus/res/trivia" + themeNum + ".wav", -15.0);
 	}
 	
 	public static void win()
 	{
-		play("res/win"+themeNum+".wav",-20.0);
+		play("Hunt the Wumpus/res/win"+themeNum+".wav",-20.0);
 	}
 	
 	public static void lose()
 	{
-		play("res/lose"+themeNum+".wav",0);
+		play("Hunt the Wumpus/res/lose"+themeNum+".wav",0);
 	}
 	
 	public static void bat()
 	{
-		play("res/bat"+themeNum+".wav",-5);
+		play("Hunt the Wumpus/res/bat"+themeNum+".wav",-5);
 	}
 	
 	public static void pit()
 	{
-		play("res/pit" + themeNum + ".wav", +2);
+		play("Hunt the Wumpus/res/pit" + themeNum + ".wav", +2);
 	}
 	
 	//plays the background music in a continuous loop
@@ -137,7 +137,7 @@ public class Sounds
 
 		try {
 			//System.out.println("HI");
-			ais = AudioSystem.getAudioInputStream(new File("res/background" + themeNum + ".wav").toURI().toURL());
+			ais = AudioSystem.getAudioInputStream(new File("Hunt the Wumpus/res/background" + themeNum + ".wav").toURI().toURL());
 			clipBackground = AudioSystem.getClip();
 			clipBackground.open(ais);
 			gainControl = (FloatControl) clipBackground.getControl(FloatControl.Type.MASTER_GAIN);

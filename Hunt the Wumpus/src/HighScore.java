@@ -75,7 +75,7 @@ public class HighScore
     */
     public static void loadFiles() throws FileNotFoundException
     {
-        scoreBoard = new File("input/HighScores.txt");    
+        scoreBoard = new File("Hunt the Wumpus/input/HighScores.txt");    
         //Scanner input = new Scanner(scoreBoard,"utf-8");
         input = new Scanner(scoreBoard);
         String userName = "";
@@ -206,7 +206,7 @@ public class HighScore
      */
     public static void updateFile() throws FileNotFoundException
     {
-        PrintStream output = new PrintStream(new File("input/HighScores.txt"));
+        PrintStream output = new PrintStream(new File("Hunt the Wumpus/input/HighScores.txt"));
         /**
          * For each score in the highScores ArrayList, the loop will output the score with its
          * corresponding player name and cave name to a new file

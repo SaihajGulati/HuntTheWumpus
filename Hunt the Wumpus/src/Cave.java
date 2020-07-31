@@ -31,7 +31,7 @@ public class Cave
 	public Cave(int cave)
 	{
 		try {
-			File file = new File("input/cave" + cave + ".txt");
+			File file = new File("Hunt the Wumpus/input/cave" + cave + ".txt");
 			Scanner layout = new Scanner(file);
 			caveMap = new int[30][7];
 			String[][] temp= new String[30][7];
