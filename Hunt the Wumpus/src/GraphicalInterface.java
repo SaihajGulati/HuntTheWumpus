@@ -1795,7 +1795,7 @@ public static void  endGame(String reason, int score, boolean leaderboard)
 	}
 
 	
-	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Next",priority);
+	waiting = !button(0.5, 0.1 , 0.15 , 0.055, "Main Menu",priority);
 	if(inBox(0.5, 0.1 , 0.15 , 0.05))
 	{
 		priority = false;
